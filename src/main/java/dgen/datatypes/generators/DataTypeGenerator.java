@@ -1,4 +1,4 @@
-package dgen.generators;
+package dgen.datatypes.generators;
 
 import dgen.datatypes.DataType;
 import dgen.distributions.Distribution;

@@ -1,13 +1,14 @@
-package dgen.datatypes;
+package dgen.datatypes.generators;
 
-import dgen.config.DataTypeConfig;
+import dgen.datatypes.IntegerType;
+import dgen.datatypes.config.IntegerTypeConfig;
+import dgen.datatypes.DataType;
+import dgen.datatypes.NativeType;
 import dgen.distributions.Distribution;
-import dgen.generators.DataTypeGenerator;
 
-import java.util.List;
-import java.util.stream.Stream;
+import java.util.Random;
 
-public class IntegerTypeGenerator implements DataType, DataTypeGenerator {
+public class IntegerTypeGenerator implements DataTypeGenerator {
 
     private final NativeType nativeType = NativeType.INTEGER;
 
@@ -15,39 +16,58 @@ public class IntegerTypeGenerator implements DataType, DataTypeGenerator {
     private int upperBoundDomain;
     private int sizeInBytes;
 
-    public IntegerDG(DataTypeConfig dtc) {
-        this.lowerBoundDomain = dtc.getInt(DataTypeConfig.LOWER_BOUND_DOMAIN);
-        this.upperBoundDomain = dtc.getInt(DataTypeConfig.UPPER_BOUND_DOMAIN);
-        this.sizeInBytes = dtc.getInt(DataTypeConfig.SIZE_IN_BYTES);
+    // TODO: we'll likely move all random to a new package so we can keep track of all seeds used to generate the data
+    private Random rnd;
+
+    public IntegerTypeGenerator(IntegerTypeConfig dtc) {
+        this.lowerBoundDomain = dtc.getInt(IntegerTypeConfig.LOWER_BOUND_DOMAIN);
+        this.upperBoundDomain = dtc.getInt(IntegerTypeConfig.UPPER_BOUND_DOMAIN);
+        this.sizeInBytes = dtc.getInt(IntegerTypeConfig.SIZE_IN_BYTES);
+
+        rnd = new Random();
+    }
+
+    private IntegerTypeGenerator() {
+        this.lowerBoundDomain = 0;
+        this.upperBoundDomain = Integer.MAX_VALUE;
+        this.sizeInBytes = Integer.SIZE;
+
+        rnd = new Random();
+    }
+
+    public static IntegerTypeGenerator makeDefault() {
+        return new IntegerTypeGenerator();
     }
 
     @Override
-    public NativeType nativeType() {
-        return this.nativeType;
-    }
-
-    @Override
-    public int size() {
-        return this.sizeInBytes;
-    }
-
-    @Override
-    public Stream<> createStream() {
+    public DataType drawWithReplacement(Distribution samplingDistribution) {
+        switch(samplingDistribution.distributionType()) {
+            case UNIFORM:
+                return uniformSample();
+            case GAUSSIAN:
+            case ZIPF:
+                // TODO: to implement
+                return null;
+        }
         return null;
     }
 
     @Override
-    public List<Object> createCollection(int size) {
+    public DataType drawWithoutReplacement(Distribution samplingDistribution) {
         return null;
     }
 
-    @Override
-    public Integer drawWithReplacement(Distribution samplingDistribution) {
-        return null;
+    private DataType uniformSample() {
+        int value = 0;
+        boolean notValid = true;
+        while(notValid) {
+            value = rnd.nextInt();
+            if (value >= this.lowerBoundDomain && value <= this.upperBoundDomain) {
+                notValid = false;
+            }
+        }
+        IntegerType it = new IntegerType(value);
+        return it;
     }
 
-    @Override
-    public Integer drawWithoutReplacement(Distribution samplingDistribution) {
-        return null;
-    }
 }

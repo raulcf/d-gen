@@ -1,4 +1,4 @@
-package dgen.config;
+package dgen.coreconfig;
 
 
 import java.util.ArrayList;

@@ -1,4 +1,7 @@
 package dgen.column;
 
-public class AttributeNameGenerator {
+public interface AttributeNameGenerator {
+
+    String generateAttributeName();
+
 }

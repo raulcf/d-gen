@@ -1,8 +1,8 @@
-package dgen.config;
+package dgen.coreconfig;
 
-import dgen.config.ConfigDef.Importance;
-import dgen.config.ConfigDef.Type;
-import dgen.config.ConfigDef.Validator;
+import dgen.coreconfig.ConfigDef.Importance;
+import dgen.coreconfig.ConfigDef.Type;
+import dgen.coreconfig.ConfigDef.Validator;
 
 public class ConfigKey {
 

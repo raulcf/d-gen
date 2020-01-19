@@ -1,12 +1,15 @@
-package dgen.config;
+package dgen.datatypes.config;
 
 import java.util.List;
 import java.util.Map;
 
-import dgen.config.ConfigDef.Importance;
-import dgen.config.ConfigDef.Type;
+import dgen.coreconfig.Config;
+import dgen.coreconfig.ConfigDef;
+import dgen.coreconfig.ConfigDef.Importance;
+import dgen.coreconfig.ConfigDef.Type;
+import dgen.coreconfig.ConfigKey;
 
-public class DataTypeConfig extends Config {
+public class IntegerTypeConfig extends Config {
 
     // TODO: refactor this to reflect the options we need for ME
 
@@ -29,7 +32,7 @@ public class DataTypeConfig extends Config {
                 .define(SIZE_IN_BYTES, Type.INT, Byte.SIZE, Importance.LOW, SIZE_IN_BYTES_DOC);
     }
 
-    public DataTypeConfig(Map<? extends Object, ? extends Object> originals) {
+    public IntegerTypeConfig(Map<? extends Object, ? extends Object> originals) {
         super(config, originals);
     }
 

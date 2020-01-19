@@ -1,4 +1,4 @@
-package dgen.config;
+package dgen.coreconfig;
 
 
 public class DGException extends RuntimeException {

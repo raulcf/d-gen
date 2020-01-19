@@ -1,5 +1,8 @@
-package dgen.generators;
+package dgen.dataset;
 
+import dgen.tables.TableGenerator;
+
+import java.util.HashSet;
 import java.util.Set;
 
 /**

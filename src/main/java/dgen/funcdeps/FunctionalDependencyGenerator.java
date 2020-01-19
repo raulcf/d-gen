@@ -1,4 +1,4 @@
-package dgen.generators;
+package dgen.funcdeps;
 
 public class FunctionalDependencyGenerator {
 }

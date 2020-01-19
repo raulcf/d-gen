@@ -1,4 +1,4 @@
-package dgen.generators;
+package dgen.datatypes.generators;
 
 public class NullValueGenerator {
 }

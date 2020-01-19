@@ -1,4 +1,4 @@
-package dgen.config;
+package dgen.coreconfig;
 
 /**
  * Thrown if the user supplies an invalid configuration
