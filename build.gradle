@@ -24,8 +24,10 @@ repositories {
 }
 
 dependencies {
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:28.0-jre'
+    // parsing options
+    implementation 'net.sf.jopt-simple:jopt-simple:4.7'
+    // logging
+    implementation 'org.slf4j:slf4j-api:1.7.30'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
@@ -33,5 +35,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClassName = 'dgen.App'
+    mainClassName = 'dgen.Main'
 }
