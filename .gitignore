@@ -35,3 +35,7 @@ d-gen.iml
 d-gen.ipr
 d-gen.iws
 .idea/
+caches/
+daemon/
+native/
+wrapper/
