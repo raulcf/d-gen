@@ -15,6 +15,8 @@ public class Table {
         this.columns = columns;
     }
 
+    // FIXME: serialization functions, such as toCSV, should not be part of Table. Table should just provide
+    // methods to deliver data, then, different serdes will use that data differently.
     public String toCSV() {
         StringBuffer sb = new StringBuffer();
 

@@ -20,6 +20,8 @@ public class TableGenerator {
         this.columnGeneratorList = columnGeneratorList;
     }
 
+    // TODO: this should be an iterator that provides either columns or rows, depending on the storage orientation
+
     public Table generateTable() {
 
         List<Column> columns = new ArrayList<>();

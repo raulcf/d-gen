@@ -41,6 +41,7 @@ public class IntegerTypeGenerator implements DataTypeGenerator {
 
     @Override
     public DataType drawWithReplacement(Distribution samplingDistribution) {
+        // TODO: unless we need to know the specific distribution here, this switch should dissappear.
         switch(samplingDistribution.distributionType()) {
             case UNIFORM:
                 return uniformSample();
@@ -62,6 +63,7 @@ public class IntegerTypeGenerator implements DataTypeGenerator {
         boolean notValid = true;
         while(notValid) {
             value = rnd.nextInt();
+            // FIXME: this check should be given to the random generator for more efficiency
             if (value >= this.lowerBoundDomain && value <= this.upperBoundDomain) {
                 notValid = false;
             }
