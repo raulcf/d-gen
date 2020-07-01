@@ -1,0 +1,23 @@
+---
+database:
+  databaseName: "test"
+  tableSchemas:
+    - table:
+        numRows: 100
+        tableID: 1
+        columnSchemas:
+          - genColumn:
+              numColumns: 2
+              columnID: 1
+              dataType:
+                int:
+                  minValue: 100
+    - genTable:
+        minTables: 2
+        maxTables: 4
+        numRows: 20
+        columnSchemas:
+          - column:
+              columnID: 1
+              dataType: "random"
+
