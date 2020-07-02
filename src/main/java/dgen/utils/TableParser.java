@@ -1,124 +1,97 @@
 package dgen.utils;
 
-import dgen.utils.schemas.columnSchema;
-import dgen.utils.schemas.tableSchema;
+import dgen.utils.schemas.ColumnSchema;
+import dgen.utils.schemas.DefTableSchema;
+import dgen.utils.schemas.TableSchema;
 
 import java.util.*;
 
 public class TableParser {
-    private List<tableSchema> tables;
+    private List<TableSchema> tables = new ArrayList<>();
 
-    public List<tableSchema> getTables() {
+    public List<TableSchema> getTables() {
         return tables;
     }
-
-    public void setTables(List<tableSchema> tables) {
+    public void setTables(List<TableSchema> tables) {
         this.tables = tables;
     }
 
-    public TableParser() { tables = new ArrayList<>(); }
-
-    public void parse(Map<String, Object> tableParameters) {
-        String tableType = tableParameters.keySet().iterator().next(); // Ugly
-
-        switch (tableType) {
-            case "table":
-                parseTable((Map<String, Object>) tableParameters.get("table"));
+    public void parse(TableSchema t) {
+        switch (t.getTableType()) {
+            case "defined":
+                parseTable(t);
                 break;
-            case "genTable":
-                parseGenTable((Map<String, Object>) tableParameters.get("genTable"));
+            case "general":
+                parseGenTable(t);
+                break;
+            default:
+                ; // TODO: Throw error
                 break;
         }
         
     }
 
-    private void parseGenTable(Map<String, Object> tableParameters) {
-        Integer numRows = null;
-        Integer numTables = null;
-        int minRows = 1;
-        int maxRows = 100; // TODO: Decide on this later
-        int tableID;
-
+    private void parseGenTable(TableSchema t) {
         Random r = new Random();
 
-        if (tableParameters.containsKey("numTables")) {
-            numTables = (int) tableParameters.get("numTables");
-        } else if (tableParameters.containsKey("minTables") && tableParameters.containsKey("maxTables")) {
-            int minTables = (int) tableParameters.get("minTables");
-            int maxTables = (int) tableParameters.get("maxTables");
+        Integer numRows = t.getNumRows();
+        int minRows = t.getMinRows();
+        int maxRows = t.getMaxRows();
 
-            tableParameters.remove("minTables");
-            tableParameters.remove("maxTables");
+        assert minRows <= maxRows;
 
-            if (minTables > maxTables) {
-                ; //TODO: Throw error
-            } else {
-                numTables = r.nextInt(maxTables - minTables + 1) + minTables;
-            }
+        int numTables;
 
+        if (t.getNumTables() != null) {
+            numTables = t.getNumTables();
         } else {
-            ; //TODO: Throw error
-        }
+            int minTables = t.getMinTables();
+            int maxTables = t.getMaxTables();
 
-        if (tableParameters.containsKey("numRows")) {
-            numRows = (int) tableParameters.get("numRows");
-        } else if (tableParameters.containsKey("minRows") && tableParameters.containsKey("maxRows")) {
-            minRows = (int) tableParameters.get("minRows");
-            maxRows = (int) tableParameters.get("maxRows");
+            assert minTables <= maxTables;
 
-            tableParameters.remove("minRows");
-            tableParameters.remove("maxRows");
-
-            if (minRows > maxRows) { } //TODO: Throw error
-
-        } else {
-            ; //TODO: Throw error
+            numTables = r.nextInt(maxTables - minTables + 1) + minTables;
         }
 
         for (int i = 0; i < numTables; i++) {
-            Map<String, Object> definedTableParameters = new HashMap<>(tableParameters);
-            tableID = r.nextInt(); // TODO: Find better way to generate tableID
-
+            int tableID = r.nextInt(); // TODO: Find better way to generate tableID
             if (numRows == null) {
                 numRows = r.nextInt( maxRows - minRows + 1) + maxRows;
             }
 
-            definedTableParameters.put("tableID", tableID);
-            definedTableParameters.put("numRows", numRows);
+            t.setTableID(tableID);
+            t.setNumRows(numRows);
 
-            parseTable(definedTableParameters);
+            parseTable(t);
         }
 
     }
 
-    private void parseTable(Map<String, Object> tableParameters) {
-        for (String parameter: tableSchema.requiredParameters) {
-            if (!(tableParameters.containsKey(parameter))) {
-                ; //TODO: Throw error
-            }
+    private void parseTable(TableSchema t) {
+        DefTableSchema definedTable = new DefTableSchema();
+
+        if (t.getTableName() != null) {
+            t.setRandomName(false);
+            t.setRegexName(null);
+        }
+        else if (t.getRegexName() != null) {
+            t.setRandomName(false);
         }
 
-        tableSchema table = new tableSchema();
-        List<columnSchema> columns = new ArrayList<>();
-        table.setTableID((Integer) tableParameters.get("tableID"));
-        table.setNumRows((Integer) tableParameters.get("numRows"));
-
-        if (tableParameters.containsKey("tableName")) {
-            table.setTableName((String) tableParameters.get("tableName"));
-            table.setRandomName(false);
-        } else if (tableParameters.containsKey("regexName")) {
-            table.setRegexName((String) tableParameters.get("regexName"));
-            table.setRandomName(false);
-        }
-
-        for (HashMap<String, Object> columnSchema: (List<HashMap<String, Object>>) tableParameters.get("columnSchemas")) {
+        List<ColumnSchema> columns = new ArrayList<>();
+        for (ColumnSchema c: t.getColumnSchemas()) {
             ColumnParser parser = new ColumnParser();
-            parser.parse(columnSchema);
+            parser.parse(c);
             columns.addAll(parser.getColumns());
         }
 
-        table.setColumnSchemas(columns);
-        tables.add(table);
+        definedTable.setTableID(t.getTableID());
+        definedTable.setNumRows(t.getNumRows());
+        definedTable.setTableName(t.getTableName());
+        definedTable.setRandomName(t.getRandomName());
+        definedTable.setColumnSchemas(columns);
+
+        tables.add(definedTable);
 
     }
 

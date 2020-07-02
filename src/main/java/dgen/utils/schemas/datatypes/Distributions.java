@@ -1,5 +1,5 @@
 package dgen.utils.schemas.datatypes;
 
-public enum distributions {
+public enum Distributions {
     GAUSSIAN, UNIFORM;
 }

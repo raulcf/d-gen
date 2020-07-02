@@ -1,55 +1,71 @@
 package dgen.utils.schemas;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class tableSchema {
+public class DefTableSchema extends TableSchema {
+
+    public static final String [] REQUIRED_PARAMETERS = {"tableID", "numRows", "columnSchemas"};
+    public static final String [] OPTIONAL_PARAMETERS = {"tableName", "randomName", "tableRelationships", "tableConstraints"};
+
+    private final String tableType = "defined";
     private int tableID;
-    private int numRows;
-    private List<columnSchema> columnSchemas;
+    private Integer numRows = null;
+    private List<ColumnSchema> columnSchemas;
     private String tableName;
     private String regexName;
     private boolean randomName = true;
 
-    public static final String [] requiredParameters = {"tableID", "numRows", "columnSchemas"};
-    public static final String [] optionalParameters = {"tableName", "randomName", "tableRelationships", "tableConstraints"};
+    @Override
+    public String getTableType() {
+        return tableType;
+    }
 
+    @Override
     public int getTableID() {
         return tableID;
     }
 
+    @Override
     public void setTableID(int tableID) {
         this.tableID = tableID;
     }
 
-    public int getNumRows() {
+    @Override
+    public Integer getNumRows() {
         return numRows;
     }
 
-    public void setNumRows(int numRows) {
+    @Override
+    public void setNumRows(Integer numRows) {
         this.numRows = numRows;
     }
 
-    public List<columnSchema> getColumnSchemas() {
+    @Override
+    public List<ColumnSchema> getColumnSchemas() {
         return columnSchemas;
     }
 
-    public void setColumnSchemas(List<columnSchema> columnSchemas) {
+    @Override
+    public void setColumnSchemas(List<ColumnSchema> columnSchemas) {
         this.columnSchemas = columnSchemas;
     }
 
+    @Override
     public String getTableName() {
         return tableName;
     }
 
+    @Override
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
 
+    @Override
     public String getRegexName() {
         return regexName;
     }
 
+    @Override
     public void setRegexName(String regexName) {
         this.regexName = regexName;
     }
@@ -58,14 +74,16 @@ public class tableSchema {
         return randomName;
     }
 
+    @Override
     public void setRandomName(boolean randomName) {
         this.randomName = randomName;
     }
 
     @Override
     public String toString() {
-        return "tableSchema{" +
-                "tableID=" + tableID +
+        return "DefTableSchema{" +
+                "tableType='" + tableType + '\'' +
+                ", tableID=" + tableID +
                 ", numRows=" + numRows +
                 ", columnSchemas=" + columnSchemas +
                 ", tableName='" + tableName + '\'' +

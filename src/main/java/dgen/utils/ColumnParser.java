@@ -1,106 +1,78 @@
 package dgen.utils;
 
-import dgen.utils.schemas.columnSchema;
+import dgen.utils.schemas.*;
 
 import java.util.*;
 
 public class ColumnParser {
-    private List<columnSchema> columns;
+    private List<ColumnSchema> columns = new ArrayList<>();
 
-    public List<columnSchema> getColumns() {
+    public List<ColumnSchema> getColumns() {
         return columns;
     }
-
-    public void setColumns(List<columnSchema> columns) {
+    public void setColumns(List<ColumnSchema> columns) {
         this.columns = columns;
     }
 
-    public ColumnParser() { columns = new ArrayList<>(); }
-
-    public void parse(Map<String, Object> columnParameters) {
-        String columnType = columnParameters.keySet().iterator().next(); // Ugly
-
-        switch (columnType) {
-            case "column":
-                parseColumn((Map<String, Object>) columnParameters.get("column"));
+    public void parse(ColumnSchema c) {
+        switch (c.getColumnType()) {
+            case "defined":
+                parseColumn(c);
                 break;
-            case "genColumn":
-                parseGenColumn((Map<String, Object>) columnParameters.get("genColumn"));
+            case "general":
+                parseGenColumn(c);
                 break;
         }
 
     }
 
-    private void parseGenColumn(Map<String, Object> columnParameters) {
-        Integer numColumns = null;
-        int minColumns = 1;
-        int maxColumns = 100; // TODO: Decide on this later
-        int tableID;
-
+    private void parseGenColumn(ColumnSchema c) {
         Random r = new Random();
 
-        if (columnParameters.containsKey("numColumns")) {
-            numColumns = (int) columnParameters.get("numColumns");
-        } else if (columnParameters.containsKey("minColumns") && columnParameters.containsKey("maxColumns")) {
-            minColumns = (int) columnParameters.get("minColumns");
-            maxColumns = (int) columnParameters.get("maxColumns");
+        int numColumns;
 
-            columnParameters.remove("minColumns");
-            columnParameters.remove("maxColumns");
-
-            if (minColumns > maxColumns) {
-                ; //TODO: Throw error
-            } else {
-                numColumns = r.nextInt(maxColumns - minColumns + 1) + minColumns;
-            }
-
+        if (c.getNumColumns() != null) {
+            numColumns = c.getNumColumns();
         } else {
-            ; //TODO: Throw error
+            int minColumns = c.getMinColumns();
+            int maxColumns = c.getMaxColumns();
+
+            assert minColumns <= maxColumns;
+
+            numColumns = r.nextInt(maxColumns - minColumns + 1) + maxColumns;
         }
 
         for (int i = 0; i < numColumns; i++) {
-            Map<String, Object> definedColumnParameters = new HashMap<>(columnParameters);
-            tableID = r.nextInt(); // TODO: Find better way to generate tableID
+            int columnId = r.nextInt(); // TODO: Find better way to generate tableID
 
-            if (numColumns == null) {
-                numColumns = r.nextInt( maxColumns - minColumns + 1) + maxColumns;
-            }
-
-            definedColumnParameters.put("columnID", tableID);
-
-            parseColumn(definedColumnParameters);
+            c.setColumnID(columnId);
+            parseColumn(c);
         }
 
     }
 
-    private void parseColumn(Map<String, Object> columnParameters) {
-        for (String parameter: columnSchema.requiredParameters) {
-            if (!(columnParameters.containsKey(parameter))) {
-                ; //TODO: Throw error
-            }
+    private void parseColumn(ColumnSchema c) {
+        DefColumnSchema definedColumn = new DefColumnSchema();
+
+        if (c.getColumnType() != null) {
+            c.setRandomName(false);
+            c.setRegexName(null);
         }
-        columnSchema column = new columnSchema();
-        column.setColumnID((Integer) columnParameters.get("columnID"));
-        //TODO: Parse datatype
-
-        if (columnParameters.containsKey("columnName")) {
-            column.setColumnName((String) columnParameters.get("columnName"));
-            column.setRandomName(false);
-        } else if (columnParameters.containsKey("regexName")) {
-            column.setRegexName((String) columnParameters.get("regexName"));
-            column.setRandomName(false);
-        }
-        if (columnParameters.containsKey("unique"))
-            column.setUnique(Boolean.parseBoolean((String) columnParameters.get("unique")));
-
-        if (columnParameters.containsKey("null")) {
-            column.setHasNull(Boolean.parseBoolean((String) columnParameters.get("null")));
-
-            if (columnParameters.containsKey("nullFrequency"))
-                column.setNullFrequency(Float.parseFloat((String) columnParameters.get("nullFrequency")));
+        else if (c.getRegexName() != null) {
+            c.setRandomName(false);
         }
 
-        columns.add(column);
+        DataTypeParser parser = new DataTypeParser();
+        parser.parse(c.getDataType());
+
+        definedColumn.setColumnID(c.getColumnID());
+        definedColumn.setUnique(c.isUnique());
+        definedColumn.setColumnName(c.getColumnName());
+        definedColumn.setRandomName(c.getRandomName());
+        definedColumn.setHasNull(c.isHasNull());
+        definedColumn.setNullFrequency(c.getNullFrequency());
+        definedColumn.setDataType(parser.getDataType());
+        columns.add(definedColumn);
 
     }
 }

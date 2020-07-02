@@ -1,10 +1,12 @@
 package dgen.utils.schemas;
 
-import dgen.utils.schemas.datatypes.*;
-import java.util.*;
+public class ColumnSchema {
 
-public class columnSchema {
     private int columnID;
+    private String columnType;
+    private Integer numColumns = null;
+    private int minColumns = 1;
+    private int maxColumns = 100; // TODO: Decide on this later
     private Object dataType; // Will change this to more specific type
     private String columnName;
     private String regexName;
@@ -13,15 +15,44 @@ public class columnSchema {
     private boolean hasNull = false;
     private float nullFrequency;
 
-    public static final String [] requiredParameters = {"columnID", "dataType"};
-    public static final String [] optionalParameters = {"columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency"};
-
     public int getColumnID() {
         return columnID;
     }
 
     public void setColumnID(int columnID) {
         this.columnID = columnID;
+    }
+
+    public String getColumnType() {
+        return columnType;
+    }
+
+    public void setColumnType(String columnType) {
+        this.columnType = columnType;
+    }
+
+    public Integer getNumColumns() {
+        return numColumns;
+    }
+
+    public void setNumColumns(int numColumns) {
+        this.numColumns = numColumns;
+    }
+
+    public int getMinColumns() {
+        return minColumns;
+    }
+
+    public void setMinColumns(int minColumns) {
+        this.minColumns = minColumns;
+    }
+
+    public int getMaxColumns() {
+        return maxColumns;
+    }
+
+    public void setMaxColumns(int maxColumns) {
+        this.maxColumns = maxColumns;
     }
 
     public Object getDataType() {
@@ -86,8 +117,12 @@ public class columnSchema {
 
     @Override
     public String toString() {
-        return "columnSchema{" +
+        return "ColumnSchema{" +
                 "columnID=" + columnID +
+                ", columnType='" + columnType + '\'' +
+                ", numColumns=" + numColumns +
+                ", minColumns=" + minColumns +
+                ", maxColumns=" + maxColumns +
                 ", dataType=" + dataType +
                 ", columnName='" + columnName + '\'' +
                 ", regexName='" + regexName + '\'' +
