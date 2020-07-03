@@ -14,28 +14,30 @@ public class ColumnParser {
         this.columns = columns;
     }
 
-    public void parse(ColumnSchema c) {
-        switch (c.getColumnType()) {
+    public void parse(ColumnSchema column) {
+        switch (column.schemaType()) {
             case "defined":
-                parseColumn(c);
+                DefColumnSchema defColumn = (DefColumnSchema) column;
+                parseColumn(defColumn);
                 break;
             case "general":
-                parseGenColumn(c);
+                GenColumnSchema genColumn = (GenColumnSchema) column;
+                parseGenColumn(genColumn);
                 break;
         }
 
     }
 
-    private void parseGenColumn(ColumnSchema c) {
+    private void parseGenColumn(GenColumnSchema genColumn) {
         Random r = new Random();
 
         int numColumns;
 
-        if (c.getNumColumns() != null) {
-            numColumns = c.getNumColumns();
+        if (genColumn.getNumColumns() != null) {
+            numColumns = genColumn.getNumColumns();
         } else {
-            int minColumns = c.getMinColumns();
-            int maxColumns = c.getMaxColumns();
+            int minColumns = genColumn.getMinColumns();
+            int maxColumns = genColumn.getMaxColumns();
 
             assert minColumns <= maxColumns;
 
@@ -45,34 +47,31 @@ public class ColumnParser {
         for (int i = 0; i < numColumns; i++) {
             int columnId = r.nextInt(); // TODO: Find better way to generate tableID
 
-            c.setColumnID(columnId);
-            parseColumn(c);
+            DefColumnSchema defColumn = new DefColumnSchema(); // TODO: Find smarter way of copying
+            defColumn.setRandomName(genColumn.isRandomName());
+            defColumn.setRegexName(genColumn.getRegexName());
+            defColumn.setColumnName(genColumn.getColumnName());
+            defColumn.setColumnID(columnId);
+
+            parseColumn(defColumn);
         }
 
     }
 
-    private void parseColumn(ColumnSchema c) {
-        DefColumnSchema definedColumn = new DefColumnSchema();
-
-        if (c.getColumnType() != null) {
-            c.setRandomName(false);
-            c.setRegexName(null);
+    private void parseColumn(DefColumnSchema defColumn) {
+        if (defColumn.getColumnName() != null) {
+            defColumn.setRandomName(false);
+            defColumn.setRegexName(null);
         }
-        else if (c.getRegexName() != null) {
-            c.setRandomName(false);
+        else if (defColumn.getRegexName() != null) {
+            defColumn.setRandomName(false);
         }
 
         DataTypeParser parser = new DataTypeParser();
-        parser.parse(c.getDataType());
+        parser.parse(defColumn.getDataType());
+        defColumn.setDataType(parser.getDataType());
 
-        definedColumn.setColumnID(c.getColumnID());
-        definedColumn.setUnique(c.isUnique());
-        definedColumn.setColumnName(c.getColumnName());
-        definedColumn.setRandomName(c.getRandomName());
-        definedColumn.setHasNull(c.isHasNull());
-        definedColumn.setNullFrequency(c.getNullFrequency());
-        definedColumn.setDataType(parser.getDataType());
-        columns.add(definedColumn);
+        columns.add(defColumn);
 
     }
 }

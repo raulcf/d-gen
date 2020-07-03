@@ -1,0 +1,44 @@
+---
+database:
+  databaseName: "test"
+  tableSchemas:
+  - !<defTable>
+    tableID: -703293792
+    numRows: 100
+    columnSchemas:
+    - !<defColumn>
+      columnID: 1
+      dataType: !<int>
+        defaultValue: null
+        minValue: -2147483648
+        maxValue: 2147483647
+        distribution: "GAUSSIAN"
+      columnName: null
+      regexName: null
+      randomName: true
+      unique: false
+      hasNull: false
+      nullFrequency: 0.0
+    tableName: null
+    regexName: null
+    randomName: true
+  - !<defTable>
+    tableID: -450911323
+    numRows: 100
+    columnSchemas:
+    - !<defColumn>
+      columnID: 1
+      dataType: !<int>
+        defaultValue: null
+        minValue: -2147483648
+        maxValue: 2147483647
+        distribution: "GAUSSIAN"
+      columnName: null
+      regexName: null
+      randomName: true
+      unique: false
+      hasNull: false
+      nullFrequency: 0.0
+    tableName: null
+    regexName: null
+    randomName: true

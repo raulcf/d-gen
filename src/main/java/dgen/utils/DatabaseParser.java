@@ -1,11 +1,8 @@
 package dgen.utils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import dgen.utils.schemas.DatabaseSchema;
 import dgen.utils.schemas.TableSchema;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

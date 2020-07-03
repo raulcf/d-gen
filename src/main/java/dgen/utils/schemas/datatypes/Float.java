@@ -6,7 +6,7 @@ public class Float implements DataType {
     private float maxValue = java.lang.Float.MAX_VALUE;
     private Distributions distribution;
 
-    public Types type() { return Types.BOOLEAN; }
+    public Type type() { return Type.BOOLEAN; }
 
     public Float getDefaultValue() {
         return defaultValue;

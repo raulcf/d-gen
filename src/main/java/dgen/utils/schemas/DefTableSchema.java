@@ -1,13 +1,20 @@
 package dgen.utils.schemas;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import java.util.List;
 
-public class DefTableSchema extends TableSchema {
+@JsonTypeName("defTable")
+public class DefTableSchema implements TableSchema {
 
     public static final String [] REQUIRED_PARAMETERS = {"tableID", "numRows", "columnSchemas"};
     public static final String [] OPTIONAL_PARAMETERS = {"tableName", "randomName", "tableRelationships", "tableConstraints"};
 
-    private final String tableType = "defined";
+    @JsonIgnore
+    public final String schemaType = "general";
+
     private int tableID;
     private Integer numRows = null;
     private List<ColumnSchema> columnSchemas;
@@ -16,56 +23,44 @@ public class DefTableSchema extends TableSchema {
     private boolean randomName = true;
 
     @Override
-    public String getTableType() {
-        return tableType;
-    }
+    public String schemaType() { return "defined"; }
 
-    @Override
     public int getTableID() {
         return tableID;
     }
 
-    @Override
     public void setTableID(int tableID) {
         this.tableID = tableID;
     }
 
-    @Override
     public Integer getNumRows() {
         return numRows;
     }
 
-    @Override
     public void setNumRows(Integer numRows) {
         this.numRows = numRows;
     }
 
-    @Override
     public List<ColumnSchema> getColumnSchemas() {
         return columnSchemas;
     }
 
-    @Override
     public void setColumnSchemas(List<ColumnSchema> columnSchemas) {
         this.columnSchemas = columnSchemas;
     }
 
-    @Override
     public String getTableName() {
         return tableName;
     }
 
-    @Override
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
 
-    @Override
     public String getRegexName() {
         return regexName;
     }
 
-    @Override
     public void setRegexName(String regexName) {
         this.regexName = regexName;
     }
@@ -74,7 +69,6 @@ public class DefTableSchema extends TableSchema {
         return randomName;
     }
 
-    @Override
     public void setRandomName(boolean randomName) {
         this.randomName = randomName;
     }
@@ -82,7 +76,7 @@ public class DefTableSchema extends TableSchema {
     @Override
     public String toString() {
         return "DefTableSchema{" +
-                "tableType='" + tableType + '\'' +
+                "schemaType='" + schemaType + '\'' +
                 ", tableID=" + tableID +
                 ", numRows=" + numRows +
                 ", columnSchemas=" + columnSchemas +

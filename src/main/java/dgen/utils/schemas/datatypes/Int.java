@@ -1,14 +1,15 @@
 package dgen.utils.schemas.datatypes;
 
-import dgen.utils.schemas.datatypes.Distributions;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
+@JsonTypeName("int")
 public class Int implements DataType{
     private Integer defaultValue = null;
     private Integer minValue = Integer.MIN_VALUE;
     private Integer maxValue = Integer.MAX_VALUE;
     private Distributions distribution = Distributions.UNIFORM;
 
-    public Types type() { return Types.INT; }
+    public Type type() { return Type.INT; }
 
     public Integer getDefaultValue() {
         return defaultValue;

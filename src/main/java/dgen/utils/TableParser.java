@@ -2,6 +2,7 @@ package dgen.utils;
 
 import dgen.utils.schemas.ColumnSchema;
 import dgen.utils.schemas.DefTableSchema;
+import dgen.utils.schemas.GenTableSchema;
 import dgen.utils.schemas.TableSchema;
 
 import java.util.*;
@@ -16,37 +17,35 @@ public class TableParser {
         this.tables = tables;
     }
 
-    public void parse(TableSchema t) {
-        switch (t.getTableType()) {
-            case "defined":
-                parseTable(t);
-                break;
+    public void parse(TableSchema table) {
+        switch (table.schemaType()) {
             case "general":
-                parseGenTable(t);
+                GenTableSchema genTable = (GenTableSchema) table;
+                parseGenTable(genTable);
                 break;
-            default:
-                ; // TODO: Throw error
+            case "defined":
+                DefTableSchema defTable = (DefTableSchema) table;
+                parseTable(defTable);
                 break;
         }
-        
     }
 
-    private void parseGenTable(TableSchema t) {
+    private void parseGenTable(GenTableSchema genTable) {
         Random r = new Random();
 
-        Integer numRows = t.getNumRows();
-        int minRows = t.getMinRows();
-        int maxRows = t.getMaxRows();
+        Integer numRows = genTable.getNumRows();
+        int minRows = genTable.getMinRows();
+        int maxRows = genTable.getMaxRows();
 
         assert minRows <= maxRows;
 
         int numTables;
 
-        if (t.getNumTables() != null) {
-            numTables = t.getNumTables();
+        if (genTable.getNumTables() != null) {
+            numTables = genTable.getNumTables();
         } else {
-            int minTables = t.getMinTables();
-            int maxTables = t.getMaxTables();
+            int minTables = genTable.getMinTables();
+            int maxTables = genTable.getMaxTables();
 
             assert minTables <= maxTables;
 
@@ -59,40 +58,43 @@ public class TableParser {
                 numRows = r.nextInt( maxRows - minRows + 1) + maxRows;
             }
 
-            t.setTableID(tableID);
-            t.setNumRows(numRows);
+            DefTableSchema defTable = new DefTableSchema();
+            defTable.setColumnSchemas(genTable.getColumnSchemas());
+            defTable.setRandomName(genTable.isRandomName());
+            defTable.setRegexName(genTable.getRegexName());
+            defTable.setTableName(genTable.getTableName());
+            defTable.setTableID(tableID);
+            defTable.setNumRows(numRows);
 
-            parseTable(t);
+            parseTable(defTable);
         }
 
     }
 
-    private void parseTable(TableSchema t) {
-        DefTableSchema definedTable = new DefTableSchema();
-
-        if (t.getTableName() != null) {
-            t.setRandomName(false);
-            t.setRegexName(null);
+    private void parseTable(DefTableSchema defTable) {
+        if (defTable.getTableName() != null) {
+            defTable.setRandomName(false);
+            defTable.setRegexName(null);
         }
-        else if (t.getRegexName() != null) {
-            t.setRandomName(false);
+        else if (defTable.getRegexName() != null) {
+            defTable.setRandomName(false);
         }
 
         List<ColumnSchema> columns = new ArrayList<>();
-        for (ColumnSchema c: t.getColumnSchemas()) {
+        for (ColumnSchema c: defTable.getColumnSchemas()) {
             ColumnParser parser = new ColumnParser();
             parser.parse(c);
             columns.addAll(parser.getColumns());
         }
 
-        definedTable.setTableID(t.getTableID());
-        definedTable.setNumRows(t.getNumRows());
-        definedTable.setTableName(t.getTableName());
-        definedTable.setRandomName(t.getRandomName());
-        definedTable.setColumnSchemas(columns);
-
-        tables.add(definedTable);
+        tables.add(defTable);
 
     }
+
+    private void parseRelationships() {}
+
+    private void parseGenRelationships() {}
+
+    private void parseDefRelationships() {}
 
 }

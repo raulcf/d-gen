@@ -1,17 +1,14 @@
 package dgen.utils.schemas;
 
-
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import dgen.utils.schemas.datatypes.DataType;
 
-@JsonTypeName("defColumn")
-public class DefColumnSchema implements ColumnSchema {
+@JsonTypeName("genColumn")
+public class GenColumnSchema implements ColumnSchema {
 
-    public static final String [] REQUIRED_PARAMETERS = {"columnID", "dataType"};
-    public static final String [] OPTIONAL_PARAMETERS = {"columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency"};
-
-    private int columnID;
-    private DataType dataType; // Will change this to more specific type
+    private Integer numColumns = null;
+    private int minColumns = 1;
+    private int maxColumns = 100; // TODO: Decide on this later
+    private Object dataType; // Will change this to more specific type
     private String columnName;
     private String regexName;
     private boolean randomName = true;
@@ -20,21 +17,37 @@ public class DefColumnSchema implements ColumnSchema {
     private float nullFrequency;
     
     @Override
-    public String schemaType() { return "defined"; }
+    public String schemaType() { return "general"; }
 
-    public int getColumnID() {
-        return columnID;
+    public Integer getNumColumns() {
+        return numColumns;
     }
 
-    public void setColumnID(int columnID) {
-        this.columnID = columnID;
+    public void setNumColumns(Integer numColumns) {
+        this.numColumns = numColumns;
     }
 
-    public DataType getDataType() {
+    public int getMinColumns() {
+        return minColumns;
+    }
+
+    public void setMinColumns(int minColumns) {
+        this.minColumns = minColumns;
+    }
+
+    public int getMaxColumns() {
+        return maxColumns;
+    }
+
+    public void setMaxColumns(int maxColumns) {
+        this.maxColumns = maxColumns;
+    }
+
+    public Object getDataType() {
         return dataType;
     }
 
-    public void setDataType(DataType dataType) {
+    public void setDataType(Object dataType) {
         this.dataType = dataType;
     }
 
@@ -84,19 +97,5 @@ public class DefColumnSchema implements ColumnSchema {
 
     public void setNullFrequency(float nullFrequency) {
         this.nullFrequency = nullFrequency;
-    }
-
-    @Override
-    public String toString() {
-        return "DefColumnSchema{" +
-                "columnID=" + columnID +
-                ", dataType=" + dataType +
-                ", columnName='" + columnName + '\'' +
-                ", regexName='" + regexName + '\'' +
-                ", randomName=" + randomName +
-                ", unique=" + unique +
-                ", hasNull=" + hasNull +
-                ", nullFrequency=" + nullFrequency +
-                '}';
     }
 }

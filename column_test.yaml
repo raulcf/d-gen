@@ -1,14 +1,16 @@
 ---
-databaseName: "test"
-tableSchemas:
-  - tableType: "general"
-    numTables: 2
-    numRows: 100
-    tableID: 1
-    columnSchemas:
-      - columnType: "general"
-        minColumns: 1
-        maxColumns: 50
-        dataType:
-          int: "default"
+database:
+  databaseName: "test"
+  tableSchemas:
+    - genTable:
+        numTables: 2
+        numRows: 100
+        maxTables: 10
+        columnSchemas:
+          - defColumn:
+              regexName: null
+              columnID: 1
+              dataType:
+                int:
+                  distribution: "GAUSSIAN"
 

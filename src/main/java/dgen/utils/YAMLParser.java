@@ -1,17 +1,25 @@
 package dgen.utils;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import dgen.utils.schemas.DatabaseSchema;
 
 import java.io.File;
 
 public class YAMLParser {
-    DatabaseSchema database;
+    private DatabaseSchema database;
+
+    public DatabaseSchema getDatabase() {
+        return database;
+    }
 
     public void parse(String path) {
         File file = new File(path);
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+        mapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
 
         try {
             database = mapper.readValue(file, DatabaseSchema.class);
@@ -28,6 +36,9 @@ public class YAMLParser {
     public void write(String path) {
         File file = new File(path);
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+        mapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         try {
             mapper.writeValue(file, database);
@@ -39,8 +50,7 @@ public class YAMLParser {
 
     public static void main(String[] args) {
         YAMLParser parser = new YAMLParser();
-        parser.parse("new_test.yaml");
-        System.out.println(parser.database);
-        parser.write("new_test.yaml");
+        parser.parse("column_test.yaml");
+        parser.write("column_test_output.yaml");
     }
 }

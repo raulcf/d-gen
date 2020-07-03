@@ -8,7 +8,7 @@ public class String implements DataType{
     private Distributions distribution;
     private java.lang.String validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz";
 
-    public Types type() { return Types.STRING; }
+    public Type type() { return Type.STRING; }
 
     public java.lang.String getDefaultValue() {
         return defaultValue;
