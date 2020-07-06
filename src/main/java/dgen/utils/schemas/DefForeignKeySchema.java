@@ -1,31 +1,27 @@
 package dgen.utils.schemas;
 
-
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.schemas.datatypes.DataType;
 
-@JsonTypeName("defColumn")
+@JsonTypeName("foreignKey")
 @JsonPropertyOrder({"columnID", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
         "dataType"})
-public class DefColumnSchema implements ColumnSchema, Schema {
-
+public class DefForeignKeySchema implements ColumnSchema, Schema {
     private int columnID;
-    private DataType dataType;
+    private final DataType dataType = null;
     private String columnName;
     private String regexName;
     private boolean randomName = true;
-    private boolean unique = false;
-    private boolean hasNull = false;
-    private float nullFrequency;
-    
-    @Override
-    public String schemaType() { return "defColumn"; }
+    private final boolean unique = false;
+    private final boolean hasNull = false;
+    private final float nullFrequency = 0;
 
     @Override
-    public void validate() {
-        dataType.validate();
-    }
+    public String schemaType() { return "defForeignKey"; }
+
+    @Override
+    public void validate() {};
 
     public int getColumnID() {
         return columnID;
@@ -37,10 +33,6 @@ public class DefColumnSchema implements ColumnSchema, Schema {
 
     public DataType getDataType() {
         return dataType;
-    }
-
-    public void setDataType(DataType dataType) {
-        this.dataType = dataType;
     }
 
     public String getColumnName() {
@@ -71,29 +63,17 @@ public class DefColumnSchema implements ColumnSchema, Schema {
         return unique;
     }
 
-    public void setUnique(boolean unique) {
-        this.unique = unique;
-    }
-
     public boolean isHasNull() {
         return hasNull;
-    }
-
-    public void setHasNull(boolean hasNull) {
-        this.hasNull = hasNull;
     }
 
     public float getNullFrequency() {
         return nullFrequency;
     }
 
-    public void setNullFrequency(float nullFrequency) {
-        this.nullFrequency = nullFrequency;
-    }
-
     @Override
     public String toString() {
-        return "DefColumnSchema{" +
+        return "DefForeignKeySchema{" +
                 "columnID=" + columnID +
                 ", dataType=" + dataType +
                 ", columnName='" + columnName + '\'' +

@@ -9,4 +9,5 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("dataType")
 public interface DataType {
     Type type();
+    public void validate();
 }

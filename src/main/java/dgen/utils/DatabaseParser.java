@@ -12,6 +12,10 @@ public class DatabaseParser {
     public DatabaseSchema getDatabase() { return database; }
     public void setDatabase(DatabaseSchema database) { this.database = database; }
 
+    /**
+     * Parses the tables within a DatabaseSchema object.
+     * @param d DatabaseSchema object to parse.
+     */
     public void parse(DatabaseSchema d) {
         database = d;
         List<TableSchema> tables = new ArrayList<>();

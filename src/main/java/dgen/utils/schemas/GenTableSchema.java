@@ -1,11 +1,12 @@
 package dgen.utils.schemas;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.SpecificationException;
 
 import java.util.List;
 
 @JsonTypeName("genTable")
-public class GenTableSchema implements TableSchema {
+public class GenTableSchema implements TableSchema, Schema {
 
     private Integer numRows = null;
     private Integer minRows = 1;
@@ -19,7 +20,19 @@ public class GenTableSchema implements TableSchema {
     private boolean randomName = true;
 
     @Override
-    public String schemaType() { return "general"; }
+    public String schemaType() { return "genTable"; }
+
+    @Override
+    public void validate() {
+        if (minRows > maxRows) {
+            throw new SpecificationException("genTable minRows of " + minRows + " greater than maxColumns of "
+                    + maxRows);
+        }
+        if (minTables > maxTables) {
+            throw new SpecificationException("genTable minTables of " + minTables + " greater than maxTables of "
+                    + maxTables);
+        }
+    }
 
     public Integer getNumRows() {
         return numRows;

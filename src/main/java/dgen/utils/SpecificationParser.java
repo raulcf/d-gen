@@ -8,14 +8,20 @@ import dgen.utils.schemas.DatabaseSchema;
 
 import java.io.File;
 
-public class YAMLParser {
+
+public class SpecificationParser {
     private DatabaseSchema database;
 
     public DatabaseSchema getDatabase() {
         return database;
     }
 
-    public void parse(String path) {
+
+    /**
+     * Parses a d-gen specification file from a YAML format to a DatabaseSchema object.
+     * @param path Path to d-gen specification YAML.
+     */
+    public void parseYAML(String path) {
         File file = new File(path);
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
@@ -31,11 +37,38 @@ public class YAMLParser {
         DatabaseParser parser = new DatabaseParser();
         parser.parse(database);
         database = parser.getDatabase();
+
     }
 
+    /**
+     * Parses a d-gen specification file from a JSON format to a DatabaseSchema object.
+     * @param path Path to d-gen specification YAML.
+     */
+    public void parseJSON(String path) {
+        File file = new File(path);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+        mapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
+
+        try {
+            database = mapper.readValue(file, DatabaseSchema.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+
+        DatabaseParser parser = new DatabaseParser();
+        parser.parse(database);
+        database = parser.getDatabase();
+    }
+
+    /**
+     * Writes the parsed DatabaseSchema object into a d-gen JSON specification.
+     * @param path Path to write to.
+     */
     public void write(String path) {
         File file = new File(path);
-        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
         mapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -49,8 +82,8 @@ public class YAMLParser {
     }
 
     public static void main(String[] args) {
-        YAMLParser parser = new YAMLParser();
-        parser.parse("column_test.yaml");
+        SpecificationParser parser = new SpecificationParser();
+        parser.parseYAML("column_test.yaml");
         parser.write("column_test_output.yaml");
     }
 }

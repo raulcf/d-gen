@@ -17,21 +17,31 @@ public class TableParser {
         this.tables = tables;
     }
 
+    /**
+     * Parses TableSchema type objects into a list of TableSchema objects.
+     * @param table TableSchema object to parse.
+     */
     public void parse(TableSchema table) {
         switch (table.schemaType()) {
-            case "general":
+            case "genTable":
                 GenTableSchema genTable = (GenTableSchema) table;
                 parseGenTable(genTable);
                 break;
-            case "defined":
+            case "defTable":
                 DefTableSchema defTable = (DefTableSchema) table;
                 parseTable(defTable);
                 break;
         }
     }
 
+    /**
+     * Parses a GenTableSchema object into a list of DefTableSchema objects.
+     * @param genTable
+     */
     private void parseGenTable(GenTableSchema genTable) {
         Random r = new Random();
+
+        genTable.validate();
 
         Integer numRows = genTable.getNumRows();
         int minRows = genTable.getMinRows();
@@ -71,6 +81,10 @@ public class TableParser {
 
     }
 
+    /**
+     * Parses the name and columns of a DefTableSchema object.
+     * @param defTable DefTableSchema object to parse.
+     */
     private void parseTable(DefTableSchema defTable) {
         if (defTable.getTableName() != null) {
             defTable.setRandomName(false);
@@ -86,6 +100,8 @@ public class TableParser {
             parser.parse(c);
             columns.addAll(parser.getColumns());
         }
+        defTable.setColumnSchemas(columns);
+        defTable.validate();
 
         tables.add(defTable);
 

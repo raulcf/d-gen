@@ -1,19 +1,13 @@
 package dgen.utils.schemas;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.util.List;
 
 @JsonTypeName("defTable")
-public class DefTableSchema implements TableSchema {
-
-    public static final String [] REQUIRED_PARAMETERS = {"tableID", "numRows", "columnSchemas"};
-    public static final String [] OPTIONAL_PARAMETERS = {"tableName", "randomName", "tableRelationships", "tableConstraints"};
-
-    @JsonIgnore
-    public final String schemaType = "general";
+@JsonPropertyOrder({"tableID", "tableName", "numRows", "regexName", "randomName", "columnSchemas"})
+public class DefTableSchema implements TableSchema, Schema {
 
     private int tableID;
     private Integer numRows = null;
@@ -23,7 +17,12 @@ public class DefTableSchema implements TableSchema {
     private boolean randomName = true;
 
     @Override
-    public String schemaType() { return "defined"; }
+    public String schemaType() { return "defTable"; }
+
+    @Override
+    public void validate() {
+        //TODO: Check whether there are duplicate columnIDs. It might be better to check while parsing.
+    }
 
     public int getTableID() {
         return tableID;
@@ -76,8 +75,7 @@ public class DefTableSchema implements TableSchema {
     @Override
     public String toString() {
         return "DefTableSchema{" +
-                "schemaType='" + schemaType + '\'' +
-                ", tableID=" + tableID +
+                "tableID=" + tableID +
                 ", numRows=" + numRows +
                 ", columnSchemas=" + columnSchemas +
                 ", tableName='" + tableName + '\'' +

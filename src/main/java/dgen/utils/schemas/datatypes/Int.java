@@ -1,6 +1,7 @@
 package dgen.utils.schemas.datatypes;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.SpecificationException;
 
 @JsonTypeName("int")
 public class Int implements DataType{
@@ -9,7 +10,16 @@ public class Int implements DataType{
     private Integer maxValue = Integer.MAX_VALUE;
     private Distributions distribution = Distributions.UNIFORM;
 
+    @Override
     public Type type() { return Type.INT; }
+
+    @Override
+    public void validate() {
+        if (minValue >= maxValue) {
+            throw new SpecificationException("Int minValue of " + minValue.toString() + " greater than maxValue of "
+                    + maxValue.toString());
+        }
+    }
 
     public Integer getDefaultValue() {
         return defaultValue;

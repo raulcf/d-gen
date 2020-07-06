@@ -1,26 +1,24 @@
 package dgen.utils.schemas;
 
-
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.schemas.datatypes.DataType;
 
-@JsonTypeName("defColumn")
+@JsonTypeName("primaryKey")
 @JsonPropertyOrder({"columnID", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
         "dataType"})
-public class DefColumnSchema implements ColumnSchema, Schema {
-
+public class PrimaryKeySchema implements ColumnSchema, Schema {
     private int columnID;
     private DataType dataType;
     private String columnName;
     private String regexName;
     private boolean randomName = true;
-    private boolean unique = false;
-    private boolean hasNull = false;
-    private float nullFrequency;
-    
+    private final boolean unique = true;
+    private final boolean hasNull = false;
+    private final float nullFrequency = 0;
+
     @Override
-    public String schemaType() { return "defColumn"; }
+    public String schemaType() { return "primaryKey"; }
 
     @Override
     public void validate() {
@@ -71,29 +69,17 @@ public class DefColumnSchema implements ColumnSchema, Schema {
         return unique;
     }
 
-    public void setUnique(boolean unique) {
-        this.unique = unique;
-    }
-
     public boolean isHasNull() {
         return hasNull;
-    }
-
-    public void setHasNull(boolean hasNull) {
-        this.hasNull = hasNull;
     }
 
     public float getNullFrequency() {
         return nullFrequency;
     }
 
-    public void setNullFrequency(float nullFrequency) {
-        this.nullFrequency = nullFrequency;
-    }
-
     @Override
     public String toString() {
-        return "DefColumnSchema{" +
+        return "PrimaryKeySchema{" +
                 "columnID=" + columnID +
                 ", dataType=" + dataType +
                 ", columnName='" + columnName + '\'' +

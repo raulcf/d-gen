@@ -1,46 +1,60 @@
 package dgen.utils.schemas;
 
-
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.SpecificationException;
 import dgen.utils.schemas.datatypes.DataType;
+import dgen.utils.schemas.datatypes.Int;
 
-@JsonTypeName("defColumn")
-@JsonPropertyOrder({"columnID", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
-        "dataType"})
-public class DefColumnSchema implements ColumnSchema, Schema {
-
-    private int columnID;
-    private DataType dataType;
+public class GenForeignKeySchema implements ColumnSchema, Schema {
+    private Integer numColumns = null;
+    private Integer minColumns = 1;
+    private Integer maxColumns = 100; // TODO: Decide on this later
+    private final DataType dataType = null;
     private String columnName;
     private String regexName;
     private boolean randomName = true;
     private boolean unique = false;
     private boolean hasNull = false;
     private float nullFrequency;
-    
+
     @Override
-    public String schemaType() { return "defColumn"; }
+    public String schemaType() {
+        return "genForeignKey";
+    }
 
     @Override
     public void validate() {
-        dataType.validate();
+        if (minColumns > maxColumns) {
+            throw new SpecificationException("genForeignKey minColumns of " + minColumns + " greater than maxColumns of "
+                    + maxColumns);
+        }
     }
 
-    public int getColumnID() {
-        return columnID;
+    public Integer getNumColumns() {
+        return numColumns;
     }
 
-    public void setColumnID(int columnID) {
-        this.columnID = columnID;
+    public void setNumColumns(Integer numColumns) {
+        this.numColumns = numColumns;
+    }
+
+    public Integer getMinColumns() {
+        return minColumns;
+    }
+
+    public void setMinColumns(Integer minColumns) {
+        this.minColumns = minColumns;
+    }
+
+    public Integer getMaxColumns() {
+        return maxColumns;
+    }
+
+    public void setMaxColumns(Integer maxColumns) {
+        this.maxColumns = maxColumns;
     }
 
     public DataType getDataType() {
         return dataType;
-    }
-
-    public void setDataType(DataType dataType) {
-        this.dataType = dataType;
     }
 
     public String getColumnName() {
@@ -93,8 +107,10 @@ public class DefColumnSchema implements ColumnSchema, Schema {
 
     @Override
     public String toString() {
-        return "DefColumnSchema{" +
-                "columnID=" + columnID +
+        return "GenForeignKeySchema{" +
+                "numColumns=" + numColumns +
+                ", minColumns=" + minColumns +
+                ", maxColumns=" + maxColumns +
                 ", dataType=" + dataType +
                 ", columnName='" + columnName + '\'' +
                 ", regexName='" + regexName + '\'' +

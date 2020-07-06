@@ -1,5 +1,7 @@
 package dgen.utils.schemas.datatypes;
 
+import dgen.utils.SpecificationException;
+
 public class String implements DataType{
     private java.lang.String defaultValue;
     private java.lang.String regexName;
@@ -8,7 +10,16 @@ public class String implements DataType{
     private Distributions distribution;
     private java.lang.String validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz";
 
+    @Override
     public Type type() { return Type.STRING; }
+
+    @Override
+    public void validate() {
+        if (minLength >= maxLength) {
+            throw new SpecificationException("String minLength of " + minLength.toString()
+                    + " greater than maxLength of " + maxLength.toString());
+        }
+    }
 
     public java.lang.String getDefaultValue() {
         return defaultValue;

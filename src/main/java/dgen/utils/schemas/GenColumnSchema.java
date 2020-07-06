@@ -1,14 +1,17 @@
 package dgen.utils.schemas;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.SpecificationException;
+import dgen.utils.schemas.datatypes.DataType;
+import dgen.utils.schemas.datatypes.Int;
 
 @JsonTypeName("genColumn")
-public class GenColumnSchema implements ColumnSchema {
+public class GenColumnSchema implements ColumnSchema, Schema {
 
     private Integer numColumns = null;
-    private int minColumns = 1;
-    private int maxColumns = 100; // TODO: Decide on this later
-    private Object dataType; // Will change this to more specific type
+    private Integer minColumns = 1;
+    private Integer maxColumns = 100; // TODO: Decide on this later
+    private DataType dataType;
     private String columnName;
     private String regexName;
     private boolean randomName = true;
@@ -17,7 +20,15 @@ public class GenColumnSchema implements ColumnSchema {
     private float nullFrequency;
     
     @Override
-    public String schemaType() { return "general"; }
+    public String schemaType() { return "genColumn"; }
+
+    @Override
+    public void validate() {
+        if (minColumns > maxColumns) {
+            throw new SpecificationException("genColumn minColumns of " + minColumns + " greater than maxColumns of "
+                    + maxColumns);
+        }
+    }
 
     public Integer getNumColumns() {
         return numColumns;
@@ -27,27 +38,27 @@ public class GenColumnSchema implements ColumnSchema {
         this.numColumns = numColumns;
     }
 
-    public int getMinColumns() {
+    public Integer getMinColumns() {
         return minColumns;
     }
 
-    public void setMinColumns(int minColumns) {
+    public void setMinColumns(Integer minColumns) {
         this.minColumns = minColumns;
     }
 
-    public int getMaxColumns() {
+    public Integer getMaxColumns() {
         return maxColumns;
     }
 
-    public void setMaxColumns(int maxColumns) {
+    public void setMaxColumns(Integer maxColumns) {
         this.maxColumns = maxColumns;
     }
 
-    public Object getDataType() {
+    public DataType getDataType() {
         return dataType;
     }
 
-    public void setDataType(Object dataType) {
+    public void setDataType(DataType dataType) {
         this.dataType = dataType;
     }
 
