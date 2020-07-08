@@ -2,15 +2,43 @@
 database:
   databaseName: "test"
   tableSchemas:
-    - genTable:
-        numTables: 2
-        numRows: 100
-        maxTables: 10
+    - defTable:
+        tableID: 1
         columnSchemas:
           - defColumn:
-              regexName: null
               columnID: 1
               dataType:
-                int:
-                  distribution: "GAUSSIAN"
+                string:
+                  distribution: "UNIFORM"
+          - defColumn:
+              columnID: 2
+              dataType:
+                int: {}
+          - defColumn:
+              columnID: 3
+              dataType:
+                int: {}
+          - defColumn:
+              columnID: 4
+              dataType:
+                int: {}
+          - defColumn:
+              columnID: 5
+              dataType:
+                int: {}
+        tableRelationships:
+          - defTableRelationship:
+              dependencyMap:
+                1: [2]
+                2: [3]
+              dependencyFunction:
+                functionalDependency: {}
+          - genTableRelationship:
+              numRelationships: 5
+              dependencyFunction:
+                functionalDependency: {}
+              graphSchema:
+                randomGraph: {}
+
+
 

@@ -1,9 +1,10 @@
 package dgen.utils.schemas;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
 import dgen.utils.schemas.datatypes.DataType;
-import dgen.utils.schemas.datatypes.Int;
 
+@JsonTypeName("genForeignKey")
 public class GenForeignKeySchema implements ColumnSchema, Schema {
     private Integer numColumns = null;
     private Integer minColumns = 1;

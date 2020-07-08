@@ -1,9 +1,7 @@
 package dgen.utils;
 
-import dgen.utils.schemas.ColumnSchema;
-import dgen.utils.schemas.DefTableSchema;
-import dgen.utils.schemas.GenTableSchema;
-import dgen.utils.schemas.TableSchema;
+import dgen.utils.schemas.*;
+import dgen.utils.schemas.relationships.TableRelationshipSchema;
 
 import java.util.*;
 
@@ -95,22 +93,25 @@ public class TableParser {
         }
 
         List<ColumnSchema> columns = new ArrayList<>();
+        Map<Integer, ColumnSchema> columnIDMap = new HashMap<>();
         for (ColumnSchema c: defTable.getColumnSchemas()) {
             ColumnParser parser = new ColumnParser();
             parser.parse(c);
             columns.addAll(parser.getColumns());
+            columnIDMap.putAll(parser.getColumnIDMap());
         }
         defTable.setColumnSchemas(columns);
         defTable.validate();
 
+        List<TableRelationshipSchema> tableRelationships = new ArrayList<>();
+        TableRelationshipParser parser = new TableRelationshipParser(columnIDMap);
+        for (TableRelationshipSchema tr: defTable.getTableRelationships()) {
+            tableRelationships.add(parser.parse(tr));
+        }
+        defTable.setTableRelationships(tableRelationships);
+
         tables.add(defTable);
 
     }
-
-    private void parseRelationships() {}
-
-    private void parseGenRelationships() {}
-
-    private void parseDefRelationships() {}
 
 }

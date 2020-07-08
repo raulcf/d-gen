@@ -1,7 +1,9 @@
 package dgen.utils.schemas.datatypes;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
 
+@JsonTypeName("string")
 public class String implements DataType{
     private java.lang.String defaultValue;
     private java.lang.String regexName;

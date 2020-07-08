@@ -13,9 +13,9 @@ public class DefForeignKeySchema implements ColumnSchema, Schema {
     private String columnName;
     private String regexName;
     private boolean randomName = true;
-    private final boolean unique = false;
-    private final boolean hasNull = false;
-    private final float nullFrequency = 0;
+    private boolean unique = false;
+    private boolean hasNull = false;
+    private float nullFrequency = 0;
 
     @Override
     public String schemaType() { return "defForeignKey"; }
@@ -63,12 +63,24 @@ public class DefForeignKeySchema implements ColumnSchema, Schema {
         return unique;
     }
 
+    public void setUnique(boolean unique) {
+        this.unique = unique;
+    }
+
     public boolean isHasNull() {
         return hasNull;
     }
 
+    public void setHasNull(boolean hasNull) {
+        this.hasNull = hasNull;
+    }
+
     public float getNullFrequency() {
         return nullFrequency;
+    }
+
+    public void setNullFrequency(float nullFrequency) {
+        this.nullFrequency = nullFrequency;
     }
 
     @Override

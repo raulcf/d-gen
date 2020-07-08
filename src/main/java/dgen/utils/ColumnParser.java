@@ -3,18 +3,24 @@ package dgen.utils;
 import dgen.utils.schemas.*;
 import dgen.utils.schemas.DefForeignKeySchema;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class ColumnParser {
     private List<ColumnSchema> columns = new ArrayList<>();
+    private Map<Integer, ColumnSchema> columnIDMap = new HashMap<>();
 
     public List<ColumnSchema> getColumns() {
         return columns;
     }
     public void setColumns(List<ColumnSchema> columns) {
         this.columns = columns;
+    }
+
+    public Map<Integer, ColumnSchema> getColumnIDMap() {
+        return columnIDMap;
+    }
+    public void setColumnIDMap(Map<Integer, ColumnSchema> columnIDMap) {
+        this.columnIDMap = columnIDMap;
     }
 
     /**
@@ -100,6 +106,7 @@ public class ColumnParser {
 
         defColumn.validate();
 
+        columnIDMap.put(defColumn.getColumnID(), defColumn);
         columns.add(defColumn);
     }
 
@@ -154,6 +161,7 @@ public class ColumnParser {
 
         defForeignKey.validate();
 
+        columnIDMap.put(defForeignKey.getColumnID(), defForeignKey);
         columns.add(defForeignKey);
     }
 
@@ -175,6 +183,7 @@ public class ColumnParser {
 
         primaryKey.validate();
 
+        columnIDMap.put(primaryKey.getColumnID(), primaryKey);
         columns.add(primaryKey);
     }
 }

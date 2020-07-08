@@ -2,11 +2,12 @@ package dgen.utils.schemas;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.schemas.relationships.TableRelationshipSchema;
 
 import java.util.List;
 
 @JsonTypeName("defTable")
-@JsonPropertyOrder({"tableID", "tableName", "numRows", "regexName", "randomName", "columnSchemas"})
+@JsonPropertyOrder({"tableID", "tableName", "numRows", "regexName", "randomName", "columnSchemas", "tableRelationships"})
 public class DefTableSchema implements TableSchema, Schema {
 
     private int tableID;
@@ -15,6 +16,7 @@ public class DefTableSchema implements TableSchema, Schema {
     private String tableName;
     private String regexName;
     private boolean randomName = true;
+    private List<TableRelationshipSchema> tableRelationships;
 
     @Override
     public String schemaType() { return "defTable"; }
@@ -72,6 +74,14 @@ public class DefTableSchema implements TableSchema, Schema {
         this.randomName = randomName;
     }
 
+    public List<TableRelationshipSchema> getTableRelationships() {
+        return tableRelationships;
+    }
+
+    public void setTableRelationships(List<TableRelationshipSchema> tableRelationships) {
+        this.tableRelationships = tableRelationships;
+    }
+
     @Override
     public String toString() {
         return "DefTableSchema{" +
@@ -81,6 +91,7 @@ public class DefTableSchema implements TableSchema, Schema {
                 ", tableName='" + tableName + '\'' +
                 ", regexName='" + regexName + '\'' +
                 ", randomName=" + randomName +
+                ", tableRelationships=" + tableRelationships +
                 '}';
     }
 }

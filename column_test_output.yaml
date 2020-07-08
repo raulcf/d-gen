@@ -1,44 +1,128 @@
----
-database:
-  databaseName: "test"
-  tableSchemas:
-  - !<defTable>
-    tableID: -703293792
-    numRows: 100
-    columnSchemas:
-    - !<defColumn>
-      columnID: 1
-      dataType: !<int>
-        defaultValue: null
-        minValue: -2147483648
-        maxValue: 2147483647
-        distribution: "GAUSSIAN"
-      columnName: null
-      regexName: null
-      randomName: true
-      unique: false
-      hasNull: false
-      nullFrequency: 0.0
-    tableName: null
-    regexName: null
-    randomName: true
-  - !<defTable>
-    tableID: -450911323
-    numRows: 100
-    columnSchemas:
-    - !<defColumn>
-      columnID: 1
-      dataType: !<int>
-        defaultValue: null
-        minValue: -2147483648
-        maxValue: 2147483647
-        distribution: "GAUSSIAN"
-      columnName: null
-      regexName: null
-      randomName: true
-      unique: false
-      hasNull: false
-      nullFrequency: 0.0
-    tableName: null
-    regexName: null
-    randomName: true
+{
+  "database" : {
+    "databaseName" : "test",
+    "tableSchemas" : [ {
+      "defTable" : {
+        "tableID" : 1,
+        "tableName" : null,
+        "numRows" : null,
+        "regexName" : null,
+        "randomName" : true,
+        "columnSchemas" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexName" : null,
+                "minLength" : 0,
+                "maxLength" : 1000,
+                "distribution" : "UNIFORM",
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz"
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : -2147483648,
+                "maxValue" : 2147483647,
+                "distribution" : "UNIFORM"
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : -2147483648,
+                "maxValue" : 2147483647,
+                "distribution" : "UNIFORM"
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 4,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : -2147483648,
+                "maxValue" : 2147483647,
+                "distribution" : "UNIFORM"
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 5,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : -2147483648,
+                "maxValue" : 2147483647,
+                "distribution" : "UNIFORM"
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2 ],
+              "2" : [ 3 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            }
+          }
+        }, {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "2" : [ 1 ],
+              "3" : [ 1, 2, 4, 5 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            }
+          }
+        } ]
+      }
+    } ]
+  }
+}

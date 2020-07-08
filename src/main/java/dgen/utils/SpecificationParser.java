@@ -84,6 +84,7 @@ public class SpecificationParser {
     public static void main(String[] args) {
         SpecificationParser parser = new SpecificationParser();
         parser.parseYAML("column_test.yaml");
+        System.out.println(parser.getDatabase());
         parser.write("column_test_output.yaml");
     }
 }

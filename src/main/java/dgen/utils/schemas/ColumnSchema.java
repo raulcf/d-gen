@@ -14,4 +14,12 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonTypeName("column")
 public interface ColumnSchema {
     String schemaType();
+    String getColumnName();
+    void setColumnName(String columnName);
+    String getRegexName();
+    void setRegexName(String regexName);
+    boolean isRandomName();
+    void setRandomName(boolean randomName);
+    boolean isHasNull();
+    boolean isUnique();
 }

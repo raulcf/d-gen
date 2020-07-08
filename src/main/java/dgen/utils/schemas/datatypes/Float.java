@@ -1,7 +1,9 @@
 package dgen.utils.schemas.datatypes;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
 
+@JsonTypeName("float")
 public class Float implements DataType {
     private java.lang.Float defaultValue = null;
     private java.lang.Float minValue = java.lang.Float.MIN_VALUE;
