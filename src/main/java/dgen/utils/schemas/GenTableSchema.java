@@ -2,7 +2,9 @@ package dgen.utils.schemas;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
+import dgen.utils.schemas.relationships.TableRelationshipSchema;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonTypeName("genTable")
@@ -18,6 +20,7 @@ public class GenTableSchema implements TableSchema, Schema {
     private String tableName;
     private String regexName;
     private boolean randomName = true;
+    private List<TableRelationshipSchema> tableRelationships = new ArrayList<>();
 
     @Override
     public String schemaType() { return "genTable"; }
@@ -112,6 +115,14 @@ public class GenTableSchema implements TableSchema, Schema {
 
     public void setMaxTables(Integer maxTables) {
         this.maxTables = maxTables;
+    }
+
+    public List<TableRelationshipSchema> getTableRelationships() {
+        return tableRelationships;
+    }
+
+    public void setTableRelationships(List<TableRelationshipSchema> tableRelationships) {
+        this.tableRelationships = tableRelationships;
     }
 
     @Override

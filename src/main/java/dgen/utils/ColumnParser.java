@@ -9,20 +9,6 @@ public class ColumnParser {
     private List<ColumnSchema> columns = new ArrayList<>();
     private Map<Integer, ColumnSchema> columnIDMap = new HashMap<>();
 
-    public List<ColumnSchema> getColumns() {
-        return columns;
-    }
-    public void setColumns(List<ColumnSchema> columns) {
-        this.columns = columns;
-    }
-
-    public Map<Integer, ColumnSchema> getColumnIDMap() {
-        return columnIDMap;
-    }
-    public void setColumnIDMap(Map<Integer, ColumnSchema> columnIDMap) {
-        this.columnIDMap = columnIDMap;
-    }
-
     /**
      * Parses ColumnSchema type objects (DefColumnSchema, GenColumnSchema, etc.) into a list of ColumnSchema objects.
      * @param column ColumnSchema type object to parse
@@ -116,7 +102,6 @@ public class ColumnParser {
      */
     private void parseGenForeignKey(GenForeignKeySchema genForeignKey) {
         Random r = new Random();
-
         int numColumns;
 
         genForeignKey.validate();
@@ -185,5 +170,21 @@ public class ColumnParser {
 
         columnIDMap.put(primaryKey.getColumnID(), primaryKey);
         columns.add(primaryKey);
+    }
+
+    public List<ColumnSchema> getColumns() {
+        return columns;
+    }
+
+    public void setColumns(List<ColumnSchema> columns) {
+        this.columns = columns;
+    }
+
+    public Map<Integer, ColumnSchema> getColumnIDMap() {
+        return columnIDMap;
+    }
+
+    public void setColumnIDMap(Map<Integer, ColumnSchema> columnIDMap) {
+        this.columnIDMap = columnIDMap;
     }
 }

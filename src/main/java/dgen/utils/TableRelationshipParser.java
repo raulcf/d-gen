@@ -12,7 +12,7 @@ import java.util.*;
 public class TableRelationshipParser {
     private Map<Integer, Set<Integer>> relationshipMap = new HashMap<>();
     private int numRelationships = 0;
-    private Map<Integer, ColumnSchema> columnIDMap = new HashMap<>();
+    private Map<Integer, ColumnSchema> columnIDMap;
 
     public TableRelationshipParser(Map<Integer, ColumnSchema> columnIDMap) {
         this.columnIDMap = columnIDMap;
@@ -79,9 +79,8 @@ public class TableRelationshipParser {
         tableRelationship.setDependencyFunction(genTableRelationship.getDependencyFunction());
         GraphSchema graphSchema = genTableRelationship.getGraphSchema();
         List<Integer> columnIDs = new ArrayList<>(columnIDMap.keySet());
-        tableRelationship.setDependencyMap(graphSchema.generateGraph(columnIDs,
+        tableRelationship.setDependencyMap(graphSchema.generateTableGraph(columnIDs,
                 genTableRelationship.getNumRelationships(), relationshipMap));
-        System.out.println(tableRelationship.getDependencyMap());
         return parseTableRelationship(tableRelationship);
     }
 

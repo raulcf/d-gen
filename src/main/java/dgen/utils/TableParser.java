@@ -7,13 +7,7 @@ import java.util.*;
 
 public class TableParser {
     private List<TableSchema> tables = new ArrayList<>();
-
-    public List<TableSchema> getTables() {
-        return tables;
-    }
-    public void setTables(List<TableSchema> tables) {
-        this.tables = tables;
-    }
+    private Map<Integer, TableSchema> tableIDMap = new HashMap<>();
 
     /**
      * Parses TableSchema type objects into a list of TableSchema objects.
@@ -71,6 +65,7 @@ public class TableParser {
             defTable.setRandomName(genTable.isRandomName());
             defTable.setRegexName(genTable.getRegexName());
             defTable.setTableName(genTable.getTableName());
+            defTable.setTableRelationships(genTable.getTableRelationships());
             defTable.setTableID(tableID);
             defTable.setNumRows(numRows);
 
@@ -101,17 +96,35 @@ public class TableParser {
             columnIDMap.putAll(parser.getColumnIDMap());
         }
         defTable.setColumnSchemas(columns);
+        defTable.setColumnIDMap(columnIDMap);
         defTable.validate();
 
         List<TableRelationshipSchema> tableRelationships = new ArrayList<>();
         TableRelationshipParser parser = new TableRelationshipParser(columnIDMap);
+        // TODO: This needs to be changed so that the defined relationships are parsed before general ones
         for (TableRelationshipSchema tr: defTable.getTableRelationships()) {
             tableRelationships.add(parser.parse(tr));
         }
         defTable.setTableRelationships(tableRelationships);
 
+        tableIDMap.put(defTable.getTableID(), defTable);
         tables.add(defTable);
 
     }
 
+    public List<TableSchema> getTables() {
+        return tables;
+    }
+
+    public void setTables(List<TableSchema> tables) {
+        this.tables = tables;
+    }
+
+    public Map<Integer, TableSchema> getTableIDMap() {
+        return tableIDMap;
+    }
+
+    public void setTableIDMap(Map<Integer, TableSchema> tableIDMap) {
+        tableIDMap = tableIDMap;
+    }
 }

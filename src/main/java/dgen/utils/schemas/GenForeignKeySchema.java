@@ -24,7 +24,7 @@ public class GenForeignKeySchema implements ColumnSchema, Schema {
 
     @Override
     public void validate() {
-        if (minColumns > maxColumns) {
+        if (minColumns != null && maxColumns != null && minColumns > maxColumns) {
             throw new SpecificationException("genForeignKey minColumns of " + minColumns + " greater than maxColumns of "
                     + maxColumns);
         }

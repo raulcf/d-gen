@@ -1,9 +1,8 @@
 package dgen.utils.schemas;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.*;
+import dgen.utils.schemas.relationships.DatabaseRelationshipSchema;
+import dgen.utils.schemas.relationships.TableRelationshipSchema;
 
 import java.util.*;
 
@@ -12,6 +11,13 @@ import java.util.*;
 public class DatabaseSchema implements Schema {
     private String databaseName;
     private List<TableSchema> tableSchemas;
+    private List<DatabaseRelationshipSchema> databaseRelationships = new ArrayList<>();
+    /*
+        TODO: This makes it easier to easily access tables and columns but it is incredibly space inefficient.
+         This is essentially is doubling the size of this object.
+     */
+    @JsonIgnore
+    private Map<Integer, TableSchema> tableIDMap;
 
     @Override
     public void validate() {
@@ -24,11 +30,28 @@ public class DatabaseSchema implements Schema {
     public void setTableSchemas(List<TableSchema> tableSchemas) { this.tableSchemas = tableSchemas; }
     public List<TableSchema> getTableSchemas() { return tableSchemas; }
 
+    public List<DatabaseRelationshipSchema> getDatabaseRelationships() {
+        return databaseRelationships;
+    }
+
+    public void setDatabaseRelationships(List<DatabaseRelationshipSchema> databaseRelationships) {
+        this.databaseRelationships = databaseRelationships;
+    }
+
+    public Map<Integer, TableSchema> getTableIDMap() {
+        return tableIDMap;
+    }
+
+    public void setTableIDMap(Map<Integer, TableSchema> tableIDMap) {
+        this.tableIDMap = tableIDMap;
+    }
+
     @Override
     public String toString() {
         return "DatabaseSchema{" +
                 "databaseName='" + databaseName + '\'' +
                 ", tableSchemas=" + tableSchemas +
+                ", databaseRelationships=" + databaseRelationships +
                 '}';
     }
 }

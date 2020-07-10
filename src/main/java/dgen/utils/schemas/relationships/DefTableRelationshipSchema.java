@@ -8,6 +8,7 @@ import java.util.Set;
 
 @JsonTypeName("defTableRelationship")
 public class DefTableRelationshipSchema implements TableRelationshipSchema {
+    /* Mapping of columnID from the determinant to the dependant */
     private Map<Integer, Set<Integer>> dependencyMap;
     private DependencyFunction dependencyFunction;
 

@@ -1,10 +1,14 @@
 package dgen.utils.schemas;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.schemas.relationships.TableRelationshipSchema;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @JsonTypeName("defTable")
 @JsonPropertyOrder({"tableID", "tableName", "numRows", "regexName", "randomName", "columnSchemas", "tableRelationships"})
@@ -16,7 +20,9 @@ public class DefTableSchema implements TableSchema, Schema {
     private String tableName;
     private String regexName;
     private boolean randomName = true;
-    private List<TableRelationshipSchema> tableRelationships;
+    private List<TableRelationshipSchema> tableRelationships = new ArrayList<>();
+    @JsonIgnore
+    private Map<Integer, ColumnSchema> columnIDMap;
 
     @Override
     public String schemaType() { return "defTable"; }
@@ -80,6 +86,14 @@ public class DefTableSchema implements TableSchema, Schema {
 
     public void setTableRelationships(List<TableRelationshipSchema> tableRelationships) {
         this.tableRelationships = tableRelationships;
+    }
+
+    public Map<Integer, ColumnSchema> getColumnIDMap() {
+        return columnIDMap;
+    }
+
+    public void setColumnIDMap(Map<Integer, ColumnSchema> columnIDMap) {
+        this.columnIDMap = columnIDMap;
     }
 
     @Override
