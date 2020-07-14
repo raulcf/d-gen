@@ -1,0 +1,34 @@
+---
+# Testing creating defined PK-FK relationships
+database:
+  databaseName: "1_input"
+  tableSchemas:
+    - defTable:
+        tableID: 1
+        numRows: 10
+        columnSchemas:
+          - primaryKey:
+              columnID: 1
+              dataType:
+                int: {}
+          - defForeignKey:
+              columnID: 2
+    - defTable:
+        tableID: 2
+        numRows: 10
+        columnSchemas:
+          - primaryKey:
+              columnID: 1
+              dataType:
+                int: {}
+          - defForeignKey:
+              columnID: 2
+  databaseRelationships:
+    - defPKFK:
+        pkfkMapping:
+          "1:1": "2:2"
+    - defPKFK:
+        pkfkMapping:
+          "2:1": "1:2"
+
+

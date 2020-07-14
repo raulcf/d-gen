@@ -5,7 +5,7 @@ import dgen.utils.SpecificationException;
 import dgen.utils.schemas.datatypes.DataType;
 
 @JsonTypeName("genForeignKey")
-public class GenForeignKeySchema implements ColumnSchema, Schema {
+public class GenForeignKeySchema implements ColumnSchema {
     private Integer numColumns = null;
     private Integer minColumns = 1;
     private Integer maxColumns = 100; // TODO: Decide on this later
@@ -18,8 +18,8 @@ public class GenForeignKeySchema implements ColumnSchema, Schema {
     private float nullFrequency;
 
     @Override
-    public String schemaType() {
-        return "genForeignKey";
+    public SchemaType schemaType() {
+        return SchemaType.GENFOREIGNKEY;
     }
 
     @Override

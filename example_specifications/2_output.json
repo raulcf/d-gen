@@ -1,0 +1,142 @@
+{
+  "database" : {
+    "databaseName" : "2_input",
+    "tableSchemas" : [ {
+      "defTable" : {
+        "tableID" : -1011925909,
+        "tableName" : null,
+        "numRows" : 144,
+        "regexName" : null,
+        "randomName" : true,
+        "columnSchemas" : [ {
+          "primaryKey" : {
+            "columnID" : 1,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : true,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : -2147483648,
+                "maxValue" : 2147483647,
+                "distribution" : "UNIFORM"
+              }
+            }
+          }
+        }, {
+          "defForeignKey" : {
+            "columnID" : 1813957590,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : null
+          }
+        } ],
+        "tableRelationships" : [ ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : -261201103,
+        "tableName" : null,
+        "numRows" : 144,
+        "regexName" : null,
+        "randomName" : true,
+        "columnSchemas" : [ {
+          "primaryKey" : {
+            "columnID" : 1,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : true,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : -2147483648,
+                "maxValue" : 2147483647,
+                "distribution" : "UNIFORM"
+              }
+            }
+          }
+        }, {
+          "defForeignKey" : {
+            "columnID" : 557993413,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : null
+          }
+        } ],
+        "tableRelationships" : [ ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : -502104606,
+        "tableName" : null,
+        "numRows" : 144,
+        "regexName" : null,
+        "randomName" : true,
+        "columnSchemas" : [ {
+          "primaryKey" : {
+            "columnID" : 1,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : true,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : -2147483648,
+                "maxValue" : 2147483647,
+                "distribution" : "UNIFORM"
+              }
+            }
+          }
+        }, {
+          "defForeignKey" : {
+            "columnID" : 1425933767,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : null
+          }
+        } ],
+        "tableRelationships" : [ ]
+      }
+    } ],
+    "databaseRelationships" : [ {
+      "defPKFK" : {
+        "pkfkMapping" : {
+          "-502104606:1" : "-1011925909:1813957590"
+        }
+      }
+    }, {
+      "defPKFK" : {
+        "pkfkMapping" : {
+          "-261201103:1" : "-502104606:1425933767"
+        }
+      }
+    }, {
+      "defPKFK" : {
+        "pkfkMapping" : {
+          "-1011925909:1" : "-261201103:557993413"
+        }
+      }
+    } ]
+  }
+}

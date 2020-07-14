@@ -8,6 +8,11 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonSubTypes({@JsonSubTypes.Type(value = GenTableSchema.class, name = "genTable"),
         @JsonSubTypes.Type(value = DefTableSchema.class, name = "defTable")})
 @JsonTypeName("table")
-public interface TableSchema {
-    public String schemaType();
+public interface TableSchema extends Schema {
+    String getTableName();
+    void setTableName(String tableName);
+    String getRegexName();
+    void setRegexName(String regexName);
+    boolean isRandomName();
+    void setRandomName(boolean randomName);
 }

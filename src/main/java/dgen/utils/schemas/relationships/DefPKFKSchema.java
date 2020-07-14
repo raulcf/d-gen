@@ -17,13 +17,16 @@ public class DefPKFKSchema implements DatabaseRelationshipSchema {
     private Map<String, String> pkfkMapping;
     /* Primary key */
     @JsonIgnore
-    private Pair<Integer, Integer> start;
+    private Pair<Integer, Integer> primaryKey;
     /* Foreign key*/
     @JsonIgnore
-    private Pair<Integer, Integer> end;
+    private Pair<Integer, Integer> foreignKey;
+
+    @Override
+    public RelationshipType relationshipType() { return RelationshipType.DEFPKFK; }
 
     public void validate() {
-        if (start.getValue0() == end.getValue0()) {
+        if (primaryKey.getValue0() == foreignKey.getValue0()) {
             throw new SpecificationException("Can't have PK linked to FK within same table");
         }
     }
@@ -33,23 +36,20 @@ public class DefPKFKSchema implements DatabaseRelationshipSchema {
             String startString = (String) pkfkMapping.keySet().toArray()[0];
             String endString = pkfkMapping.get(startString);
 
-            start = Pair.with(Integer.parseInt(startString.split(":")[0]),
+            primaryKey = Pair.with(Integer.parseInt(startString.split(":")[0]),
                     Integer.parseInt(startString.split(":")[1]));
-            end = Pair.with(Integer.parseInt(endString.split(":")[0]),
+            foreignKey = Pair.with(Integer.parseInt(endString.split(":")[0]),
                     Integer.parseInt(endString.split(":")[1]));
         }
 
     }
 
     public void unparseMapping() {
-        String startString = start.getValue0() + ":" + start.getValue1();
-        String endString = end.getValue0() + ":" + end.getValue1();
+        String startString = primaryKey.getValue0() + ":" + primaryKey.getValue1();
+        String endString = foreignKey.getValue0() + ":" + foreignKey.getValue1();
         pkfkMapping = new HashMap<>();
         pkfkMapping.put(startString, endString);
     }
-
-    @Override
-    public String relationshipType() { return "defPKFK"; }
 
     public Map<String, String> getPkfkMapping() {
         return pkfkMapping;
@@ -59,28 +59,28 @@ public class DefPKFKSchema implements DatabaseRelationshipSchema {
         this.pkfkMapping = pkfkMapping;
     }
 
-    public Pair<Integer, Integer> getStart() {
-        return start;
+    public Pair<Integer, Integer> getPrimaryKey() {
+        return primaryKey;
     }
 
-    public void setStart(Pair<Integer, Integer> start) {
-        this.start = start;
+    public void setPrimaryKey(Pair<Integer, Integer> primaryKey) {
+        this.primaryKey = primaryKey;
     }
 
-    public Pair<Integer, Integer> getEnd() {
-        return end;
+    public Pair<Integer, Integer> getForeignKey() {
+        return foreignKey;
     }
 
-    public void setEnd(Pair<Integer, Integer> end) {
-        this.end = end;
+    public void setForeignKey(Pair<Integer, Integer> foreignKey) {
+        this.foreignKey = foreignKey;
     }
 
     @Override
     public String toString() {
         return "DefPKFKSchema{" +
                 "pkfkMapping=" + pkfkMapping +
-                ", start=" + start +
-                ", end=" + end +
+                ", start=" + primaryKey +
+                ", end=" + foreignKey +
                 '}';
     }
 }

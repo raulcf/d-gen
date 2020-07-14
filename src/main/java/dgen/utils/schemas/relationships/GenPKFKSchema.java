@@ -8,7 +8,7 @@ public class GenPKFKSchema implements DatabaseRelationshipSchema {
     private GraphSchema graphSchema;
 
     @Override
-    public String relationshipType() { return "genPKFK"; }
+    public RelationshipType relationshipType() { return RelationshipType.GENPKFK; }
 
     public int getNumRelationships() {
         return numRelationships;

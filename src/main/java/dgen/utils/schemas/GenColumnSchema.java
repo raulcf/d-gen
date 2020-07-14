@@ -6,7 +6,7 @@ import dgen.utils.schemas.datatypes.DataType;
 import dgen.utils.schemas.datatypes.Int;
 
 @JsonTypeName("genColumn")
-public class GenColumnSchema implements ColumnSchema, Schema {
+public class GenColumnSchema implements ColumnSchema {
 
     private Integer numColumns = null;
     private Integer minColumns = 1;
@@ -20,7 +20,7 @@ public class GenColumnSchema implements ColumnSchema, Schema {
     private float nullFrequency;
     
     @Override
-    public String schemaType() { return "genColumn"; }
+    public SchemaType schemaType() { return SchemaType.GENCOLUMN; }
 
     @Override
     public void validate() {

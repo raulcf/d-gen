@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonTypeName("genTable")
-public class GenTableSchema implements TableSchema, Schema {
+public class GenTableSchema implements TableSchema {
 
     private Integer numRows = null;
     private Integer minRows = 1;
@@ -23,7 +23,7 @@ public class GenTableSchema implements TableSchema, Schema {
     private List<TableRelationshipSchema> tableRelationships = new ArrayList<>();
 
     @Override
-    public String schemaType() { return "genTable"; }
+    public SchemaType schemaType() { return SchemaType.GENTABLE; }
 
     @Override
     public void validate() {

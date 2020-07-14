@@ -11,8 +11,8 @@ public class GenTableRelationshipSchema implements TableRelationshipSchema {
 
 
     @Override
-    public String relationshipType() {
-        return "genTableRelationship";
+    public RelationshipType relationshipType() {
+        return RelationshipType.GENTABLE;
     }
 
     public int getNumRelationships() {

@@ -7,7 +7,7 @@ import dgen.utils.schemas.datatypes.DataType;
 @JsonTypeName("foreignKey")
 @JsonPropertyOrder({"columnID", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
         "dataType"})
-public class DefForeignKeySchema implements ColumnSchema, Schema {
+public class DefForeignKeySchema implements ColumnSchema {
     private int columnID;
     private final DataType dataType = null;
     private String columnName;
@@ -18,10 +18,10 @@ public class DefForeignKeySchema implements ColumnSchema, Schema {
     private float nullFrequency = 0;
 
     @Override
-    public String schemaType() { return "defForeignKey"; }
+    public SchemaType schemaType() { return SchemaType.DEFFOREIGNKEY; }
 
     @Override
-    public void validate() {};
+    public void validate() {}
 
     public int getColumnID() {
         return columnID;

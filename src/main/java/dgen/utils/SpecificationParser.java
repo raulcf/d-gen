@@ -83,7 +83,10 @@ public class SpecificationParser {
 
     public static void main(String[] args) {
         SpecificationParser parser = new SpecificationParser();
-        parser.parseYAML("column_test.yaml");
-        parser.write("column_test_output.yaml");
+        final long startTime = System.currentTimeMillis();
+        parser.parseYAML("example_specifications/1_input.yaml");
+        final long endTime = System.currentTimeMillis();
+        System.out.println(endTime - startTime);
+        parser.write("example_specifications/1_output.json");
     }
 }

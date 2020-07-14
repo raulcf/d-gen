@@ -8,6 +8,4 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @JsonSubTypes({@JsonSubTypes.Type(value = DefPKFKSchema.class, name = "defPKFK"),
         @JsonSubTypes.Type(value = GenPKFKSchema.class, name = "genPKFK")})
 @JsonTypeName("databaseRelationships")
-public interface DatabaseRelationshipSchema {
-    String relationshipType();
-}
+public interface DatabaseRelationshipSchema extends RelationshipSchema { }

@@ -4,7 +4,13 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
 import org.javatuples.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+
 
 /* A concentrated graph (there might be a better name) is a graph where a certain number of nodes (numNodes) has a
 * percentage (nodeConcentration) of edges within the graph.
@@ -18,6 +24,10 @@ public class ConcentratedGraph implements GraphSchema {
     private Float minNodeConcentration;
     private Float maxNodeConcentration;
 
+    @Override
+    public GraphType graphType() {
+        return GraphType.CONCENTRATED;
+    }
 
     private void parse() {
         Random r = new Random();
@@ -52,35 +62,43 @@ public class ConcentratedGraph implements GraphSchema {
     }
 
     @Override
-    public String graphType() {
-        return "concentrated";
-    }
-
-    @Override
     public Map<Integer, Set<Integer>> generateTableGraph(List<Integer> columnIDs, int numEdges, Map<Integer, Set<Integer>> relationshipMap) {
         return null;
     }
 
+
+    /**
+     * Generates an adjacency list with a certain number of edges concentrated around a certain number of nodes. All non-concentrated
+     * nodes are added randomly.
+     * @param primaryKeys List of primary keys in a table.
+     * @param foreignKeys List of foreign keys in a table.
+     * @param numEdges Number of edges to generate (nodeConcentration * numEdges edges will be concentrated)
+     * @param relationshipMap A map of existing PK-FK relationships (to ensure no duplicates).
+     * @return Mapping between primary keys and a set of foreign keys.
+     */
     @Override
     public Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> generateDatabaseGraph(List<Pair<Integer, Integer>> primaryKeys,
                                                                                           List<Pair<Integer, Integer>> foreignKeys,
                                                                                           int numEdges,
                                                                                           Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> relationshipMap) {
-        Random r = new Random();
-        Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> adjacencyList = new HashMap<>();
         this.parse();
 
-        List<Pair<Integer, Integer>> concentration = new ArrayList<>(); //Primary keys
+        Random r = new Random();
+        int numConcentratedEdges = (int) (numEdges * nodeConcentration);
+
+        /**
+         * TODO: This needs a check to make sure that the nodes in concentration can form enough relationships to satisfy
+         * numConcentrationEdges. This is very similar to the 0-1 knapsack problem but the weight (number of possible relationships)
+         * of a node (primary key) changes depending on what's in the knapsack
+         */
+        List<Pair<Integer, Integer>> concentration = new ArrayList<>(); //Concentrated primary keys
         for (int i = 0; i < numNodes; i++) {
             concentration.add(primaryKeys.remove(r.nextInt(primaryKeys.size())));
         }
-        System.out.println(concentration);
 
-        int numConcentratedEdges = (int) (numEdges * nodeConcentration);
-        RandomGraph.generateDatabaseEdge(concentration, foreignKeys, numConcentratedEdges, relationshipMap, r, adjacencyList);
 
-        RandomGraph.generateDatabaseEdge(primaryKeys, foreignKeys, numEdges - numConcentratedEdges, relationshipMap,
-                r, adjacencyList);
+        Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> adjacencyList = new HashMap<>(GraphSchema.generateDatabaseEdge(concentration, foreignKeys, numConcentratedEdges, relationshipMap, r));
+        adjacencyList.putAll(GraphSchema.generateDatabaseEdge(primaryKeys, foreignKeys, numEdges - numConcentratedEdges, relationshipMap, r));
 
         return adjacencyList;
     }

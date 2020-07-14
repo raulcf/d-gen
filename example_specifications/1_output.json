@@ -1,0 +1,97 @@
+{
+  "database" : {
+    "databaseName" : "1_input",
+    "tableSchemas" : [ {
+      "defTable" : {
+        "tableID" : 1,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columnSchemas" : [ {
+          "primaryKey" : {
+            "columnID" : 1,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : true,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : -2147483648,
+                "maxValue" : 2147483647,
+                "distribution" : "UNIFORM"
+              }
+            }
+          }
+        }, {
+          "defForeignKey" : {
+            "columnID" : 2,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : null
+          }
+        } ],
+        "tableRelationships" : [ ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : 2,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columnSchemas" : [ {
+          "primaryKey" : {
+            "columnID" : 1,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : true,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : -2147483648,
+                "maxValue" : 2147483647,
+                "distribution" : "UNIFORM"
+              }
+            }
+          }
+        }, {
+          "defForeignKey" : {
+            "columnID" : 2,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : null
+          }
+        } ],
+        "tableRelationships" : [ ]
+      }
+    } ],
+    "databaseRelationships" : [ {
+      "defPKFK" : {
+        "pkfkMapping" : {
+          "1:1" : "2:2"
+        }
+      }
+    }, {
+      "defPKFK" : {
+        "pkfkMapping" : {
+          "2:1" : "1:2"
+        }
+      }
+    } ]
+  }
+}

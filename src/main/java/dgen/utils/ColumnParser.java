@@ -1,13 +1,24 @@
 package dgen.utils;
 
-import dgen.utils.schemas.*;
+import dgen.utils.schemas.ColumnSchema;
+import dgen.utils.schemas.DefColumnSchema;
 import dgen.utils.schemas.DefForeignKeySchema;
+import dgen.utils.schemas.GenColumnSchema;
+import dgen.utils.schemas.GenForeignKeySchema;
+import dgen.utils.schemas.PrimaryKeySchema;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+
 
 public class ColumnParser {
     private List<ColumnSchema> columns = new ArrayList<>();
-    private Map<Integer, ColumnSchema> columnIDMap = new HashMap<>();
+    /* Mapping of columnIDs to columnSchema objects */
+    private Map<Integer, ColumnSchema> columnMap = new HashMap<>();
 
     /**
      * Parses ColumnSchema type objects (DefColumnSchema, GenColumnSchema, etc.) into a list of ColumnSchema objects.
@@ -15,23 +26,23 @@ public class ColumnParser {
      */
     public void parse(ColumnSchema column) {
         switch (column.schemaType()) {
-            case "defColumn":
+            case DEFCOLUMN:
                 DefColumnSchema defColumn = (DefColumnSchema) column;
                 parseColumn(defColumn);
                 break;
-            case "genColumn":
+            case GENCOLUMN:
                 GenColumnSchema genColumn = (GenColumnSchema) column;
                 parseGenColumn(genColumn);
                 break;
-            case "defForeignKey":
+            case DEFFOREIGNKEY:
                 DefForeignKeySchema defForeignKey = (DefForeignKeySchema) column;
                 parseForeignKey(defForeignKey);
                 break;
-            case "genForeignKey":
+            case GENFOREIGNKEY:
                 GenForeignKeySchema genForeignKey = (GenForeignKeySchema) column;
                 parseGenForeignKey(genForeignKey);
                 break;
-            case "primaryKey":
+            case PRIMARYKEY:
                 PrimaryKeySchema primaryKey = (PrimaryKeySchema) column;
                 parsePrimaryKey(primaryKey);
                 break;
@@ -40,15 +51,52 @@ public class ColumnParser {
     }
 
     /**
+     * Checks whether a column has a column name, regex name, or random name.
+     * @param column TableSchema object to parse.
+     */
+    private void parseColumnName(ColumnSchema column) {
+        if (column.getColumnName() != null) {
+            column.setRandomName(false);
+            column.setRegexName(null);
+        } else column.setRandomName(column.getRegexName() == null);
+    }
+
+    /**
+     * Checks whether a columnID already exists in a database and throws an error if it is.
+     * @param columnID tableID to check.
+     */
+    private void checkColumnID(int columnID) {
+        if (columnMap.containsKey(columnID)) {
+            throw new SpecificationException("columnID " + columnID + " already exists");
+        }
+    }
+
+    /**
+     * Generates a new columnID that doesn't already exist.
+     * @param r Random object used to generate columnIDs.
+     * @return Unique columnID.
+     */
+    private int generateColumnID(Random r) {
+        Set<Integer> columnIDs = columnMap.keySet();
+
+        if (columnIDs.size() == Integer.MAX_VALUE) {
+            throw new SpecificationException("Max number of columns reached");
+        }
+
+        int columnID = r.nextInt();
+        while (columnIDs.contains(columnID)) { columnID = r.nextInt(); }
+        return columnID;
+    }
+
+    /**
      * Parses a GenColumnSchema object into a list of DefColumnSchema objects.
      * @param genColumn GenColumnSchema object to parse.
      */
     private void parseGenColumn(GenColumnSchema genColumn) {
+        genColumn.validate();
         Random r = new Random();
 
         int numColumns;
-
-        genColumn.validate();
 
         if (genColumn.getNumColumns() != null) {
             numColumns = genColumn.getNumColumns();
@@ -60,9 +108,9 @@ public class ColumnParser {
         }
 
         for (int i = 0; i < numColumns; i++) {
-            int columnId = r.nextInt(); // TODO: Find better way to generate tableID
+            int columnId = generateColumnID(r);
 
-            DefColumnSchema defColumn = new DefColumnSchema(); // TODO: Find smarter way of copying
+            DefColumnSchema defColumn = new DefColumnSchema();
             defColumn.setRandomName(genColumn.isRandomName());
             defColumn.setRegexName(genColumn.getRegexName());
             defColumn.setColumnName(genColumn.getColumnName());
@@ -75,16 +123,12 @@ public class ColumnParser {
     }
 
     /**
-     * Parses the name and datatype of a DefColumnSchema object.
+     * Parses the name and datatype of a DefColumnSchema object and adds it to the columns list.
      * @param defColumn DefColumnSchema object to parse.
      */
     private void parseColumn(DefColumnSchema defColumn) {
-        if (defColumn.getColumnName() != null) { // TODO: Find way to reduce code duplication. Might need to modify ColumnSchema interface.
-            defColumn.setRandomName(false);
-            defColumn.setRegexName(null);
-        } else if (defColumn.getRegexName() != null) {
-            defColumn.setRandomName(false);
-        }
+        checkColumnID(defColumn.getColumnID());
+        parseColumnName(defColumn);
 
         DataTypeParser parser = new DataTypeParser();
         parser.parse(defColumn.getDataType());
@@ -92,7 +136,7 @@ public class ColumnParser {
 
         defColumn.validate();
 
-        columnIDMap.put(defColumn.getColumnID(), defColumn);
+        columnMap.put(defColumn.getColumnID(), defColumn);
         columns.add(defColumn);
     }
 
@@ -101,10 +145,9 @@ public class ColumnParser {
      * @param genForeignKey GenForeignKeySchema object to parse.
      */
     private void parseGenForeignKey(GenForeignKeySchema genForeignKey) {
+        genForeignKey.validate();
         Random r = new Random();
         int numColumns;
-
-        genForeignKey.validate();
 
         if (genForeignKey.getNumColumns() != null) {
             numColumns = genForeignKey.getNumColumns();
@@ -114,15 +157,13 @@ public class ColumnParser {
             int minColumns = genForeignKey.getMinColumns();
             int maxColumns = genForeignKey.getMaxColumns();
 
-            assert minColumns <= maxColumns;
-
             numColumns = r.nextInt(maxColumns - minColumns + 1) + maxColumns;
         }
 
         for (int i = 0; i < numColumns; i++) {
-            int columnId = r.nextInt(); // TODO: Find better way to generate tableID
+            int columnId = generateColumnID(r);
 
-            DefForeignKeySchema defForeignKey = new DefForeignKeySchema(); // TODO: Find smarter way of copying
+            DefForeignKeySchema defForeignKey = new DefForeignKeySchema();
             defForeignKey.setRandomName(genForeignKey.isRandomName());
             defForeignKey.setRegexName(genForeignKey.getRegexName());
             defForeignKey.setColumnName(genForeignKey.getColumnName());
@@ -133,34 +174,25 @@ public class ColumnParser {
     }
 
     /**
-     * Parses the name of a DefForeignKeySchema object.
+     * Parses a DefForeignKeySchema object and adds it to columns list.
      * @param defForeignKey DefForeignKeySchema object to parse.
      */
     private void parseForeignKey(DefForeignKeySchema defForeignKey) {
-        if (defForeignKey.getColumnName() != null) {
-            defForeignKey.setRandomName(false);
-            defForeignKey.setRegexName(null);
-        } else if (defForeignKey.getRegexName() != null) {
-            defForeignKey.setRandomName(false);
-        }
-
         defForeignKey.validate();
+        checkColumnID(defForeignKey.getColumnID());
+        parseColumnName(defForeignKey);
 
-        columnIDMap.put(defForeignKey.getColumnID(), defForeignKey);
+        columnMap.put(defForeignKey.getColumnID(), defForeignKey);
         columns.add(defForeignKey);
     }
 
     /**
-     * Parses the name and datatype of a PrimaryKeySchema object.
+     * Parses the name and datatype of a PrimaryKeySchema object and adds it to the columns list.
      * @param primaryKey PrimaryKeySchema object to parse.
      */
     private void parsePrimaryKey(PrimaryKeySchema primaryKey) {
-        if (primaryKey.getColumnName() != null) {
-            primaryKey.setRandomName(false);
-            primaryKey.setRegexName(null);
-        } else if (primaryKey.getRegexName() != null) {
-            primaryKey.setRandomName(false);
-        }
+        checkColumnID(primaryKey.getColumnID());
+        parseColumnName(primaryKey);
 
         DataTypeParser parser = new DataTypeParser();
         parser.parse(primaryKey.getDataType());
@@ -168,7 +200,7 @@ public class ColumnParser {
 
         primaryKey.validate();
 
-        columnIDMap.put(primaryKey.getColumnID(), primaryKey);
+        columnMap.put(primaryKey.getColumnID(), primaryKey);
         columns.add(primaryKey);
     }
 
@@ -180,11 +212,11 @@ public class ColumnParser {
         this.columns = columns;
     }
 
-    public Map<Integer, ColumnSchema> getColumnIDMap() {
-        return columnIDMap;
+    public Map<Integer, ColumnSchema> getColumnMap() {
+        return columnMap;
     }
 
-    public void setColumnIDMap(Map<Integer, ColumnSchema> columnIDMap) {
-        this.columnIDMap = columnIDMap;
+    public void setColumnMap(Map<Integer, ColumnSchema> columnMap) {
+        this.columnMap = columnMap;
     }
 }

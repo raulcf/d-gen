@@ -12,8 +12,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
         @JsonSubTypes.Type(value = GenForeignKeySchema.class, name = "genForeignKey"),
         @JsonSubTypes.Type(value = PrimaryKeySchema.class, name = "primaryKey")})
 @JsonTypeName("column")
-public interface ColumnSchema {
-    String schemaType();
+public interface ColumnSchema extends Schema {
     String getColumnName();
     void setColumnName(String columnName);
     String getRegexName();

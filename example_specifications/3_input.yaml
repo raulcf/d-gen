@@ -1,0 +1,19 @@
+---
+# Testing creating LOTS of random PK-FK relationships (7.5s)
+database:
+  databaseName: "3_input"
+  tableSchemas:
+    - genTable:
+        numTables: 1000
+        columnSchemas:
+          - primaryKey:
+              columnID: 1
+              dataType:
+                int: {}
+          - genForeignKey:
+              numColumns: 100
+  databaseRelationships:
+    - genPKFK:
+        numRelationships: 10000
+        graphSchema:
+          randomGraph: {}

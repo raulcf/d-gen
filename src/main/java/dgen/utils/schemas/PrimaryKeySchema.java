@@ -2,12 +2,13 @@ package dgen.utils.schemas;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.SpecificationException;
 import dgen.utils.schemas.datatypes.DataType;
 
 @JsonTypeName("primaryKey")
 @JsonPropertyOrder({"columnID", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
         "dataType"})
-public class PrimaryKeySchema implements ColumnSchema, Schema {
+public class PrimaryKeySchema implements ColumnSchema {
     private int columnID;
     private DataType dataType;
     private String columnName;
@@ -18,10 +19,14 @@ public class PrimaryKeySchema implements ColumnSchema, Schema {
     private final float nullFrequency = 0;
 
     @Override
-    public String schemaType() { return "primaryKey"; }
+    public SchemaType schemaType() { return SchemaType.PRIMARYKEY; }
 
     @Override
     public void validate() {
+        if (dataType == null) {
+            throw new SpecificationException("Primary key with columnID " + columnID + " missing datatype");
+        }
+
         dataType.validate();
     }
 

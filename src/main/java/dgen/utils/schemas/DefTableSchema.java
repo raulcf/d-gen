@@ -3,6 +3,7 @@ package dgen.utils.schemas;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.SpecificationException;
 import dgen.utils.schemas.relationships.TableRelationshipSchema;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 @JsonTypeName("defTable")
 @JsonPropertyOrder({"tableID", "tableName", "numRows", "regexName", "randomName", "columnSchemas", "tableRelationships"})
-public class DefTableSchema implements TableSchema, Schema {
+public class DefTableSchema implements TableSchema {
 
     private int tableID;
     private Integer numRows = null;
@@ -21,15 +22,15 @@ public class DefTableSchema implements TableSchema, Schema {
     private String regexName;
     private boolean randomName = true;
     private List<TableRelationshipSchema> tableRelationships = new ArrayList<>();
-    @JsonIgnore
-    private Map<Integer, ColumnSchema> columnIDMap;
 
     @Override
-    public String schemaType() { return "defTable"; }
+    public SchemaType schemaType() { return SchemaType.DEFTABLE; }
 
     @Override
     public void validate() {
-        //TODO: Check whether there are duplicate columnIDs. It might be better to check while parsing.
+        if (numRows == null || numRows <= 0) {
+            throw new SpecificationException("numRows must be greater than 0");
+        }
     }
 
     public int getTableID() {
@@ -86,14 +87,6 @@ public class DefTableSchema implements TableSchema, Schema {
 
     public void setTableRelationships(List<TableRelationshipSchema> tableRelationships) {
         this.tableRelationships = tableRelationships;
-    }
-
-    public Map<Integer, ColumnSchema> getColumnIDMap() {
-        return columnIDMap;
-    }
-
-    public void setColumnIDMap(Map<Integer, ColumnSchema> columnIDMap) {
-        this.columnIDMap = columnIDMap;
     }
 
     @Override

@@ -8,7 +8,7 @@ import dgen.utils.schemas.datatypes.DataType;
 @JsonTypeName("defColumn")
 @JsonPropertyOrder({"columnID", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
         "dataType"})
-public class DefColumnSchema implements ColumnSchema, Schema {
+public class DefColumnSchema implements ColumnSchema {
 
     private int columnID;
     private DataType dataType;
@@ -20,7 +20,7 @@ public class DefColumnSchema implements ColumnSchema, Schema {
     private float nullFrequency;
     
     @Override
-    public String schemaType() { return "defColumn"; }
+    public SchemaType schemaType() { return SchemaType.DEFCOLUMN; }
 
     @Override
     public void validate() {

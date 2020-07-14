@@ -9,6 +9,4 @@ import dgen.utils.schemas.*;
 @JsonSubTypes({@JsonSubTypes.Type(value = DefTableRelationshipSchema.class, name = "defTableRelationship"),
         @JsonSubTypes.Type(value = GenTableRelationshipSchema.class, name = "genTableRelationship")})
 @JsonTypeName("tableRelationships")
-public interface TableRelationshipSchema {
-    String relationshipType();
-}
+public interface TableRelationshipSchema extends RelationshipSchema { }

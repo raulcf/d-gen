@@ -13,7 +13,7 @@ public class DefTableRelationshipSchema implements TableRelationshipSchema {
     private DependencyFunction dependencyFunction;
 
     @Override
-    public String relationshipType() { return "defTableRelationship"; }
+    public RelationshipType relationshipType() { return RelationshipType.DEFTABLE; }
 
     public Map<Integer, Set<Integer>> getDependencyMap() {
         return dependencyMap;
