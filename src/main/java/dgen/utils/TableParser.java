@@ -139,7 +139,7 @@ public class TableParser {
 
         List<TableRelationshipSchema> tableRelationships = new ArrayList<>();
         TableRelationshipParser tableRelationshipParser = new TableRelationshipParser(columnMap);
-        tableRelationships.sort(new Comparator<TableRelationshipSchema>() {
+        tableRelationships.sort(new Comparator<TableRelationshipSchema>() { // Puts defined relationships before general ones
             @Override
             public int compare(TableRelationshipSchema t1, TableRelationshipSchema t2) {
                 if (t1.relationshipType() == t2.relationshipType()) { return 0; }
@@ -147,6 +147,11 @@ public class TableParser {
             }
         });
 
+        /*x
+         * TODO: Reduce the number of TableRelationshipSchema objects to one per dependencyFunction.
+         * Parsing the table relationships in this format results in one DefTableRelationshipSchema
+         * object for each item in the defTable.getTableRelationships list.
+         */
         for (TableRelationshipSchema tableRelationship: defTable.getTableRelationships()) {
             tableRelationships.add(tableRelationshipParser.parse(tableRelationship));
         }

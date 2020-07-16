@@ -30,6 +30,8 @@ public class GenForeignKeySchema implements ColumnSchema {
         }
     }
 
+    public Integer getColumnID() { return null; }
+
     public Integer getNumColumns() {
         return numColumns;
     }

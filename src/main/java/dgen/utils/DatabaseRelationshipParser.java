@@ -88,19 +88,14 @@ public class DatabaseRelationshipParser {
         Pair<Integer, Integer> primaryKey = defPKFK.getPrimaryKey();
         Pair<Integer, Integer> foreignKey = defPKFK.getForeignKey();
 
+        if (relationshipMap.containsKey(primaryKey) && relationshipMap.get(primaryKey).contains(foreignKey)) {
+            throw new SpecificationException("Duplicate PK-FK relationship");
+        }
         if (!primaryKeys.contains(primaryKey)) {
             throw new SpecificationException("tableID " + primaryKey.getValue0() + " and columnID " + primaryKey.getValue1() + " not a primary key");
         }
-        /**
-         * TODO: Currently we remove foreign keys after building a relationship to make sure that two primary keys aren't mapped
-         * to the same foreign key. This means that if a user defines duplicate relationships or maps multiple PK to one FK, it'll
-         * raise the "foreign key not found error" instead of the appropriate one.
-         */
         if (!foreignKeys.contains(foreignKey)) {
             throw new SpecificationException("tableID " + foreignKey.getValue0() + " and columnID " + foreignKey.getValue1() + " not a foreign key");
-        }
-        if (relationshipMap.containsKey(primaryKey) && relationshipMap.get(primaryKey).contains(foreignKey)) {
-            throw new SpecificationException("Duplicate PK-FK relationship");
         }
 
         List<DefPKFKSchema> defPKFKSchemaList = new ArrayList<>();

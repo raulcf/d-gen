@@ -15,7 +15,8 @@ import java.util.Set;
 /* A concentrated graph (there might be a better name) is a graph where a certain number of nodes (numNodes) has a
 * percentage (nodeConcentration) of edges within the graph.
 * */
-@JsonTypeName("concentratedGraph")
+// TODO: Reimplement this later
+//@JsonTypeName("concentratedGraph")
 public class ConcentratedGraph implements GraphSchema {
     private Integer numNodes;
     private Integer minNodes;
@@ -89,7 +90,7 @@ public class ConcentratedGraph implements GraphSchema {
         /**
          * TODO: This needs a check to make sure that the nodes in concentration can form enough relationships to satisfy
          * numConcentrationEdges. This is very similar to the 0-1 knapsack problem but the weight (number of possible relationships)
-         * of a node (primary key) changes depending on what's in the knapsack
+         * of a node (primary key) changes depending on what's in the knapsack.
          */
         List<Pair<Integer, Integer>> concentration = new ArrayList<>(); //Concentrated primary keys
         for (int i = 0; i < numNodes; i++) {

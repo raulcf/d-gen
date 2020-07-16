@@ -30,6 +30,8 @@ public class GenColumnSchema implements ColumnSchema {
         }
     }
 
+    public Integer getColumnID() { return null; }
+
     public Integer getNumColumns() {
         return numColumns;
     }

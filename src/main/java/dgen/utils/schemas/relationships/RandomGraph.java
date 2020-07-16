@@ -19,6 +19,11 @@ public class RandomGraph implements GraphSchema {
      * @param relationshipMap A map of the relationships between columns (to ensure there are no double edges).
      * @return A mapping of columnIDs.
      */
+    /**
+     * Right now this function is very simplistic because it seems that there are very few constraints on relationships
+     * between columns. You can have cyclic relationships and multiple edges from one node. This probably will need to
+     * change when there are more constraints.
+     */
     @Override
     public Map<Integer, Set<Integer>> generateTableGraph(List<Integer> columnIDs, int numEdges, Map<Integer, Set<Integer>> relationshipMap) {
         Random r = new Random();

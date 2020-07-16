@@ -21,7 +21,6 @@ public interface GraphSchema {
      */
     Map<Integer, Set<Integer>> generateTableGraph(List<Integer> columnIDs, int numEdges,
                                                   Map<Integer, Set<Integer>> relationshipMap);
-    // relationshipMap parameter would be better if we mapped a two-tuple to list of two-tuples
     Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> generateDatabaseGraph(List<Pair<Integer, Integer>> primaryKeys,
                                                                                    List<Pair<Integer, Integer>> foreignKeys,
                                                                                    int numEdges,

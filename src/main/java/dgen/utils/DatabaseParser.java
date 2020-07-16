@@ -34,7 +34,6 @@ public class DatabaseParser {
         TODO: Consolidate list of DatabaseRelationshipSchemas into one object after parsing.
          Currently each object in databaseRelationships represents only a single PKFK relationship.
          In the future it might make it easier for us if there's only a single object containing all of the mappings.
-         TODO: Change this so defined relationships are parsed before general ones
          */
         List<DatabaseRelationshipSchema> parsedDatabaseRelationships = new ArrayList<>();
         DatabaseRelationshipParser databaseRelationshipParser = new DatabaseRelationshipParser(tableMap);
