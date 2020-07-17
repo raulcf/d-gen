@@ -52,8 +52,8 @@ public class DataTypeParser {
             stringType.setMinLength(null);
             stringType.setMaxLength(null);
             stringType.setDistribution(null);
-            stringType.setRegexName(null);
-        } else if (stringType.getRegexName() != null) {
+            stringType.setRegexPattern(null);
+        } else if (stringType.getRegexPattern() != null) {
             stringType.setMinLength(null);
             stringType.setMaxLength(null);
             stringType.setDistribution(null);
