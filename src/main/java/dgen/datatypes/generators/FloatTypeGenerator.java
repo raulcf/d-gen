@@ -1,51 +1,53 @@
 package dgen.datatypes.generators;
 
-import dgen.datatypes.IntegerType;
-import dgen.datatypes.config.IntegerTypeConfig;
 import dgen.datatypes.DataType;
+import dgen.datatypes.FloatType;
+import dgen.datatypes.IntegerType;
 import dgen.datatypes.NativeType;
+import dgen.datatypes.config.FloatTypeConfig;
+import dgen.datatypes.config.IntegerTypeConfig;
 import dgen.distributions.Distribution;
 import dgen.distributions.GaussianDistribution;
 
 import java.util.Random;
 
-public class IntegerTypeGenerator implements DataTypeGenerator {
+public class FloatTypeGenerator implements DataTypeGenerator {
 
-    private final NativeType nativeType = NativeType.INTEGER;
+    private final NativeType nativeType = NativeType.FLOAT;
 
-    private Integer defaultValue;
-    private int lowerBoundDomain;
-    private int upperBoundDomain;
+    private Float defaultValue;
+    private float lowerBoundDomain;
+    private float upperBoundDomain;
     private int sizeInBytes;
 
     // TODO: we'll likely move all random to a new package so we can keep track of all seeds used to generate the data
     private Random rnd;
 
-    public IntegerTypeGenerator(IntegerTypeConfig dtc) {
-        this.defaultValue = dtc.getInt(IntegerTypeConfig.DEFAULT_VALUE);
-        this.lowerBoundDomain = dtc.getInt(IntegerTypeConfig.LOWER_BOUND_DOMAIN);
-        this.upperBoundDomain = dtc.getInt(IntegerTypeConfig.UPPER_BOUND_DOMAIN);
-        this.sizeInBytes = dtc.getInt(IntegerTypeConfig.SIZE_IN_BYTES);
+    public FloatTypeGenerator(FloatTypeConfig dtc) {
+        this.defaultValue = dtc.getFloat(FloatTypeConfig.DEFAULT_VALUE);
+        this.lowerBoundDomain = dtc.getFloat(FloatTypeConfig.LOWER_BOUND_DOMAIN);
+        this.upperBoundDomain = dtc.getFloat(FloatTypeConfig.UPPER_BOUND_DOMAIN);
+        this.sizeInBytes = dtc.getInt(FloatTypeConfig.SIZE_IN_BYTES);
 
         rnd = new Random();
     }
 
-    private IntegerTypeGenerator() {
+    private FloatTypeGenerator() {
         this.lowerBoundDomain = 0;
-        this.upperBoundDomain = Integer.MAX_VALUE;
-        this.sizeInBytes = Integer.SIZE;
+        this.upperBoundDomain = Float.MAX_VALUE;
+        this.sizeInBytes = Float.SIZE;
 
         rnd = new Random();
     }
 
-    public static IntegerTypeGenerator makeDefault() {
-        return new IntegerTypeGenerator();
+    public static FloatTypeGenerator makeDefault() {
+        return new FloatTypeGenerator();
     }
 
     @Override
     public DataType drawWithReplacement(Distribution samplingDistribution) {
         // TODO: Maybe move this to another function since it doesn't depend on samplingDistribution
-        if (defaultValue != null) { return new IntegerType(defaultValue); }
+        if (defaultValue != null) { return new FloatType(defaultValue); }
 
         // TODO: unless we need to know the specific distribution here, this switch should dissappear.
         switch(samplingDistribution.distributionType()) {
@@ -66,14 +68,14 @@ public class IntegerTypeGenerator implements DataTypeGenerator {
     }
 
     private DataType uniformSample() {
-        int value = rnd.nextInt(upperBoundDomain - lowerBoundDomain + 1) + lowerBoundDomain;
-        return new IntegerType(value);
+        float value = (upperBoundDomain - lowerBoundDomain) * rnd.nextFloat() + lowerBoundDomain;
+        return new FloatType(value);
     }
 
     private DataType gaussianSample(GaussianDistribution gaussianDistribution) {
         float standardDeviation = gaussianDistribution.getStandardDeviation();
         float mean = gaussianDistribution.getMean();
 
-        return new IntegerType((int) (rnd.nextGaussian() * standardDeviation + mean));
+        return new FloatType((float) (rnd.nextGaussian() * standardDeviation + mean));
     }
 }

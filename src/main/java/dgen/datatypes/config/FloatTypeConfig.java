@@ -9,9 +9,7 @@ import dgen.coreconfig.ConfigDef.Importance;
 import dgen.coreconfig.ConfigDef.Type;
 import dgen.coreconfig.ConfigKey;
 
-public class IntegerTypeConfig extends Config {
-
-    // TODO: refactor this to reflect the options we need for ME
+public class FloatTypeConfig extends Config {
 
     private static final ConfigDef config;
 
@@ -30,13 +28,13 @@ public class IntegerTypeConfig extends Config {
     static {
         config = new ConfigDef()
                 // TODO: DEFAULT_VALUE should be null by default but the Config class doesn't allow that
-                .define(DEFAULT_VALUE, Type.INT, Importance.LOW, DEFAULT_VALUE_DOC)
-                .define(LOWER_BOUND_DOMAIN, Type.INT, Integer.MIN_VALUE, Importance.LOW, LOWER_BOUND_DOMAIN_DOC)
-                .define(UPPER_BOUND_DOMAIN, Type.INT, Integer.MAX_VALUE, Importance.LOW, UPPER_BOUND_DOMAIN_DOC)
+                .define(DEFAULT_VALUE, Type.FLOAT, Importance.LOW, DEFAULT_VALUE_DOC)
+                .define(LOWER_BOUND_DOMAIN, Type.INT, Float.MIN_VALUE, Importance.LOW, LOWER_BOUND_DOMAIN_DOC)
+                .define(UPPER_BOUND_DOMAIN, Type.INT, Float.MAX_VALUE, Importance.LOW, UPPER_BOUND_DOMAIN_DOC)
                 .define(SIZE_IN_BYTES, Type.INT, Byte.SIZE, Importance.LOW, SIZE_IN_BYTES_DOC);
     }
 
-    public IntegerTypeConfig(Map<? extends Object, ? extends Object> originals) {
+    public FloatTypeConfig(Map<? extends Object, ? extends Object> originals) {
         super(config, originals);
     }
 
@@ -51,5 +49,5 @@ public class IntegerTypeConfig extends Config {
     public static void main(String[] args) {
         System.out.println(config.toHtmlTable());
     }
-}
 
+}

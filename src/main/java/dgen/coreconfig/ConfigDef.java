@@ -45,6 +45,8 @@ public class ConfigDef {
                             String documentation) {
         if (configKeys.containsKey(name))
             throw new ConfigException("Configuration " + name + " is defined twice.");
+        System.out.println(name);
+        System.out.println(defaultValue);
         Object parsedDefault = defaultValue == NO_DEFAULT_VALUE ? NO_DEFAULT_VALUE
                 : parseType(name, defaultValue, type);
         configKeys.put(name, new ConfigKey(name, type, parsedDefault, validator, importance, documentation));
@@ -176,7 +178,15 @@ public class ConfigDef {
                     } else if (value instanceof String) {
                         return Integer.parseInt(trimmed);
                     } else {
-                        throw new ConfigException(name, value, "Expected value to be an number.");
+                        throw new ConfigException(name, value, "Expected value to be a number.");
+                    }
+                case FLOAT:
+                    if (value instanceof Float) {
+                        return (Float) value;
+                    } else if (value instanceof String) {
+                        return Float.parseFloat(trimmed);
+                    } else {
+                        throw new ConfigException(name, value, "Expected value to be a number.");
                     }
                 case LONG:
                     if (value instanceof Integer)
@@ -186,7 +196,7 @@ public class ConfigDef {
                     else if (value instanceof String)
                         return Long.parseLong(trimmed);
                     else
-                        throw new ConfigException(name, value, "Expected value to be an number.");
+                        throw new ConfigException(name, value, "Expected value to be a number.");
                 case DOUBLE:
                     if (value instanceof Number)
                         return ((Number) value).doubleValue();
@@ -225,8 +235,8 @@ public class ConfigDef {
      * The config types
      */
     public enum Type {
-        BOOLEAN(Boolean.class), STRING(String.class), INT(Integer.class), LONG(Long.class), DOUBLE(Double.class), LIST(
-                List.class), CLASS(Object.class);
+        BOOLEAN(Boolean.class), STRING(String.class), INT(Integer.class), FLOAT(Float.class), LONG(Long.class),
+                DOUBLE(Double.class), LIST(List.class), CLASS(Object.class);
 
         private Class<?> clazz;
 

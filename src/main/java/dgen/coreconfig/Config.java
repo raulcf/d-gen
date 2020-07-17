@@ -55,7 +55,9 @@ public class Config {
         return values.get(key);
     }
 
-    public int getInt(String key) { return (Integer)get(key); }
+    public Integer getInt(String key) { return (Integer)get(key); }
+
+    public Float getFloat(String key) { return (Float)get(key); }
 
     public long getLong(String key) { return (Long)get(key); }
 

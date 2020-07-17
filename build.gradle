@@ -26,8 +26,10 @@ repositories {
 dependencies {
     // parsing options
     implementation 'net.sf.jopt-simple:jopt-simple:4.7'
+
     // logging
     implementation 'org.slf4j:slf4j-api:1.7.30'
+
     // jackson
     compile 'com.fasterxml.jackson.core:jackson-core:2.7.4'
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.7.4'
@@ -39,6 +41,9 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
+    //Generex
+    compile 'com.github.mifmif:generex:1.0.2'
 }
 
 application {

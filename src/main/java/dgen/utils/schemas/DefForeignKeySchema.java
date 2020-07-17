@@ -23,7 +23,7 @@ public class DefForeignKeySchema implements ColumnSchema {
     @Override
     public void validate() {}
 
-    public int getColumnID() {
+    public Integer getColumnID() {
         return columnID;
     }
 

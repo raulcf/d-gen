@@ -27,7 +27,7 @@ public class DefColumnSchema implements ColumnSchema {
         dataType.validate();
     }
 
-    public int getColumnID() {
+    public Integer getColumnID() {
         return columnID;
     }
 
