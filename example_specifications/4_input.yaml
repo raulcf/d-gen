@@ -1,0 +1,21 @@
+---
+# Testing creating concentrated PK-FK relationships
+database:
+  databaseName: "3_input"
+  tableSchemas:
+    - genTable:
+        numTables: 10
+        columnSchemas:
+          - primaryKey:
+              columnID: 1
+              dataType:
+                int: {}
+          - genForeignKey:
+              numColumns: 1
+  databaseRelationships:
+    - genPKFK:
+        numRelationships: 10 # 5/10 relationships should be centered around 1 primary key
+        graphSchema:
+          concentratedGraph:
+            numNodes: 1
+            nodeConcentration: 0.5

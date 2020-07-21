@@ -1,0 +1,19 @@
+---
+# Testing creating random PK-FK relationships
+database:
+  databaseName: "2_input"
+  tableSchemas:
+    - genTable:
+        numTables: 3
+        columnSchemas:
+          - primaryKey:
+              columnID: 1
+              dataTypeSchema:
+                int: {}
+          - genForeignKey:
+              numColumns: 1
+  databaseRelationships:
+    - genPKFK:
+        numRelationships: 3
+        graphSchema:
+          randomGraph: {}
