@@ -17,7 +17,7 @@
             "unique" : true,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataType" : {
+            "dataTypeSchema" : {
               "int" : {
                 "defaultValue" : null,
                 "minValue" : -2147483648,
@@ -35,7 +35,7 @@
             "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataType" : null
+            "dataTypeSchema" : null
           }
         } ],
         "tableRelationships" : [ ]
@@ -56,7 +56,7 @@
             "unique" : true,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataType" : {
+            "dataTypeSchema" : {
               "int" : {
                 "defaultValue" : null,
                 "minValue" : -2147483648,
@@ -74,7 +74,7 @@
             "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataType" : null
+            "dataTypeSchema" : null
           }
         } ],
         "tableRelationships" : [ ]
@@ -82,15 +82,11 @@
     } ],
     "databaseRelationships" : [ {
       "defPKFK" : {
-        "pkfkMapping" : {
+        "pkfkMappings" : [ {
           "1:1" : "2:2"
-        }
-      }
-    }, {
-      "defPKFK" : {
-        "pkfkMapping" : {
+        }, {
           "2:1" : "1:2"
-        }
+        } ]
       }
     } ]
   }

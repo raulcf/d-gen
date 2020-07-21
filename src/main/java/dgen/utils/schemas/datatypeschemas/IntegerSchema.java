@@ -1,10 +1,10 @@
-package dgen.utils.schemas.datatypes;
+package dgen.utils.schemas.datatypeschemas;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
 
 @JsonTypeName("int")
-public class Int implements DataType{
+public class IntegerSchema implements DataTypeSchema {
     private Integer defaultValue = null;
     private Integer minValue = Integer.MIN_VALUE;
     private Integer maxValue = Integer.MAX_VALUE;

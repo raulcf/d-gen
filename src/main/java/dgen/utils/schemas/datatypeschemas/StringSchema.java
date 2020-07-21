@@ -1,10 +1,10 @@
-package dgen.utils.schemas.datatypes;
+package dgen.utils.schemas.datatypeschemas;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
 
 @JsonTypeName("string")
-public class String implements DataType{
+public class StringSchema implements DataTypeSchema {
     private java.lang.String defaultValue;
     private java.lang.String regexPattern;
     private Integer minLength = 0;

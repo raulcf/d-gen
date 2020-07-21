@@ -59,7 +59,7 @@ columns within a table.
 #### defColumn:
 Required parameters:
 - columnID: An integer that uniquely identifies this column within a table.
-- dataType: A datatype schema that defines the data to put within the column.  
+- dataTypeSchema: A datatype schema that defines the data to put within the column.  
 
 Optional parameters:
 - columnName: Name to give to column.
@@ -71,7 +71,7 @@ Optional parameters:
 
 #### genColumn:
 Required parameters:
-- dataType: A datatype schema that defines the data to put within the column.
+- dataTypeSchema: A datatype schema that defines the data to put within the column.
 
 Optional parameters:
 - numColumns (Defaults to randomly generated value): Number of columns to generate following 
@@ -107,7 +107,7 @@ this schema.
 #### primaryKeys:
 Required parameters:
 - columnID: An integer that uniquely identifies this column within a table.
-- dataType: A datatype schema that defines the data to put within the column.  
+- dataTypeSchema: A datatype schema that defines the data to put within the column.  
 
 Optional parameters:
 - columnName: Name to give to column.

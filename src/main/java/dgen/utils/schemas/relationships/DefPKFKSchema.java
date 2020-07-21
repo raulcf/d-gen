@@ -5,7 +5,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
 import org.javatuples.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @JsonTypeName("defPKFK")
 public class DefPKFKSchema implements DatabaseRelationshipSchema {
@@ -14,73 +17,87 @@ public class DefPKFKSchema implements DatabaseRelationshipSchema {
     Right now in the YAML people say "1:1": "2:2" to signify that table 1 column 1 maps to table 2 column 2.
     You can't have tuples in YAML but this syntax is ugly to parse.
      */
-    private Map<String, String> pkfkMapping;
+    private List<Map<String, String>> pkfkMappings = new ArrayList<>();
     /* Primary key */
     @JsonIgnore
-    private Pair<Integer, Integer> primaryKey;
+    private List<Pair<Integer, Integer>> primaryKeys = new ArrayList<>();
     /* Foreign key*/
     @JsonIgnore
-    private Pair<Integer, Integer> foreignKey;
+    private List<Pair<Integer, Integer>> foreignKeys = new ArrayList<>();
 
     @Override
     public RelationshipType relationshipType() { return RelationshipType.DEFPKFK; }
 
     public void validate() {
-        if (primaryKey.getValue0() == foreignKey.getValue0()) {
-            throw new SpecificationException("Can't have PK linked to FK within same table");
+        for (int i = 0; i < primaryKeys.size(); i++) {
+            Pair<Integer, Integer> primaryKey = primaryKeys.get(i);
+            Pair<Integer, Integer> foreignKey = foreignKeys.get(i);
+
+            if (primaryKey.getValue0() == foreignKey.getValue0()) {
+                throw new SpecificationException("Can't have PK linked to FK within same table");
+            }
         }
     }
 
     public void parseMapping() {
-        if (pkfkMapping != null) {
-            String startString = (String) pkfkMapping.keySet().toArray()[0];
-            String endString = pkfkMapping.get(startString);
+        if (pkfkMappings != null) {
+            for (Map<String, String> pkfkMapping: pkfkMappings) {
+                String pkString = (String) pkfkMapping.keySet().toArray()[0];
+                String fkString = pkfkMapping.get(pkString);
 
-            primaryKey = Pair.with(Integer.parseInt(startString.split(":")[0]),
-                    Integer.parseInt(startString.split(":")[1]));
-            foreignKey = Pair.with(Integer.parseInt(endString.split(":")[0]),
-                    Integer.parseInt(endString.split(":")[1]));
+                primaryKeys.add(Pair.with(Integer.parseInt(pkString.split(":")[0]),
+                        Integer.parseInt(pkString.split(":")[1])));
+                foreignKeys.add(Pair.with(Integer.parseInt(fkString.split(":")[0]),
+                        Integer.parseInt(fkString.split(":")[1])));
+            }
         }
 
     }
 
     public void unparseMapping() {
-        String startString = primaryKey.getValue0() + ":" + primaryKey.getValue1();
-        String endString = foreignKey.getValue0() + ":" + foreignKey.getValue1();
-        pkfkMapping = new HashMap<>();
-        pkfkMapping.put(startString, endString);
+        for (int i = 0; i < primaryKeys.size(); i++) {
+            Pair<Integer, Integer> primaryKey = primaryKeys.get(i);
+            Pair<Integer, Integer> foreignKey = foreignKeys.get(i);
+
+            String pkString = primaryKey.getValue0() + ":" + primaryKey.getValue1();
+            String fkString = foreignKey.getValue0() + ":" + foreignKey.getValue1();
+            Map<String, String> pkfkMapping = new HashMap<>();
+            pkfkMapping.put(pkString, fkString);
+
+            pkfkMappings.add(pkfkMapping);
+        }
     }
 
-    public Map<String, String> getPkfkMapping() {
-        return pkfkMapping;
+    public List<Map<String, String>> getPkfkMappings() {
+        return pkfkMappings;
     }
 
-    public void setPkfkMapping(Map<String, String> pkfkMapping) {
-        this.pkfkMapping = pkfkMapping;
+    public void setPkfkMappings(List<Map<String, String>> pkfkMappings) {
+        this.pkfkMappings = pkfkMappings;
     }
 
-    public Pair<Integer, Integer> getPrimaryKey() {
-        return primaryKey;
+    public List<Pair<Integer, Integer>> getPrimaryKeys() {
+        return primaryKeys;
     }
 
-    public void setPrimaryKey(Pair<Integer, Integer> primaryKey) {
-        this.primaryKey = primaryKey;
+    public void setPrimaryKeys(List<Pair<Integer, Integer>> primaryKeys) {
+        this.primaryKeys = primaryKeys;
     }
 
-    public Pair<Integer, Integer> getForeignKey() {
-        return foreignKey;
+    public List<Pair<Integer, Integer>> getForeignKeys() {
+        return foreignKeys;
     }
 
-    public void setForeignKey(Pair<Integer, Integer> foreignKey) {
-        this.foreignKey = foreignKey;
+    public void setForeignKeys(List<Pair<Integer, Integer>> foreignKeys) {
+        this.foreignKeys = foreignKeys;
     }
 
     @Override
     public String toString() {
         return "DefPKFKSchema{" +
-                "pkfkMapping=" + pkfkMapping +
-                ", start=" + primaryKey +
-                ", end=" + foreignKey +
+                "pkfkMappings=" + pkfkMappings +
+                ", primaryKeys=" + primaryKeys +
+                ", foreignKeys=" + foreignKeys +
                 '}';
     }
 }

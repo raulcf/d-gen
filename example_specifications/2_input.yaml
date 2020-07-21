@@ -8,7 +8,7 @@ database:
         columnSchemas:
           - primaryKey:
               columnID: 1
-              dataType:
+              dataTypeSchema:
                 int: {}
           - genForeignKey:
               numColumns: 1

@@ -3,7 +3,6 @@ package dgen.utils.schemas.relationships.dependencyFunctions;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
 import dgen.utils.schemas.ColumnSchema;
-import dgen.utils.schemas.DefColumnSchema;
 
 @JsonTypeName("jaccardSimilarity")
 public class JaccardSimilarity implements DependencyFunction {
@@ -18,13 +17,13 @@ public class JaccardSimilarity implements DependencyFunction {
             throw new SpecificationException("Jaccard similarity between columns with columnID " + start.getColumnID()
                     + " and " + end.getColumnID() + " is greater than 1");
         }
-        if (start.getDataType().type() == end.getDataType().type()) {
+        if (start.getDataTypeSchema().type() == end.getDataTypeSchema().type()) {
             /**
              * TODO: Add more type checking to make sure that things like the range of random values for ints match.
              */
         } else {
-            throw new SpecificationException("Types of " + start.getDataType().type() + " and "
-                    + end.getDataType().type() + " not compatible for Jaccard similarity");
+            throw new SpecificationException("Types of " + start.getDataTypeSchema().type() + " and "
+                    + end.getDataTypeSchema().type() + " not compatible for Jaccard similarity");
         }
     }
 
