@@ -1,10 +1,10 @@
-package dgen.utils.schemas.datatypes;
+package dgen.utils.schemas.datatypeschemas;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
 
 @JsonTypeName("boolean")
-public class Boolean implements DataType {
+public class BooleanSchema implements DataTypeSchema {
     private float tfRatio = (float) 0.5;
 
     @Override

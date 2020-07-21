@@ -3,7 +3,7 @@ package dgen.utils.schemas;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import dgen.utils.schemas.datatypes.DataType;
+import dgen.utils.schemas.datatypeschemas.DataTypeSchema;
 
 
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
@@ -15,7 +15,7 @@ import dgen.utils.schemas.datatypes.DataType;
 @JsonTypeName("column")
 public interface ColumnSchema extends Schema {
     Integer getColumnID();
-    DataType getDataType();
+    DataTypeSchema getDataTypeSchema();
     String getColumnName();
     void setColumnName(String columnName);
     String getRegexName();

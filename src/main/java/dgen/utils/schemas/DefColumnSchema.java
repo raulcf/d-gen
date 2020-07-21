@@ -3,7 +3,7 @@ package dgen.utils.schemas;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import dgen.utils.schemas.datatypes.DataType;
+import dgen.utils.schemas.datatypeschemas.DataTypeSchema;
 
 @JsonTypeName("defColumn")
 @JsonPropertyOrder({"columnID", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
@@ -11,7 +11,7 @@ import dgen.utils.schemas.datatypes.DataType;
 public class DefColumnSchema implements ColumnSchema {
 
     private int columnID;
-    private DataType dataType;
+    private DataTypeSchema dataTypeSchema;
     private String columnName;
     private String regexName;
     private boolean randomName = true;
@@ -24,7 +24,7 @@ public class DefColumnSchema implements ColumnSchema {
 
     @Override
     public void validate() {
-        dataType.validate();
+        dataTypeSchema.validate();
     }
 
     public Integer getColumnID() {
@@ -35,12 +35,12 @@ public class DefColumnSchema implements ColumnSchema {
         this.columnID = columnID;
     }
 
-    public DataType getDataType() {
-        return dataType;
+    public DataTypeSchema getDataTypeSchema() {
+        return dataTypeSchema;
     }
 
-    public void setDataType(DataType dataType) {
-        this.dataType = dataType;
+    public void setDataTypeSchema(DataTypeSchema dataTypeSchema) {
+        this.dataTypeSchema = dataTypeSchema;
     }
 
     public String getColumnName() {
@@ -95,7 +95,7 @@ public class DefColumnSchema implements ColumnSchema {
     public String toString() {
         return "DefColumnSchema{" +
                 "columnID=" + columnID +
-                ", dataType=" + dataType +
+                ", dataType=" + dataTypeSchema +
                 ", columnName='" + columnName + '\'' +
                 ", regexName='" + regexName + '\'' +
                 ", randomName=" + randomName +

@@ -9,7 +9,7 @@ database:
         columnSchemas:
           - primaryKey:
               columnID: 1
-              dataType:
+              dataTypeSchema:
                 int: {}
           - defForeignKey:
               columnID: 2
@@ -19,16 +19,14 @@ database:
         columnSchemas:
           - primaryKey:
               columnID: 1
-              dataType:
+              dataTypeSchema:
                 int: {}
           - defForeignKey:
               columnID: 2
   databaseRelationships:
     - defPKFK:
-        pkfkMapping:
-          "1:1": "2:2"
-    - defPKFK:
-        pkfkMapping:
-          "2:1": "1:2"
+        pkfkMappings:
+          - "1:1": "2:2"
+          - "2:1": "1:2"
 
 

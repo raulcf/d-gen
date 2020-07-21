@@ -1,12 +1,12 @@
-package dgen.utils.schemas.datatypes;
+package dgen.utils.schemas.datatypeschemas;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
 
 @JsonTypeName("string")
-public class String implements DataType{
+public class StringSchema implements DataTypeSchema {
     private java.lang.String defaultValue;
-    private java.lang.String regexName;
+    private java.lang.String regexPattern;
     private Integer minLength = 0;
     private Integer maxLength = 1000; // TODO: To be decided
     private Distributions distribution;
@@ -31,12 +31,12 @@ public class String implements DataType{
         this.defaultValue = defaultValue;
     }
 
-    public java.lang.String getRegexName() {
-        return regexName;
+    public java.lang.String getRegexPattern() {
+        return regexPattern;
     }
 
-    public void setRegexName(java.lang.String regexName) {
-        this.regexName = regexName;
+    public void setRegexPattern(java.lang.String regexName) {
+        this.regexPattern = regexName;
     }
 
     public Integer getMinLength() {

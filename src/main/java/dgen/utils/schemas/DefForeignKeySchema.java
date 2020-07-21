@@ -2,14 +2,14 @@ package dgen.utils.schemas;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import dgen.utils.schemas.datatypes.DataType;
+import dgen.utils.schemas.datatypeschemas.DataTypeSchema;
 
 @JsonTypeName("foreignKey")
 @JsonPropertyOrder({"columnID", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
         "dataType"})
 public class DefForeignKeySchema implements ColumnSchema {
     private int columnID;
-    private final DataType dataType = null;
+    private final DataTypeSchema dataTypeSchema = null;
     private String columnName;
     private String regexName;
     private boolean randomName = true;
@@ -31,8 +31,8 @@ public class DefForeignKeySchema implements ColumnSchema {
         this.columnID = columnID;
     }
 
-    public DataType getDataType() {
-        return dataType;
+    public DataTypeSchema getDataTypeSchema() {
+        return dataTypeSchema;
     }
 
     public String getColumnName() {
@@ -87,7 +87,7 @@ public class DefForeignKeySchema implements ColumnSchema {
     public String toString() {
         return "DefForeignKeySchema{" +
                 "columnID=" + columnID +
-                ", dataType=" + dataType +
+                ", dataType=" + dataTypeSchema +
                 ", columnName='" + columnName + '\'' +
                 ", regexName='" + regexName + '\'' +
                 ", randomName=" + randomName +

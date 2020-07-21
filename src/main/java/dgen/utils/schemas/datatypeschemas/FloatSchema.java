@@ -1,10 +1,10 @@
-package dgen.utils.schemas.datatypes;
+package dgen.utils.schemas.datatypeschemas;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
 
 @JsonTypeName("float")
-public class Float implements DataType {
+public class FloatSchema implements DataTypeSchema {
     private java.lang.Float defaultValue = null;
     private java.lang.Float minValue = java.lang.Float.MIN_VALUE;
     private java.lang.Float maxValue = java.lang.Float.MAX_VALUE;

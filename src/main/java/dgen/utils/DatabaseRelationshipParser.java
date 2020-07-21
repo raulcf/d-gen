@@ -16,6 +16,7 @@ public class DatabaseRelationshipParser {
     private Map<Integer, Integer> tableFKCount = new HashMap<>();
     private final int maxNumRelationships;
     private int numRelationships = 0;
+    private DefPKFKSchema parsedPKFKSchema = new DefPKFKSchema();
     private Set<Pair<Integer, Integer>> primaryKeys = new HashSet<>();
     private Set<Pair<Integer, Integer>> foreignKeys = new HashSet<>();
 
@@ -63,14 +64,16 @@ public class DatabaseRelationshipParser {
      * @param databaseRelationship DatabaseRelationshipSchema object to parse.
      * @return List of parsed DefPKFK objects.
      */
-    public List<DefPKFKSchema> parse(DatabaseRelationshipSchema databaseRelationship) {
+    public void parse(DatabaseRelationshipSchema databaseRelationship) {
         switch (databaseRelationship.relationshipType()) {
             case GENPKFK:
                 GenPKFKSchema genPKFK = (GenPKFKSchema) databaseRelationship;
-                return parseGenPKFK(genPKFK);
+                parseGenPKFK(genPKFK);
+                break;
             case DEFPKFK:
                 DefPKFKSchema defPKFK = (DefPKFKSchema) databaseRelationship;
-                return parseDefPKFK(defPKFK);
+                parseDefPKFK(defPKFK);
+                break;
             default:
                 throw new SpecificationException("Cannot parse " + databaseRelationship.relationshipType() +
                         " with DatabaseRelationshipParser");
@@ -82,27 +85,35 @@ public class DatabaseRelationshipParser {
      * @param defPKFK DefPKFKSchema object to parse.
      * @return List containing the single parsed DefPKFKSchema object.
      */
-    private List<DefPKFKSchema> parseDefPKFK(DefPKFKSchema defPKFK) {
+    private void parseDefPKFK(DefPKFKSchema defPKFK) {
         defPKFK.parseMapping();
         defPKFK.validate();
-        Pair<Integer, Integer> primaryKey = defPKFK.getPrimaryKey();
-        Pair<Integer, Integer> foreignKey = defPKFK.getForeignKey();
 
-        if (relationshipMap.containsKey(primaryKey) && relationshipMap.get(primaryKey).contains(foreignKey)) {
-            throw new SpecificationException("Duplicate PK-FK relationship");
-        }
-        if (!primaryKeys.contains(primaryKey)) {
-            throw new SpecificationException("tableID " + primaryKey.getValue0() + " and columnID " + primaryKey.getValue1() + " not a primary key");
-        }
-        if (!foreignKeys.contains(foreignKey)) {
-            throw new SpecificationException("tableID " + foreignKey.getValue0() + " and columnID " + foreignKey.getValue1() + " not a foreign key");
+        List<Pair<Integer, Integer>> parsedPrimaryKeys = parsedPKFKSchema.getPrimaryKeys();
+        List<Pair<Integer, Integer>> parsedForeignKeys = parsedPKFKSchema.getForeignKeys();
+
+        for (int i = 0; i < defPKFK.getPrimaryKeys().size(); i++) {
+            Pair<Integer, Integer> primaryKey = defPKFK.getPrimaryKeys().get(i);
+            Pair<Integer, Integer> foreignKey = defPKFK.getForeignKeys().get(i);
+
+            if (relationshipMap.containsKey(primaryKey) && relationshipMap.get(primaryKey).contains(foreignKey)) {
+                throw new SpecificationException("Duplicate PK-FK relationship");
+            }
+            if (!primaryKeys.contains(primaryKey)) {
+                throw new SpecificationException("tableID " + primaryKey.getValue0() + " and columnID " + primaryKey.getValue1() + " not a primary key");
+            }
+            if (!foreignKeys.contains(foreignKey)) {
+                throw new SpecificationException("tableID " + foreignKey.getValue0() + " and columnID " + foreignKey.getValue1() + " not a foreign key");
+            }
+
+            foreignKeys.remove(foreignKey);
+            numRelationships += 1;
+            parsedPrimaryKeys.add(primaryKey);
+            parsedForeignKeys.add(foreignKey);
         }
 
-        List<DefPKFKSchema> defPKFKSchemaList = new ArrayList<>();
-        defPKFKSchemaList.add(defPKFK);
-        foreignKeys.remove(foreignKey);
-        numRelationships += 1;
-        return defPKFKSchemaList;
+        parsedPKFKSchema.setPrimaryKeys(parsedPrimaryKeys);
+        parsedPKFKSchema.setForeignKeys(parsedForeignKeys);
     }
 
     /**
@@ -110,7 +121,7 @@ public class DatabaseRelationshipParser {
      * @param genPKFK GenPKFKSchema to parse.
      * @return List of DefPKFKSchema objects.
      */
-    private List<DefPKFKSchema> parseGenPKFK(GenPKFKSchema genPKFK) {
+    private void parseGenPKFK(GenPKFKSchema genPKFK) {
         if (numRelationships + genPKFK.getNumRelationships() > maxNumRelationships) {
             throw new SpecificationException("Too many PK-FK relationships");
         }
@@ -119,16 +130,26 @@ public class DatabaseRelationshipParser {
         Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> mapping = graphSchema.generateDatabaseGraph(new ArrayList<>(primaryKeys),
                 new ArrayList<>(foreignKeys), genPKFK.getNumRelationships(), relationshipMap);
 
-        List<DefPKFKSchema> defPKFKSchemaList = new ArrayList<>();
+        List<Pair<Integer, Integer>> parsedPrimaryKeys = parsedPKFKSchema.getPrimaryKeys();
+        List<Pair<Integer, Integer>> parsedForeignKeys = parsedPKFKSchema.getForeignKeys();
+
         for (Pair<Integer, Integer> primaryKey: mapping.keySet()) {
             for (Pair<Integer, Integer> foreignKey: mapping.get(primaryKey)) {
-                DefPKFKSchema defPKFK = new DefPKFKSchema();
-                defPKFK.setPrimaryKey(primaryKey);
-                defPKFK.setForeignKey(foreignKey);
-                defPKFK.unparseMapping();
-                defPKFKSchemaList.addAll(parseDefPKFK(defPKFK));
+                parsedPrimaryKeys.add(primaryKey);
+                parsedForeignKeys.add(foreignKey);
             }
         }
-        return defPKFKSchemaList;
+
+        parsedPKFKSchema.setPrimaryKeys(parsedPrimaryKeys);
+        parsedPKFKSchema.setForeignKeys(parsedForeignKeys);
+    }
+
+    public DefPKFKSchema getParsedPKFKSchema() {
+        parsedPKFKSchema.unparseMapping();
+        return parsedPKFKSchema;
+    }
+
+    public void setParsedPKFKSchema(DefPKFKSchema parsedPKFKSchema) {
+        this.parsedPKFKSchema = parsedPKFKSchema;
     }
 }

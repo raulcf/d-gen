@@ -3,9 +3,9 @@
     "databaseName" : "2_input",
     "tableSchemas" : [ {
       "defTable" : {
-        "tableID" : -1011925909,
+        "tableID" : 1850150867,
         "tableName" : null,
-        "numRows" : 144,
+        "numRows" : 187,
         "regexName" : null,
         "randomName" : true,
         "columnSchemas" : [ {
@@ -17,7 +17,7 @@
             "unique" : true,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataType" : {
+            "dataTypeSchema" : {
               "int" : {
                 "defaultValue" : null,
                 "minValue" : -2147483648,
@@ -28,23 +28,23 @@
           }
         }, {
           "defForeignKey" : {
-            "columnID" : 1813957590,
+            "columnID" : 2016890040,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
             "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataType" : null
+            "dataTypeSchema" : null
           }
         } ],
         "tableRelationships" : [ ]
       }
     }, {
       "defTable" : {
-        "tableID" : -261201103,
+        "tableID" : 1083561862,
         "tableName" : null,
-        "numRows" : 144,
+        "numRows" : 187,
         "regexName" : null,
         "randomName" : true,
         "columnSchemas" : [ {
@@ -56,7 +56,7 @@
             "unique" : true,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataType" : {
+            "dataTypeSchema" : {
               "int" : {
                 "defaultValue" : null,
                 "minValue" : -2147483648,
@@ -67,23 +67,23 @@
           }
         }, {
           "defForeignKey" : {
-            "columnID" : 557993413,
+            "columnID" : 779744284,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
             "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataType" : null
+            "dataTypeSchema" : null
           }
         } ],
         "tableRelationships" : [ ]
       }
     }, {
       "defTable" : {
-        "tableID" : -502104606,
+        "tableID" : 1497516216,
         "tableName" : null,
-        "numRows" : 144,
+        "numRows" : 187,
         "regexName" : null,
         "randomName" : true,
         "columnSchemas" : [ {
@@ -95,7 +95,7 @@
             "unique" : true,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataType" : {
+            "dataTypeSchema" : {
               "int" : {
                 "defaultValue" : null,
                 "minValue" : -2147483648,
@@ -106,14 +106,14 @@
           }
         }, {
           "defForeignKey" : {
-            "columnID" : 1425933767,
+            "columnID" : -374801359,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
             "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataType" : null
+            "dataTypeSchema" : null
           }
         } ],
         "tableRelationships" : [ ]
@@ -121,21 +121,13 @@
     } ],
     "databaseRelationships" : [ {
       "defPKFK" : {
-        "pkfkMapping" : {
-          "-502104606:1" : "-1011925909:1813957590"
-        }
-      }
-    }, {
-      "defPKFK" : {
-        "pkfkMapping" : {
-          "-261201103:1" : "-502104606:1425933767"
-        }
-      }
-    }, {
-      "defPKFK" : {
-        "pkfkMapping" : {
-          "-1011925909:1" : "-261201103:557993413"
-        }
+        "pkfkMappings" : [ {
+          "1083561862:1" : "1497516216:-374801359"
+        }, {
+          "1083561862:1" : "1850150867:2016890040"
+        }, {
+          "1497516216:1" : "1083561862:779744284"
+        } ]
       }
     } ]
   }

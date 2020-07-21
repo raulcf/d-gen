@@ -3,14 +3,14 @@ package dgen.utils.schemas;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
-import dgen.utils.schemas.datatypes.DataType;
+import dgen.utils.schemas.datatypeschemas.DataTypeSchema;
 
 @JsonTypeName("primaryKey")
 @JsonPropertyOrder({"columnID", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
         "dataType"})
 public class PrimaryKeySchema implements ColumnSchema {
     private int columnID;
-    private DataType dataType;
+    private DataTypeSchema dataTypeSchema;
     private String columnName;
     private String regexName;
     private boolean randomName = true;
@@ -23,11 +23,11 @@ public class PrimaryKeySchema implements ColumnSchema {
 
     @Override
     public void validate() {
-        if (dataType == null) {
+        if (dataTypeSchema == null) {
             throw new SpecificationException("Primary key with columnID " + columnID + " missing datatype");
         }
 
-        dataType.validate();
+        dataTypeSchema.validate();
     }
 
     public Integer getColumnID() {
@@ -38,12 +38,12 @@ public class PrimaryKeySchema implements ColumnSchema {
         this.columnID = columnID;
     }
 
-    public DataType getDataType() {
-        return dataType;
+    public DataTypeSchema getDataTypeSchema() {
+        return dataTypeSchema;
     }
 
-    public void setDataType(DataType dataType) {
-        this.dataType = dataType;
+    public void setDataTypeSchema(DataTypeSchema dataTypeSchema) {
+        this.dataTypeSchema = dataTypeSchema;
     }
 
     public String getColumnName() {
@@ -86,7 +86,7 @@ public class PrimaryKeySchema implements ColumnSchema {
     public String toString() {
         return "PrimaryKeySchema{" +
                 "columnID=" + columnID +
-                ", dataType=" + dataType +
+                ", dataType=" + dataTypeSchema +
                 ", columnName='" + columnName + '\'' +
                 ", regexName='" + regexName + '\'' +
                 ", randomName=" + randomName +

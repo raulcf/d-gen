@@ -4,6 +4,7 @@ import dgen.utils.schemas.ColumnSchema;
 import dgen.utils.schemas.DatabaseSchema;
 import dgen.utils.schemas.TableSchema;
 import dgen.utils.schemas.relationships.DatabaseRelationshipSchema;
+import dgen.utils.schemas.relationships.DefPKFKSchema;
 import dgen.utils.schemas.relationships.RelationshipType;
 
 import java.util.ArrayList;
@@ -35,7 +36,6 @@ public class DatabaseParser {
          Currently each object in databaseRelationships represents only a single PKFK relationship.
          In the future it might make it easier for us if there's only a single object containing all of the mappings.
          */
-        List<DatabaseRelationshipSchema> parsedDatabaseRelationships = new ArrayList<>();
         DatabaseRelationshipParser databaseRelationshipParser = new DatabaseRelationshipParser(tableMap);
         List<DatabaseRelationshipSchema> databaseRelationships = database.getDatabaseRelationships();
         databaseRelationships.sort(new Comparator<DatabaseRelationshipSchema>() {
@@ -46,9 +46,12 @@ public class DatabaseParser {
             }
         });
         for (DatabaseRelationshipSchema databaseRelationship: databaseRelationships) {
-            parsedDatabaseRelationships.addAll(databaseRelationshipParser.parse(databaseRelationship));
+            databaseRelationshipParser.parse(databaseRelationship);
         }
-        database.setDatabaseRelationships(parsedDatabaseRelationships);
+
+        List<DatabaseRelationshipSchema> parsedPKFKList = new ArrayList<>();
+        parsedPKFKList.add(databaseRelationshipParser.getParsedPKFKSchema());
+        database.setDatabaseRelationships(parsedPKFKList);
     }
 
 }

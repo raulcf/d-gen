@@ -114,7 +114,7 @@ public class ColumnParser {
             defColumn.setRandomName(genColumn.isRandomName());
             defColumn.setRegexName(genColumn.getRegexName());
             defColumn.setColumnName(genColumn.getColumnName());
-            defColumn.setDataType(genColumn.getDataType());
+            defColumn.setDataTypeSchema(genColumn.getDataTypeSchema());
             defColumn.setColumnID(columnId);
 
             parseColumn(defColumn);
@@ -131,8 +131,8 @@ public class ColumnParser {
         parseColumnName(defColumn);
 
         DataTypeParser parser = new DataTypeParser();
-        parser.parse(defColumn.getDataType());
-        defColumn.setDataType(parser.getDataType());
+        parser.parse(defColumn.getDataTypeSchema());
+        defColumn.setDataTypeSchema(parser.getDataTypeSchema());
 
         defColumn.validate();
 
@@ -195,8 +195,8 @@ public class ColumnParser {
         parseColumnName(primaryKey);
 
         DataTypeParser parser = new DataTypeParser();
-        parser.parse(primaryKey.getDataType());
-        primaryKey.setDataType(parser.getDataType());
+        parser.parse(primaryKey.getDataTypeSchema());
+        primaryKey.setDataTypeSchema(parser.getDataTypeSchema());
 
         primaryKey.validate();
 

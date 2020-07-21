@@ -2,14 +2,14 @@ package dgen.utils.schemas;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
-import dgen.utils.schemas.datatypes.DataType;
+import dgen.utils.schemas.datatypeschemas.DataTypeSchema;
 
 @JsonTypeName("genForeignKey")
 public class GenForeignKeySchema implements ColumnSchema {
     private Integer numColumns = null;
     private Integer minColumns = 1;
     private Integer maxColumns = 100; // TODO: Decide on this later
-    private final DataType dataType = null;
+    private final DataTypeSchema dataTypeSchema = null;
     private String columnName;
     private String regexName;
     private boolean randomName = true;
@@ -56,8 +56,8 @@ public class GenForeignKeySchema implements ColumnSchema {
         this.maxColumns = maxColumns;
     }
 
-    public DataType getDataType() {
-        return dataType;
+    public DataTypeSchema getDataTypeSchema() {
+        return dataTypeSchema;
     }
 
     public String getColumnName() {
@@ -114,7 +114,7 @@ public class GenForeignKeySchema implements ColumnSchema {
                 "numColumns=" + numColumns +
                 ", minColumns=" + minColumns +
                 ", maxColumns=" + maxColumns +
-                ", dataType=" + dataType +
+                ", dataType=" + dataTypeSchema +
                 ", columnName='" + columnName + '\'' +
                 ", regexName='" + regexName + '\'' +
                 ", randomName=" + randomName +

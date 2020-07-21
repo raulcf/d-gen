@@ -1,78 +1,78 @@
 package dgen.utils;
 
-import dgen.utils.schemas.datatypes.Boolean;
-import dgen.utils.schemas.datatypes.DataType;
-import dgen.utils.schemas.datatypes.Float;
-import dgen.utils.schemas.datatypes.Int;
-import dgen.utils.schemas.datatypes.String;
+import dgen.utils.schemas.datatypeschemas.BooleanSchema;
+import dgen.utils.schemas.datatypeschemas.DataTypeSchema;
+import dgen.utils.schemas.datatypeschemas.FloatSchema;
+import dgen.utils.schemas.datatypeschemas.IntegerSchema;
+import dgen.utils.schemas.datatypeschemas.StringSchema;
 
 public class DataTypeParser {
-    private DataType dataType;
+    private DataTypeSchema dataTypeSchema;
 
-    public DataType getDataType() {
-        return dataType;
+    public DataTypeSchema getDataTypeSchema() {
+        return dataTypeSchema;
     }
-    public void setDataType(DataType dataType) {
-        this.dataType = dataType;
+    public void setDataTypeSchema(DataTypeSchema dataTypeSchema) {
+        this.dataTypeSchema = dataTypeSchema;
     }
 
-    public void parse(DataType d) {
+    public void parse(DataTypeSchema d) {
         switch (d.type()) {
             case INT:
-                Int intType = (Int) d;
-                parseInt(intType);
+                IntegerSchema integerType = (IntegerSchema) d;
+                parseInt(integerType);
                 break;
             case STRING:
-                String stringType = (String) d;
+                StringSchema stringType = (StringSchema) d;
                 parseString(stringType);
                 break;
             case FLOAT:
-                Float floatType = (Float) d;
+                FloatSchema floatType = (FloatSchema) d;
                 parseFloat(floatType);
                 break;
             case BOOLEAN:
-                Boolean booleanType = (Boolean) d;
+                BooleanSchema booleanType = (BooleanSchema) d;
                 parseBoolean(booleanType);
                 break;
         }
 
     }
 
-    private void parseInt(Int intType) {
-        if (intType.getDefaultValue() != null) {
-            intType.setMinValue(null);
-            intType.setMaxValue(null);
-            intType.setDistribution(null);
+    private void parseInt(IntegerSchema integerType) {
+        if (integerType.getDefaultValue() != null) {
+            integerType.setMinValue(null);
+            integerType.setMaxValue(null);
+            integerType.setDistribution(null);
         }
-        dataType = intType;
+        dataTypeSchema = integerType;
     }
 
-    private void parseString(String stringType) {
+    private void parseString(StringSchema stringType) {
         if (stringType.getDefaultValue() != null) {
             stringType.setMinLength(null);
             stringType.setMaxLength(null);
             stringType.setDistribution(null);
-            stringType.setRegexName(null);
-        } else if (stringType.getRegexName() != null) {
+            stringType.setRegexPattern(null);
+        } else if (stringType.getRegexPattern() != null) {
             stringType.setMinLength(null);
             stringType.setMaxLength(null);
             stringType.setDistribution(null);
-        } else { assert stringType.getMinLength() <= stringType.getMaxLength(); }
+        }
 
-        dataType = stringType;
+        dataTypeSchema = stringType;
     }
 
-    private void parseFloat(Float floatType) {
+    private void parseFloat(FloatSchema floatType) {
         if (floatType.getDefaultValue() != null) {
             floatType.setMinValue(null);
             floatType.setMaxValue(null);
             floatType.setDistribution(null);
-        } else { assert floatType.getMinValue() <= floatType.getMaxValue(); }
+        }
 
-        dataType = floatType;
+        dataTypeSchema = floatType;
     }
 
-    private void parseBoolean(Boolean booleanType) {
-        assert booleanType.getTfRatio() <= 1;
+    private void parseBoolean(BooleanSchema booleanType) {
+        dataTypeSchema = booleanType;
     }
 }
