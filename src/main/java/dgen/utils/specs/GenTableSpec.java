@@ -37,6 +37,8 @@ public class GenTableSpec implements TableSpec {
         }
     }
 
+    public Integer getTableID() { return null; }
+
     public Integer getNumRows() {
         return numRows;
     }

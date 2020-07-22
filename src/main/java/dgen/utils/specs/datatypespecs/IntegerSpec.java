@@ -9,7 +9,7 @@ import dgen.utils.specs.datatypespecs.distributionspecs.UniformDistributionSpec;
 @JsonTypeName("int")
 public class IntegerSpec implements DataTypeSpec {
     private Integer defaultValue = null;
-    private Integer minValue = Integer.MIN_VALUE;
+    private Integer minValue = 0;
     private Integer maxValue = Integer.MAX_VALUE;
     private DistributionSpec distribution = new UniformDistributionSpec();
 
@@ -18,7 +18,7 @@ public class IntegerSpec implements DataTypeSpec {
 
     @Override
     public void validate() {
-        if (minValue >= maxValue) {
+        if (minValue != null && maxValue != null && minValue >= maxValue) {
             throw new SpecificationException("Int minValue of " + minValue.toString() + " greater than maxValue of "
                     + maxValue.toString());
         }

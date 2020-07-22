@@ -100,7 +100,7 @@ public class ColumnParser {
             int minColumns = genColumn.getMinColumns();
             int maxColumns = genColumn.getMaxColumns();
 
-            numColumns = r.nextInt(maxColumns - minColumns + 1) + maxColumns;
+            numColumns = r.nextInt(maxColumns - minColumns) + minColumns;
         }
 
         for (int i = 0; i < numColumns; i++) {
@@ -115,6 +115,7 @@ public class ColumnParser {
 
             parseColumn(defColumn);
         }
+
 
     }
 

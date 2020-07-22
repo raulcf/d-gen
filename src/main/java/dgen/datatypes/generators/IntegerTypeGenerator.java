@@ -19,8 +19,8 @@ public class IntegerTypeGenerator implements DataTypeGenerator {
     private Set<Integer> drawnIntegers = new HashSet<>();
 
     private Integer defaultValue;
-    private int lowerBoundDomain;
-    private int upperBoundDomain;
+    private Integer lowerBoundDomain;
+    private Integer upperBoundDomain;
     private Distribution distribution;
     private int sizeInBytes;
 
@@ -86,7 +86,7 @@ public class IntegerTypeGenerator implements DataTypeGenerator {
     }
 
     private DataType uniformSample() {
-        int value = rnd.nextInt(upperBoundDomain - lowerBoundDomain + 1) + lowerBoundDomain;
+        int value = rnd.nextInt(upperBoundDomain - lowerBoundDomain) + lowerBoundDomain;
         return new IntegerType(value);
     }
 
@@ -99,10 +99,10 @@ public class IntegerTypeGenerator implements DataTypeGenerator {
     }
 
     private DataType uniformSampleWithoutReplacement() {
-        int value = rnd.nextInt(upperBoundDomain - lowerBoundDomain + 1) + lowerBoundDomain;
+        int value = rnd.nextInt(upperBoundDomain - lowerBoundDomain) + lowerBoundDomain;
 
         while (drawnIntegers.contains(value)) {
-            value = rnd.nextInt(upperBoundDomain - lowerBoundDomain + 1) + lowerBoundDomain;
+            value = rnd.nextInt(upperBoundDomain - lowerBoundDomain) + lowerBoundDomain;
         }
 
         drawnIntegers.add(value);

@@ -9,7 +9,7 @@ import dgen.utils.specs.datatypespecs.distributionspecs.UniformDistributionSpec;
 @JsonTypeName("float")
 public class FloatSpec implements DataTypeSpec {
     private java.lang.Float defaultValue = null;
-    private java.lang.Float minValue = java.lang.Float.MIN_VALUE;
+    private java.lang.Float minValue = (float) 0;
     private java.lang.Float maxValue = java.lang.Float.MAX_VALUE;
     private DistributionSpec distribution = new UniformDistributionSpec();
 

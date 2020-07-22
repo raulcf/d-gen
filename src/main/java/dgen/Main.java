@@ -1,7 +1,11 @@
 package dgen;
 
+import dgen.dataset.Dataset;
+import dgen.dataset.DatasetConfig;
+import dgen.dataset.DatasetGenerator;
 import dgen.tables.Table;
 import dgen.utils.AdHocTableFactory;
+import dgen.utils.SpecificationParser;
 
 /**
  * This class drives the data generation process, which is divided into 4 stages:
@@ -17,11 +21,13 @@ public class Main {
 
     public static void main(String[] args) {
         // Example
-        int numColumns = 4;
-        int numRecords = 10;
-        Table example = AdHocTableFactory.makeAllIntegerTable(numColumns, numRecords);
+        SpecificationParser specificationParser = new SpecificationParser();
+        specificationParser.parseYAML("test.yaml");
+        specificationParser.write("test_output.yaml");
+        DatasetGenerator datasetGenerator = DatasetConfig.specToGenerator(specificationParser.getDatabase());
+        Dataset dataset = datasetGenerator.generateDataset();
 
-        String csv = example.toCSV();
-        System.out.println(csv);
+
+        System.out.println(datasetGenerator.generateDataset());
     }
 }

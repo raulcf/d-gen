@@ -21,8 +21,8 @@ public class FloatTypeGenerator implements DataTypeGenerator {
     private Set<Float> drawnFloats = new HashSet<>();
 
     private Float defaultValue;
-    private float lowerBoundDomain;
-    private float upperBoundDomain;
+    private Float lowerBoundDomain;
+    private Float upperBoundDomain;
     private Distribution distribution;
     private int sizeInBytes;
 
@@ -40,7 +40,7 @@ public class FloatTypeGenerator implements DataTypeGenerator {
     }
 
     private FloatTypeGenerator() {
-        this.lowerBoundDomain = 0;
+        this.lowerBoundDomain = (float) 0;
         this.upperBoundDomain = Float.MAX_VALUE;
         this.distribution = new UniformDistribution();
         this.sizeInBytes = Float.SIZE;

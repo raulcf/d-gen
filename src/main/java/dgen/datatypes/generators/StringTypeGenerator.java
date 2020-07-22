@@ -129,7 +129,7 @@ public class StringTypeGenerator implements DataTypeGenerator{
     }
 
     private DataType uniformSample() {
-        int stringLength = rnd.nextInt(this.maxLength - this.minLength + 1) + this.minLength;
+        int stringLength = rnd.nextInt(this.maxLength - this.minLength) + this.minLength;
 
         return new StringType(generateString(stringLength));
     }
@@ -143,7 +143,7 @@ public class StringTypeGenerator implements DataTypeGenerator{
     }
 
     private DataType uniformSampleWithoutReplacement() {
-        int stringLength = rnd.nextInt(this.maxLength - this.minLength + 1) + this.minLength;
+        int stringLength = rnd.nextInt(this.maxLength - this.minLength) + this.minLength;
         String generatedString = generateString(stringLength);
 
         while (drawnStrings.contains(generatedString)) {

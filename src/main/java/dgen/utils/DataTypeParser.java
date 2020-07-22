@@ -39,7 +39,6 @@ public class DataTypeParser {
         if (integerType.getDefaultValue() != null) {
             integerType.setMinValue(null);
             integerType.setMaxValue(null);
-            integerType.setDistribution(null);
         }
         dataTypeSpec = integerType;
     }
@@ -48,12 +47,10 @@ public class DataTypeParser {
         if (stringType.getDefaultValue() != null) {
             stringType.setMinLength(null);
             stringType.setMaxLength(null);
-            stringType.setDistribution(null);
             stringType.setRegexPattern(null);
         } else if (stringType.getRegexPattern() != null) {
             stringType.setMinLength(null);
             stringType.setMaxLength(null);
-            stringType.setDistribution(null);
         }
 
         dataTypeSpec = stringType;
@@ -63,7 +60,6 @@ public class DataTypeParser {
         if (floatType.getDefaultValue() != null) {
             floatType.setMinValue(null);
             floatType.setMaxValue(null);
-            floatType.setDistribution(null);
         }
 
         dataTypeSpec = floatType;
