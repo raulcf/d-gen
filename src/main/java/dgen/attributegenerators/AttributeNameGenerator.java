@@ -1,4 +1,4 @@
-package dgen.column;
+package dgen.attributegenerators;
 
 public interface AttributeNameGenerator {
 

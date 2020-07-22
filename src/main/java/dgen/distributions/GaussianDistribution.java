@@ -1,9 +1,11 @@
 package dgen.distributions;
 
+import dgen.distributions.config.GaussianDistributionConfig;
+
 public class GaussianDistribution implements Distribution{
 
-    private float standardDeviation = 1;
-    private float mean = 0;
+    private float standardDeviation;
+    private float mean;
 
     @Override
     public DistributionType distributionType() {
@@ -13,6 +15,11 @@ public class GaussianDistribution implements Distribution{
     public GaussianDistribution(float standardDeviation, float mean) {
         this.standardDeviation = standardDeviation;
         this.mean = mean;
+    }
+
+    public GaussianDistribution(GaussianDistributionConfig dtc) {
+        this.standardDeviation = dtc.getFloat("standard.deviation");
+        this.mean = dtc.getFloat("mean");
     }
 
     public float getStandardDeviation() {

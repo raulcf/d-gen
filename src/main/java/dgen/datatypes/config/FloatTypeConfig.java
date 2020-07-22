@@ -1,5 +1,6 @@
 package dgen.datatypes.config;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +9,12 @@ import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigDef.Importance;
 import dgen.coreconfig.ConfigDef.Type;
 import dgen.coreconfig.ConfigKey;
+import dgen.datatypes.NativeType;
+import dgen.datatypes.generators.FloatTypeGenerator;
+import dgen.distributions.config.DistributionConfig;
+import dgen.utils.specs.datatypespecs.FloatSpec;
 
-public class FloatTypeConfig extends Config {
+public class FloatTypeConfig extends Config implements DataTypeConfig {
 
     private static final ConfigDef config;
 
@@ -22,17 +27,37 @@ public class FloatTypeConfig extends Config {
     public static final String UPPER_BOUND_DOMAIN = "upper.bound.domain";
     private static final String UPPER_BOUND_DOMAIN_DOC = "Indicates the upper bound of a type's domain";
 
+    public static final String DISTRIBUTION = "distribution";
+    public static final String DISTRIBUTION_DOC = "Indicates distribution of type";
+
     public static final String SIZE_IN_BYTES = "size.in.bytes";
     private static final String SIZE_IN_BYTES_DOC = "The native size of this type in bytes";
 
     static {
         config = new ConfigDef()
-                // TODO: DEFAULT_VALUE should be null by default but the Config class doesn't allow that
-                .define(DEFAULT_VALUE, Type.FLOAT, Importance.LOW, DEFAULT_VALUE_DOC)
+                .define(DEFAULT_VALUE, Type.FLOAT, null, null, Importance.LOW, DEFAULT_VALUE_DOC)
                 .define(LOWER_BOUND_DOMAIN, Type.INT, Float.MIN_VALUE, Importance.LOW, LOWER_BOUND_DOMAIN_DOC)
                 .define(UPPER_BOUND_DOMAIN, Type.INT, Float.MAX_VALUE, Importance.LOW, UPPER_BOUND_DOMAIN_DOC)
-                .define(SIZE_IN_BYTES, Type.INT, Byte.SIZE, Importance.LOW, SIZE_IN_BYTES_DOC);
+                .define(DISTRIBUTION, Type.OBJECT, null, null, Importance.LOW, DISTRIBUTION_DOC)
+                .define(SIZE_IN_BYTES, Type.INT, Float.BYTES, Importance.LOW, SIZE_IN_BYTES_DOC);
     }
+
+    public static FloatTypeConfig specToConfig(FloatSpec floatSchema) {
+        Map<String, Object> originals = new HashMap<>();
+        originals.put("default.value", floatSchema.getDefaultValue());
+        originals.put("lower.bound.domain", floatSchema.getMinValue());
+        originals.put("upper.bound.domain", floatSchema.getMaxValue());
+        originals.put("distribution", DistributionConfig.specToDistribution(floatSchema.getDistribution()));
+
+        return new FloatTypeConfig(originals);
+    }
+
+    public static FloatTypeGenerator specToGenerator(FloatSpec floatSchema) {
+        return new FloatTypeGenerator(specToConfig(floatSchema));
+    }
+
+    @Override
+    public NativeType nativeType() {return NativeType.FLOAT; }
 
     public FloatTypeConfig(Map<? extends Object, ? extends Object> originals) {
         super(config, originals);

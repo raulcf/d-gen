@@ -1,5 +1,6 @@
 package dgen.datatypes.config;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +9,11 @@ import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigDef.Importance;
 import dgen.coreconfig.ConfigDef.Type;
 import dgen.coreconfig.ConfigKey;
+import dgen.datatypes.NativeType;
+import dgen.datatypes.generators.BooleanTypeGenerator;
+import dgen.utils.specs.datatypespecs.BooleanSpec;
 
-public class BooleanTypeConfig extends Config {
+public class BooleanTypeConfig extends Config implements DataTypeConfig {
 
     private static final ConfigDef config;
 
@@ -22,8 +26,23 @@ public class BooleanTypeConfig extends Config {
     static {
         config = new ConfigDef()
                 .define(TRUE_FALSE_RATIO, Type.DOUBLE, 0.5, Importance.LOW, TRUE_FALSE_RATIO_DOC)
-                .define(SIZE_IN_BYTES, Type.INT, Byte.SIZE, Importance.LOW, SIZE_IN_BYTES_DOC);
+                .define(SIZE_IN_BYTES, Type.INT, 1, Importance.LOW, SIZE_IN_BYTES_DOC); // FIXME: Technically a boolean is 1 bit
     }
+
+    public static BooleanTypeConfig specToConfig(BooleanSpec booleanSpec) {
+        Map<String, Object> originals = new HashMap<>();
+        originals.put("true.false.ratio", booleanSpec.getTfRatio());
+
+        return new BooleanTypeConfig(originals);
+    }
+
+    public static BooleanTypeGenerator specToGenerator(BooleanSpec booleanSpec) {
+        return new BooleanTypeGenerator(specToConfig(booleanSpec));
+    }
+
+
+    @Override
+    public NativeType nativeType() { return NativeType.BOOLEAN; }
 
     public BooleanTypeConfig(Map<? extends Object, ? extends Object> originals) {
         super(config, originals);

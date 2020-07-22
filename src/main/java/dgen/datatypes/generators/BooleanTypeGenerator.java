@@ -1,10 +1,11 @@
 package dgen.datatypes.generators;
 
-import dgen.datatypes.*;
+import dgen.coreconfig.DGException;
+import dgen.datatypes.BooleanType;
+import dgen.datatypes.DataType;
+import dgen.datatypes.NativeType;
 import dgen.datatypes.config.BooleanTypeConfig;
 import dgen.datatypes.config.FloatTypeConfig;
-import dgen.datatypes.config.IntegerTypeConfig;
-import dgen.distributions.Distribution;
 
 import java.util.Random;
 
@@ -37,29 +38,16 @@ public class BooleanTypeGenerator implements DataTypeGenerator {
     }
 
     @Override
-    public DataType drawWithReplacement(Distribution samplingDistribution) {
-        // TODO: unless we need to know the specific distribution here, this switch should dissappear.
-        switch(samplingDistribution.distributionType()) {
-            case UNIFORM:
-                return uniformSample();
-            case GAUSSIAN:
-            case ZIPF:
-                // TODO: to implement
-                return null;
-        }
-        return null;
-    }
-
-    @Override
-    public DataType drawWithoutReplacement(Distribution samplingDistribution) {
-        return null;
-    }
-
-    private DataType uniformSample() {
+    public DataType drawWithReplacement() {
         if (rnd.nextFloat() > tfRatio) {
             return new BooleanType(false);
         } else {
             return new BooleanType(true);
         }
+    }
+
+    @Override
+    public DataType drawWithoutReplacement() {
+        throw new DGException("Cannot draw booleans without replacement");
     }
 }

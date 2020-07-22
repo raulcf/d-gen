@@ -16,13 +16,13 @@ public interface DataTypeGenerator {
      * @param samplingDistribution
      * @return
      */
-    DataType drawWithReplacement(Distribution samplingDistribution);
+    DataType drawWithReplacement();
 
     /**
      * Sample one value of type DataType without replacement
      * @param samplingDistribution
      * @return
      */
-    DataType drawWithoutReplacement(Distribution samplingDistribution);
+    DataType drawWithoutReplacement();
 
 }

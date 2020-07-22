@@ -13,7 +13,7 @@ public class FloatType implements DataType {
 
     @Override
     public int size() {
-        return 0;
+        return Float.BYTES;
     }
 
     @Override

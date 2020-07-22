@@ -45,8 +45,6 @@ public class ConfigDef {
                             String documentation) {
         if (configKeys.containsKey(name))
             throw new ConfigException("Configuration " + name + " is defined twice.");
-        System.out.println(name);
-        System.out.println(defaultValue);
         Object parsedDefault = defaultValue == NO_DEFAULT_VALUE ? NO_DEFAULT_VALUE
                 : parseType(name, defaultValue, type);
         configKeys.put(name, new ConfigKey(name, type, parsedDefault, validator, importance, documentation));
@@ -164,11 +162,15 @@ public class ConfigDef {
                         return Boolean.parseBoolean(trimmed);
                     else if (value instanceof Boolean)
                         return value;
+                    else if (value == null)
+                        return null;
                     else
                         throw new ConfigException(name, value, "Expected value to be either true or false");
                 case STRING:
                     if (value instanceof String)
                         return trimmed;
+                    else if (value == null)
+                        return null;
                     else
                         throw new ConfigException(name, value,
                                 "Expected value to be a string, but it was a " + value.getClass().getName());
@@ -177,6 +179,8 @@ public class ConfigDef {
                         return (Integer) value;
                     } else if (value instanceof String) {
                         return Integer.parseInt(trimmed);
+                    } else if (value == null) {
+                        return null;
                     } else {
                         throw new ConfigException(name, value, "Expected value to be a number.");
                     }
@@ -185,6 +189,8 @@ public class ConfigDef {
                         return (Float) value;
                     } else if (value instanceof String) {
                         return Float.parseFloat(trimmed);
+                    } else if (value == null) {
+                        return null;
                     } else {
                         throw new ConfigException(name, value, "Expected value to be a number.");
                     }
@@ -195,6 +201,8 @@ public class ConfigDef {
                         return (Long) value;
                     else if (value instanceof String)
                         return Long.parseLong(trimmed);
+                    else if (value == null)
+                        return null;
                     else
                         throw new ConfigException(name, value, "Expected value to be a number.");
                 case DOUBLE:
@@ -202,6 +210,8 @@ public class ConfigDef {
                         return ((Number) value).doubleValue();
                     else if (value instanceof String)
                         return Double.parseDouble(trimmed);
+                    else if (value == null)
+                        return null;
                     else
                         throw new ConfigException(name, value, "Expected value to be an number.");
                 case LIST:
@@ -212,6 +222,8 @@ public class ConfigDef {
                             return Collections.emptyList();
                         else
                             return Arrays.asList(trimmed.split("\\s*,\\s*", -1));
+                    else if (value == null)
+                        return null;
                     else
                         throw new ConfigException(name, value, "Expected a comma separated list.");
                 case CLASS:
@@ -219,8 +231,17 @@ public class ConfigDef {
                         return (Class<?>) value;
                     else if (value instanceof String)
                         return Class.forName(trimmed);
+                    else if (value == null)
+                        return null;
                     else
                         throw new ConfigException(name, value, "Expected a Class instance or class name.");
+                case OBJECT:
+                    if (value instanceof Object)
+                        return (Object) value;
+                    else if (value == null)
+                        return value;
+                    else
+                        throw new ConfigException(name, value, "Expected value to be an object");
                 default:
                     throw new IllegalStateException("Unknown type.");
             }
@@ -236,7 +257,7 @@ public class ConfigDef {
      */
     public enum Type {
         BOOLEAN(Boolean.class), STRING(String.class), INT(Integer.class), FLOAT(Float.class), LONG(Long.class),
-                DOUBLE(Double.class), LIST(List.class), CLASS(Object.class);
+                DOUBLE(Double.class), LIST(List.class), CLASS(Object.class), OBJECT(Object.class);
 
         private Class<?> clazz;
 

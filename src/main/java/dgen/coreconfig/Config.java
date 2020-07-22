@@ -74,6 +74,8 @@ public class Config {
 
     public Class<?> getClass(String key) { return (Class<?>)get(key); }
 
+    public Object getObject(String key) {return (Object)get(key); }
+
     public Set<String> unused() {
         Set<String> keys = new HashSet<String>(originals.keySet());
         keys.removeAll(used);

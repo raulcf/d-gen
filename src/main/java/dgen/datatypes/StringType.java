@@ -13,7 +13,7 @@ public class StringType implements DataType {
 
     @Override
     public int size() {
-        return 0;
+        return Character.BYTES * value.length();
     }
 
     @Override

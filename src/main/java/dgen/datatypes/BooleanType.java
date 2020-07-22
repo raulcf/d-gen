@@ -10,7 +10,7 @@ public class BooleanType implements DataType {
     public NativeType nativeType() { return NativeType.BOOLEAN; }
 
     @Override
-    public int size() { return 0; }
+    public int size() { return 1; } // FIXME: Technically a boolean is 1 bit.
 
     @Override
     public Boolean value() { return this.value; }

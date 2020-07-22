@@ -1,6 +1,7 @@
 package dgen.datatypes.generators;
 
 import com.mifmif.common.regex.Generex;
+import dgen.datatypes.IntegerType;
 import dgen.datatypes.StringType;
 import dgen.datatypes.config.FloatTypeConfig;
 import dgen.datatypes.config.IntegerTypeConfig;
@@ -11,17 +12,22 @@ import dgen.distributions.Distribution;
 import dgen.distributions.GaussianDistribution;
 import dgen.distributions.UniformDistribution;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class StringTypeGenerator implements DataTypeGenerator{
 
     private final NativeType nativeType = NativeType.STRING;
 
+    private Set<String> drawnStrings = new HashSet<>();
+
     private String defaultValue;
     private String regexPattern;
     private int minLength;
     private int maxLength;
-    private String validChars;
+    private Distribution distribution;
+    private String validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz";
     private int sizeInBytes;
 
     private Random rnd;
@@ -31,6 +37,7 @@ public class StringTypeGenerator implements DataTypeGenerator{
         this.regexPattern = dtc.getString(StringTypeConfig.REGEX_PATTERN);
         this.maxLength = dtc.getInt(StringTypeConfig.MAX_LENGTH);
         this.minLength = dtc.getInt(StringTypeConfig.MIN_LENGTH);
+        this.distribution = (Distribution)dtc.getObject(StringTypeConfig.DISTRIBUTION);
         this.validChars = dtc.getString(StringTypeConfig.VALID_CHARACTERS);
         this.sizeInBytes = dtc.getInt(StringTypeConfig.SIZE_IN_BYTES);
 
@@ -40,6 +47,7 @@ public class StringTypeGenerator implements DataTypeGenerator{
     public StringTypeGenerator(int maxLength) {
         this.minLength = 0;
         this.maxLength = maxLength;
+        this.distribution = new UniformDistribution();
 
         rnd = new Random();
     }
@@ -47,6 +55,7 @@ public class StringTypeGenerator implements DataTypeGenerator{
     private StringTypeGenerator() {
         this.minLength = 0;
         this.maxLength = Integer.MAX_VALUE;
+        this.distribution = new UniformDistribution();
 
         rnd = new Random();
     }
@@ -54,16 +63,16 @@ public class StringTypeGenerator implements DataTypeGenerator{
     public static StringTypeGenerator getDefault() { return new StringTypeGenerator(); }
 
     @Override
-    public DataType drawWithReplacement(Distribution samplingDistribution) {
-        // TODO: Maybe move this to another function since it doesn't depend on samplingDistribution
+    public DataType drawWithReplacement() {
         if (defaultValue != null) { return new StringType(defaultValue); }
-        if (regexPattern != null) { return generateRegex(); }
+        if (regexPattern != null) { return generateRegex() ;}
 
-        switch(samplingDistribution.distributionType()) {
+        // TODO: unless we need to know the specific distribution here, this switch should dissappear.
+        switch(distribution.distributionType()) {
             case UNIFORM:
                 return uniformSample();
             case GAUSSIAN:
-                return gaussianSample((GaussianDistribution) samplingDistribution);
+                return gaussianSample((GaussianDistribution) distribution);
             case ZIPF:
                 // TODO: to implement
                 return null;
@@ -72,13 +81,39 @@ public class StringTypeGenerator implements DataTypeGenerator{
     }
 
     @Override
-    public DataType drawWithoutReplacement(Distribution samplingDistribution) {
+    public DataType drawWithoutReplacement() {
+        if (defaultValue != null) { return new StringType(defaultValue); }
+        if (regexPattern != null) { return generateRegexWithoutReplacement() ;}
+
+        // TODO: unless we need to know the specific distribution here, this switch should dissappear.
+        switch(distribution.distributionType()) {
+            //TODO: Make this more efficient for lots of calls or small bounds
+            case UNIFORM:
+                return uniformSampleWithoutReplacement();
+            case GAUSSIAN:
+                return gaussianSampleWithoutReplacement((GaussianDistribution) distribution);
+            case ZIPF:
+                // TODO: to implement
+                return null;
+        }
         return null;
     }
 
     private DataType generateRegex() {
         Generex generex = new Generex(regexPattern, rnd);
         return new StringType(generex.random());
+    }
+
+    private DataType generateRegexWithoutReplacement() {
+        Generex generex = new Generex(regexPattern, rnd);
+        String generatedString = generex.random();
+
+        while (drawnStrings.contains(generatedString)) {
+            generatedString = generex.random();
+        }
+
+        drawnStrings.add(generatedString);
+        return new StringType(generatedString);
     }
 
     private String generateString(int stringLength) {
@@ -105,5 +140,31 @@ public class StringTypeGenerator implements DataTypeGenerator{
         int stringLength = (int) (rnd.nextGaussian() * standardDeviation + mean);
 
         return new StringType(generateString(stringLength));
+    }
+
+    private DataType uniformSampleWithoutReplacement() {
+        int stringLength = rnd.nextInt(this.maxLength - this.minLength + 1) + this.minLength;
+        String generatedString = generateString(stringLength);
+
+        while (drawnStrings.contains(generatedString)) {
+            generatedString = generateString(stringLength);
+        }
+
+        drawnStrings.add(generatedString);
+        return new StringType(generatedString);
+    }
+
+    private DataType gaussianSampleWithoutReplacement(GaussianDistribution gaussianDistribution) {
+        float standardDeviation = gaussianDistribution.getStandardDeviation();
+        float mean = gaussianDistribution.getMean();
+        int stringLength = (int) (rnd.nextGaussian() * standardDeviation + mean);
+        String generatedString = generateString(stringLength);
+
+        while (drawnStrings.contains(generatedString)) {
+            generatedString = generateString(stringLength);
+        }
+
+        drawnStrings.add(generatedString);
+        return new StringType(generatedString);
     }
 }

@@ -1,4 +1,6 @@
-package dgen.column;
+package dgen.attributegenerators;
+
+import dgen.attributegenerators.AttributeNameGenerator;
 
 public class RandomAttributeNameGenerator implements AttributeNameGenerator {
 

@@ -15,7 +15,7 @@ public class IntegerType implements DataType {
 
     @Override
     public int size() {
-        return 0;
+        return Integer.BYTES;
     }
 
     @Override
