@@ -1,7 +1,7 @@
 package dgen.utils;
 
 import dgen.column.ColumnGenerator;
-import dgen.column.RandomAttributeNameGenerator;
+import dgen.attributegenerators.RandomAttributeNameGenerator;
 import dgen.datatypes.generators.IntegerTypeGenerator;
 import dgen.tables.Table;
 import dgen.tables.TableGenerator;

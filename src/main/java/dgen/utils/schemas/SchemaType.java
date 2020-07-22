@@ -1,5 +1,0 @@
-package dgen.utils.schemas;
-
-public enum SchemaType {
-    DEFTABLE, GENTABLE, DEFCOLUMN, GENCOLUMN, DEFFOREIGNKEY, GENFOREIGNKEY, PRIMARYKEY, DATABASE
-}

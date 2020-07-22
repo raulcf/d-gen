@@ -4,15 +4,15 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import dgen.utils.schemas.DatabaseSchema;
+import dgen.utils.specs.DatabaseSpec;
 
 import java.io.File;
 
 
 public class SpecificationParser {
-    private DatabaseSchema database;
+    private DatabaseSpec database;
 
-    public DatabaseSchema getDatabase() {
+    public DatabaseSpec getDatabase() {
         return database;
     }
 
@@ -28,7 +28,7 @@ public class SpecificationParser {
         mapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
 
         try {
-            database = mapper.readValue(file, DatabaseSchema.class);
+            database = mapper.readValue(file, DatabaseSpec.class);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);
@@ -51,7 +51,7 @@ public class SpecificationParser {
         mapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
 
         try {
-            database = mapper.readValue(file, DatabaseSchema.class);
+            database = mapper.readValue(file, DatabaseSpec.class);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);

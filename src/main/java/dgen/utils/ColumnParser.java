@@ -1,11 +1,7 @@
 package dgen.utils;
 
-import dgen.utils.schemas.ColumnSchema;
-import dgen.utils.schemas.DefColumnSchema;
-import dgen.utils.schemas.DefForeignKeySchema;
-import dgen.utils.schemas.GenColumnSchema;
-import dgen.utils.schemas.GenForeignKeySchema;
-import dgen.utils.schemas.PrimaryKeySchema;
+import dgen.utils.specs.*;
+import dgen.utils.specs.ColumnSpec;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,34 +12,34 @@ import java.util.Set;
 
 
 public class ColumnParser {
-    private List<ColumnSchema> columns = new ArrayList<>();
+    private List<ColumnSpec> columns = new ArrayList<>();
     /* Mapping of columnIDs to columnSchema objects */
-    private Map<Integer, ColumnSchema> columnMap = new HashMap<>();
+    private Map<Integer, ColumnSpec> columnMap = new HashMap<>();
 
     /**
      * Parses ColumnSchema type objects (DefColumnSchema, GenColumnSchema, etc.) into a list of ColumnSchema objects.
      * @param column ColumnSchema type object to parse
      */
-    public void parse(ColumnSchema column) {
-        switch (column.schemaType()) {
+    public void parse(ColumnSpec column) {
+        switch (column.specType()) {
             case DEFCOLUMN:
-                DefColumnSchema defColumn = (DefColumnSchema) column;
+                DefColumnSpec defColumn = (DefColumnSpec) column;
                 parseColumn(defColumn);
                 break;
             case GENCOLUMN:
-                GenColumnSchema genColumn = (GenColumnSchema) column;
+                GenColumnSpec genColumn = (GenColumnSpec) column;
                 parseGenColumn(genColumn);
                 break;
             case DEFFOREIGNKEY:
-                DefForeignKeySchema defForeignKey = (DefForeignKeySchema) column;
+                DefForeignKeySpec defForeignKey = (DefForeignKeySpec) column;
                 parseForeignKey(defForeignKey);
                 break;
             case GENFOREIGNKEY:
-                GenForeignKeySchema genForeignKey = (GenForeignKeySchema) column;
+                GenForeignKeySpec genForeignKey = (GenForeignKeySpec) column;
                 parseGenForeignKey(genForeignKey);
                 break;
             case PRIMARYKEY:
-                PrimaryKeySchema primaryKey = (PrimaryKeySchema) column;
+                PrimaryKeySpec primaryKey = (PrimaryKeySpec) column;
                 parsePrimaryKey(primaryKey);
                 break;
         }
@@ -54,7 +50,7 @@ public class ColumnParser {
      * Checks whether a column has a column name, regex name, or random name.
      * @param column TableSchema object to parse.
      */
-    private void parseColumnName(ColumnSchema column) {
+    private void parseColumnName(ColumnSpec column) {
         if (column.getColumnName() != null) {
             column.setRandomName(false);
             column.setRegexName(null);
@@ -92,7 +88,7 @@ public class ColumnParser {
      * Parses a GenColumnSchema object into a list of DefColumnSchema objects.
      * @param genColumn GenColumnSchema object to parse.
      */
-    private void parseGenColumn(GenColumnSchema genColumn) {
+    private void parseGenColumn(GenColumnSpec genColumn) {
         genColumn.validate();
         Random r = new Random();
 
@@ -110,11 +106,11 @@ public class ColumnParser {
         for (int i = 0; i < numColumns; i++) {
             int columnId = generateColumnID(r);
 
-            DefColumnSchema defColumn = new DefColumnSchema();
+            DefColumnSpec defColumn = new DefColumnSpec();
             defColumn.setRandomName(genColumn.isRandomName());
             defColumn.setRegexName(genColumn.getRegexName());
             defColumn.setColumnName(genColumn.getColumnName());
-            defColumn.setDataTypeSchema(genColumn.getDataTypeSchema());
+            defColumn.setDataTypeSpec(genColumn.getDataTypeSpec());
             defColumn.setColumnID(columnId);
 
             parseColumn(defColumn);
@@ -126,13 +122,13 @@ public class ColumnParser {
      * Parses the name and datatype of a DefColumnSchema object and adds it to the columns list.
      * @param defColumn DefColumnSchema object to parse.
      */
-    private void parseColumn(DefColumnSchema defColumn) {
+    private void parseColumn(DefColumnSpec defColumn) {
         checkColumnID(defColumn.getColumnID());
         parseColumnName(defColumn);
 
         DataTypeParser parser = new DataTypeParser();
-        parser.parse(defColumn.getDataTypeSchema());
-        defColumn.setDataTypeSchema(parser.getDataTypeSchema());
+        parser.parse(defColumn.getDataTypeSpec());
+        defColumn.setDataTypeSpec(parser.getDataTypeSpec());
 
         defColumn.validate();
 
@@ -144,7 +140,7 @@ public class ColumnParser {
      * Parses a GenForeignKeySchema object into a list of DefForeignKeySchema objects.
      * @param genForeignKey GenForeignKeySchema object to parse.
      */
-    private void parseGenForeignKey(GenForeignKeySchema genForeignKey) {
+    private void parseGenForeignKey(GenForeignKeySpec genForeignKey) {
         genForeignKey.validate();
         Random r = new Random();
         int numColumns;
@@ -163,7 +159,7 @@ public class ColumnParser {
         for (int i = 0; i < numColumns; i++) {
             int columnId = generateColumnID(r);
 
-            DefForeignKeySchema defForeignKey = new DefForeignKeySchema();
+            DefForeignKeySpec defForeignKey = new DefForeignKeySpec();
             defForeignKey.setRandomName(genForeignKey.isRandomName());
             defForeignKey.setRegexName(genForeignKey.getRegexName());
             defForeignKey.setColumnName(genForeignKey.getColumnName());
@@ -177,7 +173,7 @@ public class ColumnParser {
      * Parses a DefForeignKeySchema object and adds it to columns list.
      * @param defForeignKey DefForeignKeySchema object to parse.
      */
-    private void parseForeignKey(DefForeignKeySchema defForeignKey) {
+    private void parseForeignKey(DefForeignKeySpec defForeignKey) {
         defForeignKey.validate();
         checkColumnID(defForeignKey.getColumnID());
         parseColumnName(defForeignKey);
@@ -190,13 +186,13 @@ public class ColumnParser {
      * Parses the name and datatype of a PrimaryKeySchema object and adds it to the columns list.
      * @param primaryKey PrimaryKeySchema object to parse.
      */
-    private void parsePrimaryKey(PrimaryKeySchema primaryKey) {
+    private void parsePrimaryKey(PrimaryKeySpec primaryKey) {
         checkColumnID(primaryKey.getColumnID());
         parseColumnName(primaryKey);
 
         DataTypeParser parser = new DataTypeParser();
-        parser.parse(primaryKey.getDataTypeSchema());
-        primaryKey.setDataTypeSchema(parser.getDataTypeSchema());
+        parser.parse(primaryKey.getDataTypeSpec());
+        primaryKey.setDataTypeSpec(parser.getDataTypeSpec());
 
         primaryKey.validate();
 
@@ -204,19 +200,19 @@ public class ColumnParser {
         columns.add(primaryKey);
     }
 
-    public List<ColumnSchema> getColumns() {
+    public List<ColumnSpec> getColumns() {
         return columns;
     }
 
-    public void setColumns(List<ColumnSchema> columns) {
+    public void setColumns(List<ColumnSpec> columns) {
         this.columns = columns;
     }
 
-    public Map<Integer, ColumnSchema> getColumnMap() {
+    public Map<Integer, ColumnSpec> getColumnMap() {
         return columnMap;
     }
 
-    public void setColumnMap(Map<Integer, ColumnSchema> columnMap) {
+    public void setColumnMap(Map<Integer, ColumnSpec> columnMap) {
         this.columnMap = columnMap;
     }
 }
