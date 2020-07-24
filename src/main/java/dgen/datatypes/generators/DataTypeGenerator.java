@@ -1,6 +1,7 @@
 package dgen.datatypes.generators;
 
 import dgen.datatypes.DataType;
+import dgen.datatypes.NativeType;
 import dgen.distributions.Distribution;
 
 import java.util.List;
@@ -12,17 +13,18 @@ import java.util.stream.Stream;
 public interface DataTypeGenerator {
 
     /**
-     * Sample one value of type DataType with replacement
-     * @param samplingDistribution
-     * @return
+     * Sample one value of type DataType with replacement.
+     * @return Generated DataType.
      */
     DataType drawWithReplacement();
 
     /**
-     * Sample one value of type DataType without replacement
-     * @param samplingDistribution
-     * @return
+     * Sample one value of type DataType without replacement.
+     * @return Generated DataType.
      */
     DataType drawWithoutReplacement();
 
+    NativeType getNativeType();
+
+    DataTypeGenerator copy();
 }

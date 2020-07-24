@@ -2,18 +2,22 @@
 # Testing creating random PK-FK relationships
 database:
   databaseName: "2_input"
-  tableSchemas:
+  randomSeed: 1
+  tableSpecs:
     - genTable:
         numTables: 3
-        columnSchemas:
+        columnSpecs:
           - primaryKey:
               columnID: 1
-              dataTypeSchema:
-                int: {}
+              dataTypeSpec:
+                int:
+                  distribution:
+                    gaussian:
+                      standardDeviation: 2
           - genForeignKey:
               numColumns: 1
   databaseRelationships:
     - genPKFK:
         numRelationships: 3
-        graphSchema:
+        graphSpec:
           randomGraph: {}

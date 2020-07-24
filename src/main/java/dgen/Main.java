@@ -3,9 +3,9 @@ package dgen;
 import dgen.dataset.Dataset;
 import dgen.dataset.DatasetConfig;
 import dgen.dataset.DatasetGenerator;
-import dgen.tables.Table;
-import dgen.utils.AdHocTableFactory;
 import dgen.utils.SpecificationParser;
+
+import java.util.Random;
 
 /**
  * This class drives the data generation process, which is divided into 4 stages:
@@ -22,12 +22,14 @@ public class Main {
     public static void main(String[] args) {
         // Example
         SpecificationParser specificationParser = new SpecificationParser();
-        specificationParser.parseYAML("test.yaml");
-        specificationParser.write("test_output.yaml");
+        specificationParser.parseYAML("example_specifications/3_input.yaml");
+        specificationParser.write("example_specifications/3_output.json");
         DatasetGenerator datasetGenerator = DatasetConfig.specToGenerator(specificationParser.getDatabase());
-        Dataset dataset = datasetGenerator.generateDataset();
+//        Dataset dataset = datasetGenerator.generateDataset();
 
 
         System.out.println(datasetGenerator.generateDataset());
+
+
     }
 }

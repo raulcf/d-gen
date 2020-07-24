@@ -1,20 +1,15 @@
 package dgen.dataset;
 
-import dgen.column.ColumnConfig;
 import dgen.coreconfig.Config;
 import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigKey;
 import dgen.tables.TableConfig;
-import dgen.tables.TableGenerator;
-import dgen.utils.SpecificationParser;
-import dgen.utils.specs.ColumnSpec;
 import dgen.utils.specs.DatabaseSpec;
 import dgen.utils.specs.TableSpec;
+import dgen.utils.specs.relationships.DefPKFKSpec;
+import org.javatuples.Pair;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DatasetConfig extends Config {
 
@@ -26,12 +21,14 @@ public class DatasetConfig extends Config {
     public static final String TABLE_CONFIGS = "table.configs";
     private static final String TABLE_CONFIGS_DOC = "TableConfig objects describing the tables in a dataset";
 
-    //TODO: Add table relationships
+    public static final String PK_FK_MAPPINGS = "pk.fk.mappings";
+    private static final String PK_FK_MAPPINGS_DOC = "Mapping between primary keys and foreign keys";
 
     static {
         config = new ConfigDef()
                 .define(DATASET_NAME, ConfigDef.Type.STRING, null, null, ConfigDef.Importance.LOW, DATASET_NAME_DOC)
-                .define(TABLE_CONFIGS, ConfigDef.Type.OBJECT, ConfigDef.Importance.LOW, TABLE_CONFIGS_DOC);
+                .define(TABLE_CONFIGS, ConfigDef.Type.OBJECT, ConfigDef.Importance.LOW, TABLE_CONFIGS_DOC)
+                .define(PK_FK_MAPPINGS, ConfigDef.Type.OBJECT, null, null, ConfigDef.Importance.LOW, PK_FK_MAPPINGS_DOC);
     }
 
     public static DatasetConfig specToConfig(DatabaseSpec databaseSpec) {
@@ -44,8 +41,26 @@ public class DatasetConfig extends Config {
         for (TableSpec tableSpec: databaseSpec.getTableSpecs()) {
             tableConfigs.add(TableConfig.specToConfig(tableSpec));
         }
-
         originals.put("table.configs", tableConfigs);
+
+        Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> pkfkMappings = new HashMap<>();
+
+        DefPKFKSpec defPKFKSpec = (DefPKFKSpec) databaseSpec.getDatabaseRelationships().get(0);
+        List<Pair<Integer, Integer>> primaryKeys = defPKFKSpec.getPrimaryKeys();
+        List<Pair<Integer, Integer>> foreignKeys = defPKFKSpec.getForeignKeys();
+        for (int i = 0; i < primaryKeys.size(); i++) {
+            Set<Pair<Integer, Integer>> mapping;
+            if (pkfkMappings.containsKey(primaryKeys.get(i))) {
+                mapping = pkfkMappings.get(primaryKeys.get(i));
+                mapping.add(foreignKeys.get(i));
+                pkfkMappings.replace(primaryKeys.get(i), mapping);
+            } else {
+                mapping = new HashSet<>();
+                mapping.add(foreignKeys.get(i));
+                pkfkMappings.put(primaryKeys.get(i), mapping);
+            }
+        }
+        originals.put("pk.fk.mappings", pkfkMappings);
 
         return new DatasetConfig(originals);
     }

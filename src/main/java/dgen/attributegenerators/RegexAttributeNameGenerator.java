@@ -2,6 +2,7 @@ package dgen.attributegenerators;
 
 import com.mifmif.common.regex.Generex;
 import dgen.attributegenerators.AttributeNameGenerator;
+import dgen.utils.RandomGenerator;
 
 import java.util.Random;
 
@@ -9,11 +10,11 @@ public class RegexAttributeNameGenerator implements AttributeNameGenerator {
 
     private String regexPattern;
     private Generex generex;
-    private Random rnd;
+    private RandomGenerator rnd;
 
-    public RegexAttributeNameGenerator(String regexPattern) {
+    public RegexAttributeNameGenerator(RandomGenerator rnd, String regexPattern) {
         this.regexPattern = regexPattern;
-        rnd = new Random();
+        this.rnd = rnd;
         generex = new Generex(regexPattern, rnd);
     }
 

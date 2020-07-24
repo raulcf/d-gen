@@ -36,6 +36,9 @@ public class StringTypeConfig extends Config implements DataTypeConfig{
     public static final String DISTRIBUTION = "distribution";
     public static final String DISTRIBUTION_DOC = "Indicates distribution of type";
 
+    public static final String RANDOM_SEED = "random.seed";
+    public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
+
     public static final String SIZE_IN_BYTES = "size.in.bytes";
     private static final String SIZE_IN_BYTES_DOC = "The native size of this type in bytes";
 
@@ -47,23 +50,25 @@ public class StringTypeConfig extends Config implements DataTypeConfig{
                 .define(MIN_LENGTH, Type.INT, 0, Importance.LOW, MAX_LENGTH_DOC)
                 .define(MAX_LENGTH, Type.INT, Integer.MAX_VALUE, Importance.LOW, MAX_LENGTH_DOC)
                 .define(DISTRIBUTION, Type.OBJECT, null, null, Importance.LOW, DISTRIBUTION_DOC)
+                .define(RANDOM_SEED, Type.LONG, Importance.LOW, RANDOM_SEED_DOC)
                 .define(SIZE_IN_BYTES, Type.INT, Character.BYTES, Importance.LOW, SIZE_IN_BYTES_DOC);
     }
 
-    public static StringTypeConfig specToConfig(StringSpec stringSchema) {
+    public static StringTypeConfig specToConfig(StringSpec stringSpec) {
         Map<String, Object> originals = new HashMap<>();
-        originals.put("default.value", stringSchema.getDefaultValue());
-        originals.put("regex.pattern", stringSchema.getRegexPattern());
-        originals.put("valid.characters", stringSchema.getValidChars());
-        originals.put("min.length", stringSchema.getMinLength());
-        originals.put("max.length", stringSchema.getMaxLength());
-        originals.put("distribution", DistributionConfig.specToDistribution(stringSchema.getDistribution()));
+        originals.put("default.value", stringSpec.getDefaultValue());
+        originals.put("regex.pattern", stringSpec.getRegexPattern());
+        originals.put("valid.characters", stringSpec.getValidChars());
+        originals.put("min.length", stringSpec.getMinLength());
+        originals.put("max.length", stringSpec.getMaxLength());
+        originals.put("distribution", DistributionConfig.specToDistribution(stringSpec.getDistribution()));
+        originals.put("random.seed", stringSpec.getRandomSeed());
 
         return new StringTypeConfig(originals);
     }
 
-    public static StringTypeGenerator specToGenerator(StringSpec stringSchema) {
-        return new StringTypeGenerator(specToConfig(stringSchema));
+    public static StringTypeGenerator specToGenerator(StringSpec stringSpec) {
+        return new StringTypeGenerator(specToConfig(stringSpec));
     }
 
     @Override

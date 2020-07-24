@@ -11,14 +11,13 @@ import dgen.datatypes.NativeType;
 import dgen.distributions.Distribution;
 import dgen.distributions.GaussianDistribution;
 import dgen.distributions.UniformDistribution;
+import dgen.utils.RandomGenerator;
 
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
 public class StringTypeGenerator implements DataTypeGenerator{
-
-    private final NativeType nativeType = NativeType.STRING;
 
     private Set<String> drawnStrings = new HashSet<>();
 
@@ -30,37 +29,42 @@ public class StringTypeGenerator implements DataTypeGenerator{
     private String validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz";
     private int sizeInBytes;
 
-    private Random rnd;
+    private RandomGenerator rnd;
+    private StringTypeConfig dtc;
 
     public StringTypeGenerator(StringTypeConfig dtc) {
+        this.dtc = dtc;
         this.defaultValue = dtc.getString(StringTypeConfig.DEFAULT_VALUE);
         this.regexPattern = dtc.getString(StringTypeConfig.REGEX_PATTERN);
         this.maxLength = dtc.getInt(StringTypeConfig.MAX_LENGTH);
         this.minLength = dtc.getInt(StringTypeConfig.MIN_LENGTH);
         this.distribution = (Distribution)dtc.getObject(StringTypeConfig.DISTRIBUTION);
         this.validChars = dtc.getString(StringTypeConfig.VALID_CHARACTERS);
+        this.rnd = new RandomGenerator(dtc.getLong(StringTypeConfig.RANDOM_SEED));
         this.sizeInBytes = dtc.getInt(StringTypeConfig.SIZE_IN_BYTES);
-
-        rnd = new Random();
     }
 
     public StringTypeGenerator(int maxLength) {
         this.minLength = 0;
         this.maxLength = maxLength;
         this.distribution = new UniformDistribution();
-
-        rnd = new Random();
+        this.rnd = new RandomGenerator(new Random().nextLong());
     }
 
     private StringTypeGenerator() {
         this.minLength = 0;
         this.maxLength = Integer.MAX_VALUE;
         this.distribution = new UniformDistribution();
-
-        rnd = new Random();
+        this.rnd = new RandomGenerator(new Random().nextLong());
     }
 
     public static StringTypeGenerator getDefault() { return new StringTypeGenerator(); }
+
+    @Override
+    public NativeType getNativeType() { return NativeType.STRING; }
+
+    @Override
+    public StringTypeGenerator copy() { return new StringTypeGenerator(dtc); }
 
     @Override
     public DataType drawWithReplacement() {

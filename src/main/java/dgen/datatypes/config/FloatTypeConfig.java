@@ -30,6 +30,9 @@ public class FloatTypeConfig extends Config implements DataTypeConfig {
     public static final String DISTRIBUTION = "distribution";
     public static final String DISTRIBUTION_DOC = "Indicates distribution of type";
 
+    public static final String RANDOM_SEED = "random.seed";
+    public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
+
     public static final String SIZE_IN_BYTES = "size.in.bytes";
     private static final String SIZE_IN_BYTES_DOC = "The native size of this type in bytes";
 
@@ -39,21 +42,23 @@ public class FloatTypeConfig extends Config implements DataTypeConfig {
                 .define(LOWER_BOUND_DOMAIN, Type.INT, Float.MIN_VALUE, Importance.LOW, LOWER_BOUND_DOMAIN_DOC)
                 .define(UPPER_BOUND_DOMAIN, Type.INT, Float.MAX_VALUE, Importance.LOW, UPPER_BOUND_DOMAIN_DOC)
                 .define(DISTRIBUTION, Type.OBJECT, null, null, Importance.LOW, DISTRIBUTION_DOC)
+                .define(RANDOM_SEED, Type.LONG, Importance.LOW, RANDOM_SEED_DOC)
                 .define(SIZE_IN_BYTES, Type.INT, Float.BYTES, Importance.LOW, SIZE_IN_BYTES_DOC);
     }
 
-    public static FloatTypeConfig specToConfig(FloatSpec floatSchema) {
+    public static FloatTypeConfig specToConfig(FloatSpec floatSpec) {
         Map<String, Object> originals = new HashMap<>();
-        originals.put("default.value", floatSchema.getDefaultValue());
-        originals.put("lower.bound.domain", floatSchema.getMinValue());
-        originals.put("upper.bound.domain", floatSchema.getMaxValue());
-        originals.put("distribution", DistributionConfig.specToDistribution(floatSchema.getDistribution()));
+        originals.put("default.value", floatSpec.getDefaultValue());
+        originals.put("lower.bound.domain", floatSpec.getMinValue());
+        originals.put("upper.bound.domain", floatSpec.getMaxValue());
+        originals.put("distribution", DistributionConfig.specToDistribution(floatSpec.getDistribution()));
+        originals.put("random.seed", floatSpec.getRandomSeed());
 
         return new FloatTypeConfig(originals);
     }
 
-    public static FloatTypeGenerator specToGenerator(FloatSpec floatSchema) {
-        return new FloatTypeGenerator(specToConfig(floatSchema));
+    public static FloatTypeGenerator specToGenerator(FloatSpec floatSpec) {
+        return new FloatTypeGenerator(specToConfig(floatSpec));
     }
 
     @Override

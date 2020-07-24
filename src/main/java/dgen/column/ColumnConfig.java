@@ -42,6 +42,9 @@ public class ColumnConfig extends Config {
     public static final String NULL_FREQUENCY = "null.frequency";
     private static final String NULL_FREQUENCY_DOC = "Indicates frequency of null values";
 
+    public static final String RANDOM_SEED = "random.seed";
+    public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
+
     static {
         config = new ConfigDef()
                 .define(COLUMN_ID, Type.INT, Importance.LOW, COLUMN_ID_DOC)
@@ -51,7 +54,8 @@ public class ColumnConfig extends Config {
                 .define(DATATYPE, Type.OBJECT, null, null, Importance.LOW, DATATYPE_DOC)
                 .define(UNIQUE, Type.BOOLEAN, false, Importance.LOW, UNIQUE_DOC)
                 .define(HAS_NULL, Type.BOOLEAN, false, Importance.LOW, HAS_NULL_DOC)
-                .define(NULL_FREQUENCY, Type.FLOAT, null, null, Importance.LOW, NULL_FREQUENCY_DOC);
+                .define(NULL_FREQUENCY, Type.FLOAT, null, null, Importance.LOW, NULL_FREQUENCY_DOC)
+                .define(RANDOM_SEED, Type.LONG, Importance.LOW, RANDOM_SEED_DOC);
     }
 
     public static ColumnConfig specToConfig(ColumnSpec columnSpec) {
@@ -64,6 +68,7 @@ public class ColumnConfig extends Config {
         originals.put("unique", columnSpec.isUnique());
         originals.put("has.null", columnSpec.isHasNull());
         originals.put("null.frequency", columnSpec.getNullFrequency());
+        originals.put("random.seed", columnSpec.getRandomSeed());
 
         return new ColumnConfig(originals);
     }

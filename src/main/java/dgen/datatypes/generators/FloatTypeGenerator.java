@@ -9,14 +9,13 @@ import dgen.datatypes.config.IntegerTypeConfig;
 import dgen.distributions.Distribution;
 import dgen.distributions.GaussianDistribution;
 import dgen.distributions.UniformDistribution;
+import dgen.utils.RandomGenerator;
 
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
 public class FloatTypeGenerator implements DataTypeGenerator {
-
-    private final NativeType nativeType = NativeType.FLOAT;
 
     private Set<Float> drawnFloats = new HashSet<>();
 
@@ -26,17 +25,17 @@ public class FloatTypeGenerator implements DataTypeGenerator {
     private Distribution distribution;
     private int sizeInBytes;
 
-    // TODO: we'll likely move all random to a new package so we can keep track of all seeds used to generate the data
-    private Random rnd;
+    private RandomGenerator rnd;
+    private FloatTypeConfig dtc;
 
     public FloatTypeGenerator(FloatTypeConfig dtc) {
+        this.dtc = dtc;
         this.defaultValue = dtc.getFloat(FloatTypeConfig.DEFAULT_VALUE);
         this.lowerBoundDomain = dtc.getFloat(FloatTypeConfig.LOWER_BOUND_DOMAIN);
         this.upperBoundDomain = dtc.getFloat(FloatTypeConfig.UPPER_BOUND_DOMAIN);
-        this.distribution = (Distribution)dtc.getObject(IntegerTypeConfig.DISTRIBUTION);
+        this.distribution = (Distribution)dtc.getObject(FloatTypeConfig.DISTRIBUTION);
+        this.rnd = new RandomGenerator(dtc.getLong(FloatTypeConfig.RANDOM_SEED));
         this.sizeInBytes = dtc.getInt(FloatTypeConfig.SIZE_IN_BYTES);
-
-        rnd = new Random();
     }
 
     private FloatTypeGenerator() {
@@ -45,12 +44,18 @@ public class FloatTypeGenerator implements DataTypeGenerator {
         this.distribution = new UniformDistribution();
         this.sizeInBytes = Float.SIZE;
 
-        rnd = new Random();
+        this.rnd = new RandomGenerator(new Random().nextLong());
     }
 
     public static FloatTypeGenerator makeDefault() {
         return new FloatTypeGenerator();
     }
+
+    @Override
+    public NativeType getNativeType() { return NativeType.FLOAT; }
+
+    @Override
+    public FloatTypeGenerator copy() { return new FloatTypeGenerator(dtc); }
 
     @Override
     public DataType drawWithReplacement() {

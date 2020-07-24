@@ -4,16 +4,8 @@ import dgen.column.ColumnConfig;
 import dgen.coreconfig.Config;
 import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigKey;
-import dgen.datatypes.NativeType;
-import dgen.datatypes.config.FloatTypeConfig;
-import dgen.datatypes.generators.FloatTypeGenerator;
-import dgen.distributions.config.DistributionConfig;
 import dgen.utils.specs.ColumnSpec;
-import dgen.utils.specs.DefColumnSpec;
-import dgen.utils.specs.DefTableSpec;
 import dgen.utils.specs.TableSpec;
-import dgen.utils.specs.datatypespecs.FloatSpec;
-import dgen.utils.specs.relationships.TableRelationshipSpec;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,6 +34,12 @@ public class TableConfig extends Config {
     public static final String RANDOM_NAME = "random.name";
     private static final String RANDOM_NAME_DOC = "Indicates whether to generate a random name";
 
+    public static final String TABLE_RELATIONSHIPS = "table.relationships";
+    public static final String TABLE_RELATIONSHIPS_DOC = "List of relationships between columns";
+
+    public static final String RANDOM_SEED = "random.seed";
+    public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
+
     //TODO: Add table relationships
 
     static {
@@ -51,7 +49,9 @@ public class TableConfig extends Config {
                 .define(COLUMN_CONFIGS, ConfigDef.Type.OBJECT, ConfigDef.Importance.LOW, COLUMN_CONFIGS_DOC)
                 .define(TABLE_NAME, ConfigDef.Type.STRING, null, null, ConfigDef.Importance.LOW, TABLE_NAME_DOC)
                 .define(REGEX_NAME, ConfigDef.Type.STRING, null, null, ConfigDef.Importance.LOW, REGEX_NAME_DOC)
-                .define(RANDOM_NAME, ConfigDef.Type.BOOLEAN, true, ConfigDef.Importance.LOW, RANDOM_NAME_DOC);
+                .define(RANDOM_NAME, ConfigDef.Type.BOOLEAN, true, ConfigDef.Importance.LOW, RANDOM_NAME_DOC)
+                .define(TABLE_RELATIONSHIPS, ConfigDef.Type.OBJECT, null, null, ConfigDef.Importance.LOW, TABLE_RELATIONSHIPS_DOC)
+                .define(RANDOM_SEED, ConfigDef.Type.LONG, ConfigDef.Importance.LOW, RANDOM_SEED_DOC);
     }
 
     public static TableConfig specToConfig(TableSpec tableSpec) {
@@ -61,6 +61,7 @@ public class TableConfig extends Config {
         originals.put("table.name", tableSpec.getTableName());
         originals.put("regex.name", tableSpec.getRegexName());
         originals.put("random.name", tableSpec.isRandomName());
+        originals.put("random.seed", tableSpec.getRandomSeed());
 
         List<ColumnConfig> columnConfigs = new ArrayList<>();
 
@@ -68,7 +69,6 @@ public class TableConfig extends Config {
         for (ColumnSpec columnSpec: tableSpec.getColumnSpecs()) {
             columnConfigs.add(ColumnConfig.specToConfig(columnSpec));
         }
-
         originals.put("column.configs", columnConfigs);
 
         return new TableConfig(originals);

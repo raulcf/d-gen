@@ -32,6 +32,9 @@ public class IntegerTypeConfig extends Config implements DataTypeConfig {
     public static final String DISTRIBUTION = "distribution";
     public static final String DISTRIBUTION_DOC = "Indicates distribution of type";
 
+    public static final String RANDOM_SEED = "random.seed";
+    public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
+
     public static final String SIZE_IN_BYTES = "size.in.bytes";
     private static final String SIZE_IN_BYTES_DOC = "The native size of this type in bytes";
 
@@ -41,21 +44,23 @@ public class IntegerTypeConfig extends Config implements DataTypeConfig {
                 .define(LOWER_BOUND_DOMAIN, Type.INT, Integer.MIN_VALUE, Importance.LOW, LOWER_BOUND_DOMAIN_DOC)
                 .define(UPPER_BOUND_DOMAIN, Type.INT, Integer.MAX_VALUE, Importance.LOW, UPPER_BOUND_DOMAIN_DOC)
                 .define(DISTRIBUTION, Type.OBJECT, null, null, Importance.LOW, DISTRIBUTION_DOC)
+                .define(RANDOM_SEED, Type.LONG, Importance.LOW, RANDOM_SEED_DOC)
                 .define(SIZE_IN_BYTES, Type.INT, Integer.BYTES, Importance.LOW, SIZE_IN_BYTES_DOC);
     }
 
-    public static IntegerTypeConfig specToConfig(IntegerSpec integerSchema) {
+    public static IntegerTypeConfig specToConfig(IntegerSpec integerSpec) {
         Map<String, Object> originals = new HashMap<>();
-        originals.put("default.value", integerSchema.getDefaultValue());
-        originals.put("lower.bound.domain", integerSchema.getMinValue());
-        originals.put("upper.bound.domain", integerSchema.getMaxValue());
-        originals.put("distribution", DistributionConfig.specToDistribution(integerSchema.getDistribution()));
+        originals.put("default.value", integerSpec.getDefaultValue());
+        originals.put("lower.bound.domain", integerSpec.getMinValue());
+        originals.put("upper.bound.domain", integerSpec.getMaxValue());
+        originals.put("distribution", DistributionConfig.specToDistribution(integerSpec.getDistribution()));
+        originals.put("random.seed", integerSpec.getRandomSeed());
 
         return new IntegerTypeConfig(originals);
     }
 
-    public static IntegerTypeGenerator specToGenerator(IntegerSpec integerSchema) {
-        return new IntegerTypeGenerator(specToConfig(integerSchema));
+    public static IntegerTypeGenerator specToGenerator(IntegerSpec integerSpec) {
+        return new IntegerTypeGenerator(specToConfig(integerSpec));
     }
 
     @Override

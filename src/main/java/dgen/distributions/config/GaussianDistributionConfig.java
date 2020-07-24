@@ -23,8 +23,8 @@ public class GaussianDistributionConfig extends Config implements DistributionCo
 
     static {
         config = new ConfigDef()
-                .define(STANDARD_DEVIATION, ConfigDef.Type.FLOAT, 1, ConfigDef.Importance.LOW, STANDARD_DEVIATION_DOC)
-                .define(MEAN, ConfigDef.Type.FLOAT, 0, ConfigDef.Importance.LOW, MEAN_DOC);
+                .define(STANDARD_DEVIATION, ConfigDef.Type.FLOAT, (float) 1, ConfigDef.Importance.LOW, STANDARD_DEVIATION_DOC)
+                .define(MEAN, ConfigDef.Type.FLOAT, (float) 0, ConfigDef.Importance.LOW, MEAN_DOC);
     }
 
     public static GaussianDistributionConfig parseSpec(GaussianDistributionSpec gaussianDistributionSpec) {

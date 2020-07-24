@@ -7,44 +7,51 @@ import dgen.attributegenerators.RegexAttributeNameGenerator;
 import dgen.column.Column;
 import dgen.column.ColumnConfig;
 import dgen.column.ColumnGenerator;
+import dgen.utils.RandomGenerator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A table generator is a collection of column generators
  */
 public class TableGenerator {
 
+    private AttributeNameGenerator ang;
+    private Map<Integer, ColumnGenerator> columnGeneratorMap;
+
     private int tableID;
     private int numRecords;
+    private RandomGenerator rnd;
 
-    private AttributeNameGenerator ang;
-    private List<ColumnGenerator> columnGeneratorList;
-
-    public TableGenerator(List<ColumnGenerator> columnGeneratorList, int numRecords){
+    public TableGenerator(AttributeNameGenerator ang, Map<Integer, ColumnGenerator> columnGeneratorMap, int numRecords){
+        this.ang = ang;
         this.numRecords = numRecords;
-        this.columnGeneratorList = columnGeneratorList;
+        this.columnGeneratorMap = columnGeneratorMap;
     }
 
     public TableGenerator(TableConfig tableConfig) {
         tableID = tableConfig.getInt("table.id");
         numRecords = tableConfig.getInt("num.rows");
+        rnd = new RandomGenerator(tableConfig.getLong("random.seed"));
 
         if (tableConfig.getString("table.name") != null) {
             this.ang = new DefaultAttributeNameGenerator(tableConfig.getString("column.name"));
         } else if (tableConfig.getString("regex.name") != null) {
-            this.ang = new RegexAttributeNameGenerator(tableConfig.getString("regex.name"));
+            this.ang = new RegexAttributeNameGenerator(rnd, tableConfig.getString("regex.name"));
         } else if (tableConfig.getBoolean("random.name")) {
-            this.ang = new RandomAttributeNameGenerator();
+            this.ang = new RandomAttributeNameGenerator(rnd);
         }
 
-        List<ColumnGenerator> columnGenerators = new ArrayList<>();
+        Map<Integer, ColumnGenerator> columnGenerators = new HashMap<>();
         for (ColumnConfig columnConfig: (List<ColumnConfig>) tableConfig.getObject("column.configs")) {
-            columnGenerators.add(new ColumnGenerator(columnConfig));
+            ColumnGenerator columnGenerator = new ColumnGenerator(columnConfig);
+            columnGenerators.put(columnGenerator.getColumnID(), columnGenerator);
         }
 
-        this.columnGeneratorList = columnGenerators;
+        this.columnGeneratorMap = columnGenerators;
     }
 
     // TODO: this should be an iterator that provides either columns or rows, depending on the storage orientation
@@ -52,7 +59,7 @@ public class TableGenerator {
     public Table generateTable() {
 
         List<Column> columns = new ArrayList<>();
-        for (ColumnGenerator cg : columnGeneratorList) {
+        for (ColumnGenerator cg : columnGeneratorMap.values()) {
             Column c = cg.generateColumn(this.numRecords);
             columns.add(c);
         }
@@ -62,4 +69,45 @@ public class TableGenerator {
         return t;
     }
 
+    public ColumnGenerator getColumnGenerator(int columnID) {
+        return columnGeneratorMap.get(columnID);
+    }
+
+    public void setColumnGenerator(int columnID, ColumnGenerator columnGenerator) {
+        this.columnGeneratorMap.replace(columnID, columnGenerator);
+    }
+
+    public int getTableID() {
+        return tableID;
+    }
+
+    public int getNumRecords() {
+        return numRecords;
+    }
+
+    public AttributeNameGenerator getAng() {
+        return ang;
+    }
+
+    public void setAng(AttributeNameGenerator ang) {
+        this.ang = ang;
+    }
+
+    public Map<Integer, ColumnGenerator> getColumnGeneratorMap() {
+        return columnGeneratorMap;
+    }
+
+    public void setColumnGeneratorMap(Map<Integer, ColumnGenerator> columnGeneratorMap) {
+        this.columnGeneratorMap = columnGeneratorMap;
+    }
+
+    @Override
+    public String toString() {
+        return "TableGenerator{" +
+                "tableID=" + tableID +
+                ", numRecords=" + numRecords +
+                ", ang=" + ang +
+                ", columnGeneratorMap=" + columnGeneratorMap +
+                '}';
+    }
 }

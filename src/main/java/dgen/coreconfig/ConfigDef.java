@@ -192,6 +192,7 @@ public class ConfigDef {
                     } else if (value == null) {
                         return null;
                     } else {
+                        System.out.println(value.getClass());
                         throw new ConfigException(name, value, "Expected value to be a number.");
                     }
                 case LONG:
