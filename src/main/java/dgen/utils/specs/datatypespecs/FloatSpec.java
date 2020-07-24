@@ -12,6 +12,7 @@ public class FloatSpec implements DataTypeSpec {
     private java.lang.Float minValue = (float) 0;
     private java.lang.Float maxValue = java.lang.Float.MAX_VALUE;
     private DistributionSpec distribution = new UniformDistributionSpec();
+    private Long randomSeed;
 
     @Override
     public DataTypes type() { return DataTypes.BOOLEAN; }
@@ -54,5 +55,13 @@ public class FloatSpec implements DataTypeSpec {
 
     public void setDistribution(DistributionSpec distribution) {
         this.distribution = distribution;
+    }
+
+    public Long getRandomSeed() {
+        return randomSeed;
+    }
+
+    public void setRandomSeed(Long randomSeed) {
+        this.randomSeed = randomSeed;
     }
 }

@@ -6,6 +6,7 @@ import dgen.utils.SpecificationException;
 @JsonTypeName("boolean")
 public class BooleanSpec implements DataTypeSpec {
     private float tfRatio = (float) 0.5;
+    private Long randomSeed;
 
     @Override
     public DataTypes type() { return DataTypes.BOOLEAN; }
@@ -24,5 +25,13 @@ public class BooleanSpec implements DataTypeSpec {
 
     public void setTfRatio(float tfRatio) {
         this.tfRatio = tfRatio;
+    }
+
+    public Long getRandomSeed() {
+        return randomSeed;
+    }
+
+    public void setRandomSeed(Long randomSeed) {
+        this.randomSeed = randomSeed;
     }
 }

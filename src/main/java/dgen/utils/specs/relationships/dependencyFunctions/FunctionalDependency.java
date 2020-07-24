@@ -8,8 +8,8 @@ import dgen.utils.specs.ColumnSpec;
 public class FunctionalDependency implements DependencyFunction {
 
     @Override
-    public String dependencyName() {
-        return "functionalDependency";
+    public FunctionType dependencyName() {
+        return FunctionType.FUNCTIONAL_DEPENDENCY;
     }
 
     @Override

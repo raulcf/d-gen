@@ -10,6 +10,6 @@ import dgen.utils.specs.ColumnSpec;
         @JsonSubTypes.Type(value = FunctionalDependency.class, name = "functionalDependency")})
 @JsonTypeName("dependencyFunction")
 public interface DependencyFunction {
-    String dependencyName();
+    FunctionType dependencyName();
     void validate(ColumnSpec start, ColumnSpec end);
 }

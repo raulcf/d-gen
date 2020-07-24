@@ -20,4 +20,5 @@ public interface TableSpec extends Spec {
     void setRegexName(String regexName);
     boolean isRandomName();
     void setRandomName(boolean randomName);
+    Long getRandomSeed();
 }

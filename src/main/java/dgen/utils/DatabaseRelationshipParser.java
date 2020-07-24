@@ -19,12 +19,15 @@ public class DatabaseRelationshipParser {
     private DefPKFKSpec parsedPKFKSchema = new DefPKFKSpec();
     private Set<Pair<Integer, Integer>> primaryKeys = new HashSet<>();
     private Set<Pair<Integer, Integer>> foreignKeys = new HashSet<>();
+    private RandomGenerator rnd;
 
     /**
      * Processes and stores the tableIDs and columnIDs of all foreign keys and primary keys.
      * @param tableMap Map of tableID to TableSchema object.
      */
-    public DatabaseRelationshipParser(Map<Integer, Map<Integer, ColumnSpec>> tableMap) {
+    public DatabaseRelationshipParser(Map<Integer, Map<Integer, ColumnSpec>> tableMap, RandomGenerator rnd) {
+        this.rnd = rnd;
+
         for (int tableID: tableMap.keySet()) {
             Map<Integer, ColumnSpec> columnMap = tableMap.get(tableID);
             for (int columnID: columnMap.keySet()) {
@@ -127,6 +130,7 @@ public class DatabaseRelationshipParser {
         }
 
         GraphSpec graphSpec = genPKFK.getGraphSpec();
+        graphSpec.setRandomGenerator(rnd);
         Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> mapping = graphSpec.generateDatabaseGraph(new ArrayList<>(primaryKeys),
                 new ArrayList<>(foreignKeys), genPKFK.getNumRelationships(), relationshipMap);
 

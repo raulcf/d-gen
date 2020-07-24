@@ -17,6 +17,7 @@ public class GenColumnSpec implements ColumnSpec {
     private boolean unique = false;
     private boolean hasNull = false;
     private float nullFrequency;
+    private final Long randomSeed = null;
     
     @Override
     public SpecType specType() { return SpecType.GENCOLUMN; }
@@ -109,5 +110,9 @@ public class GenColumnSpec implements ColumnSpec {
 
     public void setNullFrequency(float nullFrequency) {
         this.nullFrequency = nullFrequency;
+    }
+
+    public Long getRandomSeed() {
+        return randomSeed;
     }
 }

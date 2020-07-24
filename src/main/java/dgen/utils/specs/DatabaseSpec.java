@@ -6,9 +6,10 @@ import dgen.utils.specs.relationships.DatabaseRelationshipSpec;
 import java.util.*;
 
 @JsonRootName("database")
-@JsonPropertyOrder({"databaseName", "tableSpecs"})
+@JsonPropertyOrder({"databaseName", "randomSeed", "tableSpecs"})
 public class DatabaseSpec implements Spec {
     private String databaseName;
+    private Long randomSeed = new Random().nextLong();
     private List<TableSpec> tableSpecs;
     private List<DatabaseRelationshipSpec> databaseRelationships = new ArrayList<>();
 
@@ -20,6 +21,14 @@ public class DatabaseSpec implements Spec {
 
     public void setDatabaseName(String databaseName) { this.databaseName = databaseName; }
     public String getDatabaseName() { return databaseName; }
+
+    public Long getRandomSeed() {
+        return randomSeed;
+    }
+
+    public void setRandomSeed(Long randomSeed) {
+        this.randomSeed = randomSeed;
+    }
 
     public void setTableSpecs(List<TableSpec> tableSpecs) { this.tableSpecs = tableSpecs; }
     public List<TableSpec> getTableSpecs() { return tableSpecs; }

@@ -12,6 +12,7 @@ public class IntegerSpec implements DataTypeSpec {
     private Integer minValue = 0;
     private Integer maxValue = Integer.MAX_VALUE;
     private DistributionSpec distribution = new UniformDistributionSpec();
+    private Long randomSeed;
 
     @Override
     public DataTypes type() { return DataTypes.INT; }
@@ -54,6 +55,14 @@ public class IntegerSpec implements DataTypeSpec {
 
     public void setDistribution(DistributionSpec distribution) {
         this.distribution = distribution;
+    }
+
+    public Long getRandomSeed() {
+        return randomSeed;
+    }
+
+    public void setRandomSeed(Long randomSeed) {
+        this.randomSeed = randomSeed;
     }
 
     @Override

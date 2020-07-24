@@ -3,6 +3,7 @@ package dgen.utils.specs.relationships;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.RandomGenerator;
 import dgen.utils.SpecificationException;
 import org.javatuples.Pair;
 
@@ -26,6 +27,9 @@ public interface GraphSpec {
                                                                                    int numEdges,
                                                                                    Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> relationshipMap);
 
+    RandomGenerator getRandomGenerator();
+    void setRandomGenerator(RandomGenerator randomGenerator);
+
     /**
      * Generates a random list of valid mappings between primary keys and foreign keys.
      * @param primaryKeys List of primary keys within a table.
@@ -40,14 +44,14 @@ public interface GraphSpec {
                                                                                          List<Pair<Integer, Integer>> foreignKeys,
                                                                                          int numEdges,
                                                                                          Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> relationshipMap,
-                                                                                         Random r) {
+                                                                                         Random rnd) {
         Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> adjacencyList = new HashMap<>();
 
         for (int i = 0; i < numEdges; i++) {
             List<Pair<Integer, Integer>> potentialPrimaryKeys = new ArrayList<>(primaryKeys);
             List<Pair<Integer, Integer>> potentialForeignKeys = new ArrayList<>(foreignKeys);
-            Pair<Integer, Integer> primaryKey = potentialPrimaryKeys.remove(r.nextInt(potentialPrimaryKeys.size()));
-            Pair<Integer, Integer> foreignKey = potentialForeignKeys.remove(r.nextInt(potentialForeignKeys.size()));
+            Pair<Integer, Integer> primaryKey = potentialPrimaryKeys.remove(rnd.nextInt(potentialPrimaryKeys.size()));
+            Pair<Integer, Integer> foreignKey = potentialForeignKeys.remove(rnd.nextInt(potentialForeignKeys.size()));
 
             while (primaryKey.getValue0().equals(foreignKey.getValue0()) ||
                     (relationshipMap.containsKey(primaryKey) && relationshipMap.get(primaryKey).contains(foreignKey))) {
@@ -56,10 +60,10 @@ public interface GraphSpec {
                         throw new SpecificationException("Can't create more PK-FK keys");
                     }
 
-                    primaryKey = potentialPrimaryKeys.remove(r.nextInt(potentialPrimaryKeys.size()));
+                    primaryKey = potentialPrimaryKeys.remove(rnd.nextInt(potentialPrimaryKeys.size()));
                     potentialForeignKeys = new ArrayList<>(foreignKeys);
                 }
-                foreignKey = potentialForeignKeys.remove(r.nextInt(potentialForeignKeys.size()));
+                foreignKey = potentialForeignKeys.remove(rnd.nextInt(potentialForeignKeys.size()));
             }
 
             if (adjacencyList.containsKey(primaryKey)) {

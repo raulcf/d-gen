@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonTypeName("defTable")
-@JsonPropertyOrder({"tableID", "tableName", "numRows", "regexName", "randomName", "columnSpecs", "tableRelationships"})
+@JsonPropertyOrder({"tableID", "randomSeed", "tableName", "numRows", "regexName", "randomName", "columnSpecs", "tableRelationships"})
 public class DefTableSpec implements TableSpec {
 
     private int tableID;
@@ -20,6 +20,7 @@ public class DefTableSpec implements TableSpec {
     private String regexName;
     private boolean randomName = true;
     private List<TableRelationshipSpec> tableRelationships = new ArrayList<>();
+    private Long randomSeed;
 
     @Override
     public SpecType specType() { return SpecType.DEFTABLE; }
@@ -85,6 +86,14 @@ public class DefTableSpec implements TableSpec {
 
     public void setTableRelationships(List<TableRelationshipSpec> tableRelationships) {
         this.tableRelationships = tableRelationships;
+    }
+
+    public Long getRandomSeed() {
+        return randomSeed;
+    }
+
+    public void setRandomSeed(Long randomSeed) {
+        this.randomSeed = randomSeed;
     }
 
     @Override

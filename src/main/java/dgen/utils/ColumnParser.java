@@ -1,20 +1,18 @@
 package dgen.utils;
 
 import dgen.utils.specs.*;
-import dgen.utils.specs.ColumnSpec;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 
 public class ColumnParser {
     private List<ColumnSpec> columns = new ArrayList<>();
     /* Mapping of columnIDs to columnSchema objects */
     private Map<Integer, ColumnSpec> columnMap = new HashMap<>();
+
+    private RandomGenerator rnd;
+
+    public ColumnParser(RandomGenerator rnd) { this.rnd = rnd; }
 
     /**
      * Parses ColumnSchema type objects (DefColumnSchema, GenColumnSchema, etc.) into a list of ColumnSchema objects.
@@ -69,18 +67,17 @@ public class ColumnParser {
 
     /**
      * Generates a new columnID that doesn't already exist.
-     * @param r Random object used to generate columnIDs.
      * @return Unique columnID.
      */
-    private int generateColumnID(Random r) {
+    private int generateColumnID() {
         Set<Integer> columnIDs = columnMap.keySet();
 
         if (columnIDs.size() == Integer.MAX_VALUE) {
             throw new SpecificationException("Max number of columns reached");
         }
 
-        int columnID = r.nextInt();
-        while (columnIDs.contains(columnID)) { columnID = r.nextInt(); }
+        int columnID = rnd.nextInt();
+        while (columnIDs.contains(columnID)) { columnID = rnd.nextInt(); }
         return columnID;
     }
 
@@ -90,7 +87,6 @@ public class ColumnParser {
      */
     private void parseGenColumn(GenColumnSpec genColumn) {
         genColumn.validate();
-        Random r = new Random();
 
         int numColumns;
 
@@ -100,11 +96,11 @@ public class ColumnParser {
             int minColumns = genColumn.getMinColumns();
             int maxColumns = genColumn.getMaxColumns();
 
-            numColumns = r.nextInt(maxColumns - minColumns) + minColumns;
+            numColumns = rnd.nextInt(maxColumns - minColumns) + minColumns;
         }
 
         for (int i = 0; i < numColumns; i++) {
-            int columnId = generateColumnID(r);
+            int columnId = generateColumnID();
 
             DefColumnSpec defColumn = new DefColumnSpec();
             defColumn.setRandomName(genColumn.isRandomName());
@@ -127,8 +123,12 @@ public class ColumnParser {
         checkColumnID(defColumn.getColumnID());
         parseColumnName(defColumn);
 
-        DataTypeParser parser = new DataTypeParser();
-        parser.parse(defColumn.getDataTypeSpec());
+        if (defColumn.getRandomSeed() == null) {
+            defColumn.setRandomSeed(rnd.nextLong());
+        }
+
+        DataTypeParser parser = new DataTypeParser(defColumn.getDataTypeSpec(), rnd);
+        parser.parse();
         defColumn.setDataTypeSpec(parser.getDataTypeSpec());
 
         defColumn.validate();
@@ -143,7 +143,6 @@ public class ColumnParser {
      */
     private void parseGenForeignKey(GenForeignKeySpec genForeignKey) {
         genForeignKey.validate();
-        Random r = new Random();
         int numColumns;
 
         if (genForeignKey.getNumColumns() != null) {
@@ -154,11 +153,11 @@ public class ColumnParser {
             int minColumns = genForeignKey.getMinColumns();
             int maxColumns = genForeignKey.getMaxColumns();
 
-            numColumns = r.nextInt(maxColumns - minColumns + 1) + maxColumns;
+            numColumns = rnd.nextInt(maxColumns - minColumns) + maxColumns;
         }
 
         for (int i = 0; i < numColumns; i++) {
-            int columnId = generateColumnID(r);
+            int columnId = generateColumnID();
 
             DefForeignKeySpec defForeignKey = new DefForeignKeySpec();
             defForeignKey.setRandomName(genForeignKey.isRandomName());
@@ -179,6 +178,10 @@ public class ColumnParser {
         checkColumnID(defForeignKey.getColumnID());
         parseColumnName(defForeignKey);
 
+        if (defForeignKey.getRandomSeed() == null) {
+            defForeignKey.setRandomSeed(rnd.nextLong());
+        }
+
         columnMap.put(defForeignKey.getColumnID(), defForeignKey);
         columns.add(defForeignKey);
     }
@@ -191,8 +194,12 @@ public class ColumnParser {
         checkColumnID(primaryKey.getColumnID());
         parseColumnName(primaryKey);
 
-        DataTypeParser parser = new DataTypeParser();
-        parser.parse(primaryKey.getDataTypeSpec());
+        if (primaryKey.getRandomSeed() == null) {
+            primaryKey.setRandomSeed(rnd.nextLong());
+        }
+
+        DataTypeParser parser = new DataTypeParser(primaryKey.getDataTypeSpec(), rnd);
+        parser.parse();
         primaryKey.setDataTypeSpec(parser.getDataTypeSpec());
 
         primaryKey.validate();

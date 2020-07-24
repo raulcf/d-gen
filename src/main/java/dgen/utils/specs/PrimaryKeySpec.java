@@ -6,7 +6,7 @@ import dgen.utils.SpecificationException;
 import dgen.utils.specs.datatypespecs.DataTypeSpec;
 
 @JsonTypeName("primaryKey")
-@JsonPropertyOrder({"columnID", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
+@JsonPropertyOrder({"columnID", "randomSeed", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
         "dataType"})
 public class PrimaryKeySpec implements ColumnSpec {
     private int columnID;
@@ -17,6 +17,7 @@ public class PrimaryKeySpec implements ColumnSpec {
     private final boolean unique = true;
     private final boolean hasNull = false;
     private final float nullFrequency = 0;
+    private Long randomSeed;
 
     @Override
     public SpecType specType() { return SpecType.PRIMARYKEY; }
@@ -80,6 +81,14 @@ public class PrimaryKeySpec implements ColumnSpec {
 
     public float getNullFrequency() {
         return nullFrequency;
+    }
+
+    public Long getRandomSeed() {
+        return randomSeed;
+    }
+
+    public void setRandomSeed(Long randomSeed) {
+        this.randomSeed = randomSeed;
     }
 
     @Override

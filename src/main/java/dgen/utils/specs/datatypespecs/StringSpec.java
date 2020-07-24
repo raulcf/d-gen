@@ -14,6 +14,7 @@ public class StringSpec implements DataTypeSpec {
     private Integer maxLength = 1000; // TODO: To be decided
     private DistributionSpec distribution = new UniformDistributionSpec();
     private java.lang.String validChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz";
+    private Long randomSeed;
 
     @Override
     public DataTypes type() { return DataTypes.STRING; }
@@ -72,5 +73,13 @@ public class StringSpec implements DataTypeSpec {
 
     public void setValidChars(java.lang.String validChars) {
         this.validChars = validChars;
+    }
+
+    public Long getRandomSeed() {
+        return randomSeed;
+    }
+
+    public void setRandomSeed(Long randomSeed) {
+        this.randomSeed = randomSeed;
     }
 }

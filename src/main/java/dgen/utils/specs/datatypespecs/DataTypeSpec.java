@@ -13,4 +13,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 public interface DataTypeSpec {
     DataTypes type();
     public void validate();
+    public Long getRandomSeed();
+    public void setRandomSeed(Long randomSeed);
 }

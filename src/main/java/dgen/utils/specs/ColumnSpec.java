@@ -25,4 +25,5 @@ public interface ColumnSpec extends Spec {
     boolean isHasNull();
     boolean isUnique();
     float getNullFrequency();
+    Long getRandomSeed();
 }

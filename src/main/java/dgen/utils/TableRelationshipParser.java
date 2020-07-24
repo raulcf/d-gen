@@ -7,6 +7,7 @@ import dgen.utils.specs.relationships.dependencyFunctions.DependencyFunction;
 import dgen.utils.specs.relationships.DefTableRelationshipSpec;
 import dgen.utils.specs.relationships.GenTableRelationshipSpec;
 import dgen.utils.specs.relationships.TableRelationshipSpec;
+import dgen.utils.specs.relationships.dependencyFunctions.JaccardSimilarity;
 
 import java.util.*;
 
@@ -15,9 +16,11 @@ public class TableRelationshipParser {
     private Map<Integer, Set<Integer>> relationshipMap = new HashMap<>();
     private int numRelationships = 0;
     private final Map<Integer, ColumnSpec> columnMap;
+    private RandomGenerator rnd;
 
-    public TableRelationshipParser(Map<Integer, ColumnSpec> columnMap) {
+    public TableRelationshipParser(Map<Integer, ColumnSpec> columnMap, RandomGenerator rnd) {
         this.columnMap = columnMap;
+        this.rnd = rnd;
     }
 
     public DefTableRelationshipSpec parse(TableRelationshipSpec relationshipSchema) {
@@ -37,14 +40,15 @@ public class TableRelationshipParser {
     /**
      * Parses a DefTableRelationshipSchema object and preforms very basic checks to ensure that the relationship
      * is valid.
+     *
      * @param tableRelationship DefTableRelationshipSchema object to parse.
      * @return A parsed and validated DefTableRelationshipSchema object.
      */
     public DefTableRelationshipSpec parseTableRelationship(DefTableRelationshipSpec tableRelationship) {
         Map<Integer, Set<Integer>> dependencyMap = tableRelationship.getDependencyMap();
 
-        for (Integer start: dependencyMap.keySet()) {
-            for (Integer end: dependencyMap.get(start)) {
+        for (Integer start : dependencyMap.keySet()) {
+            for (Integer end : dependencyMap.get(start)) {
                 if (start.equals(end)) {
                     throw new SpecificationException("Columns can't have relationships with themselves");
                 }
@@ -82,6 +86,7 @@ public class TableRelationshipParser {
 
     /**
      * Parses a GenTableRelationshipSchema object into a DefTableRelationshipSchema object with a dependency map.
+     *
      * @param genTableRelationship GenTableRelationshipSchema object to parse.
      * @return Parsed DefTableRelationshipSchema object.
      */
@@ -95,6 +100,7 @@ public class TableRelationshipParser {
 
         tableRelationship.setDependencyFunction(genTableRelationship.getDependencyFunction());
         GraphSpec graphSpec = genTableRelationship.getGraphSpec();
+        graphSpec.setRandomGenerator(rnd);
 
         tableRelationship.setDependencyMap(graphSpec.generateTableGraph(columnIDs,
                 genTableRelationship.getNumRelationships(), relationshipMap));

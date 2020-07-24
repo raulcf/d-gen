@@ -6,13 +6,11 @@ import dgen.utils.specs.TableSpec;
 import dgen.utils.specs.relationships.DatabaseRelationshipSpec;
 import dgen.utils.specs.relationships.RelationshipType;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DatabaseParser {
     private DatabaseSpec database;
+    private RandomGenerator rnd;
 
     public DatabaseSpec getDatabase() { return database; }
     public void setDatabase(DatabaseSpec database) { this.database = database; }
@@ -23,19 +21,16 @@ public class DatabaseParser {
      */
     public void parse(DatabaseSpec d) {
         database = d;
+        rnd = new RandomGenerator(database.getRandomSeed());
 
-        TableParser tableParser = new TableParser();
+        TableParser tableParser = new TableParser(rnd);
         for (TableSpec tableSchema: database.getTableSpecs()) {
             tableParser.parse(tableSchema);
         }
         database.setTableSpecs(tableParser.getTables());
         Map<Integer, Map<Integer, ColumnSpec>> tableMap = tableParser.getTableMap();
-        /*
-        TODO: Consolidate list of DatabaseRelationshipSchemas into one object after parsing.
-         Currently each object in databaseRelationships represents only a single PKFK relationship.
-         In the future it might make it easier for us if there's only a single object containing all of the mappings.
-         */
-        DatabaseRelationshipParser databaseRelationshipParser = new DatabaseRelationshipParser(tableMap);
+
+        DatabaseRelationshipParser databaseRelationshipParser = new DatabaseRelationshipParser(tableMap, rnd);
         List<DatabaseRelationshipSpec> databaseRelationships = database.getDatabaseRelationships();
         databaseRelationships.sort(new Comparator<DatabaseRelationshipSpec>() {
             @Override

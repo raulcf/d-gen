@@ -1,10 +1,15 @@
 package dgen.utils;
 
 import dgen.utils.specs.datatypespecs.*;
-import dgen.utils.specs.datatypespecs.DataTypeSpec;
 
 public class DataTypeParser {
     private DataTypeSpec dataTypeSpec;
+    private RandomGenerator rnd;
+
+    public DataTypeParser(DataTypeSpec dataTypeSpec, RandomGenerator rnd) {
+        this.dataTypeSpec = dataTypeSpec;
+        this.rnd = rnd;
+    }
 
     public DataTypeSpec getDataTypeSpec() {
         return dataTypeSpec;
@@ -13,26 +18,34 @@ public class DataTypeParser {
         this.dataTypeSpec = dataTypeSpec;
     }
 
-    public void parse(DataTypeSpec d) {
-        switch (d.type()) {
+    public void parse() {
+        parseDataType();
+
+        switch (dataTypeSpec.type()) {
             case INT:
-                IntegerSpec integerType = (IntegerSpec) d;
+                IntegerSpec integerType = (IntegerSpec) dataTypeSpec;
                 parseInt(integerType);
                 break;
             case STRING:
-                StringSpec stringType = (StringSpec) d;
+                StringSpec stringType = (StringSpec) dataTypeSpec;
                 parseString(stringType);
                 break;
             case FLOAT:
-                FloatSpec floatType = (FloatSpec) d;
+                FloatSpec floatType = (FloatSpec) dataTypeSpec;
                 parseFloat(floatType);
                 break;
             case BOOLEAN:
-                BooleanSpec booleanType = (BooleanSpec) d;
+                BooleanSpec booleanType = (BooleanSpec) dataTypeSpec;
                 parseBoolean(booleanType);
                 break;
         }
 
+    }
+
+    private void parseDataType() {
+        if (dataTypeSpec.getRandomSeed() == null) {
+            dataTypeSpec.setRandomSeed(rnd.nextLong());
+        }
     }
 
     private void parseInt(IntegerSpec integerType) {

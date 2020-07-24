@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.specs.datatypespecs.DataTypeSpec;
 
 @JsonTypeName("foreignKey")
-@JsonPropertyOrder({"columnID", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
+@JsonPropertyOrder({"columnID", "randomSeed", "columnName", "regexName", "randomName", "unique", "hasNull", "nullFrequency",
         "dataType"})
 public class DefForeignKeySpec implements ColumnSpec {
     private int columnID;
@@ -16,6 +16,7 @@ public class DefForeignKeySpec implements ColumnSpec {
     private boolean unique = false;
     private boolean hasNull = false;
     private float nullFrequency = 0;
+    private Long randomSeed;
 
     @Override
     public SpecType specType() { return SpecType.DEFFOREIGNKEY; }
@@ -81,6 +82,14 @@ public class DefForeignKeySpec implements ColumnSpec {
 
     public void setNullFrequency(float nullFrequency) {
         this.nullFrequency = nullFrequency;
+    }
+
+    public Long getRandomSeed() {
+        return randomSeed;
+    }
+
+    public void setRandomSeed(Long randomSeed) {
+        this.randomSeed = randomSeed;
     }
 
     @Override

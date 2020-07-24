@@ -21,6 +21,7 @@ public class GenTableSpec implements TableSpec {
     private String regexName;
     private boolean randomName = true;
     private List<TableRelationshipSpec> tableRelationships = new ArrayList<>();
+    private final Long randomSeed = null;
 
     @Override
     public SpecType specType() { return SpecType.GENTABLE; }
@@ -125,6 +126,10 @@ public class GenTableSpec implements TableSpec {
 
     public void setTableRelationships(List<TableRelationshipSpec> tableRelationships) {
         this.tableRelationships = tableRelationships;
+    }
+
+    public Long getRandomSeed() {
+        return randomSeed;
     }
 
     @Override

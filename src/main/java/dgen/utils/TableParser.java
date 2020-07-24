@@ -7,19 +7,17 @@ import dgen.utils.specs.TableSpec;
 import dgen.utils.specs.relationships.RelationshipType;
 import dgen.utils.specs.relationships.TableRelationshipSpec;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 
 public class TableParser {
     private List<TableSpec> tables = new ArrayList<>();
     /* Mapping of tableIDs to a mapping of columns */
     private Map<Integer, Map<Integer, ColumnSpec>> tableMap = new HashMap<>();
+
+    private RandomGenerator rnd;
+
+    public TableParser(RandomGenerator rnd) { this.rnd = rnd; }
 
     /**
      * Parses TableSchema type objects into a list of TableSchema objects.
@@ -61,18 +59,17 @@ public class TableParser {
 
     /**
      * Generates a new tableID that doesn't already exist.
-     * @param r Random object used to generate tableIDs.
      * @return Unique tableID.
      */
-    private int generateTableID(Random r) {
+    private int generateTableID() {
         Set<Integer> tableIDs = tableMap.keySet();
 
         if (tableIDs.size() == Integer.MAX_VALUE) {
             throw new SpecificationException("Max number of tables reached");
         }
 
-        int tableID = r.nextInt();
-        while (tableIDs.contains(tableID)) { tableID = r.nextInt(); }
+        int tableID = rnd.nextInt();
+        while (tableIDs.contains(tableID)) { tableID = rnd.nextInt(); }
         return tableID;
     }
 
@@ -82,7 +79,6 @@ public class TableParser {
      */
     private void parseGenTable(GenTableSpec genTable) {
         genTable.validate();
-        Random r = new Random();
 
         Integer numRows = genTable.getNumRows();
         int minRows = genTable.getMinRows();
@@ -96,13 +92,13 @@ public class TableParser {
             int minTables = genTable.getMinTables();
             int maxTables = genTable.getMaxTables();
 
-            numTables = r.nextInt(maxTables - minTables + 1) + minTables;
+            numTables = rnd.nextInt(maxTables - minTables) + minTables;
         }
 
         for (int i = 0; i < numTables; i++) {
-            int tableID = generateTableID(r);
+            int tableID = generateTableID();
             if (numRows == null) {
-                numRows = r.nextInt( maxRows - minRows + 1) + maxRows;
+                numRows = rnd.nextInt( maxRows - minRows) + maxRows;
             }
 
             DefTableSpec defTable = new DefTableSpec();
@@ -128,8 +124,12 @@ public class TableParser {
         checkTableID(defTable.getTableID());
         parseTableName(defTable);
 
+        if (defTable.getRandomSeed() == null) {
+            defTable.setRandomSeed(rnd.nextLong());
+        }
+
         /* Mapping of columnIDs to columnSchema objects */
-        ColumnParser columnParser = new ColumnParser();
+        ColumnParser columnParser = new ColumnParser(rnd);
         for (ColumnSpec c: defTable.getColumnSpecs()) {
             columnParser.parse(c);
         }
@@ -138,7 +138,7 @@ public class TableParser {
         defTable.setColumnSpecs(columns);
 
         List<TableRelationshipSpec> tableRelationships = new ArrayList<>();
-        TableRelationshipParser tableRelationshipParser = new TableRelationshipParser(columnMap);
+        TableRelationshipParser tableRelationshipParser = new TableRelationshipParser(columnMap, rnd);
         tableRelationships.sort(new Comparator<TableRelationshipSpec>() { // Puts defined relationships before general ones
             @Override
             public int compare(TableRelationshipSpec t1, TableRelationshipSpec t2) {
@@ -147,11 +147,6 @@ public class TableParser {
             }
         });
 
-        /*x
-         * TODO: Reduce the number of TableRelationshipSchema objects to one per dependencyFunction.
-         * Parsing the table relationships in this format results in one DefTableRelationshipSchema
-         * object for each item in the defTable.getTableRelationships list.
-         */
         for (TableRelationshipSpec tableRelationship: defTable.getTableRelationships()) {
             tableRelationships.add(tableRelationshipParser.parse(tableRelationship));
         }

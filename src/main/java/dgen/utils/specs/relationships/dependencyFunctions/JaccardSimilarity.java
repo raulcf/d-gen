@@ -9,7 +9,7 @@ public class JaccardSimilarity implements DependencyFunction {
     private float similarity = (float) 0.5;
 
     @Override
-    public String dependencyName() { return "jaccardSimilarity"; }
+    public FunctionType dependencyName() { return FunctionType.JACCARD_SIMILARITY; }
 
     @Override
     public void validate(ColumnSpec start, ColumnSpec end) {

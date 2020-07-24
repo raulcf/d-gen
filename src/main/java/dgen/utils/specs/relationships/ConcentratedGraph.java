@@ -1,5 +1,6 @@
 package dgen.utils.specs.relationships;
 
+import dgen.utils.RandomGenerator;
 import dgen.utils.SpecificationException;
 import org.javatuples.Pair;
 
@@ -23,6 +24,7 @@ public class ConcentratedGraph implements GraphSpec {
     private Float nodeConcentration;
     private Float minNodeConcentration;
     private Float maxNodeConcentration;
+    private RandomGenerator rnd;
 
     @Override
     public GraphType graphType() {
@@ -30,13 +32,12 @@ public class ConcentratedGraph implements GraphSpec {
     }
 
     private void parse() {
-        Random r = new Random();
 
         if (numNodes != null) {
             minNodes = null;
             maxNodes = null;
         } else if (minNodes != null && maxNodes != null) {
-            numNodes = r.nextInt(maxNodes - minNodes + 1) + minNodes;
+            numNodes = rnd.nextInt(maxNodes - minNodes + 1) + minNodes;
             minNodes = null;
             maxNodes = null;
         } else {
@@ -53,7 +54,7 @@ public class ConcentratedGraph implements GraphSpec {
             if (minNodeConcentration < 0 || maxNodeConcentration > 1 || minNodeConcentration > maxNodeConcentration) {
                 throw new SpecificationException("minNodeConcentration and maxNodeConcentration must be within [0,1]");
             }
-            nodeConcentration = (maxNodeConcentration - minNodeConcentration) * r.nextFloat() + minNodeConcentration;
+            nodeConcentration = (maxNodeConcentration - minNodeConcentration) * rnd.nextFloat() + minNodeConcentration;
             minNodes = null;
             maxNodes = null;
         } else {
@@ -82,8 +83,6 @@ public class ConcentratedGraph implements GraphSpec {
                                                                                           int numEdges,
                                                                                           Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> relationshipMap) {
         this.parse();
-
-        Random r = new Random();
         int numConcentratedEdges = (int) (numEdges * nodeConcentration);
 
         /**
@@ -93,12 +92,12 @@ public class ConcentratedGraph implements GraphSpec {
          */
         List<Pair<Integer, Integer>> concentration = new ArrayList<>(); //Concentrated primary keys
         for (int i = 0; i < numNodes; i++) {
-            concentration.add(primaryKeys.remove(r.nextInt(primaryKeys.size())));
+            concentration.add(primaryKeys.remove(rnd.nextInt(primaryKeys.size())));
         }
 
 
-        Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> adjacencyList = new HashMap<>(GraphSpec.generateDatabaseEdge(concentration, foreignKeys, numConcentratedEdges, relationshipMap, r));
-        adjacencyList.putAll(GraphSpec.generateDatabaseEdge(primaryKeys, foreignKeys, numEdges - numConcentratedEdges, relationshipMap, r));
+        Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> adjacencyList = new HashMap<>(GraphSpec.generateDatabaseEdge(concentration, foreignKeys, numConcentratedEdges, relationshipMap, rnd));
+        adjacencyList.putAll(GraphSpec.generateDatabaseEdge(primaryKeys, foreignKeys, numEdges - numConcentratedEdges, relationshipMap, rnd));
 
         return adjacencyList;
     }
@@ -149,5 +148,13 @@ public class ConcentratedGraph implements GraphSpec {
 
     public void setMaxNodeConcentration(Float maxNodeConcentration) {
         this.maxNodeConcentration = maxNodeConcentration;
+    }
+
+    public RandomGenerator getRandomGenerator() {
+        return rnd;
+    }
+
+    public void setRandomGenerator(RandomGenerator randomGenerator) {
+        this.rnd = randomGenerator;
     }
 }

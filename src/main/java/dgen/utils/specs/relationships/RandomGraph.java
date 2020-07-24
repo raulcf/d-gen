@@ -1,12 +1,15 @@
 package dgen.utils.specs.relationships;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.RandomGenerator;
 import org.javatuples.Pair;
 
 import java.util.*;
 
 @JsonTypeName("randomGraph")
 public class RandomGraph implements GraphSpec {
+    private RandomGenerator rnd;
+
     @Override
     public GraphType graphType() {
         return GraphType.RANDOM;
@@ -26,17 +29,16 @@ public class RandomGraph implements GraphSpec {
      */
     @Override
     public Map<Integer, Set<Integer>> generateTableGraph(List<Integer> columnIDs, int numEdges, Map<Integer, Set<Integer>> relationshipMap) {
-        Random r = new Random();
         // Inefficient when numEdges approaches the max number of edges
         Map<Integer, Set<Integer>> adjacencyList = new HashMap<>();
         for (int i = 0; i < numEdges; i++) {
-            int start = columnIDs.get(r.nextInt(columnIDs.size()));
-            int end = columnIDs.get(r.nextInt(columnIDs.size()));
+            int start = columnIDs.get(rnd.nextInt(columnIDs.size()));
+            int end = columnIDs.get(rnd.nextInt(columnIDs.size()));
 
             while ((start == end) || (adjacencyList.containsKey(start) && adjacencyList.get(start).contains(end)) ||
                     (relationshipMap.containsKey(start) && relationshipMap.get(start).contains(end))) {
-                start = columnIDs.get(r.nextInt(columnIDs.size()));
-                end = columnIDs.get(r.nextInt(columnIDs.size()));
+                start = columnIDs.get(rnd.nextInt(columnIDs.size()));
+                end = columnIDs.get(rnd.nextInt(columnIDs.size()));
             }
 
             if (adjacencyList.containsKey(start)) {
@@ -66,8 +68,14 @@ public class RandomGraph implements GraphSpec {
                                                                                           List<Pair<Integer, Integer>> foreignKeys,
                                                                                           int numEdges,
                                                                                           Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> relationshipMap) {
-        Random r = new Random();
-        return GraphSpec.generateDatabaseEdge(primaryKeys, foreignKeys, numEdges, relationshipMap, r);
+        return GraphSpec.generateDatabaseEdge(primaryKeys, foreignKeys, numEdges, relationshipMap, rnd);
     }
 
+    public RandomGenerator getRandomGenerator() {
+        return rnd;
+    }
+
+    public void setRandomGenerator(RandomGenerator randomGenerator) {
+        this.rnd = randomGenerator;
+    }
 }
