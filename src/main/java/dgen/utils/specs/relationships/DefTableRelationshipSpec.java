@@ -1,6 +1,7 @@
 package dgen.utils.specs.relationships;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.RandomGenerator;
 import dgen.utils.specs.relationships.dependencyFunctions.DependencyFunction;
 
 import java.util.Map;
@@ -11,6 +12,8 @@ public class DefTableRelationshipSpec implements TableRelationshipSpec {
     /* Mapping of columnID from the determinant to the dependant */
     private Map<Integer, Set<Integer>> dependencyMap;
     private DependencyFunction dependencyFunction;
+
+    private Long randomSeed;
 
     @Override
     public RelationshipType relationshipType() { return RelationshipType.DEFTABLE; }
@@ -29,6 +32,14 @@ public class DefTableRelationshipSpec implements TableRelationshipSpec {
 
     public void setDependencyFunction(DependencyFunction dependencyFunction) {
         this.dependencyFunction = dependencyFunction;
+    }
+
+    public Long getRandomSeed() {
+        return randomSeed;
+    }
+
+    public void setRandomSeed(Long randomSeed) {
+        this.randomSeed = randomSeed;
     }
 
     @Override

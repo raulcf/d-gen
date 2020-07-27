@@ -28,6 +28,7 @@ public class ColumnGenerator {
     private int columnID;
     private RandomGenerator rnd;
     private boolean unique = false;
+    private ColumnConfig columnConfig;
 
     public ColumnGenerator(DataTypeGenerator dtg, AttributeNameGenerator ang) {
         this.dtg = dtg;
@@ -35,6 +36,7 @@ public class ColumnGenerator {
     }
 
     public ColumnGenerator(ColumnConfig columnConfig) {
+        this.columnConfig = columnConfig;
         columnID = columnConfig.getInt("column.id");
         rnd = new RandomGenerator(columnConfig.getLong("random.seed"));
 
@@ -78,6 +80,8 @@ public class ColumnGenerator {
 
         return c;
     }
+
+    public ColumnGenerator copy() { return new ColumnGenerator(this.columnConfig); }
 
     public int getColumnID() {
         return columnID;

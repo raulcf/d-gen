@@ -7,12 +7,15 @@ import dgen.attributegenerators.RegexAttributeNameGenerator;
 import dgen.column.Column;
 import dgen.column.ColumnConfig;
 import dgen.column.ColumnGenerator;
+import dgen.coreconfig.DGException;
+import dgen.tablerelationships.TableRelationshipConfig;
+import dgen.tablerelationships.dependencyfunctions.DependencyFunctionConfig;
+import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityConfig;
+import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityGenerator;
 import dgen.utils.RandomGenerator;
+import dgen.utils.specs.relationships.dependencyFunctions.JaccardSimilarity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A table generator is a collection of column generators
@@ -50,8 +53,40 @@ public class TableGenerator {
             ColumnGenerator columnGenerator = new ColumnGenerator(columnConfig);
             columnGenerators.put(columnGenerator.getColumnID(), columnGenerator);
         }
-
         this.columnGeneratorMap = columnGenerators;
+
+        List<TableRelationshipConfig> tableRelationshipConfigs = (List<TableRelationshipConfig>) tableConfig.getObject("table.relationships");
+        for (TableRelationshipConfig tableRelationshipConfig : tableRelationshipConfigs) {
+            Map<Integer, Set<Integer>> mappings = (Map<Integer, Set<Integer>>) tableRelationshipConfig.getObject("mappings");
+
+            for (Integer determinant: mappings.keySet()) {
+                ColumnGenerator determinantColumnGenerator = columnGeneratorMap.get(determinant);
+                Set<Integer> dependants = mappings.get(determinant);
+
+                for (Integer dependant: dependants) {
+                    ColumnGenerator dependantColumnGenerator = columnGeneratorMap.get(dependant);
+
+                    if (dependantColumnGenerator.getDtg() == null) {
+                        throw new DGException("Unsupported relationship with foreign keys");
+                    } else {
+                        DependencyFunctionConfig dependencyFunctionConfig = (DependencyFunctionConfig) tableRelationshipConfig.getObject("dependency.function.config");
+
+                        switch (dependencyFunctionConfig.dependencyName()) {
+                            case JACCARD_SIMILARITY:
+                                JaccardSimilarityConfig jaccardSimilarityConfig = (JaccardSimilarityConfig) dependencyFunctionConfig;
+                                if (! JaccardSimilarityGenerator.validate(determinantColumnGenerator.copy(),
+                                        dependantColumnGenerator.copy(), (JaccardSimilarityConfig) dependencyFunctionConfig,
+                                        numRecords)) {
+                                    dependantColumnGenerator.setDtg(new JaccardSimilarityGenerator(tableRelationshipConfig.getLong("random.seed"),
+                                            jaccardSimilarityConfig, dependantColumnGenerator.getDtg().copy(),
+                                            determinantColumnGenerator.getDtg().copy(), numRecords,
+                                            determinantColumnGenerator.isUnique(), dependantColumnGenerator.isUnique()));
+                                }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // TODO: this should be an iterator that provides either columns or rows, depending on the storage orientation

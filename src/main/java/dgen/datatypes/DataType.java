@@ -29,4 +29,7 @@ public interface DataType {
      */
     Object value();
 
+    @Override
+    boolean equals(Object o);
+
 }

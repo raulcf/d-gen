@@ -25,7 +25,7 @@ public class FKGenerator implements DataTypeGenerator {
         this.numRecords = numRecords;
         this.rnd = rnd;
 
-        for (int i = 0; i < numRecords; i++) {
+        for (int i = 0; i < numRecords; i++) { // Repetitive when a pk has a lot of fks
             pkValues.add(pkDataTypeGenerator.drawWithoutReplacement());
         }
     }

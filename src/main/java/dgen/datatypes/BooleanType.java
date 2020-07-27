@@ -14,4 +14,23 @@ public class BooleanType implements DataType {
 
     @Override
     public Boolean value() { return this.value; }
+
+    @Override
+    public boolean equals(Object o) {
+        boolean result = false;
+        if (o == null || o.getClass() != getClass()) {
+            result = false;
+        } else {
+            BooleanType booleanType = (BooleanType) o;
+            if (this.value == booleanType.value()) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public int hashCode() {
+        return Boolean.hashCode(this.value);
+    }
 }

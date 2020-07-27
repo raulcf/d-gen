@@ -81,6 +81,11 @@ public class TableRelationshipParser {
                 numRelationships += 1;
             }
         }
+
+        if (tableRelationship.getRandomSeed() == null) {
+            tableRelationship.setRandomSeed(rnd.nextLong());
+        }
+
         return tableRelationship;
     }
 

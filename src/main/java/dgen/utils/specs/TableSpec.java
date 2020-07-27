@@ -3,6 +3,7 @@ package dgen.utils.specs;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.specs.relationships.TableRelationshipSpec;
 
 import java.util.List;
 
@@ -21,4 +22,5 @@ public interface TableSpec extends Spec {
     boolean isRandomName();
     void setRandomName(boolean randomName);
     Long getRandomSeed();
+    List<TableRelationshipSpec> getTableRelationships();
 }

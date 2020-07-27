@@ -4,8 +4,11 @@ import dgen.column.ColumnConfig;
 import dgen.coreconfig.Config;
 import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigKey;
+import dgen.tablerelationships.TableRelationshipConfig;
 import dgen.utils.specs.ColumnSpec;
 import dgen.utils.specs.TableSpec;
+import dgen.utils.specs.relationships.DefTableRelationshipSpec;
+import dgen.utils.specs.relationships.TableRelationshipSpec;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,8 +43,6 @@ public class TableConfig extends Config {
     public static final String RANDOM_SEED = "random.seed";
     public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
 
-    //TODO: Add table relationships
-
     static {
         config = new ConfigDef()
                 .define(TABLE_ID, ConfigDef.Type.INT, ConfigDef.Importance.LOW, TABLE_ID_DOC)
@@ -64,12 +65,17 @@ public class TableConfig extends Config {
         originals.put("random.seed", tableSpec.getRandomSeed());
 
         List<ColumnConfig> columnConfigs = new ArrayList<>();
-
         // TODO: tableSpec.GetColumnSpecs() Should only be DefColumnSpec but I can't figure out how to downcast it
         for (ColumnSpec columnSpec: tableSpec.getColumnSpecs()) {
             columnConfigs.add(ColumnConfig.specToConfig(columnSpec));
         }
         originals.put("column.configs", columnConfigs);
+
+        List<TableRelationshipConfig> tableRelationships = new ArrayList<>();
+        for (TableRelationshipSpec tableRelationshipSpec: tableSpec.getTableRelationships()) {
+            tableRelationships.add(TableRelationshipConfig.specToConfig((DefTableRelationshipSpec) tableRelationshipSpec));
+        }
+        originals.put("table.relationships", tableRelationships);
 
         return new TableConfig(originals);
     }
