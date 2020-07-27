@@ -1,8 +1,10 @@
 package dgen.tablerelationships.dependencyfunctions;
 
+import dgen.tablerelationships.dependencyfunctions.funcdeps.FuncDepConfig;
 import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityConfig;
 import dgen.utils.specs.relationships.dependencyFunctions.DependencyFunction;
 import dgen.utils.specs.relationships.dependencyFunctions.FunctionType;
+import dgen.utils.specs.relationships.dependencyFunctions.FunctionalDependency;
 import dgen.utils.specs.relationships.dependencyFunctions.JaccardSimilarity;
 
 public interface DependencyFunctionConfig {
@@ -11,6 +13,9 @@ public interface DependencyFunctionConfig {
         switch (dependencyFunction.dependencyName()) {
             case JACCARD_SIMILARITY:
                 return JaccardSimilarityConfig.specToConfig((JaccardSimilarity) dependencyFunction);
+            case FUNCTIONAL_DEPENDENCY:
+                return FuncDepConfig.specToConfig((FunctionalDependency) dependencyFunction);
+
         }
 
         return null;

@@ -2,6 +2,7 @@ package dgen.utils.specs.relationships;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.RandomGenerator;
+import dgen.utils.SpecificationException;
 import org.javatuples.Pair;
 
 import java.util.*;
@@ -28,17 +29,29 @@ public class RandomGraph implements GraphSpec {
      * change when there are more constraints.
      */
     @Override
-    public Map<Integer, Set<Integer>> generateTableGraph(List<Integer> columnIDs, int numEdges, Map<Integer, Set<Integer>> relationshipMap) {
+    public Map<Integer, Set<Integer>> generateTableGraph(List<Integer> columnIDs, int numEdges, Map<Integer, Set<Integer>> relationshipMap,
+                                                         Set<Integer> usedColumns) {
         // Inefficient when numEdges approaches the max number of edges
         Map<Integer, Set<Integer>> adjacencyList = new HashMap<>();
-        for (int i = 0; i < numEdges; i++) {
-            int start = columnIDs.get(rnd.nextInt(columnIDs.size()));
-            int end = columnIDs.get(rnd.nextInt(columnIDs.size()));
 
-            while ((start == end) || (adjacencyList.containsKey(start) && adjacencyList.get(start).contains(end)) ||
-                    (relationshipMap.containsKey(start) && relationshipMap.get(start).contains(end))) {
-                start = columnIDs.get(rnd.nextInt(columnIDs.size()));
-                end = columnIDs.get(rnd.nextInt(columnIDs.size()));
+        for (int i = 0; i < numEdges; i++) {
+            List<Integer> potentialStart = new ArrayList<>(columnIDs);
+            List<Integer> potentialEnd = new ArrayList<>(columnIDs);
+            potentialEnd.removeAll(usedColumns);
+            int start = potentialStart.get(rnd.nextInt(potentialStart.size()));
+            int end = potentialEnd.get(rnd.nextInt(potentialEnd.size()));
+
+            while ((start == end) || (relationshipMap.containsKey(start) && relationshipMap.get(start).contains(end))) {
+                while (potentialEnd.isEmpty()) {
+                    if (potentialStart.isEmpty()) {
+                        throw new SpecificationException("Can't create more table relationships");
+                    }
+
+                    start = potentialStart.remove(rnd.nextInt(potentialStart.size()));
+                    potentialEnd = new ArrayList<>(columnIDs);
+                    potentialEnd.removeAll(usedColumns);
+                }
+                end = potentialEnd.remove(rnd.nextInt(potentialEnd.size()));
             }
 
             if (adjacencyList.containsKey(start)) {
@@ -50,6 +63,8 @@ public class RandomGraph implements GraphSpec {
                 edges.add(end);
                 adjacencyList.put(start, edges);
             }
+
+            usedColumns.add(end);
         }
 
         return adjacencyList;

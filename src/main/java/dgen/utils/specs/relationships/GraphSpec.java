@@ -21,7 +21,7 @@ public interface GraphSpec {
      two columns can't have multiple relationships. May want to change this later
      */
     Map<Integer, Set<Integer>> generateTableGraph(List<Integer> columnIDs, int numEdges,
-                                                  Map<Integer, Set<Integer>> relationshipMap);
+                                                  Map<Integer, Set<Integer>> relationshipMap, Set<Integer> usedColumns);
     Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> generateDatabaseGraph(List<Pair<Integer, Integer>> primaryKeys,
                                                                                    List<Pair<Integer, Integer>> foreignKeys,
                                                                                    int numEdges,
@@ -57,7 +57,7 @@ public interface GraphSpec {
                     (relationshipMap.containsKey(primaryKey) && relationshipMap.get(primaryKey).contains(foreignKey))) {
                 while (potentialForeignKeys.isEmpty()) {
                     if (potentialPrimaryKeys.isEmpty()) {
-                        throw new SpecificationException("Can't create more PK-FK keys");
+                        throw new SpecificationException("Can't create more PK-FK relationships");
                     }
 
                     primaryKey = potentialPrimaryKeys.remove(rnd.nextInt(potentialPrimaryKeys.size()));

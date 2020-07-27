@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FunctionalDependencyConfig extends Config implements DependencyFunctionConfig {
+public class FuncDepConfig extends Config implements DependencyFunctionConfig {
 
     private static final ConfigDef config;
 
@@ -19,13 +19,13 @@ public class FunctionalDependencyConfig extends Config implements DependencyFunc
         config = new ConfigDef();
     }
 
-    public static FunctionalDependencyConfig specToConfig(FunctionalDependency functionalDependencySpec) {
+    public static FuncDepConfig specToConfig(FunctionalDependency functionalDependencySpec) {
         Map<String, Object> originals = new HashMap<>();
 
-        return new FunctionalDependencyConfig(originals);
+        return new FuncDepConfig(originals);
     }
 
-    public FunctionalDependencyConfig(Map<? extends Object, ? extends Object> originals) {
+    public FuncDepConfig(Map<? extends Object, ? extends Object> originals) {
         super(config, originals);
     }
 

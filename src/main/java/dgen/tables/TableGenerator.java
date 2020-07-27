@@ -8,8 +8,11 @@ import dgen.column.Column;
 import dgen.column.ColumnConfig;
 import dgen.column.ColumnGenerator;
 import dgen.coreconfig.DGException;
+import dgen.datatypes.DataType;
 import dgen.tablerelationships.TableRelationshipConfig;
 import dgen.tablerelationships.dependencyfunctions.DependencyFunctionConfig;
+import dgen.tablerelationships.dependencyfunctions.funcdeps.FuncDepConfig;
+import dgen.tablerelationships.dependencyfunctions.funcdeps.FuncDepGenerator;
 import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityConfig;
 import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityGenerator;
 import dgen.utils.RandomGenerator;
@@ -61,6 +64,7 @@ public class TableGenerator {
 
             for (Integer determinant: mappings.keySet()) {
                 ColumnGenerator determinantColumnGenerator = columnGeneratorMap.get(determinant);
+                List<DataType> determinantData = determinantColumnGenerator.copy().generateColumn(numRecords).getData();
                 Set<Integer> dependants = mappings.get(determinant);
 
                 for (Integer dependant: dependants) {
@@ -70,18 +74,39 @@ public class TableGenerator {
                         throw new DGException("Unsupported relationship with foreign keys");
                     } else {
                         DependencyFunctionConfig dependencyFunctionConfig = (DependencyFunctionConfig) tableRelationshipConfig.getObject("dependency.function.config");
-
                         switch (dependencyFunctionConfig.dependencyName()) {
                             case JACCARD_SIMILARITY:
                                 JaccardSimilarityConfig jaccardSimilarityConfig = (JaccardSimilarityConfig) dependencyFunctionConfig;
-                                if (! JaccardSimilarityGenerator.validate(determinantColumnGenerator.copy(),
+                                if (! JaccardSimilarityGenerator.validate(determinantData,
                                         dependantColumnGenerator.copy(), (JaccardSimilarityConfig) dependencyFunctionConfig,
                                         numRecords)) {
+                                    if (dependantColumnGenerator.getDtg() instanceof JaccardSimilarityGenerator) {
+                                        throw new DGException("Cannot fufill cyclic jaccard relationship");
+                                    } else if (dependantColumnGenerator.getDtg() instanceof FuncDepGenerator) {
+                                        throw new DGException("Functional dependency incompatible with jaccard relationship");
+                                    }
+
                                     dependantColumnGenerator.setDtg(new JaccardSimilarityGenerator(tableRelationshipConfig.getLong("random.seed"),
                                             jaccardSimilarityConfig, dependantColumnGenerator.getDtg().copy(),
-                                            determinantColumnGenerator.getDtg().copy(), numRecords,
-                                            determinantColumnGenerator.isUnique(), dependantColumnGenerator.isUnique()));
+                                            determinantData, numRecords, dependantColumnGenerator.isUnique()));
                                 }
+                                break;
+                            case FUNCTIONAL_DEPENDENCY:
+                                FuncDepConfig funcDepConfig = (FuncDepConfig) dependencyFunctionConfig;
+                                if (! FuncDepGenerator.validate(determinantData, dependantColumnGenerator.copy(),
+                                        funcDepConfig, numRecords)) {
+                                    if (dependantColumnGenerator.getDtg() instanceof FuncDepGenerator) {
+                                        throw new DGException("Cannot fufill cyclic functional dependency");
+                                    } else if (dependantColumnGenerator.getDtg() instanceof JaccardSimilarityGenerator) {
+                                        throw new DGException("Jaccard relationship incompatible with functional dependency");
+                                    }
+
+
+                                    dependantColumnGenerator.setDtg(new FuncDepGenerator(tableRelationshipConfig.getLong("random.seed"),
+                                            funcDepConfig, dependantColumnGenerator.getDtg().copy(),
+                                            determinantData, numRecords, dependantColumnGenerator.isUnique()));
+                                }
+                                break;
                         }
                     }
                 }

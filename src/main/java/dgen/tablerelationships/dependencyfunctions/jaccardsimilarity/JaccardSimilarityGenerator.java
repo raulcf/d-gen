@@ -14,25 +14,15 @@ import dgen.utils.RandomGenerator;
 import java.util.*;
 
 public class JaccardSimilarityGenerator implements DataTypeGenerator {
-    private Random rnd;
-    private float similarity;
-    private DataTypeGenerator dependentDtg;
-    private DataTypeGenerator determinantDtg;
-    private int numRecords;
-    private Set<DataType> determinantValues = new HashSet<>();
-    private List<DataType> dependentValues = new ArrayList<>();
+    private final Random rnd;
+    private final List<DataType> dependentValues = new ArrayList<>();
 
 
-    public static boolean validate(ColumnGenerator determinant, ColumnGenerator dependant,
+    public static boolean validate(List<DataType> determinantData, ColumnGenerator dependant,
                                    JaccardSimilarityConfig jaccardSimilarityConfig, int numRecords) {
-        Column determinantColumn = determinant.generateColumn(numRecords); // Inefficient to keep recalculating
         Column dependentColumn = dependant.generateColumn(numRecords);
         Float similarity = jaccardSimilarityConfig.getFloat("similarity");
-
-        Set<Object> determinantValues = new HashSet<>();
-        for (DataType d: determinantColumn.getData()) {
-            determinantValues.add(d.value());
-        }
+        Set<Object> determinantValues = new HashSet<>(determinantData);
 
         Set<Object> dependentValues = new HashSet<>();
         for (DataType d: dependentColumn.getData()) {
@@ -57,21 +47,11 @@ public class JaccardSimilarityGenerator implements DataTypeGenerator {
      * @param unique Whether values from determinantDtg will be drawn with or without replacement.
      */
     public JaccardSimilarityGenerator(long randomSeed, JaccardSimilarityConfig jaccardSimilarityConfig, DataTypeGenerator dependentDtg,
-                                      DataTypeGenerator determinantDtg, int numRecords, boolean determinantUnique,
-                                      boolean dependantUnique) {
+                                      List<DataType> determinantData, int numRecords, boolean dependantUnique) {
         this.rnd = new RandomGenerator(randomSeed);
-        this.similarity = jaccardSimilarityConfig.getFloat("similarity");
-        this.dependentDtg = dependentDtg;
-        this.determinantDtg = determinantDtg;
-        this.numRecords = numRecords;
 
-        for (int i = 0; i < numRecords; i++) {
-            if (determinantUnique) {
-                determinantValues.add(determinantDtg.drawWithoutReplacement());
-            } else {
-                determinantValues.add(determinantDtg.drawWithReplacement());
-            }
-        }
+        Set<DataType> determinantValues = new HashSet<>(determinantData);
+        float similarity = jaccardSimilarityConfig.getFloat("similarity");
 
         if (determinantValues.size() < (int)(similarity * numRecords)) {
             throw new DGException("Cannot create Jaccard similarity");
@@ -88,7 +68,7 @@ public class JaccardSimilarityGenerator implements DataTypeGenerator {
                 DataType value = dependentDtg.drawWithoutReplacement();
 
                 while (dependentValuesSet.contains(value)) {
-                    value = determinantDtg.drawWithoutReplacement();
+                    value = dependentDtg.drawWithoutReplacement();
                 }
 
                 dependentValuesSet.add(dependentDtg.drawWithoutReplacement());
@@ -98,11 +78,10 @@ public class JaccardSimilarityGenerator implements DataTypeGenerator {
         }
 
         dependentValues.addAll(dependentValuesSet);
-
     }
 
     @Override
-    public NativeType getNativeType() { return dependentDtg.getNativeType(); }
+    public NativeType getNativeType() { return dependentValues.get(0).nativeType(); }
 
     @Override
     public IntegerTypeGenerator copy() { return null; }

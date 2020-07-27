@@ -63,7 +63,8 @@ public class ConcentratedGraph implements GraphSpec {
     }
 
     @Override
-    public Map<Integer, Set<Integer>> generateTableGraph(List<Integer> columnIDs, int numEdges, Map<Integer, Set<Integer>> relationshipMap) {
+    public Map<Integer, Set<Integer>> generateTableGraph(List<Integer> columnIDs, int numEdges, Map<Integer, Set<Integer>> relationshipMap,
+                                                         Set<Integer> usedColumns) {
         return null;
     }
 

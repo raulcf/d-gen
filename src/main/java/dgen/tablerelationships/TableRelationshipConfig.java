@@ -4,7 +4,6 @@ import dgen.coreconfig.Config;
 import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigKey;
 import dgen.tablerelationships.dependencyfunctions.DependencyFunctionConfig;
-import dgen.tablerelationships.dependencyfunctions.funcdeps.FunctionalDependencyConfig;
 import dgen.utils.specs.relationships.DefTableRelationshipSpec;
 
 import java.util.HashMap;
