@@ -1,11 +1,13 @@
 package dgen.dataset;
 
 import dgen.column.ColumnGenerator;
+import dgen.datatypes.DataType;
 import dgen.datatypes.generators.DataTypeGenerator;
 import dgen.pkfk.FKGenerator;
 import dgen.tables.Table;
 import dgen.tables.TableConfig;
 import dgen.tables.TableGenerator;
+import dgen.utils.RandomGenerator;
 import org.javatuples.Pair;
 
 import java.util.*;
@@ -31,30 +33,29 @@ public class DatasetGenerator {
             TableGenerator tableGenerator = new TableGenerator(tableConfig);
             tableGenerators.put(tableGenerator.getTableID(), tableGenerator);
         }
-
         this.tableGeneratorMap = tableGenerators;
 
         // Handling PK-FK
         Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> pkfkMappings = (Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>>) datasetConfig.getObject("pk.fk.mappings");
         for (Pair<Integer, Integer> pk : pkfkMappings.keySet()) {
-            ColumnGenerator pkColumnGenerator = getColumnGenerator(pk.getValue0(), pk.getValue1());
             int numRecords = getTableGenerator(pk.getValue0()).getNumRecords();
+            ColumnGenerator pkColumnGenerator = getColumnGenerator(pk.getValue0(), pk.getValue1());
+            List<DataType> pkValues = new FKGenerator(pkColumnGenerator.getDtg().copy(), numRecords,
+                    new RandomGenerator(new Random().nextLong())).getPkValues();
 
             for (Pair<Integer, Integer> fk : pkfkMappings.get(pk)) {
                 if (getColumnGenerator(fk.getValue0(), fk.getValue1()).getDtg() != null) {
                     ColumnGenerator fkColumnGenerator = getColumnGenerator(fk.getValue0(), fk.getValue1());
-                    DataTypeGenerator pkDataTypeGenerator = pkColumnGenerator.getDtg();
                     DataTypeGenerator fkDataTypeGenerator = fkColumnGenerator.getDtg();
-                    int pkNumRecords = numRecords;
                     int fkNumRecords = getTableGenerator(fk.getValue0()).getNumRecords();
                     boolean fkUnique = fkColumnGenerator.isUnique();
 
-                    FKGenerator.validate(pkDataTypeGenerator, fkDataTypeGenerator, pkNumRecords, fkNumRecords, fkUnique);
+                    FKGenerator.validate(pkValues, fkDataTypeGenerator, fkNumRecords, fkUnique);
 
                 } else {
                     ColumnGenerator fkColumnGenerator = getColumnGenerator(fk.getValue0(), fk.getValue1());
-                    fkColumnGenerator.setDtg(new FKGenerator(pkColumnGenerator.getDtg().copy(), numRecords,
-                            fkColumnGenerator.getRandomGenerator())); // TODO: Foreign key data generators have no random seed so I'm reusing the column random object
+                    // TODO: Foreign key data generators have no random seed so I'm using the column's random object. Should be fine but may want to change later
+                    fkColumnGenerator.setDtg(new FKGenerator(pkValues, fkColumnGenerator.getRandomGenerator()));
 
                     setColumnGenerator(fk.getValue0(), fk.getValue1(), fkColumnGenerator);
                 }

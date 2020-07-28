@@ -81,7 +81,7 @@ public class TableGenerator {
                                         dependantColumnGenerator.copy(), (JaccardSimilarityConfig) dependencyFunctionConfig,
                                         numRecords)) {
                                     if (dependantColumnGenerator.getDtg() instanceof JaccardSimilarityGenerator) {
-                                        throw new DGException("Cannot fufill cyclic jaccard relationship");
+                                        throw new DGException("Cannot fulfill cyclic jaccard relationship");
                                     } else if (dependantColumnGenerator.getDtg() instanceof FuncDepGenerator) {
                                         throw new DGException("Functional dependency incompatible with jaccard relationship");
                                     }
@@ -96,7 +96,7 @@ public class TableGenerator {
                                 if (! FuncDepGenerator.validate(determinantData, dependantColumnGenerator.copy(),
                                         funcDepConfig, numRecords)) {
                                     if (dependantColumnGenerator.getDtg() instanceof FuncDepGenerator) {
-                                        throw new DGException("Cannot fufill cyclic functional dependency");
+                                        throw new DGException("Cannot fulfill cyclic functional dependency");
                                     } else if (dependantColumnGenerator.getDtg() instanceof JaccardSimilarityGenerator) {
                                         throw new DGException("Jaccard relationship incompatible with functional dependency");
                                     }
@@ -104,7 +104,7 @@ public class TableGenerator {
 
                                     dependantColumnGenerator.setDtg(new FuncDepGenerator(tableRelationshipConfig.getLong("random.seed"),
                                             funcDepConfig, dependantColumnGenerator.getDtg().copy(),
-                                            determinantData, numRecords, dependantColumnGenerator.isUnique()));
+                                            determinantData, numRecords));
                                 }
                                 break;
                         }

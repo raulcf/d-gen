@@ -1,7 +1,5 @@
 package dgen.attributegenerators;
 
-import dgen.attributegenerators.AttributeNameGenerator;
-
 public class DefaultAttributeNameGenerator implements AttributeNameGenerator {
 
     private String defaultValue;

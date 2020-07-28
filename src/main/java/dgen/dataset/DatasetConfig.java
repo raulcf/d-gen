@@ -6,6 +6,7 @@ import dgen.coreconfig.ConfigKey;
 import dgen.tables.TableConfig;
 import dgen.utils.specs.DatabaseSpec;
 import dgen.utils.specs.TableSpec;
+import dgen.utils.specs.relationships.DatabaseRelationshipSpec;
 import dgen.utils.specs.relationships.DefPKFKSpec;
 import org.javatuples.Pair;
 
@@ -37,17 +38,21 @@ public class DatasetConfig extends Config {
 
         List<TableConfig> tableConfigs = new ArrayList<>();
 
-        // TODO: tableSpec.GetColumnSpecs() Should only be DefColumnSpec but I can't figure out how to downcast it
         for (TableSpec tableSpec: databaseSpec.getTableSpecs()) {
             tableConfigs.add(TableConfig.specToConfig(tableSpec));
         }
         originals.put("table.configs", tableConfigs);
 
+        // Adding all primary keys and foreign keys into a map
         Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> pkfkMappings = new HashMap<>();
+        List<Pair<Integer, Integer>> primaryKeys = new ArrayList<>();
+        List<Pair<Integer, Integer>> foreignKeys = new ArrayList<>();
+        for (DatabaseRelationshipSpec databaseRelationshipSpec: databaseSpec.getDatabaseRelationships()) {
+            DefPKFKSpec defPKFKSpec = (DefPKFKSpec) databaseRelationshipSpec;
+            primaryKeys.addAll(defPKFKSpec.getPrimaryKeys());
+            primaryKeys.addAll(defPKFKSpec.getForeignKeys());
+        }
 
-        DefPKFKSpec defPKFKSpec = (DefPKFKSpec) databaseSpec.getDatabaseRelationships().get(0);
-        List<Pair<Integer, Integer>> primaryKeys = defPKFKSpec.getPrimaryKeys();
-        List<Pair<Integer, Integer>> foreignKeys = defPKFKSpec.getForeignKeys();
         for (int i = 0; i < primaryKeys.size(); i++) {
             Set<Pair<Integer, Integer>> mapping;
             if (pkfkMappings.containsKey(primaryKeys.get(i))) {

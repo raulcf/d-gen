@@ -3,7 +3,6 @@ package dgen.utils.specs.datatypespecs;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.SpecificationException;
 import dgen.utils.specs.datatypespecs.distributionspecs.DistributionSpec;
-import dgen.utils.specs.datatypespecs.distributionspecs.Distributions;
 import dgen.utils.specs.datatypespecs.distributionspecs.UniformDistributionSpec;
 
 @JsonTypeName("int")

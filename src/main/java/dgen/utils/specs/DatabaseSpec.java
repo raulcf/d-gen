@@ -1,9 +1,12 @@
 package dgen.utils.specs;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import dgen.utils.specs.relationships.DatabaseRelationshipSpec;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @JsonRootName("database")
 @JsonPropertyOrder({"databaseName", "randomSeed", "tableSpecs"})

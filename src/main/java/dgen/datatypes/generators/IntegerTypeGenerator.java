@@ -1,10 +1,9 @@
 package dgen.datatypes.generators;
 
-import dgen.datatypes.IntegerType;
-import dgen.datatypes.config.DataTypeConfig;
-import dgen.datatypes.config.IntegerTypeConfig;
 import dgen.datatypes.DataType;
+import dgen.datatypes.IntegerType;
 import dgen.datatypes.NativeType;
+import dgen.datatypes.config.IntegerTypeConfig;
 import dgen.distributions.Distribution;
 import dgen.distributions.GaussianDistribution;
 import dgen.distributions.UniformDistribution;

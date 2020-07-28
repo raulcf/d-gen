@@ -4,12 +4,7 @@ import dgen.utils.RandomGenerator;
 import dgen.utils.SpecificationException;
 import org.javatuples.Pair;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 
 /* A concentrated graph (there might be a better name) is a graph where a certain number of nodes (numNodes) has a

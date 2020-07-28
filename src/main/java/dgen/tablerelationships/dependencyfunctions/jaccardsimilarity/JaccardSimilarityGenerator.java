@@ -6,7 +6,6 @@ import dgen.coreconfig.DGException;
 import dgen.datatypes.DataType;
 import dgen.datatypes.IntegerType;
 import dgen.datatypes.NativeType;
-import dgen.datatypes.config.DataTypeConfig;
 import dgen.datatypes.generators.DataTypeGenerator;
 import dgen.datatypes.generators.IntegerTypeGenerator;
 import dgen.utils.RandomGenerator;
@@ -17,7 +16,14 @@ public class JaccardSimilarityGenerator implements DataTypeGenerator {
     private final Random rnd;
     private final List<DataType> dependentValues = new ArrayList<>();
 
-
+    /**
+     * Checks whether data from two columns satisfies a jaccard similarity relationship.
+     * @param determinantData Datatype values from determinant column.
+     * @param dependant ColumnGenerator of dependant column.
+     * @param jaccardSimilarityConfig Config object of jaccard similarity to validate.
+     * @param numRecords Number of records to generate from dependant.
+     * @return Whether the data from dependant and determinantData satisfies a jaccard similarity relationship.
+     */
     public static boolean validate(List<DataType> determinantData, ColumnGenerator dependant,
                                    JaccardSimilarityConfig jaccardSimilarityConfig, int numRecords) {
         Column dependentColumn = dependant.generateColumn(numRecords);
@@ -37,14 +43,14 @@ public class JaccardSimilarityGenerator implements DataTypeGenerator {
 
     private static int unionSize(float similarity, int numRecords) { return (int) (2 * numRecords * similarity / (1 + similarity)); }
 
-
     /**
      * Creates a data generator for the dependent of a jaccard similarity based on the determinant's data type generator.
-     * @param rnd Random object.
-     * @param similarity Float representing the percentage of values between determinant and dependant to be the same.
-     * @param determinantDtg Data type generator of the determinant.
+     * @param randomSeed Random seed to use.
+     * @param jaccardSimilarityConfig Config object of jaccard similarity.
+     * @param dependentDtg Datatype generator of dependent column.
+     * @param determinantData Datatypes generated from determinant column.
      * @param numRecords Number of records in generator.
-     * @param unique Whether values from determinantDtg will be drawn with or without replacement.
+     * @param dependantUnique Whether the dependant column has unique values.
      */
     public JaccardSimilarityGenerator(long randomSeed, JaccardSimilarityConfig jaccardSimilarityConfig, DataTypeGenerator dependentDtg,
                                       List<DataType> determinantData, int numRecords, boolean dependantUnique) {
@@ -98,17 +104,6 @@ public class JaccardSimilarityGenerator implements DataTypeGenerator {
         } else {
             return dependentValues.remove(rnd.nextInt(dependentValues.size()));
         }
-    }
-
-    public static void main(String[] args) {
-        IntegerType int1 = new IntegerType(1);
-        IntegerType int2= new IntegerType(1);
-        Set<IntegerType> set1 = new HashSet<>();
-        set1.add(int1);
-        Set<IntegerType> set2 = new HashSet<>();
-        set2.add(int2);
-
-        System.out.println(set1.equals(set2));
     }
 
 }

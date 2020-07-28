@@ -21,6 +21,7 @@ public class RandomGraph implements GraphSpec {
      * @param columnIDs A list of columnIDs to consider as "nodes" in the graph.
      * @param numEdges The number of random edges to generate. All edges are generated uniformly.
      * @param relationshipMap A map of the relationships between columns (to ensure there are no double edges).
+     * @param usedColumns Set of columns that can no longer have relationships.
      * @return A mapping of columnIDs.
      */
     /**

@@ -1,13 +1,10 @@
 package dgen.datatypes.generators;
 
 import com.mifmif.common.regex.Generex;
-import dgen.datatypes.IntegerType;
-import dgen.datatypes.StringType;
-import dgen.datatypes.config.FloatTypeConfig;
-import dgen.datatypes.config.IntegerTypeConfig;
-import dgen.datatypes.config.StringTypeConfig;
 import dgen.datatypes.DataType;
 import dgen.datatypes.NativeType;
+import dgen.datatypes.StringType;
+import dgen.datatypes.config.StringTypeConfig;
 import dgen.distributions.Distribution;
 import dgen.distributions.GaussianDistribution;
 import dgen.distributions.UniformDistribution;

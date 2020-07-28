@@ -2,10 +2,6 @@ package dgen.datatypes.generators;
 
 import dgen.datatypes.DataType;
 import dgen.datatypes.NativeType;
-import dgen.distributions.Distribution;
-
-import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * A datatype generator is a generator of DataTypes, which are types defined by DGEN

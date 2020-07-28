@@ -6,7 +6,6 @@ import dgen.coreconfig.ConfigDef.Importance;
 import dgen.coreconfig.ConfigDef.Type;
 import dgen.coreconfig.ConfigKey;
 import dgen.utils.specs.ColumnSpec;
-import dgen.utils.specs.DefColumnSpec;
 
 import java.util.HashMap;
 import java.util.List;

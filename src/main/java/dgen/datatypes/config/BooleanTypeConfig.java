@@ -1,9 +1,5 @@
 package dgen.datatypes.config;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import dgen.coreconfig.Config;
 import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigDef.Importance;
@@ -12,6 +8,10 @@ import dgen.coreconfig.ConfigKey;
 import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.BooleanTypeGenerator;
 import dgen.utils.specs.datatypespecs.BooleanSpec;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BooleanTypeConfig extends Config implements DataTypeConfig {
 

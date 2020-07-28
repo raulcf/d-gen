@@ -5,7 +5,6 @@ import dgen.datatypes.BooleanType;
 import dgen.datatypes.DataType;
 import dgen.datatypes.NativeType;
 import dgen.datatypes.config.BooleanTypeConfig;
-import dgen.datatypes.config.FloatTypeConfig;
 import dgen.utils.RandomGenerator;
 
 import java.util.Random;

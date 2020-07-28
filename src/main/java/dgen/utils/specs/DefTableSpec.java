@@ -2,7 +2,6 @@ package dgen.utils.specs;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import dgen.datatypes.IntegerType;
 import dgen.utils.SpecificationException;
 import dgen.utils.specs.relationships.TableRelationshipSpec;
 

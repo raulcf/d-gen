@@ -6,7 +6,10 @@ import dgen.utils.specs.TableSpec;
 import dgen.utils.specs.relationships.DatabaseRelationshipSpec;
 import dgen.utils.specs.relationships.RelationshipType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 
 public class DatabaseParser {
     private DatabaseSpec database;

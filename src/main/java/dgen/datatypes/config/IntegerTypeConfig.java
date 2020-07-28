@@ -1,9 +1,5 @@
 package dgen.datatypes.config;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import dgen.coreconfig.Config;
 import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigDef.Importance;
@@ -13,6 +9,10 @@ import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.IntegerTypeGenerator;
 import dgen.distributions.config.DistributionConfig;
 import dgen.utils.specs.datatypespecs.IntegerSpec;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class IntegerTypeConfig extends Config implements DataTypeConfig {
 

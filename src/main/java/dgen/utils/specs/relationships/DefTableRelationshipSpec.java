@@ -1,7 +1,6 @@
 package dgen.utils.specs.relationships;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import dgen.utils.RandomGenerator;
 import dgen.utils.specs.relationships.dependencyFunctions.DependencyFunction;
 
 import java.util.Map;

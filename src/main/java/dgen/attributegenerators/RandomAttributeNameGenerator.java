@@ -8,6 +8,10 @@ public class RandomAttributeNameGenerator implements AttributeNameGenerator {
     private final String alphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz";
     private RandomGenerator rnd;
 
+    /**
+     * Creates a generator that generates strings randomly.
+     * @param rnd Random object to use when generating strings.
+     */
     public RandomAttributeNameGenerator(RandomGenerator rnd) {
         this.nameLength = 10; //Decide on a default or modify specification to allow this
         this.rnd = rnd;

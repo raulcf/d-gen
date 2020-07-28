@@ -12,15 +12,6 @@ import java.util.Map;
 
 public class TableRelationshipConfig extends Config {
 
-//    static TableRelationshipsConfig specToConfig(DefTableRelationshipSpec tableRelationshipSpec) {
-//        switch (tableRelationshipSpec.getDependencyFunction().dependencyName()) {
-//            case JACCARD_SIMILARITY:
-//                return JaccardSimilarityConfig.specToConfig(tableRelationshipSpec);
-//        }
-//
-//        return null;
-//    }
-
     public static final String MAPPINGS = "mappings";
     private static final String MAPPINGS_DOC = "Mapping between columnIDs";
 

@@ -7,7 +7,6 @@ import dgen.utils.RandomGenerator;
 import dgen.utils.SpecificationException;
 import org.javatuples.Pair;
 
-
 import java.util.*;
 
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
@@ -36,7 +35,7 @@ public interface GraphSpec {
      * @param foreignKeys List of foreign keys within a table.
      * @param numEdges Number of random edges to generate
      * @param relationshipMap Mapping of existing PK-FK relationships within a table.
-     * @r Random object to use to generate random numbers.
+     * @rnd Random object to use to generate random numbers.
      *
      * @return Mapping between primary keys and a set of foreign keys.
      */
@@ -44,7 +43,7 @@ public interface GraphSpec {
                                                                                          List<Pair<Integer, Integer>> foreignKeys,
                                                                                          int numEdges,
                                                                                          Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> relationshipMap,
-                                                                                         Random rnd) {
+                                                                                         RandomGenerator rnd) {
         Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> adjacencyList = new HashMap<>();
 
         for (int i = 0; i < numEdges; i++) {

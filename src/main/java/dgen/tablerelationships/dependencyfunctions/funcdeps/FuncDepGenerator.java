@@ -8,7 +8,6 @@ import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.DataTypeGenerator;
 import dgen.utils.RandomGenerator;
 
-import javax.xml.crypto.Data;
 import java.util.*;
 
 public class FuncDepGenerator implements DataTypeGenerator {
@@ -16,6 +15,14 @@ public class FuncDepGenerator implements DataTypeGenerator {
     private final Random rnd;
     private final List<DataType> dependentValues = new ArrayList<>();
 
+    /**
+     * Checks whether data from two columns satisfies a functional dependency relationship.
+     * @param determinantData Datatype values from determinant column.
+     * @param dependant ColumnGenerator of dependant column.
+     * @param funcDepConfig Config object of functional dependency to validate.
+     * @param numRecords Number of records to generate from dependant.
+     * @return Whether the data from dependant and determinantData satisfies a functional dependency relationship.
+     */
     public static boolean validate(List<DataType> determinantData, ColumnGenerator dependant,
                                    FuncDepConfig funcDepConfig, int numRecords) {
         List<DataType> dependentValues = dependant.generateColumn(numRecords).getData();
@@ -37,8 +44,16 @@ public class FuncDepGenerator implements DataTypeGenerator {
         return true;
     }
 
+    /**
+     * Creates a datatype generator that has a functional dependency on another generator.
+     * @param randomSeed Random seed to use when drawing values.
+     * @param funcDepConfig Config object of functional dependency.
+     * @param dependentDtg Datatype generator of dependent column (used to generate values that fit column constraints).
+     * @param determinantData Data generated from determinant column.
+     * @param numRecords Number of records to create in datatype generator.
+     */
     public FuncDepGenerator(long randomSeed, FuncDepConfig funcDepConfig, DataTypeGenerator dependentDtg,
-                            List<DataType> determinantData, int numRecords, boolean dependantUnique) {
+                            List<DataType> determinantData, int numRecords) {
         this.rnd = new RandomGenerator(randomSeed);
 
         HashMap determinantMap = new HashMap();

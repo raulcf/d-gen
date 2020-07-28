@@ -1,7 +1,6 @@
 package dgen.datatypes.config;
 
 import dgen.datatypes.NativeType;
-import dgen.datatypes.StringType;
 import dgen.datatypes.generators.*;
 import dgen.utils.specs.datatypespecs.*;
 

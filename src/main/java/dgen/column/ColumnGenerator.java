@@ -9,7 +9,6 @@ import dgen.datatypes.DataType;
 import dgen.datatypes.config.DataTypeConfig;
 import dgen.datatypes.generators.DataTypeGenerator;
 import dgen.datatypes.generators.NullValueGenerator;
-import dgen.distributions.UniformDistribution;
 import dgen.utils.RandomGenerator;
 import dgen.utils.specs.datatypespecs.DataTypeSpec;
 
