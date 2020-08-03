@@ -22,6 +22,8 @@ public class Main {
     public static void main(String[] args) {
         // Example
         SpecificationParser specificationParser = new SpecificationParser();
+//        specificationParser.parseYAML("example_specifications/2_input.yaml");
+//        specificationParser.write("example_specifications/2_output.json");
         specificationParser.parseYAML("test.yaml");
         specificationParser.write("test_output.json");
         DatasetGenerator datasetGenerator = DatasetConfig.specToGenerator(specificationParser.getDatabase());

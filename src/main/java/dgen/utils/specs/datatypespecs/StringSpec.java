@@ -20,10 +20,24 @@ public class StringSpec implements DataTypeSpec {
 
     @Override
     public void validate() {
-        if (minLength >= maxLength) {
+        if (minLength != null && maxLength != null && minLength >= maxLength) {
             throw new SpecificationException("String minLength of " + minLength.toString()
                     + " greater than maxLength of " + maxLength.toString());
         }
+    }
+
+    @Override
+    public DataTypeSpec copy() {
+        StringSpec stringSpec = new StringSpec();
+        stringSpec.setDefaultValue(defaultValue);
+        stringSpec.setRegexPattern(regexPattern);
+        stringSpec.setMinLength(minLength);
+        stringSpec.setMaxLength(maxLength);
+        stringSpec.setDistribution(distribution);
+        stringSpec.setValidChars(validChars);
+        stringSpec.setRandomSeed(randomSeed);
+
+        return stringSpec;
     }
 
     public java.lang.String getDefaultValue() {

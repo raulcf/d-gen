@@ -2,6 +2,7 @@ package dgen.utils.specs;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import dgen.utils.SpecificationException;
 import dgen.utils.specs.relationships.DatabaseRelationshipSpec;
 
 import java.util.ArrayList;
@@ -17,7 +18,11 @@ public class DatabaseSpec implements Spec {
     private List<DatabaseRelationshipSpec> databaseRelationships = new ArrayList<>();
 
     @Override
-    public void validate() { }
+    public void validate() {
+        if (databaseName == null) {
+            throw new SpecificationException("Database must have a name");
+        }
+    }
 
     @Override
     public SpecType specType() { return SpecType.DATABASE; }

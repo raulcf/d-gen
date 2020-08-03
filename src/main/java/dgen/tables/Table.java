@@ -65,4 +65,12 @@ public class Table {
                 ", attributeName='" + attributeName + '\'' +
                 '}';
     }
+
+    public List<Column> getColumns() {
+        return columns;
+    }
+
+    public String getAttributeName() {
+        return attributeName;
+    }
 }

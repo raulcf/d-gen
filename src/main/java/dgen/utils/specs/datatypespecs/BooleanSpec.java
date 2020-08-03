@@ -19,6 +19,15 @@ public class BooleanSpec implements DataTypeSpec {
         }
     }
 
+    @Override
+    public DataTypeSpec copy() {
+        BooleanSpec booleanSpec = new BooleanSpec();
+        booleanSpec.setTfRatio(tfRatio);
+        booleanSpec.setRandomSeed(randomSeed);
+
+        return booleanSpec;
+    }
+
     public float getTfRatio() {
         return tfRatio;
     }

@@ -40,17 +40,14 @@ public class DatasetGenerator {
         for (Pair<Integer, Integer> pk : pkfkMappings.keySet()) {
             int numRecords = getTableGenerator(pk.getValue0()).getNumRecords();
             ColumnGenerator pkColumnGenerator = getColumnGenerator(pk.getValue0(), pk.getValue1());
-            List<DataType> pkValues = new FKGenerator(pkColumnGenerator.getDtg().copy(), numRecords,
-                    new RandomGenerator(new Random().nextLong())).getPkValues();
+            List<DataType> pkValues = pkColumnGenerator.copy().generateColumn(numRecords).getData();
 
             for (Pair<Integer, Integer> fk : pkfkMappings.get(pk)) {
                 if (getColumnGenerator(fk.getValue0(), fk.getValue1()).getDtg() != null) {
                     ColumnGenerator fkColumnGenerator = getColumnGenerator(fk.getValue0(), fk.getValue1());
-                    DataTypeGenerator fkDataTypeGenerator = fkColumnGenerator.getDtg();
                     int fkNumRecords = getTableGenerator(fk.getValue0()).getNumRecords();
-                    boolean fkUnique = fkColumnGenerator.isUnique();
 
-                    FKGenerator.validate(pkValues, fkDataTypeGenerator, fkNumRecords, fkUnique);
+                    FKGenerator.validate(pkValues, fkColumnGenerator.copy(), fkNumRecords);
 
                 } else {
                     ColumnGenerator fkColumnGenerator = getColumnGenerator(fk.getValue0(), fk.getValue1());

@@ -125,6 +125,8 @@ public class DatabaseRelationshipParser {
      * @return List of DefPKFKSchema objects.
      */
     private void parseGenPKFK(GenPKFKSpec genPKFK) {
+        genPKFK.validate();
+
         if (numRelationships + genPKFK.getNumRelationships() > maxNumRelationships) {
             throw new SpecificationException("Too many PK-FK relationships");
         }

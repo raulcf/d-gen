@@ -14,14 +14,26 @@ public class FloatSpec implements DataTypeSpec {
     private Long randomSeed;
 
     @Override
-    public DataTypes type() { return DataTypes.BOOLEAN; }
+    public DataTypes type() { return DataTypes.FLOAT; }
 
     @Override
     public void validate() {
-        if (minValue >= maxValue) {
+        if (minValue != null && maxValue != null && minValue >= maxValue) {
             throw new SpecificationException("Float minValue of " + minValue.toString() + " greater than maxValue of "
                     + maxValue.toString());
         }
+    }
+
+    @Override
+    public DataTypeSpec copy() {
+        FloatSpec floatSpec = new FloatSpec();
+        floatSpec.setDefaultValue(defaultValue);
+        floatSpec.setMinValue(minValue);
+        floatSpec.setMaxValue(maxValue);
+        floatSpec.setDistribution(distribution);
+        floatSpec.setRandomSeed(randomSeed);
+
+        return floatSpec;
     }
 
     public java.lang.Float getDefaultValue() {

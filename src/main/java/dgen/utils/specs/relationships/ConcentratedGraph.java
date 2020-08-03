@@ -23,7 +23,8 @@ public class ConcentratedGraph implements GraphSpec {
 
     @Override
     public GraphType graphType() {
-        return GraphType.CONCENTRATED;
+//        return GraphType.CONCENTRATED;
+        return null;
     }
 
     private void parse() {

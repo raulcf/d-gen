@@ -19,6 +19,7 @@ import dgen.utils.RandomGenerator;
 import dgen.utils.specs.relationships.dependencyFunctions.JaccardSimilarity;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * A table generator is a collection of column generators
@@ -44,7 +45,7 @@ public class TableGenerator {
         rnd = new RandomGenerator(tableConfig.getLong("random.seed"));
 
         if (tableConfig.getString("table.name") != null) {
-            this.ang = new DefaultAttributeNameGenerator(tableConfig.getString("column.name"));
+            this.ang = new DefaultAttributeNameGenerator(tableConfig.getString("table.name"));
         } else if (tableConfig.getString("regex.name") != null) {
             this.ang = new RegexAttributeNameGenerator(rnd, tableConfig.getString("regex.name"));
         } else if (tableConfig.getBoolean("random.name")) {
@@ -59,6 +60,7 @@ public class TableGenerator {
         this.columnGeneratorMap = columnGenerators;
 
         List<TableRelationshipConfig> tableRelationshipConfigs = (List<TableRelationshipConfig>) tableConfig.getObject("table.relationships");
+        Set<Integer> visitedColumns = new HashSet<>();
         for (TableRelationshipConfig tableRelationshipConfig : tableRelationshipConfigs) {
             Map<Integer, Set<Integer>> mappings = (Map<Integer, Set<Integer>>) tableRelationshipConfig.getObject("mappings");
 
@@ -80,36 +82,39 @@ public class TableGenerator {
                                 if (! JaccardSimilarityGenerator.validate(determinantData,
                                         dependantColumnGenerator.copy(), (JaccardSimilarityConfig) dependencyFunctionConfig,
                                         numRecords)) {
-                                    if (dependantColumnGenerator.getDtg() instanceof JaccardSimilarityGenerator) {
-                                        throw new DGException("Cannot fulfill cyclic jaccard relationship");
-                                    } else if (dependantColumnGenerator.getDtg() instanceof FuncDepGenerator) {
-                                        throw new DGException("Functional dependency incompatible with jaccard relationship");
-                                    }
 
-                                    dependantColumnGenerator.setDtg(new JaccardSimilarityGenerator(tableRelationshipConfig.getLong("random.seed"),
-                                            jaccardSimilarityConfig, dependantColumnGenerator.getDtg().copy(),
-                                            determinantData, numRecords, dependantColumnGenerator.isUnique()));
+                                    if (visitedColumns.contains(dependant)) {
+                                        throw new DGException("Cannot fulfill table relationship");
+                                    } else {
+                                        dependantColumnGenerator.setDtg(new JaccardSimilarityGenerator(tableRelationshipConfig.getLong("random.seed"),
+                                                jaccardSimilarityConfig, dependantColumnGenerator.getDtg().copy(),
+                                                determinantData, numRecords));
+                                    }
                                 }
                                 break;
                             case FUNCTIONAL_DEPENDENCY:
                                 FuncDepConfig funcDepConfig = (FuncDepConfig) dependencyFunctionConfig;
-                                if (! FuncDepGenerator.validate(determinantData, dependantColumnGenerator.copy(),
+                                if (!FuncDepGenerator.validate(determinantData, dependantColumnGenerator.copy(),
                                         funcDepConfig, numRecords)) {
-                                    if (dependantColumnGenerator.getDtg() instanceof FuncDepGenerator) {
-                                        throw new DGException("Cannot fulfill cyclic functional dependency");
-                                    } else if (dependantColumnGenerator.getDtg() instanceof JaccardSimilarityGenerator) {
-                                        throw new DGException("Jaccard relationship incompatible with functional dependency");
+
+                                    if (visitedColumns.contains(dependant)) {
+                                        throw new DGException("Cannot fulfill table relationship");
+                                    } else {
+                                        dependantColumnGenerator.setDtg(new FuncDepGenerator(tableRelationshipConfig.getLong("random.seed"),
+                                                funcDepConfig, dependantColumnGenerator.getDtg().copy(),
+                                                determinantData, numRecords));
                                     }
-
-
-                                    dependantColumnGenerator.setDtg(new FuncDepGenerator(tableRelationshipConfig.getLong("random.seed"),
-                                            funcDepConfig, dependantColumnGenerator.getDtg().copy(),
-                                            determinantData, numRecords));
                                 }
                                 break;
                         }
                     }
                 }
+                visitedColumns.add(determinant);
+            }
+        }
+        for (int i: columnGeneratorMap.keySet()) {
+            if (columnGeneratorMap.get(i).getDtg() instanceof FuncDepGenerator) {
+                System.out.println(((FuncDepGenerator) columnGeneratorMap.get(i).getDtg()).getDependentValues().stream().map(n -> n.value()).collect(Collectors.toList()));
             }
         }
     }

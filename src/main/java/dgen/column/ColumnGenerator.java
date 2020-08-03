@@ -58,6 +58,7 @@ public class ColumnGenerator {
     }
 
     public Column generateColumn(int numRecords) {
+
         if (dtg == null) {
             throw new DGException("Missing data generator");
         }
@@ -80,7 +81,11 @@ public class ColumnGenerator {
         return c;
     }
 
-    public ColumnGenerator copy() { return new ColumnGenerator(this.columnConfig); }
+    public ColumnGenerator copy() {
+        ColumnGenerator columnGenerator = new ColumnGenerator(this.columnConfig);
+        columnGenerator.setDtg(this.dtg.copy());
+        return columnGenerator;
+    }
 
     public int getColumnID() {
         return columnID;

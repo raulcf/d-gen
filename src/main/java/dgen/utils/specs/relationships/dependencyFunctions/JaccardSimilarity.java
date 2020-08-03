@@ -13,7 +13,7 @@ public class JaccardSimilarity implements DependencyFunction {
 
     @Override
     public void validate(ColumnSpec start, ColumnSpec end) {
-        if (similarity > 1) {
+        if (similarity > 1 || similarity < 0) {
             throw new SpecificationException("Jaccard similarity between columns with columnID " + start.getColumnID()
                     + " and " + end.getColumnID() + " is greater than 1");
         }

@@ -15,4 +15,5 @@ public interface DataTypeSpec {
     public void validate();
     public Long getRandomSeed();
     public void setRandomSeed(Long randomSeed);
+    DataTypeSpec copy();
 }

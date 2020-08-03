@@ -1,6 +1,7 @@
 package dgen.utils.specs.relationships;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.SpecificationException;
 import dgen.utils.specs.relationships.dependencyFunctions.DependencyFunction;
 
 import java.util.Map;
@@ -16,6 +17,16 @@ public class DefTableRelationshipSpec implements TableRelationshipSpec {
 
     @Override
     public RelationshipType relationshipType() { return RelationshipType.DEFTABLE; }
+
+    @Override
+    public void validate() {
+        if (dependencyFunction == null) {
+            throw new SpecificationException("dependencyFunction can't be null");
+        }
+        if (dependencyMap == null) {
+            throw new SpecificationException("dependencyMap can't be null");
+        }
+    }
 
     public Map<Integer, Set<Integer>> getDependencyMap() {
         return dependencyMap;

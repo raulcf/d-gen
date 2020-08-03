@@ -28,6 +28,7 @@ public class DefPKFKSpec implements DatabaseRelationshipSpec {
     @Override
     public RelationshipType relationshipType() { return RelationshipType.DEFPKFK; }
 
+    @Override
     public void validate() {
         for (int i = 0; i < primaryKeys.size(); i++) {
             Pair<Integer, Integer> primaryKey = primaryKeys.get(i);
@@ -50,6 +51,8 @@ public class DefPKFKSpec implements DatabaseRelationshipSpec {
                 foreignKeys.add(Pair.with(Integer.parseInt(fkString.split(":")[0]),
                         Integer.parseInt(fkString.split(":")[1])));
             }
+        } else {
+            throw new SpecificationException("pkfkMappings can't be null");
         }
 
     }

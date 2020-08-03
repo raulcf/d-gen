@@ -9,7 +9,6 @@ import dgen.utils.specs.datatypespecs.DataTypeSpec;
         "dataType"})
 public class DefForeignKeySpec implements ColumnSpec {
     private int columnID;
-    private final DataTypeSpec dataTypeSpec = null;
     private String columnName;
     private String regexName;
     private boolean randomName = true;
@@ -33,7 +32,7 @@ public class DefForeignKeySpec implements ColumnSpec {
     }
 
     public DataTypeSpec getDataTypeSpec() {
-        return dataTypeSpec;
+        return null;
     }
 
     public String getColumnName() {
@@ -96,7 +95,6 @@ public class DefForeignKeySpec implements ColumnSpec {
     public String toString() {
         return "DefForeignKeySchema{" +
                 "columnID=" + columnID +
-                ", dataType=" + dataTypeSpec +
                 ", columnName='" + columnName + '\'' +
                 ", regexName='" + regexName + '\'' +
                 ", randomName=" + randomName +

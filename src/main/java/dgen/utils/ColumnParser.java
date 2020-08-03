@@ -106,7 +106,7 @@ public class ColumnParser {
             defColumn.setRandomName(genColumn.isRandomName());
             defColumn.setRegexName(genColumn.getRegexName());
             defColumn.setColumnName(genColumn.getColumnName());
-            defColumn.setDataTypeSpec(genColumn.getDataTypeSpec());
+            defColumn.setDataTypeSpec(genColumn.getDataTypeSpec().copy());
             defColumn.setColumnID(columnId);
 
             parseColumn(defColumn);

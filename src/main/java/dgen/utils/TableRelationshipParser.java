@@ -25,6 +25,8 @@ public class TableRelationshipParser {
     }
 
     public DefTableRelationshipSpec parse(TableRelationshipSpec relationshipSchema) {
+        relationshipSchema.validate();
+
         switch (relationshipSchema.relationshipType()) {
             case DEFTABLE:
                 DefTableRelationshipSpec defTableRelationship = (DefTableRelationshipSpec) relationshipSchema;
@@ -45,7 +47,7 @@ public class TableRelationshipParser {
      * @param tableRelationship DefTableRelationshipSchema object to parse.
      * @return A parsed and validated DefTableRelationshipSchema object.
      */
-    public DefTableRelationshipSpec parseTableRelationship(DefTableRelationshipSpec tableRelationship) {
+    private DefTableRelationshipSpec parseTableRelationship(DefTableRelationshipSpec tableRelationship) {
         Map<Integer, Set<Integer>> dependencyMap = tableRelationship.getDependencyMap();
 
         for (Integer determinant : dependencyMap.keySet()) {
@@ -100,7 +102,7 @@ public class TableRelationshipParser {
      * @param genTableRelationship GenTableRelationshipSchema object to parse.
      * @return Parsed DefTableRelationshipSchema object.
      */
-    public DefTableRelationshipSpec parseGenTableRelationship(GenTableRelationshipSpec genTableRelationship) {
+    private DefTableRelationshipSpec parseGenTableRelationship(GenTableRelationshipSpec genTableRelationship) {
         if (genTableRelationship.getNumRelationships() + numRelationships > columnMap.size() - usedColumns.size()) {
             throw new SpecificationException("Too many relationships in one table");
         }

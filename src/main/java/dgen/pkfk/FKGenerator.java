@@ -1,5 +1,6 @@
 package dgen.pkfk;
 
+import dgen.column.ColumnGenerator;
 import dgen.coreconfig.DGException;
 import dgen.datatypes.DataType;
 import dgen.datatypes.NativeType;
@@ -22,23 +23,21 @@ public class FKGenerator implements DataTypeGenerator {
     /**
      * Checks whether a pair of datatype generators satisfies a PK-FK relationship.
      * @param pkValues Datatype values from the primary key datatype generator.
-     * @param fkDtg Datatype generator to act as the foreign key datatype generator.
+     * @param fkColumnGenerator Column generator to act as the foreign key column generator.
      * @param fkNumRecords Number of rows to generate from fkDtg.
-     * @param fkUnique Whether fkDtg is producing unique or non-unique values.
      */
-    public static void validate(List<DataType> pkValues, DataTypeGenerator fkDtg, int fkNumRecords,
-                                boolean fkUnique) {
-
+    public static void validate(List<DataType> pkValues, ColumnGenerator fkColumnGenerator, int fkNumRecords) {
         Set<Object> fkValues = new HashSet<>();
-        for (int i = 0; i < fkNumRecords; i++) {
-            if (fkUnique) {
-                fkValues.add(fkDtg.drawWithoutReplacement().value());
-            } else {
-                fkValues.add(fkDtg.drawWithReplacement().value());
-            }
+        for (DataType d: fkColumnGenerator.generateColumn(fkNumRecords).getData()) {
+            fkValues.add(d.value());
         }
 
-        if (!pkValues.containsAll(fkValues)) {
+        Set<Object> pkValueSet = new HashSet<>();
+        for (DataType d: pkValues) {
+            pkValueSet.add(d.value());
+        }
+
+        if (!pkValueSet.containsAll(fkValues)) {
             throw new DGException("FKGenerator not compatible with PKGenerator");
         }
     }

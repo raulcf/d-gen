@@ -28,4 +28,12 @@ public class Dataset {
 
         return sb.toString();
     }
+
+    public String getAttributeName() {
+        return attributeName;
+    }
+
+    public List<Table> getTables() {
+        return tables;
+    }
 }

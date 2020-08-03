@@ -9,11 +9,12 @@ import dgen.datatypes.generators.DataTypeGenerator;
 import dgen.utils.RandomGenerator;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class FuncDepGenerator implements DataTypeGenerator {
 
-    private final Random rnd;
-    private final List<DataType> dependentValues = new ArrayList<>();
+    private RandomGenerator rnd;
+    private List<DataType> dependentValues = new ArrayList<>();
 
     /**
      * Checks whether data from two columns satisfies a functional dependency relationship.
@@ -41,7 +42,12 @@ public class FuncDepGenerator implements DataTypeGenerator {
             }
         }
 
+
         return true;
+    }
+
+    public FuncDepGenerator(List<DataType> dependentValues) {
+        this.dependentValues = dependentValues;
     }
 
     /**
@@ -71,7 +77,7 @@ public class FuncDepGenerator implements DataTypeGenerator {
 
     @Override
     public DataTypeGenerator copy() {
-        return null;
+        return new FuncDepGenerator(new ArrayList<>(dependentValues));
     }
 
     @Override
@@ -81,6 +87,7 @@ public class FuncDepGenerator implements DataTypeGenerator {
 
     @Override
     public DataType drawWithoutReplacement() {
+
         if (dependentValues.isEmpty()) {
             throw new DGException("No more values");
         } else {
@@ -88,10 +95,11 @@ public class FuncDepGenerator implements DataTypeGenerator {
         }
     }
 
-    public static void main(String[] args) {
-        Map<DataType, Integer> x = new HashMap<>();
-        x.put(new IntegerType(2), 2);
+    public List<DataType> getDependentValues() {
+        return dependentValues;
+    }
 
-        System.out.println(x.containsKey(new IntegerType(2)));
+    public void setDependentValues(List<DataType> dependentValues) {
+        this.dependentValues = dependentValues;
     }
 }

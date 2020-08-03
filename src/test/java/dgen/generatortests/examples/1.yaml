@@ -1,0 +1,18 @@
+---
+database:
+  databaseName: "1"
+  randomSeed: 1
+  tableSpecs:
+    - defTable:
+        numRows: 10
+        columnSpecs:
+          - defColumn:
+              columnID: 1
+              columnName: "hello world"
+              unique: True
+              dataTypeSpec:
+                int:
+                  minValue: 0
+                  maxValue: 10
+
+

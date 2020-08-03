@@ -50,7 +50,7 @@ public class DatasetConfig extends Config {
         for (DatabaseRelationshipSpec databaseRelationshipSpec: databaseSpec.getDatabaseRelationships()) {
             DefPKFKSpec defPKFKSpec = (DefPKFKSpec) databaseRelationshipSpec;
             primaryKeys.addAll(defPKFKSpec.getPrimaryKeys());
-            primaryKeys.addAll(defPKFKSpec.getForeignKeys());
+            foreignKeys.addAll(defPKFKSpec.getForeignKeys());
         }
 
         for (int i = 0; i < primaryKeys.size(); i++) {

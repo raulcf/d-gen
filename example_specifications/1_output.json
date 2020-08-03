@@ -1,11 +1,11 @@
 {
   "database" : {
     "databaseName" : "1_input",
-    "randomSeed" : -1591954592273004560,
+    "randomSeed" : -4982418843605177614,
     "tableSpecs" : [ {
       "defTable" : {
         "tableID" : 1,
-        "randomSeed" : 3561581593556977250,
+        "randomSeed" : -6761209701230044036,
         "tableName" : null,
         "numRows" : 10,
         "regexName" : null,
@@ -13,7 +13,7 @@
         "columnSpecs" : [ {
           "primaryKey" : {
             "columnID" : 1,
-            "randomSeed" : -1365050473742851087,
+            "randomSeed" : -6369102817107095136,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
@@ -28,14 +28,14 @@
                 "distribution" : {
                   "uniform" : { }
                 },
-                "randomSeed" : -8631878669411124514
+                "randomSeed" : -2718815665674034326
               }
             }
           }
         }, {
           "defForeignKey" : {
             "columnID" : 2,
-            "randomSeed" : -1990826436946048911,
+            "randomSeed" : 8547439868947721021,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
@@ -50,7 +50,7 @@
     }, {
       "defTable" : {
         "tableID" : 2,
-        "randomSeed" : -8372393354444198005,
+        "randomSeed" : 2106110390293188850,
         "tableName" : null,
         "numRows" : 10,
         "regexName" : null,
@@ -58,7 +58,7 @@
         "columnSpecs" : [ {
           "primaryKey" : {
             "columnID" : 1,
-            "randomSeed" : 7901305631349371677,
+            "randomSeed" : 7545971074074138421,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
@@ -73,14 +73,14 @@
                 "distribution" : {
                   "uniform" : { }
                 },
-                "randomSeed" : 5146893058445154369
+                "randomSeed" : -9109890576417732975
               }
             }
           }
         }, {
           "defForeignKey" : {
             "columnID" : 2,
-            "randomSeed" : 6538420769044921609,
+            "randomSeed" : 2103596710263615337,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,

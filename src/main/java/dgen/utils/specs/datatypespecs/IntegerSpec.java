@@ -1,7 +1,9 @@
 package dgen.utils.specs.datatypespecs;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.datatypes.IntegerType;
 import dgen.utils.SpecificationException;
+import dgen.utils.specs.DatabaseSpec;
 import dgen.utils.specs.datatypespecs.distributionspecs.DistributionSpec;
 import dgen.utils.specs.datatypespecs.distributionspecs.UniformDistributionSpec;
 
@@ -22,6 +24,18 @@ public class IntegerSpec implements DataTypeSpec {
             throw new SpecificationException("Int minValue of " + minValue.toString() + " greater than maxValue of "
                     + maxValue.toString());
         }
+    }
+
+    @Override
+    public DataTypeSpec copy() {
+        IntegerSpec integerSpec = new IntegerSpec();
+        integerSpec.setDefaultValue(defaultValue);
+        integerSpec.setMinValue(minValue);
+        integerSpec.setMaxValue(maxValue);
+        integerSpec.setDistribution(distribution);
+        integerSpec.setRandomSeed(randomSeed);
+
+        return integerSpec;
     }
 
     public Integer getDefaultValue() {

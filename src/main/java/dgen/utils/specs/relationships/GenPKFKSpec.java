@@ -1,6 +1,7 @@
 package dgen.utils.specs.relationships;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import dgen.utils.SpecificationException;
 
 @JsonTypeName("genPKFK")
 public class GenPKFKSpec implements DatabaseRelationshipSpec {
@@ -9,6 +10,16 @@ public class GenPKFKSpec implements DatabaseRelationshipSpec {
 
     @Override
     public RelationshipType relationshipType() { return RelationshipType.GENPKFK; }
+
+    @Override
+    public void validate() {
+        if (numRelationships < 0) {
+            throw new SpecificationException("numRelationships can't be less than zero");
+        }
+        if (graphSpec == null) {
+            throw new SpecificationException("graphSpec can't be null");
+        }
+    }
 
     public int getNumRelationships() {
         return numRelationships;
