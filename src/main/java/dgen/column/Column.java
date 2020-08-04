@@ -21,4 +21,12 @@ public class Column {
     public String getAttributeName() {
         return attributeName;
     }
+
+    @Override
+    public String toString() {
+        return "Column{" +
+                "attributeName='" + attributeName + '\'' +
+                ", data=" + data +
+                '}';
+    }
 }

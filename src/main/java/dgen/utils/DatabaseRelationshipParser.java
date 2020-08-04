@@ -1,10 +1,10 @@
 package dgen.utils;
 
-import dgen.utils.schemas.ColumnSchema;
-import dgen.utils.schemas.relationships.DatabaseRelationshipSchema;
-import dgen.utils.schemas.relationships.DefPKFKSchema;
-import dgen.utils.schemas.relationships.GenPKFKSchema;
-import dgen.utils.schemas.relationships.GraphSchema;
+import dgen.utils.specs.ColumnSpec;
+import dgen.utils.specs.relationships.DatabaseRelationshipSpec;
+import dgen.utils.specs.relationships.DefPKFKSpec;
+import dgen.utils.specs.relationships.GenPKFKSpec;
+import dgen.utils.specs.relationships.GraphSpec;
 import org.javatuples.Pair;
 
 import java.util.*;
@@ -16,20 +16,23 @@ public class DatabaseRelationshipParser {
     private Map<Integer, Integer> tableFKCount = new HashMap<>();
     private final int maxNumRelationships;
     private int numRelationships = 0;
-    private DefPKFKSchema parsedPKFKSchema = new DefPKFKSchema();
+    private DefPKFKSpec parsedPKFKSchema = new DefPKFKSpec();
     private Set<Pair<Integer, Integer>> primaryKeys = new HashSet<>();
     private Set<Pair<Integer, Integer>> foreignKeys = new HashSet<>();
+    private RandomGenerator rnd;
 
     /**
      * Processes and stores the tableIDs and columnIDs of all foreign keys and primary keys.
      * @param tableMap Map of tableID to TableSchema object.
      */
-    public DatabaseRelationshipParser(Map<Integer, Map<Integer, ColumnSchema>> tableMap) {
+    public DatabaseRelationshipParser(Map<Integer, Map<Integer, ColumnSpec>> tableMap, RandomGenerator rnd) {
+        this.rnd = rnd;
+
         for (int tableID: tableMap.keySet()) {
-            Map<Integer, ColumnSchema> columnMap = tableMap.get(tableID);
+            Map<Integer, ColumnSpec> columnMap = tableMap.get(tableID);
             for (int columnID: columnMap.keySet()) {
-                ColumnSchema column = columnMap.get(columnID);
-                switch (column.schemaType()) {
+                ColumnSpec column = columnMap.get(columnID);
+                switch (column.specType()) {
                     case DEFFOREIGNKEY:
                         Pair<Integer, Integer> foreignKeyPair = Pair.with(tableID, columnID);
                         if (tableFKCount.containsKey(tableID)) {
@@ -64,14 +67,14 @@ public class DatabaseRelationshipParser {
      * @param databaseRelationship DatabaseRelationshipSchema object to parse.
      * @return List of parsed DefPKFK objects.
      */
-    public void parse(DatabaseRelationshipSchema databaseRelationship) {
+    public void parse(DatabaseRelationshipSpec databaseRelationship) {
         switch (databaseRelationship.relationshipType()) {
             case GENPKFK:
-                GenPKFKSchema genPKFK = (GenPKFKSchema) databaseRelationship;
+                GenPKFKSpec genPKFK = (GenPKFKSpec) databaseRelationship;
                 parseGenPKFK(genPKFK);
                 break;
             case DEFPKFK:
-                DefPKFKSchema defPKFK = (DefPKFKSchema) databaseRelationship;
+                DefPKFKSpec defPKFK = (DefPKFKSpec) databaseRelationship;
                 parseDefPKFK(defPKFK);
                 break;
             default:
@@ -85,7 +88,7 @@ public class DatabaseRelationshipParser {
      * @param defPKFK DefPKFKSchema object to parse.
      * @return List containing the single parsed DefPKFKSchema object.
      */
-    private void parseDefPKFK(DefPKFKSchema defPKFK) {
+    private void parseDefPKFK(DefPKFKSpec defPKFK) {
         defPKFK.parseMapping();
         defPKFK.validate();
 
@@ -121,13 +124,16 @@ public class DatabaseRelationshipParser {
      * @param genPKFK GenPKFKSchema to parse.
      * @return List of DefPKFKSchema objects.
      */
-    private void parseGenPKFK(GenPKFKSchema genPKFK) {
+    private void parseGenPKFK(GenPKFKSpec genPKFK) {
+        genPKFK.validate();
+
         if (numRelationships + genPKFK.getNumRelationships() > maxNumRelationships) {
             throw new SpecificationException("Too many PK-FK relationships");
         }
 
-        GraphSchema graphSchema = genPKFK.getGraphSchema();
-        Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> mapping = graphSchema.generateDatabaseGraph(new ArrayList<>(primaryKeys),
+        GraphSpec graphSpec = genPKFK.getGraphSpec();
+        graphSpec.setRandomGenerator(rnd);
+        Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> mapping = graphSpec.generateDatabaseGraph(new ArrayList<>(primaryKeys),
                 new ArrayList<>(foreignKeys), genPKFK.getNumRelationships(), relationshipMap);
 
         List<Pair<Integer, Integer>> parsedPrimaryKeys = parsedPKFKSchema.getPrimaryKeys();
@@ -144,12 +150,12 @@ public class DatabaseRelationshipParser {
         parsedPKFKSchema.setForeignKeys(parsedForeignKeys);
     }
 
-    public DefPKFKSchema getParsedPKFKSchema() {
+    public DefPKFKSpec getParsedPKFKSchema() {
         parsedPKFKSchema.unparseMapping();
         return parsedPKFKSchema;
     }
 
-    public void setParsedPKFKSchema(DefPKFKSchema parsedPKFKSchema) {
+    public void setParsedPKFKSchema(DefPKFKSpec parsedPKFKSchema) {
         this.parsedPKFKSchema = parsedPKFKSchema;
     }
 }

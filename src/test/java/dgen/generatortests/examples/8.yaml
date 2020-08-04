@@ -1,0 +1,28 @@
+---
+database:
+  databaseName: "8"
+  randomSeed: 1
+  tableSpecs:
+    - defTable:
+        tableName: "hello world"
+        numRows: 1000
+        tableID: 1
+        columnSpecs:
+          - primaryKey:
+              columnID: 1
+              dataTypeSpec:
+                int: {}
+    - defTable:
+        tableName: "hello world"
+        numRows: 1000
+        tableID: 2
+        columnSpecs:
+          - defForeignKey:
+              columnID: 2
+  databaseRelationships:
+    - defPKFK:
+        pkfkMappings:
+          - "1:1": "2:2"
+
+
+

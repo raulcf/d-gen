@@ -1,11 +1,10 @@
 package dgen.utils;
 
-import dgen.utils.schemas.ColumnSchema;
-import dgen.utils.schemas.DatabaseSchema;
-import dgen.utils.schemas.TableSchema;
-import dgen.utils.schemas.relationships.DatabaseRelationshipSchema;
-import dgen.utils.schemas.relationships.DefPKFKSchema;
-import dgen.utils.schemas.relationships.RelationshipType;
+import dgen.utils.specs.ColumnSpec;
+import dgen.utils.specs.DatabaseSpec;
+import dgen.utils.specs.TableSpec;
+import dgen.utils.specs.relationships.DatabaseRelationshipSpec;
+import dgen.utils.specs.relationships.RelationshipType;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,43 +12,41 @@ import java.util.List;
 import java.util.Map;
 
 public class DatabaseParser {
-    private DatabaseSchema database;
+    private DatabaseSpec database;
+    private RandomGenerator rnd;
 
-    public DatabaseSchema getDatabase() { return database; }
-    public void setDatabase(DatabaseSchema database) { this.database = database; }
+    public DatabaseSpec getDatabase() { return database; }
+    public void setDatabase(DatabaseSpec database) { this.database = database; }
 
     /**
      * Parses the tables within a DatabaseSchema object.
      * @param d DatabaseSchema object to parse.
      */
-    public void parse(DatabaseSchema d) {
+    public void parse(DatabaseSpec d) {
         database = d;
+        rnd = new RandomGenerator(database.getRandomSeed());
 
-        TableParser tableParser = new TableParser();
-        for (TableSchema tableSchema: database.getTableSchemas()) {
+        TableParser tableParser = new TableParser(rnd);
+        for (TableSpec tableSchema: database.getTableSpecs()) {
             tableParser.parse(tableSchema);
         }
-        database.setTableSchemas(tableParser.getTables());
-        Map<Integer, Map<Integer, ColumnSchema>> tableMap = tableParser.getTableMap();
-        /*
-        TODO: Consolidate list of DatabaseRelationshipSchemas into one object after parsing.
-         Currently each object in databaseRelationships represents only a single PKFK relationship.
-         In the future it might make it easier for us if there's only a single object containing all of the mappings.
-         */
-        DatabaseRelationshipParser databaseRelationshipParser = new DatabaseRelationshipParser(tableMap);
-        List<DatabaseRelationshipSchema> databaseRelationships = database.getDatabaseRelationships();
-        databaseRelationships.sort(new Comparator<DatabaseRelationshipSchema>() {
+        database.setTableSpecs(tableParser.getTables());
+        Map<Integer, Map<Integer, ColumnSpec>> tableMap = tableParser.getTableMap();
+
+        DatabaseRelationshipParser databaseRelationshipParser = new DatabaseRelationshipParser(tableMap, rnd);
+        List<DatabaseRelationshipSpec> databaseRelationships = database.getDatabaseRelationships();
+        databaseRelationships.sort(new Comparator<DatabaseRelationshipSpec>() {
             @Override
-            public int compare(DatabaseRelationshipSchema d1, DatabaseRelationshipSchema d2) {
+            public int compare(DatabaseRelationshipSpec d1, DatabaseRelationshipSpec d2) {
                 if (d1.relationshipType() == d2.relationshipType()) { return 0; }
                 return d1.relationshipType() == RelationshipType.DEFPKFK ? -1: 1;
             }
         });
-        for (DatabaseRelationshipSchema databaseRelationship: databaseRelationships) {
+        for (DatabaseRelationshipSpec databaseRelationship: databaseRelationships) {
             databaseRelationshipParser.parse(databaseRelationship);
         }
 
-        List<DatabaseRelationshipSchema> parsedPKFKList = new ArrayList<>();
+        List<DatabaseRelationshipSpec> parsedPKFKList = new ArrayList<>();
         parsedPKFKList.add(databaseRelationshipParser.getParsedPKFKSchema());
         database.setDatabaseRelationships(parsedPKFKList);
     }

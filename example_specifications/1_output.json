@@ -1,41 +1,48 @@
 {
   "database" : {
     "databaseName" : "1_input",
-    "tableSchemas" : [ {
+    "randomSeed" : -4982418843605177614,
+    "tableSpecs" : [ {
       "defTable" : {
         "tableID" : 1,
+        "randomSeed" : -6761209701230044036,
         "tableName" : null,
         "numRows" : 10,
         "regexName" : null,
         "randomName" : true,
-        "columnSchemas" : [ {
+        "columnSpecs" : [ {
           "primaryKey" : {
             "columnID" : 1,
+            "randomSeed" : -6369102817107095136,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
             "unique" : true,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataTypeSchema" : {
+            "dataTypeSpec" : {
               "int" : {
                 "defaultValue" : null,
-                "minValue" : -2147483648,
+                "minValue" : 0,
                 "maxValue" : 2147483647,
-                "distribution" : "UNIFORM"
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -2718815665674034326
               }
             }
           }
         }, {
           "defForeignKey" : {
             "columnID" : 2,
+            "randomSeed" : 8547439868947721021,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
             "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataTypeSchema" : null
+            "dataTypeSpec" : null
           }
         } ],
         "tableRelationships" : [ ]
@@ -43,38 +50,44 @@
     }, {
       "defTable" : {
         "tableID" : 2,
+        "randomSeed" : 2106110390293188850,
         "tableName" : null,
         "numRows" : 10,
         "regexName" : null,
         "randomName" : true,
-        "columnSchemas" : [ {
+        "columnSpecs" : [ {
           "primaryKey" : {
             "columnID" : 1,
+            "randomSeed" : 7545971074074138421,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
             "unique" : true,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataTypeSchema" : {
+            "dataTypeSpec" : {
               "int" : {
                 "defaultValue" : null,
-                "minValue" : -2147483648,
+                "minValue" : 0,
                 "maxValue" : 2147483647,
-                "distribution" : "UNIFORM"
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -9109890576417732975
               }
             }
           }
         }, {
           "defForeignKey" : {
             "columnID" : 2,
+            "randomSeed" : 2103596710263615337,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
             "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataTypeSchema" : null
+            "dataTypeSpec" : null
           }
         } ],
         "tableRelationships" : [ ]

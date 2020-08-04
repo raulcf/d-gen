@@ -1,13 +1,9 @@
 package dgen.coreconfig;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.*;
 
 /**
  * A convenient base class for configurations to extend.
@@ -55,7 +51,9 @@ public class Config {
         return values.get(key);
     }
 
-    public int getInt(String key) { return (Integer)get(key); }
+    public Integer getInt(String key) { return (Integer)get(key); }
+
+    public Float getFloat(String key) { return (Float)get(key); }
 
     public long getLong(String key) { return (Long)get(key); }
 
@@ -71,6 +69,8 @@ public class Config {
     public String getString(String key) { return (String)get(key); }
 
     public Class<?> getClass(String key) { return (Class<?>)get(key); }
+
+    public Object getObject(String key) {return (Object)get(key); }
 
     public Set<String> unused() {
         Set<String> keys = new HashSet<String>(originals.keySet());

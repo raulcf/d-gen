@@ -1,78 +1,84 @@
 package dgen.utils;
 
-import dgen.utils.schemas.datatypeschemas.BooleanSchema;
-import dgen.utils.schemas.datatypeschemas.DataTypeSchema;
-import dgen.utils.schemas.datatypeschemas.FloatSchema;
-import dgen.utils.schemas.datatypeschemas.IntegerSchema;
-import dgen.utils.schemas.datatypeschemas.StringSchema;
+import dgen.utils.specs.datatypespecs.*;
 
 public class DataTypeParser {
-    private DataTypeSchema dataTypeSchema;
+    private DataTypeSpec dataTypeSpec;
+    private RandomGenerator rnd;
 
-    public DataTypeSchema getDataTypeSchema() {
-        return dataTypeSchema;
-    }
-    public void setDataTypeSchema(DataTypeSchema dataTypeSchema) {
-        this.dataTypeSchema = dataTypeSchema;
+    public DataTypeParser(DataTypeSpec dataTypeSpec, RandomGenerator rnd) {
+        this.dataTypeSpec = dataTypeSpec;
+        this.rnd = rnd;
     }
 
-    public void parse(DataTypeSchema d) {
-        switch (d.type()) {
+    public DataTypeSpec getDataTypeSpec() {
+        return dataTypeSpec;
+    }
+    public void setDataTypeSpec(DataTypeSpec dataTypeSpec) {
+        this.dataTypeSpec = dataTypeSpec;
+    }
+
+    public void parse() {
+        parseDataType();
+
+        switch (dataTypeSpec.type()) {
             case INT:
-                IntegerSchema integerType = (IntegerSchema) d;
+                IntegerSpec integerType = (IntegerSpec) dataTypeSpec;
                 parseInt(integerType);
                 break;
             case STRING:
-                StringSchema stringType = (StringSchema) d;
+                StringSpec stringType = (StringSpec) dataTypeSpec;
                 parseString(stringType);
                 break;
             case FLOAT:
-                FloatSchema floatType = (FloatSchema) d;
+                FloatSpec floatType = (FloatSpec) dataTypeSpec;
                 parseFloat(floatType);
                 break;
             case BOOLEAN:
-                BooleanSchema booleanType = (BooleanSchema) d;
+                BooleanSpec booleanType = (BooleanSpec) dataTypeSpec;
                 parseBoolean(booleanType);
                 break;
         }
 
     }
 
-    private void parseInt(IntegerSchema integerType) {
+    private void parseDataType() {
+        if (dataTypeSpec.getRandomSeed() == null) {
+            dataTypeSpec.setRandomSeed(rnd.nextLong());
+        }
+    }
+
+    private void parseInt(IntegerSpec integerType) {
         if (integerType.getDefaultValue() != null) {
             integerType.setMinValue(null);
             integerType.setMaxValue(null);
-            integerType.setDistribution(null);
         }
-        dataTypeSchema = integerType;
+        dataTypeSpec = integerType;
     }
 
-    private void parseString(StringSchema stringType) {
+    private void parseString(StringSpec stringType) {
         if (stringType.getDefaultValue() != null) {
             stringType.setMinLength(null);
             stringType.setMaxLength(null);
-            stringType.setDistribution(null);
             stringType.setRegexPattern(null);
         } else if (stringType.getRegexPattern() != null) {
             stringType.setMinLength(null);
             stringType.setMaxLength(null);
-            stringType.setDistribution(null);
         }
 
-        dataTypeSchema = stringType;
+        dataTypeSpec = stringType;
     }
 
-    private void parseFloat(FloatSchema floatType) {
+    private void parseFloat(FloatSpec floatType) {
         if (floatType.getDefaultValue() != null) {
             floatType.setMinValue(null);
             floatType.setMaxValue(null);
-            floatType.setDistribution(null);
         }
 
-        dataTypeSchema = floatType;
+        dataTypeSpec = floatType;
     }
 
-    private void parseBoolean(BooleanSchema booleanType) {
-        dataTypeSchema = booleanType;
+    private void parseBoolean(BooleanSpec booleanType) {
+        dataTypeSpec = booleanType;
     }
 }

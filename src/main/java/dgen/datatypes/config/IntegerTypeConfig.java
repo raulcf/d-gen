@@ -1,19 +1,27 @@
 package dgen.datatypes.config;
 
-import java.util.List;
-import java.util.Map;
-
 import dgen.coreconfig.Config;
 import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigDef.Importance;
 import dgen.coreconfig.ConfigDef.Type;
 import dgen.coreconfig.ConfigKey;
+import dgen.datatypes.NativeType;
+import dgen.datatypes.generators.IntegerTypeGenerator;
+import dgen.distributions.config.DistributionConfig;
+import dgen.utils.specs.datatypespecs.IntegerSpec;
 
-public class IntegerTypeConfig extends Config {
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class IntegerTypeConfig extends Config implements DataTypeConfig {
 
     // TODO: refactor this to reflect the options we need for ME
 
     private static final ConfigDef config;
+
+    public static final String DEFAULT_VALUE = "default.value";
+    private static final String DEFAULT_VALUE_DOC = "Indicates the default value of a type";
 
     public static final String LOWER_BOUND_DOMAIN = "lower.bound.domain";
     private static final String LOWER_BOUND_DOMAIN_DOC = "Indicates the lower bound of a type's domain";
@@ -21,15 +29,43 @@ public class IntegerTypeConfig extends Config {
     public static final String UPPER_BOUND_DOMAIN = "upper.bound.domain";
     private static final String UPPER_BOUND_DOMAIN_DOC = "Indicates the upper bound of a type's domain";
 
+    public static final String DISTRIBUTION = "distribution";
+    public static final String DISTRIBUTION_DOC = "Indicates distribution of type";
+
+    public static final String RANDOM_SEED = "random.seed";
+    public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
+
     public static final String SIZE_IN_BYTES = "size.in.bytes";
     private static final String SIZE_IN_BYTES_DOC = "The native size of this type in bytes";
 
     static {
         config = new ConfigDef()
-
+                .define(DEFAULT_VALUE, Type.INT, null, null, Importance.LOW, DEFAULT_VALUE_DOC)
                 .define(LOWER_BOUND_DOMAIN, Type.INT, Integer.MIN_VALUE, Importance.LOW, LOWER_BOUND_DOMAIN_DOC)
                 .define(UPPER_BOUND_DOMAIN, Type.INT, Integer.MAX_VALUE, Importance.LOW, UPPER_BOUND_DOMAIN_DOC)
-                .define(SIZE_IN_BYTES, Type.INT, Byte.SIZE, Importance.LOW, SIZE_IN_BYTES_DOC);
+                .define(DISTRIBUTION, Type.OBJECT, null, null, Importance.LOW, DISTRIBUTION_DOC)
+                .define(RANDOM_SEED, Type.LONG, Importance.LOW, RANDOM_SEED_DOC)
+                .define(SIZE_IN_BYTES, Type.INT, Integer.BYTES, Importance.LOW, SIZE_IN_BYTES_DOC);
+    }
+
+    public static IntegerTypeConfig specToConfig(IntegerSpec integerSpec) {
+        Map<String, Object> originals = new HashMap<>();
+        originals.put("default.value", integerSpec.getDefaultValue());
+        originals.put("lower.bound.domain", integerSpec.getMinValue());
+        originals.put("upper.bound.domain", integerSpec.getMaxValue());
+        originals.put("distribution", DistributionConfig.specToDistribution(integerSpec.getDistribution()));
+        originals.put("random.seed", integerSpec.getRandomSeed());
+
+        return new IntegerTypeConfig(originals);
+    }
+
+    public static IntegerTypeGenerator specToGenerator(IntegerSpec integerSpec) {
+        return new IntegerTypeGenerator(specToConfig(integerSpec));
+    }
+
+    @Override
+    public NativeType nativeType() {
+        return NativeType.INTEGER;
     }
 
     public IntegerTypeConfig(Map<? extends Object, ? extends Object> originals) {

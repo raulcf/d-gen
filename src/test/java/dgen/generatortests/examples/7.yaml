@@ -1,0 +1,19 @@
+---
+database:
+  databaseName: "7"
+  randomSeed: 1
+  tableSpecs:
+    - defTable:
+        regexName: "[a-z]{2}"
+        numRows: 10
+        tableID: 1
+        columnSpecs:
+          - defColumn:
+              columnID: 1
+              unique: false
+              dataTypeSpec:
+                int:
+                  minValue: 0
+                  maxValue: 10
+
+

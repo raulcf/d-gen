@@ -10,8 +10,10 @@ import java.util.List;
 public class Table {
 
     private List<Column> columns;
+    private String attributeName;
 
-    public Table(List<Column> columns) {
+    public Table(String attributeName, List<Column> columns) {
+        this.attributeName = attributeName;
         this.columns = columns;
     }
 
@@ -54,5 +56,21 @@ public class Table {
         }
 
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "Table{" +
+                "columns=" + columns +
+                ", attributeName='" + attributeName + '\'' +
+                '}';
+    }
+
+    public List<Column> getColumns() {
+        return columns;
+    }
+
+    public String getAttributeName() {
+        return attributeName;
     }
 }

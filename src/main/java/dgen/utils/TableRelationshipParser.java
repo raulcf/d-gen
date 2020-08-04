@@ -1,13 +1,12 @@
 package dgen.utils;
 
 
-import dgen.utils.schemas.ColumnSchema;
-import dgen.utils.schemas.DefColumnSchema;
-import dgen.utils.schemas.relationships.GraphSchema;
-import dgen.utils.schemas.relationships.dependencyFunctions.DependencyFunction;
-import dgen.utils.schemas.relationships.DefTableRelationshipSchema;
-import dgen.utils.schemas.relationships.GenTableRelationshipSchema;
-import dgen.utils.schemas.relationships.TableRelationshipSchema;
+import dgen.utils.specs.ColumnSpec;
+import dgen.utils.specs.relationships.DefTableRelationshipSpec;
+import dgen.utils.specs.relationships.GenTableRelationshipSpec;
+import dgen.utils.specs.relationships.GraphSpec;
+import dgen.utils.specs.relationships.TableRelationshipSpec;
+import dgen.utils.specs.relationships.dependencyFunctions.DependencyFunction;
 
 import java.util.*;
 
@@ -15,19 +14,25 @@ public class TableRelationshipParser {
     /* Mapping of all relationships in a table */
     private Map<Integer, Set<Integer>> relationshipMap = new HashMap<>();
     private int numRelationships = 0;
-    private final Map<Integer, ColumnSchema> columnMap;
+    private final Map<Integer, ColumnSpec> columnMap;
+    private Set<Integer> usedColumns;
+    private RandomGenerator rnd;
 
-    public TableRelationshipParser(Map<Integer, ColumnSchema> columnMap) {
+    public TableRelationshipParser(Map<Integer, ColumnSpec> columnMap, RandomGenerator rnd) {
         this.columnMap = columnMap;
+        this.rnd = rnd;
+        this.usedColumns = new HashSet<>();
     }
 
-    public DefTableRelationshipSchema parse(TableRelationshipSchema relationshipSchema) {
+    public DefTableRelationshipSpec parse(TableRelationshipSpec relationshipSchema) {
+        relationshipSchema.validate();
+
         switch (relationshipSchema.relationshipType()) {
             case DEFTABLE:
-                DefTableRelationshipSchema defTableRelationship = (DefTableRelationshipSchema) relationshipSchema;
+                DefTableRelationshipSpec defTableRelationship = (DefTableRelationshipSpec) relationshipSchema;
                 return parseTableRelationship(defTableRelationship);
             case GENTABLE:
-                GenTableRelationshipSchema genTableRelationship = (GenTableRelationshipSchema) relationshipSchema;
+                GenTableRelationshipSpec genTableRelationship = (GenTableRelationshipSpec) relationshipSchema;
                 return parseGenTableRelationship(genTableRelationship);
             default:
                 throw new SpecificationException("Type " + relationshipSchema.relationshipType() +
@@ -38,67 +43,79 @@ public class TableRelationshipParser {
     /**
      * Parses a DefTableRelationshipSchema object and preforms very basic checks to ensure that the relationship
      * is valid.
+     *
      * @param tableRelationship DefTableRelationshipSchema object to parse.
      * @return A parsed and validated DefTableRelationshipSchema object.
      */
-    public DefTableRelationshipSchema parseTableRelationship(DefTableRelationshipSchema tableRelationship) {
+    private DefTableRelationshipSpec parseTableRelationship(DefTableRelationshipSpec tableRelationship) {
         Map<Integer, Set<Integer>> dependencyMap = tableRelationship.getDependencyMap();
 
-        for (Integer start: dependencyMap.keySet()) {
-            for (Integer end: dependencyMap.get(start)) {
-                if (start.equals(end)) {
+        for (Integer determinant : dependencyMap.keySet()) {
+            for (Integer dependent : dependencyMap.get(determinant)) {
+                if (determinant.equals(dependent)) {
                     throw new SpecificationException("Columns can't have relationships with themselves");
                 }
-                if (!(columnMap.containsKey(start))) {
-                    throw new SpecificationException("Column with columnID " + start + " not found");
+                if (!(columnMap.containsKey(determinant))) {
+                    throw new SpecificationException("Column with columnID " + determinant + " not found");
                 }
-                if (!(columnMap.containsKey(end))) {
-                    throw new SpecificationException("Column with columnID " + end + " not found");
+                if (!(columnMap.containsKey(dependent))) {
+                    throw new SpecificationException("Column with columnID " + dependent + " not found");
                 }
-                if (relationshipMap.containsKey(start) && relationshipMap.get(start).contains(end)) {
-                    throw new SpecificationException("Relationship between columnID " + start + " and " + end +
+                if (relationshipMap.containsKey(determinant) && relationshipMap.get(determinant).contains(dependent)) {
+                    throw new SpecificationException("Relationship between columnID " + determinant + " and " + dependent +
                             " already exists");
+                }
+                if (usedColumns.contains(dependent)) {
+                    throw new SpecificationException("Relationship already exists");
                 }
 
                 DependencyFunction dependencyFunction = tableRelationship.getDependencyFunction();
-                ColumnSchema startColumn = columnMap.get(start);
-                ColumnSchema endColumn = columnMap.get(end);
+                ColumnSpec startColumn = columnMap.get(determinant);
+                ColumnSpec endColumn = columnMap.get(dependent);
                 dependencyFunction.validate(startColumn, endColumn);
 
-                if (relationshipMap.containsKey(start)) {
-                    Set<Integer> ends = relationshipMap.get(start);
-                    ends.add(end);
-                    relationshipMap.replace(start, ends);
+                if (relationshipMap.containsKey(determinant)) {
+                    Set<Integer> ends = relationshipMap.get(determinant);
+                    ends.add(dependent);
+                    relationshipMap.replace(determinant, ends);
                 } else {
                     Set<Integer> ends = new HashSet<>();
-                    ends.add(end);
-                    relationshipMap.put(start, ends);
+                    ends.add(dependent);
+                    relationshipMap.put(determinant, ends);
                 }
 
                 numRelationships += 1;
+                usedColumns.add(dependent);
             }
         }
+
+        if (tableRelationship.getRandomSeed() == null) {
+            tableRelationship.setRandomSeed(rnd.nextLong());
+        }
+
         return tableRelationship;
     }
 
     /**
      * Parses a GenTableRelationshipSchema object into a DefTableRelationshipSchema object with a dependency map.
+     *
      * @param genTableRelationship GenTableRelationshipSchema object to parse.
      * @return Parsed DefTableRelationshipSchema object.
      */
-    public DefTableRelationshipSchema parseGenTableRelationship(GenTableRelationshipSchema genTableRelationship) {
-        if (genTableRelationship.getNumRelationships() + numRelationships > columnMap.size() * (columnMap.size() - 1)) {
+    private DefTableRelationshipSpec parseGenTableRelationship(GenTableRelationshipSpec genTableRelationship) {
+        if (genTableRelationship.getNumRelationships() + numRelationships > columnMap.size() - usedColumns.size()) {
             throw new SpecificationException("Too many relationships in one table");
         }
 
-        DefTableRelationshipSchema tableRelationship = new DefTableRelationshipSchema();
+        DefTableRelationshipSpec tableRelationship = new DefTableRelationshipSpec();
         List<Integer> columnIDs = new ArrayList<>(columnMap.keySet());
 
         tableRelationship.setDependencyFunction(genTableRelationship.getDependencyFunction());
-        GraphSchema graphSchema = genTableRelationship.getGraphSchema();
+        GraphSpec graphSpec = genTableRelationship.getGraphSpec();
+        graphSpec.setRandomGenerator(rnd);
 
-        tableRelationship.setDependencyMap(graphSchema.generateTableGraph(columnIDs,
-                genTableRelationship.getNumRelationships(), relationshipMap));
+        tableRelationship.setDependencyMap(graphSpec.generateTableGraph(columnIDs,
+                genTableRelationship.getNumRelationships(), relationshipMap, new HashSet<>(usedColumns)));
 
         return parseTableRelationship(tableRelationship);
     }

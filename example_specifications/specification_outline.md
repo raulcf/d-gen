@@ -59,7 +59,7 @@ columns within a table.
 #### defColumn:
 Required parameters:
 - columnID: An integer that uniquely identifies this column within a table.
-- dataTypeSchema: A datatype schema that defines the data to put within the column.  
+- dataTypeSpec: A datatype schema that defines the data to put within the column.  
 
 Optional parameters:
 - columnName: Name to give to column.
@@ -71,7 +71,7 @@ Optional parameters:
 
 #### genColumn:
 Required parameters:
-- dataTypeSchema: A datatype schema that defines the data to put within the column.
+- dataTypeSpec: A datatype schema that defines the data to put within the column.
 
 Optional parameters:
 - numColumns (Defaults to randomly generated value): Number of columns to generate following 
@@ -107,7 +107,7 @@ this schema.
 #### primaryKeys:
 Required parameters:
 - columnID: An integer that uniquely identifies this column within a table.
-- dataTypeSchema: A datatype schema that defines the data to put within the column.  
+- dataTypeSpec: A datatype schema that defines the data to put within the column.  
 
 Optional parameters:
 - columnName: Name to give to column.
@@ -167,7 +167,7 @@ Required parameters:
 - numRelationships: Number of relationships to create.
 - dependencyFunction: Dependency function that defines the relationships between columns in
 dependencyMap (explained below).
-- graphSchema: Graph that defines how relationships are distributed (explained below).
+- graphSpec: Graph that defines how relationships are distributed (explained below).
 
 ### Dependency Functions
 Dependency functions determine the kind of relationship between columns.
@@ -209,7 +209,7 @@ key column.
 #### genPKFK
 Required parameters:
 - numRelationships: Number of PK-FK relationships to generate.
-- graphSchema: Graph that defines how relationships are distributed (explained below).
+- graphSpec: Graph that defines how relationships are distributed (explained below).
 
 ### Graph Schemas
 Graph schemas are used to defines how relationships are distributed amongst columns or 

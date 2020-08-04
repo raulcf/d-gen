@@ -1,0 +1,14 @@
+---
+database:
+  databaseName: "5"
+  randomSeed: 1
+  tableSpecs:
+    - defTable:
+        numRows: 100
+        columnSpecs:
+          - defColumn:
+              columnID: 1
+              dataTypeSpec:
+                int: {}
+
+

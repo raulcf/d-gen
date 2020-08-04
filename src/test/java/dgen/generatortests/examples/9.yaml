@@ -1,0 +1,42 @@
+---
+database:
+  databaseName: "9"
+  randomSeed: 1
+  tableSpecs:
+    - defTable:
+        tableName: "hello world"
+        numRows: 10
+        tableID: 1
+        columnSpecs:
+          - defColumn:
+              columnID: 1
+              unique: true
+              dataTypeSpec:
+                int:
+                  minValue: 0
+                  maxValue: 10
+          - defColumn:
+              columnID: 2
+              unique: false
+              dataTypeSpec:
+                int:
+                  minValue: 10
+                  maxValue: 15
+          - defColumn:
+              columnID: 3
+              unique: true
+              dataTypeSpec:
+                int:
+                  minValue: 20
+                  maxValue: 30
+        tableRelationships:
+          - defTableRelationship:
+              dependencyMap:
+                1: [2]
+                2: [3]
+                3: [1]
+              dependencyFunction:
+                functionalDependency: {}
+
+
+
