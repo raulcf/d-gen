@@ -1,0 +1,5 @@
+package dgen.utils.parsers.specs;
+
+public enum SpecType {
+    DEFTABLE, GENTABLE, DEFCOLUMN, GENCOLUMN, DEFFOREIGNKEY, GENFOREIGNKEY, PRIMARYKEY, DATABASE
+}

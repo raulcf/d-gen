@@ -8,7 +8,7 @@ import dgen.coreconfig.ConfigKey;
 import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.IntegerTypeGenerator;
 import dgen.distributions.config.DistributionConfig;
-import dgen.utils.specs.datatypespecs.IntegerSpec;
+import dgen.utils.parsers.specs.datatypespecs.IntegerSpec;
 
 import java.util.HashMap;
 import java.util.List;

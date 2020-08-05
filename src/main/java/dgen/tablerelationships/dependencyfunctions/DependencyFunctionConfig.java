@@ -2,10 +2,10 @@ package dgen.tablerelationships.dependencyfunctions;
 
 import dgen.tablerelationships.dependencyfunctions.funcdeps.FuncDepConfig;
 import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityConfig;
-import dgen.utils.specs.relationships.dependencyFunctions.DependencyFunction;
-import dgen.utils.specs.relationships.dependencyFunctions.FunctionType;
-import dgen.utils.specs.relationships.dependencyFunctions.FunctionalDependency;
-import dgen.utils.specs.relationships.dependencyFunctions.JaccardSimilarity;
+import dgen.utils.parsers.specs.relationships.dependencyFunctions.DependencyFunction;
+import dgen.utils.parsers.specs.relationships.dependencyFunctions.FunctionType;
+import dgen.utils.parsers.specs.relationships.dependencyFunctions.FunctionalDependency;
+import dgen.utils.parsers.specs.relationships.dependencyFunctions.JaccardSimilarity;
 
 public interface DependencyFunctionConfig {
 

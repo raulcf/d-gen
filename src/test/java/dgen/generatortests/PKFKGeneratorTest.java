@@ -8,7 +8,7 @@ import dgen.dataset.DatasetGenerator;
 import dgen.datatypes.DataType;
 import dgen.datatypes.IntegerType;
 import dgen.pkfk.FKGenerator;
-import dgen.utils.SpecificationParser;
+import dgen.utils.parsers.SpecificationParser;
 import org.junit.Before;
 import org.junit.Test;
 

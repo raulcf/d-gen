@@ -2,7 +2,7 @@ package dgen.datatypes.config;
 
 import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.*;
-import dgen.utils.specs.datatypespecs.*;
+import dgen.utils.parsers.specs.datatypespecs.*;
 
 public interface DataTypeConfig {
 

@@ -1,18 +1,13 @@
 package dgen.generatortests;
 
-import dgen.attributegenerators.DefaultAttributeNameGenerator;
 import dgen.column.ColumnGenerator;
 import dgen.dataset.DatasetConfig;
 import dgen.dataset.DatasetGenerator;
 import dgen.datatypes.DataType;
 import dgen.datatypes.IntegerType;
-import dgen.datatypes.generators.DataTypeGenerator;
-import dgen.tablerelationships.dependencyfunctions.funcdeps.FuncDepConfig;
-import dgen.tablerelationships.dependencyfunctions.funcdeps.FuncDepGenerator;
 import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityConfig;
 import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityGenerator;
-import dgen.utils.SpecificationParser;
-import dgen.utils.specs.relationships.dependencyFunctions.JaccardSimilarity;
+import dgen.utils.parsers.SpecificationParser;
 import org.junit.Before;
 import org.junit.Test;
 

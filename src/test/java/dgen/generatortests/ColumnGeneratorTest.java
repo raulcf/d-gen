@@ -3,7 +3,7 @@ package dgen.generatortests;
 import dgen.column.Column;
 import dgen.dataset.DatasetConfig;
 import dgen.dataset.DatasetGenerator;
-import dgen.utils.SpecificationParser;
+import dgen.utils.parsers.SpecificationParser;
 import org.junit.Before;
 import org.junit.Test;
 

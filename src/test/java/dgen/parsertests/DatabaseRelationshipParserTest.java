@@ -1,15 +1,15 @@
 package dgen.parsertests;
 
-import dgen.utils.DatabaseRelationshipParser;
-import dgen.utils.RandomGenerator;
-import dgen.utils.SpecificationException;
-import dgen.utils.specs.ColumnSpec;
-import dgen.utils.specs.DefForeignKeySpec;
-import dgen.utils.specs.PrimaryKeySpec;
-import dgen.utils.specs.datatypespecs.IntegerSpec;
-import dgen.utils.specs.relationships.DefPKFKSpec;
-import dgen.utils.specs.relationships.GenPKFKSpec;
-import dgen.utils.specs.relationships.RandomGraph;
+import dgen.utils.parsers.DatabaseRelationshipParser;
+import dgen.utils.parsers.RandomGenerator;
+import dgen.utils.parsers.SpecificationException;
+import dgen.utils.parsers.specs.ColumnSpec;
+import dgen.utils.parsers.specs.DefForeignKeySpec;
+import dgen.utils.parsers.specs.PrimaryKeySpec;
+import dgen.utils.parsers.specs.datatypespecs.IntegerSpec;
+import dgen.utils.parsers.specs.relationships.DefPKFKSpec;
+import dgen.utils.parsers.specs.relationships.GenPKFKSpec;
+import dgen.utils.parsers.specs.relationships.RandomGraph;
 import org.javatuples.Pair;
 import org.junit.Before;
 import org.junit.Test;

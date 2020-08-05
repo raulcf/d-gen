@@ -1,10 +1,10 @@
 package dgen.parsertests;
 
-import dgen.utils.RandomGenerator;
-import dgen.utils.SpecificationException;
-import dgen.utils.TableParser;
-import dgen.utils.specs.*;
-import dgen.utils.specs.datatypespecs.IntegerSpec;
+import dgen.utils.parsers.RandomGenerator;
+import dgen.utils.parsers.SpecificationException;
+import dgen.utils.parsers.TableParser;
+import dgen.utils.parsers.specs.*;
+import dgen.utils.parsers.specs.datatypespecs.IntegerSpec;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -7,7 +7,7 @@ import dgen.datatypes.DataType;
 import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.DataTypeGenerator;
 import dgen.datatypes.generators.IntegerTypeGenerator;
-import dgen.utils.RandomGenerator;
+import dgen.utils.parsers.RandomGenerator;
 
 import java.util.*;
 

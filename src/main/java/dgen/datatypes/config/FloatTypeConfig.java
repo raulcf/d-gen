@@ -8,7 +8,7 @@ import dgen.coreconfig.ConfigKey;
 import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.FloatTypeGenerator;
 import dgen.distributions.config.DistributionConfig;
-import dgen.utils.specs.datatypespecs.FloatSpec;
+import dgen.utils.parsers.specs.datatypespecs.FloatSpec;
 
 import java.util.HashMap;
 import java.util.List;

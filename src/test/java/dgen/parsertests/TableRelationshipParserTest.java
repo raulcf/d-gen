@@ -1,15 +1,15 @@
 package dgen.parsertests;
 
-import dgen.utils.RandomGenerator;
-import dgen.utils.SpecificationException;
-import dgen.utils.TableRelationshipParser;
-import dgen.utils.specs.ColumnSpec;
-import dgen.utils.specs.DefColumnSpec;
-import dgen.utils.specs.datatypespecs.IntegerSpec;
-import dgen.utils.specs.datatypespecs.StringSpec;
-import dgen.utils.specs.relationships.*;
-import dgen.utils.specs.relationships.dependencyFunctions.FunctionalDependency;
-import dgen.utils.specs.relationships.dependencyFunctions.JaccardSimilarity;
+import dgen.utils.parsers.RandomGenerator;
+import dgen.utils.parsers.SpecificationException;
+import dgen.utils.parsers.TableRelationshipParser;
+import dgen.utils.parsers.specs.ColumnSpec;
+import dgen.utils.parsers.specs.DefColumnSpec;
+import dgen.utils.parsers.specs.datatypespecs.IntegerSpec;
+import dgen.utils.parsers.specs.datatypespecs.StringSpec;
+import dgen.utils.parsers.specs.relationships.*;
+import dgen.utils.parsers.specs.relationships.dependencyFunctions.FunctionalDependency;
+import dgen.utils.parsers.specs.relationships.dependencyFunctions.JaccardSimilarity;
 import org.junit.Before;
 import org.junit.Test;
 

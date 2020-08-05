@@ -5,7 +5,7 @@ import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigKey;
 import dgen.distributions.DistributionType;
 import dgen.distributions.GaussianDistribution;
-import dgen.utils.specs.datatypespecs.distributionspecs.GaussianDistributionSpec;
+import dgen.utils.parsers.specs.datatypespecs.distributionspecs.GaussianDistributionSpec;
 
 import java.util.HashMap;
 import java.util.List;

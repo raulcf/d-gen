@@ -1,6 +1,6 @@
 package dgen.attributegenerators;
 
-import dgen.utils.RandomGenerator;
+import dgen.utils.parsers.RandomGenerator;
 
 public class RandomAttributeNameGenerator implements AttributeNameGenerator {
 

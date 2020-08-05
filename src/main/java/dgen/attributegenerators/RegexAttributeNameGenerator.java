@@ -1,7 +1,7 @@
 package dgen.attributegenerators;
 
 import com.mifmif.common.regex.Generex;
-import dgen.utils.RandomGenerator;
+import dgen.utils.parsers.RandomGenerator;
 
 public class RegexAttributeNameGenerator implements AttributeNameGenerator {
 

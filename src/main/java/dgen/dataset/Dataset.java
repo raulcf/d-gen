@@ -1,15 +1,20 @@
 package dgen.dataset;
 
+import dgen.column.Column;
 import dgen.tables.Table;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Dataset {
 
+    private DatasetConfig datasetConfig;
     private String attributeName;
-    private List<Table> tables;
+    private Map<Integer, Table> tables;
 
-    public Dataset(String attributeName, List<Table> tables) {
+    public Dataset(DatasetConfig datasetConfig, String attributeName, Map<Integer, Table> tables) {
+        this.datasetConfig = datasetConfig;
         this.attributeName = attributeName;
         this.tables = tables;
     }
@@ -20,10 +25,9 @@ public class Dataset {
         sb.append("Dataset name: ");
         sb.append(attributeName).append("\n\n");
 
-        for (int i = 0; i < tables.size(); i++) {
-            Table table = tables.get(i);
-            sb.append("Table ").append(i).append(":\n");
-            sb.append(table.toCSV());
+        for (Table table: tables.values()) {
+            sb.append("Table ").append(table.getAttributeName()).append("\n");
+            sb.append(table.toString());
         }
 
         return sb.toString();
@@ -34,6 +38,14 @@ public class Dataset {
     }
 
     public List<Table> getTables() {
-        return tables;
+        return new ArrayList<>(tables.values());
+    }
+
+    public Table getTable(int tableID) { return tables.get(tableID); }
+
+    public Column getColumn(int tableID, int columnID) { return getTable(tableID).getColumn(columnID); }
+
+    public DatasetConfig getDatasetConfig() {
+        return datasetConfig;
     }
 }

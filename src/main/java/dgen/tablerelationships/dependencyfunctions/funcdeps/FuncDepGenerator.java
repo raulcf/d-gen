@@ -3,13 +3,11 @@ package dgen.tablerelationships.dependencyfunctions.funcdeps;
 import dgen.column.ColumnGenerator;
 import dgen.coreconfig.DGException;
 import dgen.datatypes.DataType;
-import dgen.datatypes.IntegerType;
 import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.DataTypeGenerator;
-import dgen.utils.RandomGenerator;
+import dgen.utils.parsers.RandomGenerator;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class FuncDepGenerator implements DataTypeGenerator {
 

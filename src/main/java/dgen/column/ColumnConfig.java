@@ -5,7 +5,7 @@ import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigDef.Importance;
 import dgen.coreconfig.ConfigDef.Type;
 import dgen.coreconfig.ConfigKey;
-import dgen.utils.specs.ColumnSpec;
+import dgen.utils.parsers.specs.ColumnSpec;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +19,9 @@ public class ColumnConfig extends Config {
 
     public static final String COLUMN_ID = "column.id";
     private static final String COLUMN_ID_DOC = "Indicates unique ID of column";
+
+    public static final String COLUMN_TYPE = "column.type";
+    private static final String COLUMN_TYPE_DOC = "Indicates type of column";
 
     public static final String COLUMN_NAME = "column.name";
     private static final String COLUMN_NAME_DOC = "Indicates the name of column";
@@ -47,6 +50,7 @@ public class ColumnConfig extends Config {
     static {
         config = new ConfigDef()
                 .define(COLUMN_ID, Type.INT, Importance.LOW, COLUMN_ID_DOC)
+                .define(COLUMN_TYPE, Type.OBJECT, Importance.LOW, COLUMN_TYPE_DOC)
                 .define(COLUMN_NAME, Type.STRING, null, null, Importance.LOW, COLUMN_NAME_DOC)
                 .define(REGEX_NAME, Type.STRING, null, null, Importance.LOW, REGEX_NAME_DOC)
                 .define(RANDOM_NAME, Type.BOOLEAN, true, Importance.LOW, RANDOM_NAME_DOC)
@@ -60,6 +64,7 @@ public class ColumnConfig extends Config {
     public static ColumnConfig specToConfig(ColumnSpec columnSpec) {
         Map<String, Object> originals = new HashMap<>();
         originals.put("column.id", columnSpec.getColumnID());
+        originals.put("column.type", columnSpec.specType());
         originals.put("column.name", columnSpec.getColumnName());
         originals.put("regex.name", columnSpec.getRegexName());
         originals.put("random.name", columnSpec.isRandomName());

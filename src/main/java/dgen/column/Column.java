@@ -6,12 +6,18 @@ import java.util.List;
 
 public class Column {
 
+    private int columnID;
     private String attributeName;
     private List<DataType> data;
 
-    public Column(String attributeName, List<DataType> data) {
+    public Column(int columnID, String attributeName, List<DataType> data) {
+        this.columnID = columnID;
         this.attributeName = attributeName;
         this.data = data;
+    }
+
+    public int getColumnID() {
+        return columnID;
     }
 
     public List<DataType> getData() {

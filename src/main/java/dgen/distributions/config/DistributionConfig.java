@@ -2,9 +2,9 @@ package dgen.distributions.config;
 
 import dgen.distributions.Distribution;
 import dgen.distributions.DistributionType;
-import dgen.utils.specs.datatypespecs.distributionspecs.DistributionSpec;
-import dgen.utils.specs.datatypespecs.distributionspecs.GaussianDistributionSpec;
-import dgen.utils.specs.datatypespecs.distributionspecs.UniformDistributionSpec;
+import dgen.utils.parsers.specs.datatypespecs.distributionspecs.DistributionSpec;
+import dgen.utils.parsers.specs.datatypespecs.distributionspecs.GaussianDistributionSpec;
+import dgen.utils.parsers.specs.datatypespecs.distributionspecs.UniformDistributionSpec;
 
 public interface DistributionConfig {
 

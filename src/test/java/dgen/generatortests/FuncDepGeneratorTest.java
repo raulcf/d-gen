@@ -9,7 +9,7 @@ import dgen.datatypes.IntegerType;
 import dgen.datatypes.generators.DataTypeGenerator;
 import dgen.tablerelationships.dependencyfunctions.funcdeps.FuncDepConfig;
 import dgen.tablerelationships.dependencyfunctions.funcdeps.FuncDepGenerator;
-import dgen.utils.SpecificationParser;
+import dgen.utils.parsers.SpecificationParser;
 import org.junit.Before;
 import org.junit.Test;
 
