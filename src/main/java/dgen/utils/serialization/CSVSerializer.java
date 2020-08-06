@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class CSVSerializer {
+public class CSVSerializer implements Serializer {
 
     Dataset dataset;
     String delimiter;
@@ -34,6 +34,7 @@ public class CSVSerializer {
      * be a .csv file and all .csv files will be in a folder named after the database.
      * @param parentDir Parent directory to place Dataset directory in.
      */
+    @Override
     public void serialize(String parentDir) throws Exception {
         FileWriter csvWriter;
 
@@ -58,6 +59,8 @@ public class CSVSerializer {
             csvWriter.flush();
             csvWriter.close();
         }
+
+        Serializer.outputMetadata(parentDir, dataset);
     }
 
     public String tableToCSV(Table table) {
@@ -92,7 +95,7 @@ public class CSVSerializer {
                 String value = dt.value().toString();
                 recordValues.add(value);
             }
-            String record = String.join(",", recordValues);
+            String record = String.join(delimiter, recordValues);
             sb.append(record).append('\n');
         }
 
@@ -105,8 +108,9 @@ public class CSVSerializer {
         specificationParser.parseYAML("test.yaml");
         specificationParser.write("test_output.json");
         DatasetGenerator datasetGenerator = DatasetConfig.specToGenerator(specificationParser.getDatabase());
+        Dataset dataset = datasetGenerator.generateDataset();
 
-//        CSVSerializer csvSerializer = new CSVSerializer(datasetGenerator.generateDataset(), ",");
-//        csvSerializer.serialize("/Users/ryan/Downloads/");
+        CSVSerializer csvSerializer = new CSVSerializer(dataset, ",");
+        csvSerializer.serialize("/Users/ryan/Downloads/");
     }
 }

@@ -17,7 +17,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.*;
 
-public class PostgresSerializer {
+public class PostgresSerializer implements Serializer{
 
     Dataset dataset;
     DatasetConfig datasetConfig;
@@ -34,6 +34,7 @@ public class PostgresSerializer {
      * Dataset objects aren't loaded as Postgres objects but rather as schemas.
      * @param scriptPath Path of file to write PostgreSQL script to.
      */
+    @Override
     public void serialize(String scriptPath) throws Exception {
         StringBuilder statement = new StringBuilder();
         statement.append("CREATE SCHEMA \"");
@@ -79,6 +80,8 @@ public class PostgresSerializer {
         postgresScriptWriter.write(statement.toString());
         postgresScriptWriter.flush();
         postgresScriptWriter.close();
+
+        Serializer.outputMetadata(scriptPath + ".json", dataset);
     }
 
     private String dataTypeToStatement(DataTypeSpec dataTypeSpec) {
