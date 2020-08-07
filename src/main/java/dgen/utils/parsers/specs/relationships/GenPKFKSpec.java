@@ -1,11 +1,13 @@
 package dgen.utils.parsers.specs.relationships;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.parsers.SpecificationException;
 
 @JsonTypeName("genPKFK")
 public class GenPKFKSpec implements DatabaseRelationshipSpec {
     private int numRelationships;
+    @JsonProperty("graph")
     private GraphSpec graphSpec;
 
     @Override

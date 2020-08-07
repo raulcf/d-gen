@@ -12,7 +12,7 @@ import java.util.*;
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.NAME)
 @JsonSubTypes({@JsonSubTypes.Type(value = RandomGraph.class, name = "randomGraph"),
         @JsonSubTypes.Type(value = ConcentratedGraph.class, name = "concentratedGraph")})
-@JsonTypeName("graphSpec")
+@JsonTypeName("graph")
 public interface GraphSpec {
     GraphType graphType();
     /*

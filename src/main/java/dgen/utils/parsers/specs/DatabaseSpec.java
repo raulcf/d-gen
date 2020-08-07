@@ -1,5 +1,6 @@
 package dgen.utils.parsers.specs;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import dgen.utils.parsers.SpecificationException;
@@ -14,6 +15,7 @@ import java.util.Random;
 public class DatabaseSpec implements Spec {
     private String databaseName;
     private Long randomSeed = new Random().nextLong();
+    @JsonProperty("tables")
     private List<TableSpec> tableSpecs;
     private List<DatabaseRelationshipSpec> databaseRelationships = new ArrayList<>();
 

@@ -40,9 +40,10 @@ public class ParquetSerializer implements Serializer {
      * Writes a Dataset object into Parquet files. Each table with the Dataset object will be a
      * .parquet file and all .parquet files will be in a folder named after the database.
      * @param parentDir Parent directory to place dataset directory in.
+     * @param metadataPath Path to write dataset metadata to.
      */
     @Override
-    public void serialize(String parentDir) throws Exception {
+    public void serialize(String parentDir, String metadataPath) throws Exception {
         for (TableConfig tableConfig: (List<TableConfig>) datasetConfig.getObject(DatasetConfig.TABLE_CONFIGS)) {
             Schema parquetSchema;
             Table table = dataset.getTable(tableConfig.getInt(TableConfig.TABLE_ID));
@@ -54,7 +55,7 @@ public class ParquetSerializer implements Serializer {
             writeToParquet(parquetSchema, parquetRecords, parquetPath);
         }
 
-        Serializer.outputMetadata(parentDir, dataset);
+        Serializer.outputMetadata(metadataPath, dataset);
     }
 
     private String dataTypeToAvro(DataTypeSpec dataTypeSpec) {
@@ -171,6 +172,7 @@ public class ParquetSerializer implements Serializer {
         }
     }
 
+    // Method for testing
     public void readFromParquet(Path filePathToRead) throws IOException {
         try (ParquetReader<GenericData.Record> reader = AvroParquetReader
                 .<GenericData.Record>builder(filePathToRead)
@@ -193,6 +195,6 @@ public class ParquetSerializer implements Serializer {
         Dataset dataset = datasetGenerator.generateDataset();
 
         ParquetSerializer parquetSerializer = new ParquetSerializer(dataset);
-        parquetSerializer.serialize("/Users/ryan/Documents/test");
+//        parquetSerializer.serialize("/Users/ryan/Documents/test");
     }
 }

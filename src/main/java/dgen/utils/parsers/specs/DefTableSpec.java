@@ -1,5 +1,6 @@
 package dgen.utils.parsers.specs;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.parsers.SpecificationException;
@@ -14,6 +15,7 @@ public class DefTableSpec implements TableSpec {
 
     private int tableID;
     private Integer numRows = null;
+    @JsonProperty("columns")
     private List<ColumnSpec> columnSpecs;
     private String tableName;
     private String regexName;

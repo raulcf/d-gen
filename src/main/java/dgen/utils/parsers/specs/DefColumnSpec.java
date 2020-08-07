@@ -1,6 +1,7 @@
 package dgen.utils.parsers.specs;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.parsers.specs.datatypespecs.DataTypeSpec;
@@ -11,6 +12,7 @@ import dgen.utils.parsers.specs.datatypespecs.DataTypeSpec;
 public class DefColumnSpec implements ColumnSpec {
 
     private int columnID;
+    @JsonProperty("dataType")
     private DataTypeSpec dataTypeSpec;
     private String columnName;
     private String regexName;

@@ -15,7 +15,7 @@ public interface Serializer {
     /**
      * Writes metadata into a .json about a Dataset object that can't be inferred from the low-level spec
      * used to create the database.
-     * @param path File or directory to write to. If directory then the file will be named after the database.
+     * @param path File to write to.
      * @param dataset Dataset object to write metadata for.
      */
     static void outputMetadata(String path, Dataset dataset) throws Exception {
@@ -39,16 +39,16 @@ public interface Serializer {
 
 
         File metadataFile = new File(path);
-        if (metadataFile.isDirectory()) {
-            metadataFile = new File(path + "/" + dataset.getAttributeName() + "/" + dataset.getAttributeName() + ".json");
-        }
         if (metadataFile.exists()) {
             throw new Exception("File " + metadataFile + " already exists");
         }
 
         FileWriter metadataWriter = new FileWriter(metadataFile);
         metadataWriter.write(new ObjectMapper().writeValueAsString(metadata));
+
+        metadataWriter.flush();
+        metadataWriter.close();
     }
 
-    void serialize(String outPath) throws Exception;
+    void serialize(String outPath, String metadataPath) throws Exception;
 }

@@ -1,5 +1,6 @@
 package dgen.utils.parsers.specs;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.parsers.SpecificationException;
 import dgen.utils.parsers.specs.relationships.TableRelationshipSpec;
@@ -16,6 +17,7 @@ public class GenTableSpec implements TableSpec {
     private Integer numTables;
     private Integer minTables = 1;
     private Integer maxTables = 100; // TODO: Decide on this later
+    @JsonProperty("columns")
     private List<ColumnSpec> columnSpecs;
     private String tableName;
     private String regexName;

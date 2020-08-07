@@ -1,5 +1,6 @@
 package dgen.utils.parsers.specs.relationships;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.parsers.SpecificationException;
 import dgen.utils.parsers.specs.relationships.dependencyFunctions.DependencyFunction;
@@ -8,6 +9,7 @@ import dgen.utils.parsers.specs.relationships.dependencyFunctions.DependencyFunc
 public class GenTableRelationshipSpec implements TableRelationshipSpec {
     private int numRelationships = 0;
     private DependencyFunction dependencyFunction;
+    @JsonProperty("graph")
     private GraphSpec graphSpec;
 
 

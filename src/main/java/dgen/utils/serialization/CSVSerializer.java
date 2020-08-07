@@ -33,9 +33,10 @@ public class CSVSerializer implements Serializer {
      * Writes a Dataset object to CSV files. Each table within the dataset will
      * be a .csv file and all .csv files will be in a folder named after the database.
      * @param parentDir Parent directory to place Dataset directory in.
+     * @param metadataPath Path to write dataset metadata to.
      */
     @Override
-    public void serialize(String parentDir) throws Exception {
+    public void serialize(String parentDir, String metadataPath) throws Exception {
         FileWriter csvWriter;
 
         String datasetDirPath = parentDir + "/" + dataset.getAttributeName();
@@ -60,7 +61,7 @@ public class CSVSerializer implements Serializer {
             csvWriter.close();
         }
 
-        Serializer.outputMetadata(parentDir, dataset);
+        Serializer.outputMetadata(metadataPath, dataset);
     }
 
     public String tableToCSV(Table table) {
@@ -111,6 +112,6 @@ public class CSVSerializer implements Serializer {
         Dataset dataset = datasetGenerator.generateDataset();
 
         CSVSerializer csvSerializer = new CSVSerializer(dataset, ",");
-        csvSerializer.serialize("/Users/ryan/Downloads/");
+//        csvSerializer.serialize("/Users/ryan/Downloads/");
     }
 }

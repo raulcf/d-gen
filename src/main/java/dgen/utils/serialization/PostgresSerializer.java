@@ -33,9 +33,10 @@ public class PostgresSerializer implements Serializer{
      * Creates a script of PostgreSQL commands that can be used to load a database object into PostgreSQL.
      * Dataset objects aren't loaded as Postgres objects but rather as schemas.
      * @param scriptPath Path of file to write PostgreSQL script to.
+     * @param metadataPath Path to write dataset metadata to.
      */
     @Override
-    public void serialize(String scriptPath) throws Exception {
+    public void serialize(String scriptPath, String metadataPath) throws Exception {
         StringBuilder statement = new StringBuilder();
         statement.append("CREATE SCHEMA \"");
         statement.append(databaseName + "\";");
@@ -81,7 +82,7 @@ public class PostgresSerializer implements Serializer{
         postgresScriptWriter.flush();
         postgresScriptWriter.close();
 
-        Serializer.outputMetadata(scriptPath + ".json", dataset);
+        Serializer.outputMetadata(metadataPath, dataset);
     }
 
     private String dataTypeToStatement(DataTypeSpec dataTypeSpec) {
@@ -216,6 +217,6 @@ public class PostgresSerializer implements Serializer{
         Dataset dataset = datasetGenerator.generateDataset();
 
         PostgresSerializer postgresSerializer = new PostgresSerializer(dataset);
-        postgresSerializer.serialize("/Users/ryan/Documents/postgres_test");
+//        postgresSerializer.serialize("/Users/ryan/Documents/postgres_test");
     }
 }

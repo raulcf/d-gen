@@ -1,5 +1,6 @@
 package dgen.utils.parsers.specs;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.parsers.SpecificationException;
 import dgen.utils.parsers.specs.datatypespecs.DataTypeSpec;
@@ -9,6 +10,7 @@ public class GenForeignKeySpec implements ColumnSpec {
     private Integer numColumns = null;
     private Integer minColumns = 1;
     private Integer maxColumns = 100; // TODO: Decide on this later
+    @JsonProperty("dataType")
     private DataTypeSpec dataTypeSpec;
     private String columnName;
     private String regexName;

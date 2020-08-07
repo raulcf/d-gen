@@ -39,8 +39,8 @@ public class FloatTypeConfig extends Config implements DataTypeConfig {
     static {
         config = new ConfigDef()
                 .define(DEFAULT_VALUE, Type.FLOAT, null, null, Importance.LOW, DEFAULT_VALUE_DOC)
-                .define(LOWER_BOUND_DOMAIN, Type.INT, Float.MIN_VALUE, Importance.LOW, LOWER_BOUND_DOMAIN_DOC)
-                .define(UPPER_BOUND_DOMAIN, Type.INT, Float.MAX_VALUE, Importance.LOW, UPPER_BOUND_DOMAIN_DOC)
+                .define(LOWER_BOUND_DOMAIN, Type.FLOAT, Float.MIN_VALUE, Importance.LOW, LOWER_BOUND_DOMAIN_DOC)
+                .define(UPPER_BOUND_DOMAIN, Type.FLOAT, Float.MAX_VALUE, Importance.LOW, UPPER_BOUND_DOMAIN_DOC)
                 .define(DISTRIBUTION, Type.OBJECT, null, null, Importance.LOW, DISTRIBUTION_DOC)
                 .define(RANDOM_SEED, Type.LONG, Importance.LOW, RANDOM_SEED_DOC)
                 .define(SIZE_IN_BYTES, Type.INT, Float.BYTES, Importance.LOW, SIZE_IN_BYTES_DOC);

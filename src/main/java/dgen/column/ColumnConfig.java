@@ -21,7 +21,7 @@ public class ColumnConfig extends Config {
     private static final String COLUMN_ID_DOC = "Indicates unique ID of column";
 
     public static final String COLUMN_TYPE = "column.type";
-    private static final String COLUMN_TYPE_DOC = "Indicates type of column";
+    private static final String COLUMN_TYPE_DOC = "Indicates spec type of column (e.g. DefForeignKey, DefColumn, etc)";
 
     public static final String COLUMN_NAME = "column.name";
     private static final String COLUMN_NAME_DOC = "Indicates the name of column";
@@ -33,7 +33,7 @@ public class ColumnConfig extends Config {
     private static final String RANDOM_NAME_DOC = "Indicates whether to generate a random name";
 
     public static final String DATATYPE = "datatype";
-    private static final String DATATYPE_DOC = "Indicates the datatype of column";
+    private static final String DATATYPE_DOC = "Datatype spec of column";
 
     public static final String UNIQUE = "unique";
     private static final String UNIQUE_DOC = "Indicates whether column values are unique";

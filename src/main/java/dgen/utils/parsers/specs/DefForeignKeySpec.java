@@ -1,5 +1,6 @@
 package dgen.utils.parsers.specs;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.parsers.specs.datatypespecs.DataTypeSpec;
@@ -15,6 +16,7 @@ public class DefForeignKeySpec implements ColumnSpec {
     private boolean unique = false;
     private boolean hasNull = false;
     private float nullFrequency = 0;
+    @JsonProperty("dataType")
     private DataTypeSpec dataTypeSpec;
     private Long randomSeed;
 
