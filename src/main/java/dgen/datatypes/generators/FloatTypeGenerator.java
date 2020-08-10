@@ -7,7 +7,7 @@ import dgen.datatypes.config.FloatTypeConfig;
 import dgen.distributions.Distribution;
 import dgen.distributions.GaussianDistribution;
 import dgen.distributions.UniformDistribution;
-import dgen.utils.RandomGenerator;
+import dgen.utils.parsers.RandomGenerator;
 
 import java.util.HashSet;
 import java.util.Random;

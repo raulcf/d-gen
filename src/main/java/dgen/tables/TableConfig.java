@@ -5,10 +5,10 @@ import dgen.coreconfig.Config;
 import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigKey;
 import dgen.tablerelationships.TableRelationshipConfig;
-import dgen.utils.specs.ColumnSpec;
-import dgen.utils.specs.TableSpec;
-import dgen.utils.specs.relationships.DefTableRelationshipSpec;
-import dgen.utils.specs.relationships.TableRelationshipSpec;
+import dgen.utils.parsers.specs.ColumnSpec;
+import dgen.utils.parsers.specs.TableSpec;
+import dgen.utils.parsers.specs.relationships.DefTableRelationshipSpec;
+import dgen.utils.parsers.specs.relationships.TableRelationshipSpec;
 
 import java.util.ArrayList;
 import java.util.HashMap;

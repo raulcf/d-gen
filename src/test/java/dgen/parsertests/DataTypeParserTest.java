@@ -1,11 +1,11 @@
 package dgen.parsertests;
 
-import dgen.utils.DataTypeParser;
-import dgen.utils.RandomGenerator;
-import dgen.utils.specs.datatypespecs.BooleanSpec;
-import dgen.utils.specs.datatypespecs.FloatSpec;
-import dgen.utils.specs.datatypespecs.IntegerSpec;
-import dgen.utils.specs.datatypespecs.StringSpec;
+import dgen.utils.parsers.DataTypeParser;
+import dgen.utils.parsers.RandomGenerator;
+import dgen.utils.parsers.specs.datatypespecs.BooleanSpec;
+import dgen.utils.parsers.specs.datatypespecs.FloatSpec;
+import dgen.utils.parsers.specs.datatypespecs.IntegerSpec;
+import dgen.utils.parsers.specs.datatypespecs.StringSpec;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

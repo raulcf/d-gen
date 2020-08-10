@@ -5,7 +5,7 @@ import dgen.coreconfig.DGException;
 import dgen.datatypes.DataType;
 import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.DataTypeGenerator;
-import dgen.utils.RandomGenerator;
+import dgen.utils.parsers.RandomGenerator;
 
 import java.util.ArrayList;
 import java.util.HashSet;

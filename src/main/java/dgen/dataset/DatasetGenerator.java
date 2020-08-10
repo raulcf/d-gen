@@ -2,12 +2,10 @@ package dgen.dataset;
 
 import dgen.column.ColumnGenerator;
 import dgen.datatypes.DataType;
-import dgen.datatypes.generators.DataTypeGenerator;
 import dgen.pkfk.FKGenerator;
 import dgen.tables.Table;
 import dgen.tables.TableConfig;
 import dgen.tables.TableGenerator;
-import dgen.utils.RandomGenerator;
 import org.javatuples.Pair;
 
 import java.util.*;
@@ -19,6 +17,7 @@ public class DatasetGenerator {
 
     private String attributeName;
     private Map<Integer, TableGenerator> tableGeneratorMap;
+    private DatasetConfig datasetConfig;
 
     public DatasetGenerator(String attributeName, Map<Integer, TableGenerator> tableGeneratorMap) {
         this.attributeName = attributeName;
@@ -26,6 +25,7 @@ public class DatasetGenerator {
     }
 
     public DatasetGenerator(DatasetConfig datasetConfig) {
+        this.datasetConfig = datasetConfig;
         this.attributeName = datasetConfig.getString("dataset.name");
 
         Map<Integer, TableGenerator> tableGenerators = new HashMap<>();
@@ -63,13 +63,13 @@ public class DatasetGenerator {
 
     public Dataset generateDataset() {
 
-        List<Table> tables = new ArrayList<>();
+        Map<Integer, Table> tables = new HashMap<>();
         for (TableGenerator tg: tableGeneratorMap.values()) {
             Table table = tg.generateTable();
-            tables.add(table);
+            tables.put(table.getTableID(), table);
         }
 
-        return new Dataset(attributeName, tables);
+        return new Dataset(datasetConfig, attributeName, tables);
     }
 
     public TableGenerator getTableGenerator(int tableID) {

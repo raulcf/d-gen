@@ -7,7 +7,7 @@ import dgen.coreconfig.ConfigDef.Type;
 import dgen.coreconfig.ConfigKey;
 import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.BooleanTypeGenerator;
-import dgen.utils.specs.datatypespecs.BooleanSpec;
+import dgen.utils.parsers.specs.datatypespecs.BooleanSpec;
 
 import java.util.HashMap;
 import java.util.List;

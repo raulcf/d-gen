@@ -5,7 +5,7 @@ import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigKey;
 import dgen.distributions.DistributionType;
 import dgen.distributions.UniformDistribution;
-import dgen.utils.specs.datatypespecs.distributionspecs.UniformDistributionSpec;
+import dgen.utils.parsers.specs.datatypespecs.distributionspecs.UniformDistributionSpec;
 
 import java.util.HashMap;
 import java.util.List;

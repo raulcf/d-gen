@@ -1,9 +1,9 @@
 package dgen.parsertests;
 
-import dgen.utils.DatabaseParser;
-import dgen.utils.SpecificationException;
-import dgen.utils.specs.*;
-import dgen.utils.specs.datatypespecs.IntegerSpec;
+import dgen.utils.parsers.DatabaseParser;
+import dgen.utils.parsers.SpecificationException;
+import dgen.utils.parsers.specs.*;
+import dgen.utils.parsers.specs.datatypespecs.IntegerSpec;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -4,10 +4,10 @@ import dgen.coreconfig.Config;
 import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigKey;
 import dgen.tables.TableConfig;
-import dgen.utils.specs.DatabaseSpec;
-import dgen.utils.specs.TableSpec;
-import dgen.utils.specs.relationships.DatabaseRelationshipSpec;
-import dgen.utils.specs.relationships.DefPKFKSpec;
+import dgen.utils.parsers.specs.DatabaseSpec;
+import dgen.utils.parsers.specs.TableSpec;
+import dgen.utils.parsers.specs.relationships.DatabaseRelationshipSpec;
+import dgen.utils.parsers.specs.relationships.DefPKFKSpec;
 import org.javatuples.Pair;
 
 import java.util.*;

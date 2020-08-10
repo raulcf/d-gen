@@ -1,10 +1,10 @@
 package dgen.parsertests;
 
-import dgen.utils.SpecificationException;
-import dgen.utils.specs.datatypespecs.BooleanSpec;
-import dgen.utils.specs.datatypespecs.FloatSpec;
-import dgen.utils.specs.datatypespecs.IntegerSpec;
-import dgen.utils.specs.datatypespecs.StringSpec;
+import dgen.utils.parsers.SpecificationException;
+import dgen.utils.parsers.specs.datatypespecs.BooleanSpec;
+import dgen.utils.parsers.specs.datatypespecs.FloatSpec;
+import dgen.utils.parsers.specs.datatypespecs.IntegerSpec;
+import dgen.utils.parsers.specs.datatypespecs.StringSpec;
 import org.junit.Test;
 
 public class DataTypeValidateTest {

@@ -8,7 +8,7 @@ import dgen.coreconfig.ConfigKey;
 import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.StringTypeGenerator;
 import dgen.distributions.config.DistributionConfig;
-import dgen.utils.specs.datatypespecs.StringSpec;
+import dgen.utils.parsers.specs.datatypespecs.StringSpec;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +47,7 @@ public class StringTypeConfig extends Config implements DataTypeConfig{
                 .define(DEFAULT_VALUE, Type.STRING, null, null, Importance.LOW, DEFAULT_VALUE_DOC)
                 .define(REGEX_PATTERN, Type.STRING, null, null, Importance.LOW, REGEX_PATTERN_DOC)
                 .define(VALID_CHARACTERS, Type.STRING, "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz", Importance.LOW, VALID_CHARACTERS_DOC)
-                .define(MIN_LENGTH, Type.INT, 0, Importance.LOW, MAX_LENGTH_DOC)
+                .define(MIN_LENGTH, Type.INT, 0, Importance.LOW, MIN_LENGTH_DOC)
                 .define(MAX_LENGTH, Type.INT, Integer.MAX_VALUE, Importance.LOW, MAX_LENGTH_DOC)
                 .define(DISTRIBUTION, Type.OBJECT, null, null, Importance.LOW, DISTRIBUTION_DOC)
                 .define(RANDOM_SEED, Type.LONG, Importance.LOW, RANDOM_SEED_DOC)

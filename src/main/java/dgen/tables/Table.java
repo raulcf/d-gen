@@ -3,29 +3,28 @@ package dgen.tables;
 import dgen.column.Column;
 import dgen.datatypes.DataType;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Table {
 
-    private List<Column> columns;
+    private Map<Integer, Column> columns;
     private String attributeName;
+    private int tableID;
 
-    public Table(String attributeName, List<Column> columns) {
+    public Table(int tableID, String attributeName, Map<Integer, Column> columns) {
+        this.tableID = tableID;
         this.attributeName = attributeName;
         this.columns = columns;
     }
 
-    // FIXME: serialization functions, such as toCSV, should not be part of Table. Table should just provide
-    // methods to deliver data, then, different serdes will use that data differently.
-    public String toCSV() {
+    @Override
+    public String toString() {
         StringBuffer sb = new StringBuffer();
 
         // header
         List<String> attributeNames = new ArrayList<>();
         List<Iterator<DataType>> columnIterators = new ArrayList<>();
-        for (Column c : columns) {
+        for (Column c : columns.values()) {
             // attribute data for header
             String attrName = c.getAttributeName();
             attributeNames.add(attrName);
@@ -58,17 +57,16 @@ public class Table {
         return sb.toString();
     }
 
-    @Override
-    public String toString() {
-        return "Table{" +
-                "columns=" + columns +
-                ", attributeName='" + attributeName + '\'' +
-                '}';
+
+    public int getTableID() {
+        return tableID;
     }
 
     public List<Column> getColumns() {
-        return columns;
+        return new ArrayList<>(columns.values());
     }
+
+    public Column getColumn(int columnID) { return columns.get(columnID); }
 
     public String getAttributeName() {
         return attributeName;

@@ -5,7 +5,7 @@ import dgen.coreconfig.DGException;
 import dgen.dataset.DatasetConfig;
 import dgen.dataset.DatasetGenerator;
 import dgen.tables.Table;
-import dgen.utils.SpecificationParser;
+import dgen.utils.parsers.SpecificationParser;
 import org.junit.Before;
 import org.junit.Test;
 

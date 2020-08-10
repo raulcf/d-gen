@@ -7,13 +7,14 @@ import dgen.datatypes.DataType;
 import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.DataTypeGenerator;
 import dgen.datatypes.generators.IntegerTypeGenerator;
-import dgen.utils.RandomGenerator;
+import dgen.utils.parsers.RandomGenerator;
+import dgen.utils.parsers.specs.relationships.dependencyFunctions.JaccardSimilarity;
 
 import java.util.*;
 
 public class JaccardSimilarityGenerator implements DataTypeGenerator {
-    private final Random rnd;
-    private final List<DataType> dependentValues = new ArrayList<>();
+    private RandomGenerator rnd;
+    private List<DataType> dependentValues = new ArrayList<>();
 
     /**
      * Checks whether data from two columns satisfies a jaccard similarity relationship.
@@ -45,6 +46,11 @@ public class JaccardSimilarityGenerator implements DataTypeGenerator {
 
     private static int intersectionSize(float similarity, int determinantSize, int dependentSize) {
         return Math.round((similarity * (dependentSize + determinantSize)) / (1 + similarity));
+    }
+
+    public JaccardSimilarityGenerator(RandomGenerator rnd, List<DataType> dependentValues) {
+        this.rnd = rnd;
+        this.dependentValues = dependentValues;
     }
 
     /**
@@ -91,11 +97,21 @@ public class JaccardSimilarityGenerator implements DataTypeGenerator {
     public NativeType getNativeType() { return dependentValues.get(0).nativeType(); }
 
     @Override
-    public IntegerTypeGenerator copy() { return null; }
+    public JaccardSimilarityGenerator copy() {
+        return new JaccardSimilarityGenerator(new RandomGenerator(rnd.getSeed()), new ArrayList<>(this.dependentValues));
+    }
 
     @Override
     public DataType drawWithReplacement() {
         return dependentValues.get(rnd.nextInt(dependentValues.size()));
+    }
+
+    public void setRnd(RandomGenerator rnd) {
+        this.rnd = rnd;
+    }
+
+    public void setDependentValues(List<DataType> dependentValues) {
+        this.dependentValues = dependentValues;
     }
 
     @Override

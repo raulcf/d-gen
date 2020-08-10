@@ -1,11 +1,8 @@
 package dgen;
 
-import dgen.dataset.Dataset;
 import dgen.dataset.DatasetConfig;
 import dgen.dataset.DatasetGenerator;
-import dgen.utils.SpecificationParser;
-
-import java.util.Random;
+import dgen.utils.parsers.SpecificationParser;
 
 /**
  * This class drives the data generation process, which is divided into 4 stages:

@@ -9,8 +9,9 @@ import dgen.datatypes.DataType;
 import dgen.datatypes.config.DataTypeConfig;
 import dgen.datatypes.generators.DataTypeGenerator;
 import dgen.datatypes.generators.NullValueGenerator;
-import dgen.utils.RandomGenerator;
-import dgen.utils.specs.datatypespecs.DataTypeSpec;
+import dgen.utils.parsers.RandomGenerator;
+import dgen.utils.parsers.specs.SpecType;
+import dgen.utils.parsers.specs.datatypespecs.DataTypeSpec;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,10 +48,10 @@ public class ColumnGenerator {
             this.ang = new RandomAttributeNameGenerator(rnd);
         }
 
-        if (columnConfig.getObject("datatype") == null) {
+        if (columnConfig.getObject("column.type") == SpecType.DEFFOREIGNKEY) {
             this.dtg = null;
         } else {
-            this.dtg = DataTypeConfig.specToGenerator((DataTypeSpec)columnConfig.getObject("datatype"));
+            this.dtg = DataTypeConfig.specToGenerator((DataTypeSpec) columnConfig.getObject("datatype"));
         }
 
         //TODO: Add logic for nulls
@@ -76,7 +77,7 @@ public class ColumnGenerator {
         }
 
         String attributeName = ang.generateAttributeName();
-        Column c = new Column(attributeName, values);
+        Column c = new Column(columnID, attributeName, values);
 
         return c;
     }

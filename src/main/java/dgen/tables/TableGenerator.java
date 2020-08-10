@@ -15,8 +15,7 @@ import dgen.tablerelationships.dependencyfunctions.funcdeps.FuncDepConfig;
 import dgen.tablerelationships.dependencyfunctions.funcdeps.FuncDepGenerator;
 import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityConfig;
 import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityGenerator;
-import dgen.utils.RandomGenerator;
-import dgen.utils.specs.relationships.dependencyFunctions.JaccardSimilarity;
+import dgen.utils.parsers.RandomGenerator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -112,25 +111,20 @@ public class TableGenerator {
                 visitedColumns.add(determinant);
             }
         }
-        for (int i: columnGeneratorMap.keySet()) {
-            if (columnGeneratorMap.get(i).getDtg() instanceof FuncDepGenerator) {
-                System.out.println(((FuncDepGenerator) columnGeneratorMap.get(i).getDtg()).getDependentValues().stream().map(n -> n.value()).collect(Collectors.toList()));
-            }
-        }
     }
 
     // TODO: this should be an iterator that provides either columns or rows, depending on the storage orientation
 
     public Table generateTable() {
 
-        List<Column> columns = new ArrayList<>();
+        Map<Integer, Column> columns = new HashMap<>();
         for (ColumnGenerator cg : columnGeneratorMap.values()) {
             Column c = cg.generateColumn(this.numRecords);
-            columns.add(c);
+            columns.put(c.getColumnID(), c);
         }
 
         String attributeName = ang.generateAttributeName();
-        Table t = new Table(attributeName, columns);
+        Table t = new Table(tableID, attributeName, columns);
         return t;
     }
 
