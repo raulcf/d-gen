@@ -1,32 +1,59 @@
 ---
-# Testing creating defined PK-FK relationships
+# Example for creating general and defined tables/columns
 database:
   databaseName: "1_input"
-  tableSpecs:
+  randomSeed: 1
+  tables:
+    # Creates one table with one column with integers and one column with strings
     - defTable:
         tableID: 1
         numRows: 10
-        columnSpecs:
-          - primaryKey:
+        columns:
+          - defColumn:
               columnID: 1
-              dataTypeSpec:
+              dataType:
+                # Curly brackets are used when defaults are used for all parameters (or when there are no parameters)
                 int: {}
-          - defForeignKey:
+          - defColumn:
               columnID: 2
+              dataType:
+                string:
+                  maxLength: 10
+                  distribution:
+                    uniform: {}
+      # Creates a table with one column of integers and 10-50 with floats
     - defTable:
         tableID: 2
-        numRows: 10
-        columnSpecs:
-          - primaryKey:
+        numRows: 50
+        columns:
+          - defColumn:
+              columnName: "column1"
               columnID: 1
-              dataTypeSpec:
+              dataType:
                 int: {}
-          - defForeignKey:
-              columnID: 2
-  databaseRelationships:
-    - defPKFK:
-        pkfkMappings:
-          - "1:1": "2:2"
-          - "2:1": "1:2"
+            # Creates 10-50 columns that are all unique, contain floats, and who's names follow the [a-z][0-9]{2} pattern
+          - genColumn:
+              regexName: "[a-z][0-9]{2}"
+              minColumns: 10
+              maxColumns: 50
+              unique: true
+              dataType:
+                float: {}
+      # Creates 5 tables with 10-100 rows each and with one column of integers and 10-50 columns of strings
+    - genTable:
+        numTables: 5
+        minRows: 10
+        maxRows: 15
+        columns:
+          - defColumn:
+              columnID: 1
+              dataType:
+                int: {}
+          - genColumn:
+              minColumns: 10
+              maxColumns: 50
+              dataType:
+                string:
+                  maxLength: 10
 
 

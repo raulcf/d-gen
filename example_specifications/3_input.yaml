@@ -1,20 +1,56 @@
 ---
-# Testing creating LOTS of random PK-FK relationships (7.5s)
+# Example for creating PK-FK relationships
 database:
   databaseName: "3_input"
-  randomSeed: 50
-  tableSpecs:
-    - genTable:
-        numTables: 1000
-        columnSpecs:
+  randomSeed: 1
+  tables:
+    - defTable:
+        numRows: 10
+        tableID: 1
+        columns:
           - primaryKey:
               columnID: 1
-              dataTypeSpec:
+              dataType:
+                int: {}
+          - defForeignKey:
+              columnID: 2
+    - defTable:
+        numRows: 10
+        tableID: 2
+        columns:
+          - primaryKey:
+              columnID: 1
+              dataType:
+                int: {}
+          - defForeignKey:
+              columnID: 2
+    - defTable:
+        numRows: 10
+        tableID: 3
+        columns:
+          - primaryKey:
+              columnID: 1
+              dataType:
+                int: {}
+          - defForeignKey:
+              columnID: 2
+    - genTable:
+        numTables: 50
+        columns:
+          - primaryKey:
+              columnID: 1
+              dataType:
                 int: {}
           - genForeignKey:
-              numColumns: 100
+              numColumns: 1
+  # 3 defined PK-FK relationships and 50 random ones
   databaseRelationships:
+    - defPKFK:
+        pkfkMappings:
+          - "1:1": "2:2"
+          - "1:1": "3:2" # :P You'll be able to map primary keys to a set of foreign keys in the future
+          - "2:1": "1:2"
     - genPKFK:
-        numRelationships: 100000
-        graphSpec:
+        numRelationships: 50
+        graph:
           randomGraph: {}

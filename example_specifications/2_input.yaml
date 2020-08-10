@@ -1,23 +1,159 @@
 ---
-# Testing creating random PK-FK relationships
+# Example for creating table-relationships
 database:
   databaseName: "2_input"
   randomSeed: 1
-  tableSpecs:
-    - genTable:
-        numTables: 3
-        columnSpecs:
-          - primaryKey:
+  tables:
+      # A defined functional dependency with column 1 as the determinant and columns 2 and 3 as the dependents
+    - defTable:
+        tableID: 1
+        numRows: 10
+        columns:
+          - defColumn:
               columnID: 1
-              dataTypeSpec:
+              dataType:
+                int: {}
+          - defColumn:
+              columnID: 2
+              dataType:
+                int: {}
+          - defColumn:
+              columnID: 3
+              dataType:
+                int: {}
+        tableRelationships:
+          - defTableRelationship:
+              dependencyFunction:
+                functionalDependency: {}
+              dependencyMap:
+                1: [2, 3]
+      # Creates 10 tables with a functional dependency from column 1 to columns 2 and 3
+    - genTable:
+        numRows: 10
+        numTables: 10
+        columns:
+          - defColumn:
+              columnID: 1
+              dataType:
+                int: {}
+          - defColumn:
+              columnID: 2
+              dataType:
+                int: {}
+          - defColumn:
+              columnID: 3
+              dataType:
+                int: {}
+        tableRelationships:
+          - defTableRelationship:
+              dependencyFunction:
+                functionalDependency: {}
+              dependencyMap:
+                1: [2, 3]
+      # Table with a cyclic dependency that won't work
+#    - defTable:
+#        tableID: 2
+#        numRows: 10
+#        columns:
+#          - defColumn:
+#              columnID: 1
+#              dataType:
+#                int: {}
+#          - defColumn:
+#              columnID: 2
+#              dataType:
+#                int: {}
+#          - defColumn:
+#              columnID: 3
+#              dataType:
+#                int: {}
+#        tableRelationships:
+#          - defTableRelationship:
+#              dependencyFunction:
+#                jaccardSimilarity:
+#                  similarity: 0.4
+#              dependencyMap:
+#                1: [2]
+#                2: [3]
+#                3: [1]
+      # A table with a cyclic dependency that DOES work
+    - defTable:
+        tableID: 3
+        numRows: 10
+        columns:
+          - defColumn:
+              columnID: 1
+              unique: true
+              dataType:
                 int:
-                  distribution:
-                    gaussian:
-                      standardDeviation: 2
-          - genForeignKey:
-              numColumns: 1
-  databaseRelationships:
-    - genPKFK:
-        numRelationships: 3
-        graphSpec:
-          randomGraph: {}
+                  minValue: 0
+                  maxValue: 10
+          - defColumn:
+              columnID: 2
+              unique: true
+              dataType:
+                int:
+                  minValue: 0
+                  maxValue: 10
+          - defColumn:
+              columnID: 3
+              unique: true
+              dataType:
+                int:
+                  minValue: 0
+                  maxValue: 10
+        tableRelationships:
+          - defTableRelationship:
+              dependencyFunction:
+                functionalDependency: {}
+              dependencyMap:
+                1: [2]
+                2: [3]
+                3: [1]
+      # Table with 5 random relationships
+    - defTable:
+        tableID: 4
+        numRows: 10
+        columns:
+          - genColumn:
+              numColumns: 10
+              dataType:
+                int: {}
+        tableRelationships:
+          - genTableRelationship:
+              dependencyFunction:
+                functionalDependency: {}
+              numRelationships: 5
+              graph:
+                randomGraph: {}
+      # A table with 5 random functional dependencies and 1 defined jaccard similarity
+    - defTable:
+        tableID: 5
+        numRows: 10
+        columns:
+          - defColumn:
+                columnID: 1
+                dataType:
+                  int: {}
+          - defColumn:
+              columnID: 2
+              unique: true
+              dataType:
+                int: {}
+          - genColumn:
+              numColumns: 10
+              dataType:
+                int: {}
+        tableRelationships:
+          - genTableRelationship:
+              dependencyFunction:
+                functionalDependency: {}
+              numRelationships: 5
+              graph:
+                randomGraph: {}
+          - defTableRelationship:
+              dependencyFunction:
+                jaccardSimilarity:
+                  similarity: 0.2
+              dependencyMap:
+                1: [2]

@@ -1,5 +1,6 @@
 package dgen;
 
+import dgen.dataset.Dataset;
 import dgen.dataset.DatasetConfig;
 import dgen.dataset.DatasetGenerator;
 import dgen.utils.parsers.SpecificationParser;
@@ -24,10 +25,11 @@ public class Main {
         specificationParser.parseYAML("test.yaml");
         specificationParser.write("test_output.json");
         DatasetGenerator datasetGenerator = DatasetConfig.specToGenerator(specificationParser.getDatabase());
-//        Dataset dataset = datasetGenerator.generateDataset();
+        Dataset dataset = datasetGenerator.generateDataset();
 
 
-        System.out.println(datasetGenerator.generateDataset());
+//        System.out.println(dataset.toString());
+//        System.out.println(dataset.getTables().size());
 
 
     }

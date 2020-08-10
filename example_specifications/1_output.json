@@ -1,26 +1,26 @@
 {
   "database" : {
     "databaseName" : "1_input",
-    "randomSeed" : -4982418843605177614,
-    "tableSpecs" : [ {
+    "randomSeed" : 1,
+    "tables" : [ {
       "defTable" : {
         "tableID" : 1,
-        "randomSeed" : -6761209701230044036,
+        "randomSeed" : -4964420948893066024,
         "tableName" : null,
         "numRows" : 10,
         "regexName" : null,
         "randomName" : true,
-        "columnSpecs" : [ {
-          "primaryKey" : {
+        "columns" : [ {
+          "defColumn" : {
             "columnID" : 1,
-            "randomSeed" : -6369102817107095136,
+            "randomSeed" : 7564655870752979346,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
-            "unique" : true,
+            "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataTypeSpec" : {
+            "dataType" : {
               "int" : {
                 "defaultValue" : null,
                 "minValue" : 0,
@@ -28,21 +28,33 @@
                 "distribution" : {
                   "uniform" : { }
                 },
-                "randomSeed" : -2718815665674034326
+                "randomSeed" : 3831662765844904176
               }
             }
           }
         }, {
-          "defForeignKey" : {
+          "defColumn" : {
             "columnID" : 2,
-            "randomSeed" : 8547439868947721021,
+            "randomSeed" : 6137546356583794141,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
             "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataTypeSpec" : null
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -594798593157429144
+              }
+            }
           }
         } ],
         "tableRelationships" : [ ]
@@ -50,22 +62,22 @@
     }, {
       "defTable" : {
         "tableID" : 2,
-        "randomSeed" : 2106110390293188850,
+        "randomSeed" : 112842269129291794,
         "tableName" : null,
-        "numRows" : 10,
+        "numRows" : 50,
         "regexName" : null,
         "randomName" : true,
-        "columnSpecs" : [ {
-          "primaryKey" : {
+        "columns" : [ {
+          "defColumn" : {
             "columnID" : 1,
-            "randomSeed" : 7545971074074138421,
-            "columnName" : null,
+            "randomSeed" : -669528114487223426,
+            "columnName" : "column1",
             "regexName" : null,
-            "randomName" : true,
-            "unique" : true,
+            "randomName" : false,
+            "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataTypeSpec" : {
+            "dataType" : {
               "int" : {
                 "defaultValue" : null,
                 "minValue" : 0,
@@ -73,21 +85,4698 @@
                 "distribution" : {
                   "uniform" : { }
                 },
-                "randomSeed" : -9109890576417732975
+                "randomSeed" : -1109287713991315740
               }
             }
           }
         }, {
-          "defForeignKey" : {
-            "columnID" : 2,
-            "randomSeed" : 2103596710263615337,
+          "defColumn" : {
+            "columnID" : -382464772,
+            "randomSeed" : -1160629452687687109,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 7326573195622447256
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1492578621,
+            "randomSeed" : 2939296080422457956,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 6806895744627829028
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -582126989,
+            "randomSeed" : 2139215297105423308,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -4232865876030345843
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1460749695,
+            "randomSeed" : 780266760877150279,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -4396325885451314877
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1615025656,
+            "randomSeed" : 2578166436595196069,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -5627216606837767319
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -836540342,
+            "randomSeed" : 89513449252017259,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -2725440695943024712
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 100579776,
+            "randomSeed" : -4722652817683412901,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 2619856624980352251
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2069007352,
+            "randomSeed" : 1390659345622495633,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -7183318222962370660
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -193570837,
+            "randomSeed" : 3779987867844568136,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -6947711303906420817
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 793310972,
+            "randomSeed" : 23954608908678828,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -5837905537295310168
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2088469028,
+            "randomSeed" : 3284532136690698432,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -8478177725643278359
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -112382065,
+            "randomSeed" : 2401926599819937381,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 3805118434975371888
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -662903833,
+            "randomSeed" : 4014050679668805482,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 7969120158891947125
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1001396483,
+            "randomSeed" : -8840064378166243509,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 7143510462956554902
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1165249391,
+            "randomSeed" : -7519275600551226667,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -6360924135797636003
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 514704749,
+            "randomSeed" : -149748567458138470,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -7632370113005710310
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -162286093,
+            "randomSeed" : 3813634057487595412,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 6911063436971917473
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1990072188,
+            "randomSeed" : -2242592025140036932,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 5363062305061232425
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 220969086,
+            "randomSeed" : -9147084144055124649,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -18800628192384088
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1587398993,
+            "randomSeed" : 5127038469576228851,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 6288771570310971427
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1141557491,
+            "randomSeed" : 9065674809775364834,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 7909671975457870438
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1323248980,
+            "randomSeed" : -8373172502932590391,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 9124117683239964075
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 66075398,
+            "randomSeed" : 3864458965704708566,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 3184808690151788414
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1937234195,
+            "randomSeed" : -3668004662282080962,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 2026209717004212480
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -2066794714,
+            "randomSeed" : -3888746125786119271,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -5552347832537805063
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 878903023,
+            "randomSeed" : 8163352960877838030,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -5541513329062344977
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 748918191,
+            "randomSeed" : 4150930343758163695,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -311691390498039484
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -843451650,
+            "randomSeed" : -4815358852979966789,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 1662910620728633115
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1878716128,
+            "randomSeed" : -6686992125460025861,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 161601140914943624
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1584027382,
+            "randomSeed" : 6878298634043919175,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -1649762239590229898
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1306683493,
+            "randomSeed" : -5404080405594186050,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -5102892484113533015
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -2106711811,
+            "randomSeed" : 1016816632346098112,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 2575420188438242581
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1732680838,
+            "randomSeed" : -5338953178777934760,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -3246979880425410455
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 531163870,
+            "randomSeed" : -6376750328407095667,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -5390725639980755759
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1142045419,
+            "randomSeed" : 1840067945267344782,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -7062411921403462023
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 120776076,
+            "randomSeed" : 5239044339046845851,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -8747604696548387510
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1112362630,
+            "randomSeed" : 1365943130551420261,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -5904149397109527665
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1202597766,
+            "randomSeed" : 6517957657068743901,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 2858784064691900233
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1575270834,
+            "randomSeed" : 6526887576802954450,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -7403923644694799186
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1254531672,
+            "randomSeed" : 332095280342010808,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -3214310141960182634
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1976707769,
+            "randomSeed" : 7807265917042125009,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 6932437597733693250
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1165195938,
+            "randomSeed" : -2522448690831573607,
+            "columnName" : null,
+            "regexName" : "[a-z][0-9]{2}",
+            "randomName" : false,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "float" : {
+                "defaultValue" : null,
+                "minValue" : 0.0,
+                "maxValue" : 3.4028235E38,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -3858113202009035075
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : -671409943,
+        "randomSeed" : 8050798245630957284,
+        "tableName" : null,
+        "numRows" : 16,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : 6247087273549595101,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
             "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataTypeSpec" : null
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 5517905292620496132
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 268385879,
+            "randomSeed" : -8156117465617023632,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 4820635101177954490
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1732216817,
+            "randomSeed" : -15063047445053702,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 1141886611049844721
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1776739380,
+            "randomSeed" : -8249237910831096255,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -8422430877497522009
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 866345822,
+            "randomSeed" : -1710360246199412092,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 4546857235350971184
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1067251123,
+            "randomSeed" : -2287578142355445033,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -2692306454274842389
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -954721027,
+            "randomSeed" : -7243389174711685803,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 5818523204758407422
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 105106996,
+            "randomSeed" : -3082381469579654380,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 4885875761526838815
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1818009612,
+            "randomSeed" : 8556296580499353143,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 3269551181474795397
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1391040485,
+            "randomSeed" : -3241205184341229055,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7795093501329442635
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -361268990,
+            "randomSeed" : -1307825960948043813,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7565129111504795170
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1528955526,
+            "randomSeed" : 154062444477091840,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -8367923348276218798
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -706436080,
+            "randomSeed" : 5653609452294381049,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -2202565841775117866
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1587413744,
+            "randomSeed" : -8207988807144048001,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -2251378622577623876
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1099351221,
+            "randomSeed" : -4525977720206120167,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 2907771609439525970
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 181156043,
+            "randomSeed" : -8024052699002737192,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 919829209015073087
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -445328248,
+            "randomSeed" : -5298787210079405285,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 2034188968277120912
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1021630684,
+            "randomSeed" : -8724646941189564601,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 7704013458740527785
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -599159739,
+            "randomSeed" : -6141412821020480834,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 7866485694190557398
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1720379939,
+            "randomSeed" : 1158209132233697310,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -8352242497450889908
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 323873054,
+            "randomSeed" : -4357952859750176081,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 5952195970042072907
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -2092856764,
+            "randomSeed" : -3899462614856859495,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 147458202203867058
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 176278955,
+            "randomSeed" : 586541553579625708,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 8198777404514432018
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1324906324,
+            "randomSeed" : -962037744541542392,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 6892542573406568415
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 119942735,
+            "randomSeed" : 5314520057811676541,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -4033293396040907809
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -144938186,
+            "randomSeed" : -630968925301233374,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -4052283290353789862
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1361611547,
+            "randomSeed" : 8212144607526460367,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 2402170585793741972
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1007058536,
+            "randomSeed" : -6458187903218154302,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 3151825408614048587
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -428409496,
+            "randomSeed" : -8190969857040160713,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 4617151108230248888
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -342389666,
+            "randomSeed" : 7239802408611070559,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 7683336414412988794
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : 193291713,
+        "randomSeed" : 4469205987600845164,
+        "tableName" : null,
+        "numRows" : 16,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : 3241129027203716284,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 8205001152228352441
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2017496657,
+            "randomSeed" : -7343378748249317669,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -6678700892246573074
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1302951949,
+            "randomSeed" : 8480008078320589765,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -3745751432781708219
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1439110646,
+            "randomSeed" : 4914520655968408745,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 4227465294407942587
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1305568859,
+            "randomSeed" : 7518430791156072002,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 6191793843083193737
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 592193209,
+            "randomSeed" : -3558812817526879536,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 7170789582926847684
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1139224850,
+            "randomSeed" : -5906512104188701093,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 7677068407400238110
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 670972566,
+            "randomSeed" : 1371725377195789311,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7210074501640255752
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 767348987,
+            "randomSeed" : -376751842428319023,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 2832460956851343784
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -299181507,
+            "randomSeed" : 5124104824591383551,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 2135919692763215075
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1326174467,
+            "randomSeed" : 1797364735937135739,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 3788540444613744310
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1695233956,
+            "randomSeed" : 3091674171583948921,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7477735970847863754
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -816516950,
+            "randomSeed" : 7162153346077451644,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -5850519580558567421
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2092238194,
+            "randomSeed" : 979401604932372669,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7264508646647264850
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1367833456,
+            "randomSeed" : -6243197517321718863,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -2116135543406847561
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 812465288,
+            "randomSeed" : -996271069855517935,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -5784334880520928715
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 964537434,
+            "randomSeed" : 5791429252109911244,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 14185463974078808
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 454991672,
+            "randomSeed" : 549670855068890709,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -6292301921292308170
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1356855360,
+            "randomSeed" : -8655404759264112200,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 3482929095712702546
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2003925480,
+            "randomSeed" : 8363831910784389368,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 5897574581860534902
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1934055846,
+            "randomSeed" : 2880512539059472436,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -4681839759482913740
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1955138769,
+            "randomSeed" : -5605727922123064679,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 1750179170939337200
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -176918059,
+            "randomSeed" : 6754577419231988935,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -5947326903562367201
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1950237111,
+            "randomSeed" : 1562823400580920263,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 965148254923310220
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2018435351,
+            "randomSeed" : 3605306293219669116,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -369223525227642378
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1590420582,
+            "randomSeed" : 6456096406736068536,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 5033866490504259237
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 48226131,
+            "randomSeed" : -5050855114046890739,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7930461617606479034
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 171282833,
+            "randomSeed" : -3339923054956012041,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -4651165585027274315
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1631499554,
+            "randomSeed" : 4177395839499666271,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 8510855824939858196
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -297497515,
+            "randomSeed" : 3851341151515983442,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -1012687692920911702
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 118428953,
+            "randomSeed" : 8738956980988042106,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -1710677598588747553
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -2145158329,
+            "randomSeed" : -1133762471128363116,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 1731384326470527658
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -173163405,
+            "randomSeed" : -8475632104143877520,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -9063927740209706847
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1294120434,
+            "randomSeed" : -3066363461174165045,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 4717132773378215506
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1543738040,
+            "randomSeed" : 5500180636103346625,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 2930532661397136535
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1549082550,
+            "randomSeed" : 8511008801800695597,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 2206964971789829043
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -2102028564,
+            "randomSeed" : 1111038262332407106,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7986827514455586545
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1593415088,
+            "randomSeed" : -8119498848597693732,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 6788334880493738400
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : -505795994,
+        "randomSeed" : -1226649785603838054,
+        "tableName" : null,
+        "numRows" : 16,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : -5542100905144726379,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 2607918285766736318
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 984635218,
+            "randomSeed" : -6253535058477601759,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 5267518610946707143
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1272398797,
+            "randomSeed" : 5404563858905771036,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -2112065732561566608
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1957029395,
+            "randomSeed" : 1957574078519435587,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -262336730502500020
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -232772209,
+            "randomSeed" : 6407158390048106542,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 734076836668018355
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1070670776,
+            "randomSeed" : -3417883358113083818,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 4994110536568976889
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2068466449,
+            "randomSeed" : 8597871441244350187,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -3628106716711993682
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 352548108,
+            "randomSeed" : 7842576444508565020,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -111912734637948053
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -412269605,
+            "randomSeed" : 4392418595998448164,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 8359846518481709173
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2066256311,
+            "randomSeed" : -8302302075013504311,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 8388285912279931320
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1176314392,
+            "randomSeed" : -1969405985713957728,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -2501813298120137646
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -863639954,
+            "randomSeed" : -6890634026830579458,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 3080993828271136734
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1420441716,
+            "randomSeed" : -1992359606170871786,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 7968344785073412999
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 557798296,
+            "randomSeed" : -7248345169887759566,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -149223989321373709
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1051146105,
+            "randomSeed" : -8219913421160094438,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -1535454053085176255
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1633599789,
+            "randomSeed" : 3727227325208120686,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 6381449953564041253
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 493737786,
+            "randomSeed" : 8824408439328479051,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -2300494148001699291
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1771421828,
+            "randomSeed" : -7708478228230484856,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -8820754850551718901
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1864864574,
+            "randomSeed" : 2970571310786788940,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 4542507909054265692
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -635990968,
+            "randomSeed" : 5646292865141442886,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 272018652252578009
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 689044006,
+            "randomSeed" : 510285269381373006,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7158275989867936758
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1245871076,
+            "randomSeed" : 7087469347612233478,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -6300852783834793868
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 980191294,
+            "randomSeed" : 6628628126523362608,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7321046850780552556
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1576734506,
+            "randomSeed" : 5639513502285588194,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 8698460439319433844
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1486783679,
+            "randomSeed" : -6318341073491982972,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -6580384694417029853
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 291201029,
+            "randomSeed" : 6339085489094251374,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 482236679803680669
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 7729693,
+            "randomSeed" : -8660177264874821894,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -1605220553506042561
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -241837202,
+            "randomSeed" : 9162688563907339900,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7342351599422710957
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -933152816,
+            "randomSeed" : 3053999859889047548,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -1433168339968175998
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -16912384,
+            "randomSeed" : 1755062496601524621,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 7536873678998009874
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -764603272,
+            "randomSeed" : -7711053877388439927,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 8259009174512809898
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1776007137,
+            "randomSeed" : 6862851965659011797,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7881699799186313479
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -687918760,
+            "randomSeed" : 5761486026613371527,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -2058284347992892522
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1194994472,
+            "randomSeed" : -4107136544707447809,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7953920856019277856
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : -71340944,
+        "randomSeed" : -602664614376623581,
+        "tableName" : null,
+        "numRows" : 16,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : -4644381035208900112,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -4778722965787949513
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1609065465,
+            "randomSeed" : -8613698794611856191,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 4938837984058411784
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1089051038,
+            "randomSeed" : 987622681813527013,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -8869440377461807820
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -259685397,
+            "randomSeed" : -8870838682910727036,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -3481303340373052062
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -2020246557,
+            "randomSeed" : 1246594439488131428,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -1847188873945650187
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1530756463,
+            "randomSeed" : -6844021423522588843,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -5313258595273868787
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1534650852,
+            "randomSeed" : -4019437065424626574,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 5660749721679798707
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1560889512,
+            "randomSeed" : 7262681496769027748,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -629957583708890263
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1363065477,
+            "randomSeed" : -2713902390992942413,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7266571235981166053
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -315284297,
+            "randomSeed" : -5958897142568596242,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -4264621774708574050
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 425529305,
+            "randomSeed" : -4784468930283527518,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -8742856937464427618
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -347914681,
+            "randomSeed" : -4139139394307766141,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -9214273663042394788
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1400869029,
+            "randomSeed" : 5418334194370481017,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -3440728355987034171
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1475946390,
+            "randomSeed" : 6679449464743596269,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 2534933053248123990
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1318344500,
+            "randomSeed" : 5006204176203402648,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 1630884286879202167
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 763017128,
+            "randomSeed" : 8707876039894576685,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 1487779730435471630
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1980006311,
+            "randomSeed" : -82078672700650113,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -8868567550841986134
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -282238593,
+            "randomSeed" : 1733288417527076717,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -8021599411625960016
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -227341417,
+            "randomSeed" : -1505678660778100009,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -6980148090289722847
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -53462995,
+            "randomSeed" : 8846912380672704217,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -2576622448192527363
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -2062873855,
+            "randomSeed" : -7221889975011582949,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 9006364270335528733
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1422372147,
+            "randomSeed" : 5148922605676573368,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -4117109912539327325
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 838006872,
+            "randomSeed" : 3221000439732725990,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -5197076908981923799
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2097541693,
+            "randomSeed" : -7161821400321886207,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 8981150819769519739
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -357714326,
+            "randomSeed" : 2355185657120266224,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 9169230975203934579
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1881088893,
+            "randomSeed" : -3298860870146623238,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -8927472728384559247
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 633741508,
+            "randomSeed" : -6224003751458770120,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 7392207898445979207
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -113631700,
+            "randomSeed" : -752485989227337041,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 1192938174765282094
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 504914225,
+            "randomSeed" : -6899891341144359945,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -1898574231664830809
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1620756732,
+            "randomSeed" : 9072771924758394422,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -2751855288680966212
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 843407779,
+            "randomSeed" : -4770557775787001524,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 7603946279529542431
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1035307351,
+            "randomSeed" : 5251680821401800474,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 1142816208769887931
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 395635307,
+            "randomSeed" : -2373747582793103425,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 1958202374289175868
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1680844382,
+            "randomSeed" : -2954026697070068106,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 4852258032818651
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1085136901,
+            "randomSeed" : -6594629878706293488,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -8393300475270794675
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 793894264,
+            "randomSeed" : 815140000251632242,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 3280961560970673085
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 554528899,
+            "randomSeed" : 7468576740732449520,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 5716607729517827939
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1536522345,
+            "randomSeed" : 6151578769272386630,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -3269888707743186324
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : 842098969,
+        "randomSeed" : -5400495497521527669,
+        "tableName" : null,
+        "numRows" : 16,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : 4940290186955940001,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -7870607274443293324
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1033856756,
+            "randomSeed" : -806655618216187037,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7360412867720622570
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1161506922,
+            "randomSeed" : 7881056753299060439,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -8865600838366062749
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1284242078,
+            "randomSeed" : 2970500167722739662,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 5283727164657691324
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1829343234,
+            "randomSeed" : 8003997864268199529,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 7150702006398017106
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 25396894,
+            "randomSeed" : 2441663330851104214,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 675391205430424732
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1754451763,
+            "randomSeed" : -1951722049122280697,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -7967840176929689680
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -782054328,
+            "randomSeed" : -4901904312383876362,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 6568527852643732413
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1195596705,
+            "randomSeed" : -4058813734348554944,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -1515019815878253027
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1701807683,
+            "randomSeed" : 5918689873313815084,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -6339568599610330089
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -2042565732,
+            "randomSeed" : 1065113703984210204,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -4703452986645829526
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -200094511,
+            "randomSeed" : 2486252380658219327,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -707982731711797205
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 874590539,
+            "randomSeed" : -4122590837124505861,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -4510425284513452348
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1504305987,
+            "randomSeed" : -2697148605445179872,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : -1299159033667433275
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1002075424,
+            "randomSeed" : 2903433145977156936,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "string" : {
+                "defaultValue" : null,
+                "regexPattern" : null,
+                "minLength" : 0,
+                "maxLength" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "validChars" : "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvxyz",
+                "randomSeed" : 1382321549149335452
+              }
+            }
           }
         } ],
         "tableRelationships" : [ ]
@@ -95,11 +4784,7 @@
     } ],
     "databaseRelationships" : [ {
       "defPKFK" : {
-        "pkfkMappings" : [ {
-          "1:1" : "2:2"
-        }, {
-          "2:1" : "1:2"
-        } ]
+        "pkfkMappings" : [ ]
       }
     } ]
   }

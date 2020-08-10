@@ -2,160 +2,1623 @@
   "database" : {
     "databaseName" : "2_input",
     "randomSeed" : 1,
-    "tableSpecs" : [ {
+    "tables" : [ {
       "defTable" : {
-        "tableID" : -1155869325,
-        "randomSeed" : 7564655870752979346,
+        "tableID" : 1,
+        "randomSeed" : -4964420948893066024,
         "tableName" : null,
-        "numRows" : 128,
+        "numRows" : 10,
         "regexName" : null,
         "randomName" : true,
-        "columnSpecs" : [ {
-          "primaryKey" : {
+        "columns" : [ {
+          "defColumn" : {
             "columnID" : 1,
-            "randomSeed" : 3831662765844904176,
-            "columnName" : null,
-            "regexName" : null,
-            "randomName" : true,
-            "unique" : true,
-            "hasNull" : false,
-            "nullFrequency" : 0.0,
-            "dataTypeSpec" : {
-              "int" : {
-                "defaultValue" : null,
-                "minValue" : 0,
-                "maxValue" : 2147483647,
-                "distribution" : {
-                  "gaussian" : {
-                    "standardDeviation" : 2.0,
-                    "mean" : 0.0
-                  }
-                },
-                "randomSeed" : 6137546356583794141
-              }
-            }
-          }
-        }, {
-          "defForeignKey" : {
-            "columnID" : -138487339,
-            "randomSeed" : -5335911890708011662,
+            "randomSeed" : 7564655870752979346,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
             "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataTypeSpec" : null
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 3831662765844904176
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : 6137546356583794141,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -594798593157429144
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "randomSeed" : 112842269129291794,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -669528114487223426
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 4,
+            "randomSeed" : -1109287713991315740,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -974081879987450628
+              }
+            }
           }
         } ],
-        "tableRelationships" : [ ]
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2, 3 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -1160629452687687109
+          }
+        } ]
       }
     }, {
       "defTable" : {
-        "tableID" : 655996946,
-        "randomSeed" : -669528114487223426,
+        "tableID" : 1705850753,
+        "randomSeed" : -1587104797948448451,
         "tableName" : null,
-        "numRows" : 128,
+        "numRows" : 10,
         "regexName" : null,
         "randomName" : true,
-        "columnSpecs" : [ {
-          "primaryKey" : {
+        "columns" : [ {
+          "defColumn" : {
             "columnID" : 1,
-            "randomSeed" : 3831662765844904176,
-            "columnName" : null,
-            "regexName" : null,
-            "randomName" : true,
-            "unique" : true,
-            "hasNull" : false,
-            "nullFrequency" : 0.0,
-            "dataTypeSpec" : {
-              "int" : {
-                "defaultValue" : null,
-                "minValue" : 0,
-                "maxValue" : 2147483647,
-                "distribution" : {
-                  "gaussian" : {
-                    "standardDeviation" : 2.0,
-                    "mean" : 0.0
-                  }
-                },
-                "randomSeed" : 6137546356583794141
-              }
-            }
-          }
-        }, {
-          "defForeignKey" : {
-            "columnID" : -258276172,
-            "randomSeed" : -8225913900319941199,
+            "randomSeed" : 2939296080422457956,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
             "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataTypeSpec" : null
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 6806895744627829028
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : -2500216379375876869,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -8499159136334653718
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "randomSeed" : -7685764894419928447,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 780266760877150279
+              }
+            }
           }
         } ],
-        "tableRelationships" : [ ]
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2, 3 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -4396325885451314877
+          }
+        } ]
       }
     }, {
       "defTable" : {
-        "tableID" : -382464772,
-        "randomSeed" : -1160629452687687109,
+        "tableID" : -1615025656,
+        "randomSeed" : 2578166436595196069,
         "tableName" : null,
-        "numRows" : 128,
+        "numRows" : 10,
         "regexName" : null,
         "randomName" : true,
-        "columnSpecs" : [ {
-          "primaryKey" : {
+        "columns" : [ {
+          "defColumn" : {
             "columnID" : 1,
-            "randomSeed" : 3831662765844904176,
-            "columnName" : null,
-            "regexName" : null,
-            "randomName" : true,
-            "unique" : true,
-            "hasNull" : false,
-            "nullFrequency" : 0.0,
-            "dataTypeSpec" : {
-              "int" : {
-                "defaultValue" : null,
-                "minValue" : 0,
-                "maxValue" : 2147483647,
-                "distribution" : {
-                  "gaussian" : {
-                    "standardDeviation" : 2.0,
-                    "mean" : 0.0
-                  }
-                },
-                "randomSeed" : 6137546356583794141
-              }
-            }
-          }
-        }, {
-          "defForeignKey" : {
-            "columnID" : 1705850753,
-            "randomSeed" : -1587104797948448451,
+            "randomSeed" : -5627216606837767319,
             "columnName" : null,
             "regexName" : null,
             "randomName" : true,
             "unique" : false,
             "hasNull" : false,
             "nullFrequency" : 0.0,
-            "dataTypeSpec" : null
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -3592913410653813758
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : 92698085241473569,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -8796603504740353600
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "randomSeed" : -4722652817683412901,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 2619856624980352251
+              }
+            }
           }
         } ],
-        "tableRelationships" : [ ]
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2, 3 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -4396325885451314877
+          }
+        } ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : 2069007352,
+        "randomSeed" : 1390659345622495633,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : -7183318222962370660,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -831380413494249744
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : 5055682315482875233,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 3508611625878353660
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "randomSeed" : 23954608908678828,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -5837905537295310168
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2, 3 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -4396325885451314877
+          }
+        } ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : 2088469028,
+        "randomSeed" : 3284532136690698432,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : -8478177725643278359,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -482677293272704124
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : 4527320925905780494,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 7277626163180921831
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "randomSeed" : 4014050679668805482,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 7969120158891947125
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2, 3 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -4396325885451314877
+          }
+        } ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : 1001396483,
+        "randomSeed" : -8840064378166243509,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : 7143510462956554902,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 5004708024278198958
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : 2081176313610728755,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 4220651705025283437
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "randomSeed" : -149748567458138470,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -7632370113005710310
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2, 3 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -4396325885451314877
+          }
+        } ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : -162286093,
+        "randomSeed" : 3813634057487595412,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : 6911063436971917473,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 8547294963617019503
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : 6154022364946197696,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 8175826803456981118
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "randomSeed" : -9147084144055124649,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -18800628192384088
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2, 3 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -4396325885451314877
+          }
+        } ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : -1587398993,
+        "randomSeed" : 5127038469576228851,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : 6288771570310971427,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 4902952092459581237
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : 2152187231736220865,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 2524076715527843156
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "randomSeed" : -8373172502932590391,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 9124117683239964075
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2, 3 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -4396325885451314877
+          }
+        } ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : 66075398,
+        "randomSeed" : 3864458965704708566,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : 3184808690151788414,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -8320357513071910606
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : -8200160751728555263,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -7603456060161050842
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "randomSeed" : -3888746125786119271,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -5552347832537805063
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2, 3 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -4396325885451314877
+          }
+        } ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : 878903023,
+        "randomSeed" : 8163352960877838030,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : -5541513329062344977,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 3216579138690945320
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : -5541557368775727531,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -1310238237583084802
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "randomSeed" : -4815358852979966789,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 1662910620728633115
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2, 3 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -4396325885451314877
+          }
+        } ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : 1878716128,
+        "randomSeed" : -6686992125460025861,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : 161601140914943624,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -6803345800057020374
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : 3836516331752709628,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -2207018395996362651
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "randomSeed" : -5404080405594186050,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -5102892484113533015
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2, 3 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -4396325885451314877
+          }
+        } ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : 3,
+        "randomSeed" : -9048258330105186985,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : -237923595412718844,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : true,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 2826893961496978298
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : -5338953178777934760,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : true,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -3246979880425410455
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 3,
+            "randomSeed" : 2281331448982092637,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : true,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 10,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -7065999876450923625
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2 ],
+              "2" : [ 3 ],
+              "3" : [ 1 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : 8888791547312749291
+          }
+        } ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : 4,
+        "randomSeed" : 1840067945267344782,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : -1644345913,
+            "randomSeed" : -7547119861010078324,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 5239044339046845851
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -2036710432,
+            "randomSeed" : 1347092278477147782,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 1365943130551420261
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1374666904,
+            "randomSeed" : -6596881134784729210,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 6517957657068743901
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 665612534,
+            "randomSeed" : -2773637612724504142,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 6526887576802954450
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1723860308,
+            "randomSeed" : 4456835947396768344,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 332095280342010808
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -748389899,
+            "randomSeed" : -4717761859960318649,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 7807265917042125009
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1614083908,
+            "randomSeed" : -541936902069847390,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -2522448690831573607
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -898286980,
+            "randomSeed" : -2089196626022557463,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 806172501569318489
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1965807332,
+            "randomSeed" : 6247087273549595101,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 5517905292620496132
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 361860038,
+            "randomSeed" : 1152708571114219105,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -4356742874647865835
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "-748389899" : [ 1965807332 ],
+              "665612534" : [ -1723860308, 361860038 ],
+              "-2036710432" : [ -1644345913 ],
+              "-1644345913" : [ -898286980 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -6234520482433768610
+          }
+        } ]
+      }
+    }, {
+      "defTable" : {
+        "tableID" : 5,
+        "randomSeed" : -1710360246199412092,
+        "tableName" : null,
+        "numRows" : 10,
+        "regexName" : null,
+        "randomName" : true,
+        "columns" : [ {
+          "defColumn" : {
+            "columnID" : 1,
+            "randomSeed" : 4546857235350971184,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 4583808669371655117
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 2,
+            "randomSeed" : -5407509412797283957,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : true,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 6229851483527453949
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1686482964,
+            "randomSeed" : 3991998332904901639,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -2234338478009364940
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -717672862,
+            "randomSeed" : 8319638437045870110,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 6809326219677622260
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1992168040,
+            "randomSeed" : 2417780126975510394,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 775621360840239131
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -754651889,
+            "randomSeed" : -5246761733127519293,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -4733994914873378558
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -304501960,
+            "randomSeed" : -5068678395978366168,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -6572359489891205766
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 35870458,
+            "randomSeed" : 2038177896599595533,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -4157820461140106224
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : 1316333528,
+            "randomSeed" : -4698347356483032567,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 6815557938281839888
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1911071317,
+            "randomSeed" : -1311679443604766958,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 3628279229051225269
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1053786306,
+            "randomSeed" : 4451855618706930399,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : 7826091022412953803
+              }
+            }
+          }
+        }, {
+          "defColumn" : {
+            "columnID" : -1868245355,
+            "randomSeed" : 6984359371816035275,
+            "columnName" : null,
+            "regexName" : null,
+            "randomName" : true,
+            "unique" : false,
+            "hasNull" : false,
+            "nullFrequency" : 0.0,
+            "dataType" : {
+              "int" : {
+                "defaultValue" : null,
+                "minValue" : 0,
+                "maxValue" : 2147483647,
+                "distribution" : {
+                  "uniform" : { }
+                },
+                "randomSeed" : -3936364606998129528
+              }
+            }
+          }
+        } ],
+        "tableRelationships" : [ {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "-304501960" : [ -1053786306 ],
+              "-1868245355" : [ 1992168040 ],
+              "1992168040" : [ -717672862 ],
+              "-754651889" : [ -1868245355 ],
+              "-1911071317" : [ -1686482964 ]
+            },
+            "dependencyFunction" : {
+              "functionalDependency" : { }
+            },
+            "randomSeed" : -6141412821020480834
+          }
+        }, {
+          "defTableRelationship" : {
+            "dependencyMap" : {
+              "1" : [ 2 ]
+            },
+            "dependencyFunction" : {
+              "jaccardSimilarity" : {
+                "similarity" : 0.2
+              }
+            },
+            "randomSeed" : 7866485694190557398
+          }
+        } ]
       }
     } ],
     "databaseRelationships" : [ {
       "defPKFK" : {
-        "pkfkMappings" : [ {
-          "655996946:1" : "-382464772:1705850753"
-        }, {
-          "-382464772:1" : "655996946:-258276172"
-        }, {
-          "-382464772:1" : "-1155869325:-138487339"
-        } ]
+        "pkfkMappings" : [ ]
       }
     } ]
   }
