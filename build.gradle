@@ -50,6 +50,9 @@ dependencies {
     compile 'org.apache.parquet:parquet-hadoop:1.2.1'
     compile 'org.apache.hadoop:hadoop-client:2.6.0'
     compile 'org.apache.avro:avro:1.9.0'
+
+    // Cli
+    compile 'commons-cli:commons-cli:1.4'
 }
 
 application {
