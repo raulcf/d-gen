@@ -28,7 +28,7 @@ public class BooleanTypeConfig extends Config implements DataTypeConfig {
 
     static {
         config = new ConfigDef()
-                .define(TRUE_FALSE_RATIO, Type.DOUBLE, 0.5, Importance.LOW, TRUE_FALSE_RATIO_DOC)
+                .define(TRUE_FALSE_RATIO, Type.FLOAT, 0.5f, Importance.LOW, TRUE_FALSE_RATIO_DOC)
                 .define(RANDOM_SEED, Type.LONG, Importance.LOW, RANDOM_SEED_DOC)
                 .define(SIZE_IN_BYTES, Type.INT, 1, Importance.LOW, SIZE_IN_BYTES_DOC); // FIXME: Technically a boolean is 1 bit
 

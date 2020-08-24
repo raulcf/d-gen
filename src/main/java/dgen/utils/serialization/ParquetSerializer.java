@@ -1,6 +1,5 @@
 package dgen.utils.serialization;
 
-import dgen.column.Column;
 import dgen.column.ColumnConfig;
 import dgen.dataset.Dataset;
 import dgen.dataset.DatasetConfig;
@@ -26,7 +25,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ParquetSerializer implements Serializer {
+public class ParquetSerializer {
 
     Dataset dataset;
     DatasetConfig datasetConfig;
@@ -42,8 +41,9 @@ public class ParquetSerializer implements Serializer {
      * @param parentDir Parent directory to place dataset directory in.
      * @param metadataPath Path to write dataset metadata to.
      */
-    @Override
+//    @Override
     public void serialize(String parentDir, String metadataPath) throws Exception {
+
         for (TableConfig tableConfig: (List<TableConfig>) datasetConfig.getObject(DatasetConfig.TABLE_CONFIGS)) {
             Schema parquetSchema;
             Table table = dataset.getTable(tableConfig.getInt(TableConfig.TABLE_ID));
@@ -74,7 +74,7 @@ public class ParquetSerializer implements Serializer {
     }
 
     // FIXME: Avro doesn't allow field names to start with a number :(
-    private String cleanFieldName(String name) {
+    private String fieldNameToAvroName(String name) {
         Pattern pattern = Pattern.compile("[A-Za-z_]");
         Matcher matcher = pattern.matcher(String.valueOf(name.charAt(0)));
 
@@ -86,9 +86,9 @@ public class ParquetSerializer implements Serializer {
 
     }
 
-    private Map<String, Object> columnToAvro(ColumnConfig columnConfig, Column column) {
+    private Map<String, Object> columnToAvro(ColumnConfig columnConfig, String columnName) {
         Map<String, Object> columnAvro = new HashMap<>();
-        columnAvro.put("name", cleanFieldName(column.getAttributeName()));
+        columnAvro.put("name", fieldNameToAvroName(columnName));
 
         if (columnConfig.getBoolean(ColumnConfig.HAS_NULL)) {
             List<String> dataType = new ArrayList<>();
@@ -106,12 +106,12 @@ public class ParquetSerializer implements Serializer {
     private String generateAvroSchema(TableConfig tableConfig, Table table) throws IOException {
         Map<String, Object> tableAvro = new HashMap<>();
         tableAvro.put("type", "record");
-        tableAvro.put("name", cleanFieldName(table.getAttributeName()));
+        tableAvro.put("name", fieldNameToAvroName(table.getAttributeName()));
 
         List<Map<String, Object>> columnAvros = new ArrayList<>();
         for (ColumnConfig columnConfig: (List<ColumnConfig>) tableConfig.getObject(TableConfig.COLUMN_CONFIGS)) {
-            Column column = table.getColumn(columnConfig.getInt(ColumnConfig.COLUMN_ID));
-            columnAvros.add(columnToAvro(columnConfig, column));
+            String columnName = table.getColumnName(columnConfig.getInt(ColumnConfig.COLUMN_ID));
+            columnAvros.add(columnToAvro(columnConfig, columnName));
         }
         tableAvro.put("fields", columnAvros);
 
@@ -120,52 +120,38 @@ public class ParquetSerializer implements Serializer {
 
     private List<GenericData.Record> generateParquetRecords(Schema parquetSchema, Table table) {
         List<GenericData.Record> parquetRecords = new ArrayList<>();
-        List<Column> columns = table.getColumns();
-        int numColumns = columns.size();
 
-        // header
-        List<String> attributeNames = new ArrayList<>();
-        List<Iterator<DataType>> columnIterators = new ArrayList<>();
-        for (Column c : columns) {
-            // attribute data for header
-            String attrName = c.getAttributeName();
-            attributeNames.add(cleanFieldName(attrName));
+        ArrayList<ArrayList<DataType>> rows = table.getData();
+        ArrayList<String> attributeNames = new ArrayList<>();
 
-            // the rest of the records
-            Iterator<DataType> it = c.getData().iterator();
-            columnIterators.add(it);
-        }
+//        for (String attributeName: table.getColumnNames()) {
+//            attributeNames.add(fieldNameToAvroName(attributeName));
+//        }
 
-        boolean moreData = true;
-        while(moreData) {
+
+        for (ArrayList<DataType> row: rows) {
             GenericData.Record record = new GenericData.Record(parquetSchema);
-            for (int i = 0; i < numColumns; i++) {
-                Iterator<DataType> it = columnIterators.get(i);
-                String attributeName = attributeNames.get(i);
-                if (! it.hasNext()) {
-                    moreData = false;
-                    continue;
-                }
-                DataType dt = it.next();
-                Object value = dt.value();
-                record.put(attributeName, value);
+            for (int i = 0; i < row.size(); i++) {
+                record.put(attributeNames.get(i), row.get(i).value());
             }
-
             parquetRecords.add(record);
         }
 
-        parquetRecords.remove(parquetRecords.size() - 1);
         return parquetRecords;
     }
 
-    public void writeToParquet(Schema parquetSchema, List<GenericData.Record> recordsToWrite, Path fileToWrite) throws IOException {
+    public void writeToParquet(Schema avroSchema, List<GenericData.Record> recordsToWrite, Path fileToWrite) throws IOException {
+        int blockSize = 1024 * 100;
+        int pageSize = 65535 * 100;
+
         try (ParquetWriter<GenericData.Record> writer = AvroParquetWriter
                 .<GenericData.Record>builder(fileToWrite)
-                .withSchema(parquetSchema)
+                .withSchema(avroSchema)
                 .withConf(new Configuration())
                 .withCompressionCodec(CompressionCodecName.SNAPPY)
+                .withPageSize(pageSize)
+                .withRowGroupSize(blockSize)
                 .build()) {
-
             for (GenericData.Record record : recordsToWrite) {
                 writer.write(record);
             }
@@ -192,9 +178,9 @@ public class ParquetSerializer implements Serializer {
         specificationParser.parseYAML("test.yaml");
         specificationParser.write("test_output.json");
         DatasetGenerator datasetGenerator = DatasetConfig.specToGenerator(specificationParser.getDatabase());
-        Dataset dataset = datasetGenerator.generateDataset();
+//        Dataset dataset = datasetGenerator.generateDataset();
 
-        ParquetSerializer parquetSerializer = new ParquetSerializer(dataset);
+//        ParquetSerializer parquetSerializer = new ParquetSerializer(dataset);
 //        parquetSerializer.serialize("/Users/ryan/Documents/test");
     }
 }

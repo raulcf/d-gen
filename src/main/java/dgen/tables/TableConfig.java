@@ -7,8 +7,8 @@ import dgen.coreconfig.ConfigKey;
 import dgen.tablerelationships.TableRelationshipConfig;
 import dgen.utils.parsers.specs.ColumnSpec;
 import dgen.utils.parsers.specs.TableSpec;
-import dgen.utils.parsers.specs.relationships.DefTableRelationshipSpec;
-import dgen.utils.parsers.specs.relationships.TableRelationshipSpec;
+import dgen.utils.parsers.specs.relationshipspecs.DefTableRelationshipSpec;
+import dgen.utils.parsers.specs.relationshipspecs.TableRelationshipSpec;
 
 import java.util.ArrayList;
 import java.util.HashMap;

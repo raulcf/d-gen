@@ -9,11 +9,6 @@ import dgen.utils.serialization.ParquetSerializer;
 import dgen.utils.serialization.PostgresSerializer;
 import dgen.utils.serialization.Serializer;
 import org.apache.commons.cli.*;
-import org.apache.commons.io.FileUtils;
-import org.apache.zookeeper.Op;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * This class drives the data generation process, which is divided into 4 stages:
@@ -25,41 +20,6 @@ import java.io.IOException;
  *
  */
 public class Main {
-
-    public static void benchmark(String[] args) throws Exception {
-        // Example
-        long t0 = System.currentTimeMillis();
-        SpecificationParser specificationParser = new SpecificationParser();
-//        specificationParser.parseYAML("example_specifications/2_input.yaml");
-//        specificationParser.write("example_specifications/2_output.json");
-        specificationParser.parseYAML("test.yaml");
-        specificationParser.write("test_output.json");
-        DatasetGenerator datasetGenerator = DatasetConfig.specToGenerator(specificationParser.getDatabase());
-        Dataset dataset = datasetGenerator.generateDataset();
-
-        CSVSerializer serializer = new CSVSerializer(dataset);
-
-        File datasetPath = new File("11");
-        File metadataPath = new File("test_dataset.json");
-        FileUtils.deleteDirectory(datasetPath);
-        metadataPath.delete();
-
-        serializer.serialize(".", "test_dataset.json");
-        System.out.println("Finished in " + (System.currentTimeMillis() - t0));
-
-        long length = 0;
-        for (File file : datasetPath.listFiles()) {
-            length += file.length();
-        }
-
-        System.out.println((double) length / 1000000);
-
-
-//        System.out.println(dataset.toString());
-//        System.out.println(dataset.getTables().size());
-
-
-    }
 
     public static void main(String[] args) throws Exception {
         Options options = new Options();
@@ -99,23 +59,23 @@ public class Main {
             specificationParser.write("test_output.json");
         }
         DatasetGenerator datasetGenerator = DatasetConfig.specToGenerator(specificationParser.getDatabase());
-        Dataset dataset = datasetGenerator.generateDataset();
+//        Dataset dataset = datasetGenerator.generateDataset();
 
-        Serializer databaseSerializer;
-        switch (serializerValue) {
-            case ("csv"):
-                databaseSerializer = new CSVSerializer(dataset);
-                break;
-            case ("postgres"):
-                databaseSerializer = new PostgresSerializer(dataset);
-                break;
-            case ("parquet"):
-                databaseSerializer = new ParquetSerializer(dataset);
-                break;
-            default:
-                throw new Exception("Invalid serializer type");
-        }
-
-        databaseSerializer.serialize(databaseOutputValue, metadataOutputValue);
+//        Serializer databaseSerializer;
+//        switch (serializerValue) {
+//            case ("csv"):
+//                databaseSerializer = new CSVSerializer(dataset);
+//                break;
+//            case ("postgres"):
+//                databaseSerializer = new PostgresSerializer(dataset);
+//                break;
+//            case ("parquet"):
+//                databaseSerializer = new ParquetSerializer(dataset);
+//                break;
+//            default:
+//                throw new Exception("Invalid serializer type");
+//        }
+//
+//        databaseSerializer.serialize(databaseOutputValue, metadataOutputValue);
     }
 }

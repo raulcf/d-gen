@@ -13,25 +13,26 @@ public class Dataset {
     private String attributeName;
     private Map<Integer, Table> tables;
 
+
     public Dataset(DatasetConfig datasetConfig, String attributeName, Map<Integer, Table> tables) {
         this.datasetConfig = datasetConfig;
         this.attributeName = attributeName;
         this.tables = tables;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Dataset name: ");
-        sb.append(attributeName).append("\n\n");
-
-        for (Table table: tables.values()) {
-            sb.append("Table ").append(table.getAttributeName()).append("\n");
-            sb.append(table.toString());
-        }
-
-        return sb.toString();
-    }
+//    @Override
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Dataset name: ");
+//        sb.append(attributeName).append("\n\n");
+//
+//        for (Table table: tables.values()) {
+//            sb.append("Table ").append(table.getAttributeName()).append("\n");
+//            sb.append(table.toString());
+//        }
+//
+//        return sb.toString();
+//    }
 
     public String getAttributeName() {
         return attributeName;
@@ -43,7 +44,11 @@ public class Dataset {
 
     public Table getTable(int tableID) { return tables.get(tableID); }
 
-    public Column getColumn(int tableID, int columnID) { return getTable(tableID).getColumn(columnID); }
+//    public Column getColumn(int tableID, int columnID) { return getTable(tableID).getColumn(columnID); }
+
+    public String getTableName(int tableID) { return tables.get(tableID).getAttributeName(); }
+
+    public String getColumnName(int tableID, int columnID) { return tables.get(tableID).getColumnNames().get(columnID); }
 
     public DatasetConfig getDatasetConfig() {
         return datasetConfig;

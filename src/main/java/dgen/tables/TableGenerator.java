@@ -1,5 +1,6 @@
 package dgen.tables;
 
+import com.sun.research.ws.wadl.Link;
 import dgen.attributegenerators.AttributeNameGenerator;
 import dgen.attributegenerators.DefaultAttributeNameGenerator;
 import dgen.attributegenerators.RandomAttributeNameGenerator;
@@ -16,7 +17,10 @@ import dgen.tablerelationships.dependencyfunctions.funcdeps.FuncDepGenerator;
 import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityConfig;
 import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityGenerator;
 import dgen.utils.parsers.RandomGenerator;
+import dgen.utils.serialization.Serializer;
 
+import javax.xml.crypto.Data;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -115,17 +119,58 @@ public class TableGenerator {
 
     // TODO: this should be an iterator that provides either columns or rows, depending on the storage orientation
 
-    public Table generateTable() {
+    public Table generateTable(Serializer serializer) throws Exception {
+        String attributeName = ang.generateAttributeName();
+        List<ColumnGenerator> columnGenerators = new ArrayList<>(columnGeneratorMap.values());
+        LinkedHashMap<Integer, String> columnNameMap = new LinkedHashMap<>();
+        List<ColumnConfig> columnConfigs = new ArrayList<>();
 
-        Map<Integer, Column> columns = new HashMap<>();
-        for (ColumnGenerator cg : columnGeneratorMap.values()) {
-            Column c = cg.generateColumn(this.numRecords);
-            columns.put(c.getColumnID(), c);
+        serializer.fileSetup(attributeName);
+
+        for (ColumnGenerator columnGenerator: columnGenerators) {
+            String columnName = columnGenerator.generateName();
+            columnNameMap.put(columnGenerator.getColumnID(), columnName);
+            columnConfigs.add(columnGenerator.getColumnConfig());
         }
 
-        String attributeName = ang.generateAttributeName();
-        Table t = new Table(tableID, attributeName, columns);
-        return t;
+        serializer.serializationSetup(attributeName, columnNameMap, columnConfigs);
+
+        // Might want to create an enum of row-oriented and column-oriented serialization types
+        switch (serializer.serializerType()) {
+            case POSTGRES:
+            case CSV:
+                generateTableInRows(serializer, attributeName);
+                break;
+        }
+
+        serializer.postSerialization();
+
+        return new Table(tableID, attributeName, columnNameMap);
+    }
+
+    public void generateTableInRows(Serializer serializer, String attributeName) throws Exception {
+        List<ColumnGenerator> columnGenerators = new ArrayList<>(columnGeneratorMap.values());
+
+        for (int i = 0; i < numRecords; i++) {
+            ArrayList<DataType> row = new ArrayList<>(columnGenerators.size());
+
+            for (ColumnGenerator columnGenerator: columnGenerators) {
+                row.add(columnGenerator.generateData());
+            }
+
+            serializer.serialize(row, attributeName);
+        }
+    }
+
+    public void generateTableInColumns(Serializer serializer, String attributeName) throws Exception {
+        List<ColumnGenerator> columnGenerators = new ArrayList<>(columnGeneratorMap.values());
+
+        for (ColumnGenerator columnGenerator: columnGenerators) {
+            ArrayList<DataType> column = columnGenerator.generateData(numRecords);
+
+            serializer.serialize(column, attributeName);
+        }
+
     }
 
     public ColumnGenerator getColumnGenerator(int columnID) {

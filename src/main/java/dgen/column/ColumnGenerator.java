@@ -13,6 +13,7 @@ import dgen.utils.parsers.RandomGenerator;
 import dgen.utils.parsers.specs.SpecType;
 import dgen.utils.parsers.specs.datatypespecs.DataTypeSpec;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,6 @@ public class ColumnGenerator {
     }
 
     public Column generateColumn(int numRecords) {
-
         if (dtg == null) {
             throw new DGException("Missing data generator");
         }
@@ -80,6 +80,40 @@ public class ColumnGenerator {
         Column c = new Column(columnID, attributeName, values);
 
         return c;
+    }
+
+    public String generateName() {
+        return ang.generateAttributeName();
+    }
+
+    public DataType generateData() {
+        if (dtg == null) {
+            throw new DGException("Missing data generator");
+        }
+
+        if (unique) {
+            return this.dtg.drawWithoutReplacement();
+        } else {
+            return this.dtg.drawWithReplacement();
+        }
+    }
+
+    public ArrayList<DataType> generateData(int numRecords) {
+        if (dtg == null) {
+            throw new DGException("Missing data generator");
+        }
+
+        ArrayList<DataType> data = new ArrayList<>();
+
+        for (int i = 0; i < numRecords; i++) {
+            if (unique) {
+                data.add(this.dtg.drawWithoutReplacement());
+            } else {
+                data.add(this.dtg.drawWithReplacement());
+            }
+        }
+
+        return data;
     }
 
     public ColumnGenerator copy() {
@@ -104,6 +138,10 @@ public class ColumnGenerator {
 
     public void setDtg(DataTypeGenerator dtg) {
         this.dtg = dtg;
+    }
+
+    public ColumnConfig getColumnConfig() {
+        return columnConfig;
     }
 
     @Override

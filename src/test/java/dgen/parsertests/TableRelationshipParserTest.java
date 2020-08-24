@@ -7,9 +7,9 @@ import dgen.utils.parsers.specs.ColumnSpec;
 import dgen.utils.parsers.specs.DefColumnSpec;
 import dgen.utils.parsers.specs.datatypespecs.IntegerSpec;
 import dgen.utils.parsers.specs.datatypespecs.StringSpec;
-import dgen.utils.parsers.specs.relationships.*;
-import dgen.utils.parsers.specs.relationships.dependencyFunctions.FunctionalDependency;
-import dgen.utils.parsers.specs.relationships.dependencyFunctions.JaccardSimilarity;
+import dgen.utils.parsers.specs.relationshipspecs.*;
+import dgen.utils.parsers.specs.relationshipspecs.dependencyFunctions.FunctionalDependency;
+import dgen.utils.parsers.specs.relationshipspecs.dependencyFunctions.JaccardSimilarity;
 import org.junit.Before;
 import org.junit.Test;
 

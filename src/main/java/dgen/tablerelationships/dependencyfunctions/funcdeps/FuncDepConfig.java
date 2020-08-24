@@ -4,8 +4,8 @@ import dgen.coreconfig.Config;
 import dgen.coreconfig.ConfigDef;
 import dgen.coreconfig.ConfigKey;
 import dgen.tablerelationships.dependencyfunctions.DependencyFunctionConfig;
-import dgen.utils.parsers.specs.relationships.dependencyFunctions.FunctionType;
-import dgen.utils.parsers.specs.relationships.dependencyFunctions.FunctionalDependency;
+import dgen.utils.parsers.specs.relationshipspecs.dependencyFunctions.FunctionType;
+import dgen.utils.parsers.specs.relationshipspecs.dependencyFunctions.FunctionalDependency;
 
 import java.util.HashMap;
 import java.util.List;
