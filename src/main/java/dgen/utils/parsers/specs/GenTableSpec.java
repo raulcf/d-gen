@@ -3,7 +3,7 @@ package dgen.utils.parsers.specs;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import dgen.utils.parsers.SpecificationException;
-import dgen.utils.parsers.specs.relationships.TableRelationshipSpec;
+import dgen.utils.parsers.specs.relationshipspecs.TableRelationshipSpec;
 
 import java.util.ArrayList;
 import java.util.List;

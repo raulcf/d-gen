@@ -1,4 +1,4 @@
-package dgen.utils.parsers.specs.relationships;
+package dgen.utils.parsers.specs.relationshipspecs;
 
 import dgen.utils.parsers.RandomGenerator;
 import dgen.utils.parsers.SpecificationException;

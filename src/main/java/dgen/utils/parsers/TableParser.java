@@ -4,8 +4,8 @@ import dgen.utils.parsers.specs.ColumnSpec;
 import dgen.utils.parsers.specs.DefTableSpec;
 import dgen.utils.parsers.specs.GenTableSpec;
 import dgen.utils.parsers.specs.TableSpec;
-import dgen.utils.parsers.specs.relationships.RelationshipType;
-import dgen.utils.parsers.specs.relationships.TableRelationshipSpec;
+import dgen.utils.parsers.specs.relationshipspecs.RelationshipType;
+import dgen.utils.parsers.specs.relationshipspecs.TableRelationshipSpec;
 
 import java.util.*;
 

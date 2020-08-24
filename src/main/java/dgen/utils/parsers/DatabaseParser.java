@@ -3,8 +3,8 @@ package dgen.utils.parsers;
 import dgen.utils.parsers.specs.ColumnSpec;
 import dgen.utils.parsers.specs.DatabaseSpec;
 import dgen.utils.parsers.specs.TableSpec;
-import dgen.utils.parsers.specs.relationships.DatabaseRelationshipSpec;
-import dgen.utils.parsers.specs.relationships.RelationshipType;
+import dgen.utils.parsers.specs.relationshipspecs.DatabaseRelationshipSpec;
+import dgen.utils.parsers.specs.relationshipspecs.RelationshipType;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -26,6 +26,9 @@ public class DatabaseParser {
         database = d;
         rnd = new RandomGenerator(database.getRandomSeed());
 
+        SerializerParser serializerParser = new SerializerParser(database.getSerializer());
+        database.setSerializer(serializerParser.parse());
+
         TableParser tableParser = new TableParser(rnd);
         for (TableSpec tableSchema: database.getTableSpecs()) {
             tableParser.parse(tableSchema);
@@ -33,6 +36,7 @@ public class DatabaseParser {
         database.setTableSpecs(tableParser.getTables());
         Map<Integer, Map<Integer, ColumnSpec>> tableMap = tableParser.getTableMap();
 
+        long t0 = System.currentTimeMillis();
         DatabaseRelationshipParser databaseRelationshipParser = new DatabaseRelationshipParser(tableMap, rnd);
         List<DatabaseRelationshipSpec> databaseRelationships = database.getDatabaseRelationships();
         databaseRelationships.sort(new Comparator<DatabaseRelationshipSpec>() {
@@ -49,6 +53,7 @@ public class DatabaseParser {
         List<DatabaseRelationshipSpec> parsedPKFKList = new ArrayList<>();
         parsedPKFKList.add(databaseRelationshipParser.getParsedPKFKSchema());
         database.setDatabaseRelationships(parsedPKFKList);
+        System.out.println("Parsed PK-FK relationships in " + (System.currentTimeMillis() - t0));
     }
 
 }
