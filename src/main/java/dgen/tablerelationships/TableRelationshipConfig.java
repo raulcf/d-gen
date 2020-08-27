@@ -19,7 +19,7 @@ public class TableRelationshipConfig extends Config {
     private static final String DEPENDENCY_FUNCTION_CONFIG_DOC = "Config file of dependency function";
 
     public static final String RANDOM_SEED = "random.seed";
-    public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
+    private static final String RANDOM_SEED_DOC = "Random seed used to generate values";
 
     private static final ConfigDef config;
 
@@ -32,10 +32,10 @@ public class TableRelationshipConfig extends Config {
 
     public static TableRelationshipConfig specToConfig(DefTableRelationshipSpec tableRelationshipSpec) {
         Map<String, Object> originals = new HashMap<>();
-        originals.put("mappings", tableRelationshipSpec.getDependencyMap());
-        originals.put("dependency.function.config",
+        originals.put(TableRelationshipConfig.MAPPINGS, tableRelationshipSpec.getDependencyMap());
+        originals.put(TableRelationshipConfig.DEPENDENCY_FUNCTION_CONFIG,
                 DependencyFunctionConfig.specToConfig(tableRelationshipSpec.getDependencyFunction()));
-        originals.put("random.seed", tableRelationshipSpec.getRandomSeed());
+        originals.put(TableRelationshipConfig.RANDOM_SEED, tableRelationshipSpec.getRandomSeed());
 
         return new TableRelationshipConfig(originals);
     }

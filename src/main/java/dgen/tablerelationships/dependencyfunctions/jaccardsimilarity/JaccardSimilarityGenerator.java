@@ -25,7 +25,7 @@ public class JaccardSimilarityGenerator implements DataTypeGenerator {
     public static boolean validate(List<DataType> determinantData, ColumnGenerator dependent,
                                    JaccardSimilarityConfig jaccardSimilarityConfig, int numRecords) {
         Column dependentColumn = dependent.generateColumn(numRecords);
-        Float similarity = jaccardSimilarityConfig.getFloat("similarity");
+        Float similarity = jaccardSimilarityConfig.getFloat(JaccardSimilarityConfig.SIMILARITY);
         Set<Object> determinantValues = new HashSet<>();
         for (DataType d: determinantData) {
             determinantValues.add(d.value());

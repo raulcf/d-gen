@@ -39,15 +39,15 @@ public class DatasetConfig extends Config {
 
     public static DatasetConfig specToConfig(DatabaseSpec databaseSpec) {
         Map<String, Object> originals = new HashMap<>();
-        originals.put("dataset.name", databaseSpec.getDatabaseName());
-        originals.put("serializer.config", SerializerConfig.specToConfig(databaseSpec.getSerializer()));
+        originals.put(DatasetConfig.DATASET_NAME, databaseSpec.getDatabaseName());
+        originals.put(DatasetConfig.SERIALIZER_CONFIG, SerializerConfig.specToConfig(databaseSpec.getSerializer()));
 
         List<TableConfig> tableConfigs = new ArrayList<>();
 
         for (TableSpec tableSpec: databaseSpec.getTableSpecs()) {
             tableConfigs.add(TableConfig.specToConfig(tableSpec));
         }
-        originals.put("table.configs", tableConfigs);
+        originals.put(DatasetConfig.TABLE_CONFIGS, tableConfigs);
 
         // Adding all primary keys and foreign keys into a map
         Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> pkfkMappings = new HashMap<>();
@@ -71,15 +71,13 @@ public class DatasetConfig extends Config {
                 pkfkMappings.put(primaryKeys.get(i), mapping);
             }
         }
-        originals.put("pk.fk.mappings", pkfkMappings);
+        originals.put(DatasetConfig.PK_FK_MAPPINGS, pkfkMappings);
 
         return new DatasetConfig(originals);
     }
 
     public static DatasetGenerator specToGenerator(DatabaseSpec databaseSpec) {
-        long t0 = System.currentTimeMillis();
         DatasetGenerator datasetGenerator = new DatasetGenerator(specToConfig(databaseSpec));
-        System.out.println("Created generators in " + (System.currentTimeMillis() - t0));
         return datasetGenerator;
     }
 

@@ -29,8 +29,8 @@ public class GaussianDistributionConfig extends Config implements DistributionCo
 
     public static GaussianDistributionConfig parseSpec(GaussianDistributionSpec gaussianDistributionSpec) {
         Map<String, Object> originals = new HashMap<>();
-        originals.put("standard.deviation", gaussianDistributionSpec.getStandardDeviation());
-        originals.put("mean", gaussianDistributionSpec.getMean());
+        originals.put(GaussianDistributionConfig.STANDARD_DEVIATION, gaussianDistributionSpec.getStandardDeviation());
+        originals.put(GaussianDistributionConfig.MEAN, gaussianDistributionSpec.getMean());
 
         return new GaussianDistributionConfig(originals);
     }

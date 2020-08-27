@@ -21,7 +21,7 @@ public class BooleanTypeConfig extends Config implements DataTypeConfig {
     private static final String TRUE_FALSE_RATIO_DOC = "Percentage of values of this type to be true";
 
     public static final String RANDOM_SEED = "random.seed";
-    public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
+    private static final String RANDOM_SEED_DOC = "Random seed used to generate values";
 
     public static final String SIZE_IN_BYTES = "size.in.bytes";
     private static final String SIZE_IN_BYTES_DOC = "The native size of this type in bytes";
@@ -36,8 +36,8 @@ public class BooleanTypeConfig extends Config implements DataTypeConfig {
 
     public static BooleanTypeConfig specToConfig(BooleanSpec booleanSpec) {
         Map<String, Object> originals = new HashMap<>();
-        originals.put("true.false.ratio", booleanSpec.getTfRatio());
-        originals.put("random.seed", booleanSpec.getRandomSeed());
+        originals.put(BooleanTypeConfig.TRUE_FALSE_RATIO, booleanSpec.getTfRatio());
+        originals.put(BooleanTypeConfig.RANDOM_SEED, booleanSpec.getRandomSeed());
 
         return new BooleanTypeConfig(originals);
     }

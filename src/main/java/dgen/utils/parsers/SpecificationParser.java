@@ -35,9 +35,7 @@ public class SpecificationParser {
         }
 
         DatabaseParser parser = new DatabaseParser();
-        long t0 = System.currentTimeMillis();
         parser.parse(database);
-        System.out.println("Parsed high-level spec in " + (System.currentTimeMillis() - t0));
         database = parser.getDatabase();
 
     }

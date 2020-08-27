@@ -40,12 +40,6 @@ public class PostgresSerializer implements Serializer {
         this.metadataOutputPath = postgresConfig.getString(SerializerConfig.METADATA_OUTPUT_PATH);
     }
 
-//    public PostgresSerializer(Dataset dataset) {
-//        this.dataset = dataset;
-//        this.databaseName = dataset.getAttributeName();
-//        this.datasetConfig = dataset.getDatasetConfig();
-//    }
-
     @Override
     public Serializers serializerType() { return Serializers.POSTGRES; }
 
@@ -69,6 +63,7 @@ public class PostgresSerializer implements Serializer {
 
     }
 
+    @Override
     public void serializationSetup(String tableName, LinkedHashMap<Integer, String> columnNames, List<ColumnConfig> columnConfigs) throws IOException {
         StringBuilder statement = new StringBuilder();
 
@@ -144,63 +139,9 @@ public class PostgresSerializer implements Serializer {
 
         bufferedWriter.flush();
         bufferedWriter.close();
-    }
 
-    /**
-     * Creates a script of PostgreSQL commands that can be used to load a database object into PostgreSQL.
-     * Dataset objects aren't loaded as Postgres objects but rather as schemas.
-//     * @param scriptPath Path of file to write PostgreSQL script to.
-//     * @param metadataPath Path to write dataset metadata to.
-     */
-//    @Override
-//    public void serialize(String scriptPath, String metadataPath) throws Exception {
-//        StringBuilder statement = new StringBuilder();
-//        statement.append("CREATE SCHEMA \"");
-//        statement.append(databaseName + "\";");
-//        statement.append("\n\n");
-//
-//        for (TableConfig tableConfig: (List<TableConfig>) datasetConfig.getObject(DatasetConfig.TABLE_CONFIGS)) {
-//            Table table = dataset.getTable(tableConfig.getInt(TableConfig.TABLE_ID));
-//            statement.append(tableConfigToStatement(tableConfig, table));
-//            statement.append("\n");
-//
-//        }
-//
-//        statement.append("\n");
-//
-//        // We insert data before defining constraints, but the inserted data should already follow those constraints
-//        for (Table table: dataset.getTables()) {
-//            statement.append(insertTableValues(table));
-//            statement.append("\n\n");
-//        }
-//
-//        Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> pkfkMappings = (Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>>) datasetConfig.getObject("pk.fk.mappings");
-//        for (Pair<Integer, Integer> pk : pkfkMappings.keySet()) {
-//            String pkColumnName = dataset.getColumnName(pk.getValue0(), pk.getValue1());
-//            String pkTableName = dataset.getTableName(pk.getValue0());
-//
-//            statement.append(primaryKeyToStatement(pkTableName, pkColumnName));
-//            statement.append("\n\n");
-//
-//            for (Pair<Integer, Integer> fk : pkfkMappings.get(pk)) {
-//                String fkColumnName = dataset.getColumnName(fk.getValue0(), fk.getValue1());
-//                String fkTableName = dataset.getTableName(fk.getValue0());
-//
-//                statement.append(foreignKeyToStatement(pkTableName, pkColumnName, fkTableName, fkColumnName));
-//                statement.append("\n\n");
-//            }
-//        }
-//
-//        File postgresScript = new File(scriptPath);
-//        if (postgresScript.exists()) { throw new Exception("Path " + scriptPath + " already exists"); }
-//
-//        FileWriter postgresScriptWriter = new FileWriter(postgresScript);
-//        postgresScriptWriter.write(statement.toString());
-//        postgresScriptWriter.flush();
-//        postgresScriptWriter.close();
-//
-//        Serializer.outputMetadata(metadataPath, dataset);
-//    }
+        Serializer.outputMetadata(metadataOutputPath, tableNames, columnNames);
+    }
 
     private String dataTypeToStatement(DataTypeSpec dataTypeSpec) {
         switch (dataTypeSpec.type()) {
@@ -275,36 +216,6 @@ public class PostgresSerializer implements Serializer {
         statement.append("ADD PRIMARY KEY (\"");
         statement.append(pkColumn);
         statement.append("\");");
-
-        return statement.toString();
-    }
-
-    private String insertTableValues(Table table) {
-        StringBuilder statement = new StringBuilder();
-
-        statement.append("INSERT INTO ");
-        statement.append("\"" + databaseName + "\".\"" + table.getAttributeName() + "\"");
-        statement.append(" VALUES\n");
-
-        ArrayList<ArrayList<DataType>> rows = table.getData();
-
-        for (ArrayList<DataType> row: rows) {
-            ArrayList<String> data = new ArrayList<>();
-            for (DataType dt: row) {
-                if (dt.nativeType() == NativeType.STRING) {
-                    data.add("'" + dt.value() + "'");
-                } else {
-                    data.add(dt.value().toString());
-                }
-            }
-
-            String record = String.join(",", data);
-            statement.append("(" + record + "),");
-            statement.append("\n");
-        }
-
-        statement.append(";");
-        statement.deleteCharAt(statement.length() - 3);
 
         return statement.toString();
     }

@@ -16,7 +16,7 @@ public class JaccardSimilarityConfig extends Config implements DependencyFunctio
     private static final ConfigDef config;
 
     public static final String SIMILARITY = "similarity";
-    public static final String SIMILARITY_DOC = "Jaccard similarity index";
+    private static final String SIMILARITY_DOC = "Jaccard similarity index";
 
 
     static {
@@ -27,7 +27,7 @@ public class JaccardSimilarityConfig extends Config implements DependencyFunctio
     public static JaccardSimilarityConfig specToConfig(JaccardSimilarity jaccardSimilarity) {
         Map<String, Object> originals = new HashMap<>();
 
-        originals.put("similarity", jaccardSimilarity.getSimilarity());
+        originals.put(JaccardSimilarityConfig.SIMILARITY, jaccardSimilarity.getSimilarity());
 
         return new JaccardSimilarityConfig(originals);
     }

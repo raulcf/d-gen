@@ -13,7 +13,6 @@ import dgen.utils.parsers.RandomGenerator;
 import dgen.utils.parsers.specs.SpecType;
 import dgen.utils.parsers.specs.datatypespecs.DataTypeSpec;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,25 +37,25 @@ public class ColumnGenerator {
 
     public ColumnGenerator(ColumnConfig columnConfig) {
         this.columnConfig = columnConfig;
-        columnID = columnConfig.getInt("column.id");
-        rnd = new RandomGenerator(columnConfig.getLong("random.seed"));
+        columnID = columnConfig.getInt(ColumnConfig.COLUMN_ID);
+        rnd = new RandomGenerator(columnConfig.getLong(ColumnConfig.RANDOM_SEED));
 
-        if (columnConfig.getString("column.name") != null) {
-            this.ang = new DefaultAttributeNameGenerator(columnConfig.getString("column.name"));
-        } else if (columnConfig.getString("regex.name") != null) {
-            this.ang = new RegexAttributeNameGenerator(rnd, columnConfig.getString("regex.name"));
-        } else if (columnConfig.getBoolean("random.name")) {
+        if (columnConfig.getString(ColumnConfig.COLUMN_NAME) != null) {
+            this.ang = new DefaultAttributeNameGenerator(columnConfig.getString(ColumnConfig.COLUMN_NAME));
+        } else if (columnConfig.getString(ColumnConfig.REGEX_NAME) != null) {
+            this.ang = new RegexAttributeNameGenerator(rnd, columnConfig.getString(ColumnConfig.REGEX_NAME));
+        } else if (columnConfig.getBoolean(ColumnConfig.RANDOM_NAME)) {
             this.ang = new RandomAttributeNameGenerator(rnd);
         }
 
-        if (columnConfig.getObject("column.type") == SpecType.DEFFOREIGNKEY) {
+        if (columnConfig.getObject(ColumnConfig.COLUMN_TYPE) == SpecType.DEFFOREIGNKEY) {
             this.dtg = null;
         } else {
-            this.dtg = DataTypeConfig.specToGenerator((DataTypeSpec) columnConfig.getObject("datatype"));
+            this.dtg = DataTypeConfig.specToGenerator((DataTypeSpec) columnConfig.getObject(ColumnConfig.DATATYPE));
         }
 
         //TODO: Add logic for nulls
-        this.unique = columnConfig.getBoolean("unique");
+        this.unique = columnConfig.getBoolean(ColumnConfig.UNIQUE);
     }
 
     public Column generateColumn(int numRecords) {

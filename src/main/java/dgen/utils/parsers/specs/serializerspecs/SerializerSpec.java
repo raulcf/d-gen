@@ -20,4 +20,8 @@ public interface SerializerSpec {
     String getMetadataOutputPath();
 
     void setMetadataOutputPath(String metadataOutputPath);
+
+    String getLowLevelOutputPath();
+
+    void setLowLevelOutputPath(String outputPath);
 }

@@ -38,10 +38,10 @@ public class TableConfig extends Config {
     private static final String RANDOM_NAME_DOC = "Indicates whether to generate a random name";
 
     public static final String TABLE_RELATIONSHIPS = "table.relationships";
-    public static final String TABLE_RELATIONSHIPS_DOC = "List of relationships between columns";
+    private static final String TABLE_RELATIONSHIPS_DOC = "List of relationships between columns";
 
     public static final String RANDOM_SEED = "random.seed";
-    public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
+    private static final String RANDOM_SEED_DOC = "Random seed used to generate values";
 
     static {
         config = new ConfigDef()
@@ -57,25 +57,25 @@ public class TableConfig extends Config {
 
     public static TableConfig specToConfig(TableSpec tableSpec) {
         Map<String, Object> originals = new HashMap<>();
-        originals.put("table.id", tableSpec.getTableID());
-        originals.put("num.rows", tableSpec.getNumRows());
-        originals.put("table.name", tableSpec.getTableName());
-        originals.put("regex.name", tableSpec.getRegexName());
-        originals.put("random.name", tableSpec.isRandomName());
-        originals.put("random.seed", tableSpec.getRandomSeed());
+        originals.put(TableConfig.TABLE_ID, tableSpec.getTableID());
+        originals.put(TableConfig.NUM_ROWS, tableSpec.getNumRows());
+        originals.put(TableConfig.TABLE_NAME, tableSpec.getTableName());
+        originals.put(TableConfig.REGEX_NAME, tableSpec.getRegexName());
+        originals.put(TableConfig.RANDOM_NAME, tableSpec.isRandomName());
+        originals.put(TableConfig.RANDOM_SEED, tableSpec.getRandomSeed());
 
         List<ColumnConfig> columnConfigs = new ArrayList<>();
         // TODO: tableSpec.GetColumnSpecs() Should only be DefColumnSpec but I can't figure out how to downcast it
         for (ColumnSpec columnSpec: tableSpec.getColumnSpecs()) {
             columnConfigs.add(ColumnConfig.specToConfig(columnSpec));
         }
-        originals.put("column.configs", columnConfigs);
+        originals.put(TableConfig.COLUMN_CONFIGS, columnConfigs);
 
         List<TableRelationshipConfig> tableRelationships = new ArrayList<>();
         for (TableRelationshipSpec tableRelationshipSpec: tableSpec.getTableRelationships()) {
             tableRelationships.add(TableRelationshipConfig.specToConfig((DefTableRelationshipSpec) tableRelationshipSpec));
         }
-        originals.put("table.relationships", tableRelationships);
+        originals.put(TableConfig.TABLE_RELATIONSHIPS, tableRelationships);
 
         return new TableConfig(originals);
     }

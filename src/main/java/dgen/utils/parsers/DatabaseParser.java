@@ -36,7 +36,6 @@ public class DatabaseParser {
         database.setTableSpecs(tableParser.getTables());
         Map<Integer, Map<Integer, ColumnSpec>> tableMap = tableParser.getTableMap();
 
-        long t0 = System.currentTimeMillis();
         DatabaseRelationshipParser databaseRelationshipParser = new DatabaseRelationshipParser(tableMap, rnd);
         List<DatabaseRelationshipSpec> databaseRelationships = database.getDatabaseRelationships();
         databaseRelationships.sort(new Comparator<DatabaseRelationshipSpec>() {
@@ -53,7 +52,6 @@ public class DatabaseParser {
         List<DatabaseRelationshipSpec> parsedPKFKList = new ArrayList<>();
         parsedPKFKList.add(databaseRelationshipParser.getParsedPKFKSchema());
         database.setDatabaseRelationships(parsedPKFKList);
-        System.out.println("Parsed PK-FK relationships in " + (System.currentTimeMillis() - t0));
     }
 
 }

@@ -1,6 +1,7 @@
 package dgen.utils.serialization;
 
 import dgen.column.ColumnConfig;
+import dgen.coreconfig.DGException;
 import dgen.dataset.Dataset;
 import dgen.dataset.DatasetConfig;
 import dgen.dataset.DatasetGenerator;
@@ -9,6 +10,10 @@ import dgen.tables.Table;
 import dgen.tables.TableConfig;
 import dgen.utils.parsers.SpecificationParser;
 import dgen.utils.parsers.specs.datatypespecs.DataTypeSpec;
+import dgen.utils.parsers.specs.serializerspecs.Serializers;
+import dgen.utils.serialization.config.CSVConfig;
+import dgen.utils.serialization.config.ParquetConfig;
+import dgen.utils.serialization.config.SerializerConfig;
 import org.apache.avro.Schema;
 import org.apache.avro.generic.GenericData;
 import org.apache.hadoop.conf.Configuration;
@@ -20,42 +25,83 @@ import org.apache.parquet.hadoop.ParquetWriter;
 import org.apache.parquet.hadoop.metadata.CompressionCodecName;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-public class ParquetSerializer {
+public class ParquetSerializer implements Serializer {
 
-    Dataset dataset;
-    DatasetConfig datasetConfig;
+    private String parentDirectory;
+    private String metadataOutputPath;
+    private String datasetDirectory;
+    private Schema avroTableSchema;
+    private ParquetWriter parquetWriter;
+    private List<String> columnNames;
 
-    public ParquetSerializer(Dataset dataset) {
-        this.dataset = dataset;
-        this.datasetConfig = dataset.getDatasetConfig();
+    public ParquetSerializer(ParquetConfig parquetConfig) {
+        this.parentDirectory = parquetConfig.getString(SerializerConfig.PARENT_DIRECTORY);
+        this.metadataOutputPath = parquetConfig.getString(SerializerConfig.METADATA_OUTPUT_PATH);
     }
 
-    /**
-     * Writes a Dataset object into Parquet files. Each table with the Dataset object will be a
-     * .parquet file and all .parquet files will be in a folder named after the database.
-     * @param parentDir Parent directory to place dataset directory in.
-     * @param metadataPath Path to write dataset metadata to.
-     */
-//    @Override
-    public void serialize(String parentDir, String metadataPath) throws Exception {
+    @Override
+    public Serializers serializerType() { return Serializers.PARQUET; }
 
-        for (TableConfig tableConfig: (List<TableConfig>) datasetConfig.getObject(DatasetConfig.TABLE_CONFIGS)) {
-            Schema parquetSchema;
-            Table table = dataset.getTable(tableConfig.getInt(TableConfig.TABLE_ID));
-            parquetSchema = new Schema.Parser().parse(generateAvroSchema(tableConfig, table));
-            List<GenericData.Record> parquetRecords = generateParquetRecords(parquetSchema, table);
+    @Override
+    public void directorySetup(String directoryName) {
+        java.nio.file.Path path = Paths.get(parentDirectory, directoryName);
+        datasetDirectory = path.toString();
 
-            String pathName = parentDir + "/" + dataset.getAttributeName() + "/" + table.getAttributeName() + ".parquet";
-            Path parquetPath = new Path(pathName);
-            writeToParquet(parquetSchema, parquetRecords, parquetPath);
+        try {
+            Files.createDirectory(path);
+        } catch (Exception e) {
+            throw new DGException(path.toString() + " already exists");
         }
 
-        Serializer.outputMetadata(metadataPath, dataset);
+    }
+
+    @Override
+    public void fileSetup(String fileName) throws IOException {
+    }
+
+    @Override
+    public void serializationSetup(String tableName, LinkedHashMap<Integer, String> columnNames, List<ColumnConfig> columnConfigs) throws IOException {
+        avroTableSchema = new Schema.Parser().parse(generateAvroSchema(columnConfigs, columnNames, tableName));
+        parquetWriter = AvroParquetWriter
+                .<GenericData.Record>builder(new Path(datasetDirectory + "/" + tableName + ".parquet"))
+                .withSchema(avroTableSchema)
+                .withConf(new Configuration())
+                .withCompressionCodec(CompressionCodecName.SNAPPY)
+                .build();
+        this.columnNames = columnNames.values().stream().map(n -> fieldNameToAvroName(n)).collect(Collectors.toList());;
+    }
+
+    @Override
+    public void serialize(List<DataType> row, String tableName) throws IOException {
+        GenericData.Record record = new GenericData.Record(avroTableSchema);
+        for (int i = 0; i < row.size(); i++) {
+            record.put(columnNames.get(i), row.get(i).value());
+        }
+
+        parquetWriter.write(record);
+    }
+
+    @Override
+    public void postSerialization() throws IOException {
+        parquetWriter.close();
+        parquetWriter = null;
+    }
+
+    @Override
+    public void cleanup(DatasetConfig datasetConfig, Map<Integer, String> tableNames,
+                        Map<Integer, Map<Integer, String>> columnNames) throws IOException {
+        Serializer.outputMetadata(metadataOutputPath, tableNames, columnNames);
     }
 
     private String dataTypeToAvro(DataTypeSpec dataTypeSpec) {
@@ -73,7 +119,7 @@ public class ParquetSerializer {
         return null;
     }
 
-    // FIXME: Avro doesn't allow field names to start with a number :(
+    // FIXME: Avro doesn't allow field names to start with a number :(. Name changes also aren't reflected in metadata
     private String fieldNameToAvroName(String name) {
         Pattern pattern = Pattern.compile("[A-Za-z_]");
         Matcher matcher = pattern.matcher(String.valueOf(name.charAt(0)));
@@ -103,59 +149,20 @@ public class ParquetSerializer {
         return columnAvro;
     }
 
-    private String generateAvroSchema(TableConfig tableConfig, Table table) throws IOException {
+    private String generateAvroSchema(List<ColumnConfig> columnConfigs, LinkedHashMap<Integer, String> columnNames,
+                                      String tableName) throws IOException {
         Map<String, Object> tableAvro = new HashMap<>();
         tableAvro.put("type", "record");
-        tableAvro.put("name", fieldNameToAvroName(table.getAttributeName()));
+        tableAvro.put("name", fieldNameToAvroName(tableName));
 
         List<Map<String, Object>> columnAvros = new ArrayList<>();
-        for (ColumnConfig columnConfig: (List<ColumnConfig>) tableConfig.getObject(TableConfig.COLUMN_CONFIGS)) {
-            String columnName = table.getColumnName(columnConfig.getInt(ColumnConfig.COLUMN_ID));
+        for (ColumnConfig columnConfig: columnConfigs) {
+            String columnName = columnNames.get(columnConfig.getInt(ColumnConfig.COLUMN_ID));
             columnAvros.add(columnToAvro(columnConfig, columnName));
         }
         tableAvro.put("fields", columnAvros);
 
         return (new ObjectMapper().writeValueAsString(tableAvro));
-    }
-
-    private List<GenericData.Record> generateParquetRecords(Schema parquetSchema, Table table) {
-        List<GenericData.Record> parquetRecords = new ArrayList<>();
-
-        ArrayList<ArrayList<DataType>> rows = table.getData();
-        ArrayList<String> attributeNames = new ArrayList<>();
-
-//        for (String attributeName: table.getColumnNames()) {
-//            attributeNames.add(fieldNameToAvroName(attributeName));
-//        }
-
-
-        for (ArrayList<DataType> row: rows) {
-            GenericData.Record record = new GenericData.Record(parquetSchema);
-            for (int i = 0; i < row.size(); i++) {
-                record.put(attributeNames.get(i), row.get(i).value());
-            }
-            parquetRecords.add(record);
-        }
-
-        return parquetRecords;
-    }
-
-    public void writeToParquet(Schema avroSchema, List<GenericData.Record> recordsToWrite, Path fileToWrite) throws IOException {
-        int blockSize = 1024 * 100;
-        int pageSize = 65535 * 100;
-
-        try (ParquetWriter<GenericData.Record> writer = AvroParquetWriter
-                .<GenericData.Record>builder(fileToWrite)
-                .withSchema(avroSchema)
-                .withConf(new Configuration())
-                .withCompressionCodec(CompressionCodecName.SNAPPY)
-                .withPageSize(pageSize)
-                .withRowGroupSize(blockSize)
-                .build()) {
-            for (GenericData.Record record : recordsToWrite) {
-                writer.write(record);
-            }
-        }
     }
 
     // Method for testing

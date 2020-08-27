@@ -3,6 +3,7 @@ package dgen.utils.serialization.config;
 import dgen.coreconfig.DGException;
 import dgen.utils.parsers.specs.serializerspecs.*;
 import dgen.utils.serialization.CSVSerializer;
+import dgen.utils.serialization.ParquetSerializer;
 import dgen.utils.serialization.PostgresSerializer;
 import dgen.utils.serialization.Serializer;
 
@@ -13,7 +14,6 @@ public interface SerializerConfig {
 
     static String METADATA_OUTPUT_PATH = "metadata.output.path";
     static String METADATA_OUTPUT_PATH_DOC = "Path to output dataset metadata";
-
 
     static SerializerConfig specToConfig(SerializerSpec serializerSpec) {
         switch (serializerSpec.serializerType()) {
@@ -39,6 +39,9 @@ public interface SerializerConfig {
             case POSTGRES:
                 PostgresConfig postgresConfig = (PostgresConfig) serializerConfig;
                 return new PostgresSerializer(postgresConfig);
+            case PARQUET:
+                ParquetConfig parquetConfig = (ParquetConfig) serializerConfig;
+                return new ParquetSerializer(parquetConfig);
         }
 
         return null;

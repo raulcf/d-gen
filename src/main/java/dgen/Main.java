@@ -28,54 +28,23 @@ public class Main {
         specPath.setRequired(true);
         options.addOption(specPath);
 
-        Option specOutputPath = new Option("so", "spec-output", true, "low-level spec output path");
+        Option specOutputPath = new Option("o", "output", true, "low-level spec output path");
         options.addOption(specOutputPath);
-
-        Option databaseOutput = new Option("o", "output", true, "output database path");
-        databaseOutput.setRequired(true);
-        options.addOption(databaseOutput);
-
-        Option serializer = new Option("s", "serializer", true, "serializer type (csv, parquet, postgres");
-        serializer.setRequired(true);
-        options.addOption(serializer);
-
-        Option metadataOutput = new Option("m", "metadata-output", true, "metadata output file path");
-        metadataOutput.setRequired(true);
-        options.addOption(metadataOutput);
 
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd = parser.parse(options, args);
 
         String specPathValue = cmd.getOptionValue("input");
-        String databaseOutputValue = cmd.getOptionValue("output");
-        String serializerValue = cmd.getOptionValue("serializer");
-        String metadataOutputValue = cmd.getOptionValue("metadata-output");
         String specOutputPathValue = cmd.getOptionValue("spec-output");
 
         SpecificationParser specificationParser = new SpecificationParser();
         specificationParser.parseYAML(specPathValue);
 
         if (specOutputPathValue != null) {
-            specificationParser.write("test_output.json");
+            specificationParser.write(specOutputPathValue);
         }
         DatasetGenerator datasetGenerator = DatasetConfig.specToGenerator(specificationParser.getDatabase());
-//        Dataset dataset = datasetGenerator.generateDataset();
 
-//        Serializer databaseSerializer;
-//        switch (serializerValue) {
-//            case ("csv"):
-//                databaseSerializer = new CSVSerializer(dataset);
-//                break;
-//            case ("postgres"):
-//                databaseSerializer = new PostgresSerializer(dataset);
-//                break;
-//            case ("parquet"):
-//                databaseSerializer = new ParquetSerializer(dataset);
-//                break;
-//            default:
-//                throw new Exception("Invalid serializer type");
-//        }
-//
-//        databaseSerializer.serialize(databaseOutputValue, metadataOutputValue);
+        datasetGenerator.generateDataset();
     }
 }

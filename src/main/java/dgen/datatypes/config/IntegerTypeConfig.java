@@ -30,10 +30,10 @@ public class IntegerTypeConfig extends Config implements DataTypeConfig {
     private static final String UPPER_BOUND_DOMAIN_DOC = "Indicates the upper bound of a type's domain";
 
     public static final String DISTRIBUTION = "distribution";
-    public static final String DISTRIBUTION_DOC = "Indicates distribution of type";
+    private static final String DISTRIBUTION_DOC = "Indicates distribution of type";
 
     public static final String RANDOM_SEED = "random.seed";
-    public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
+    private static final String RANDOM_SEED_DOC = "Random seed used to generate values";
 
     public static final String SIZE_IN_BYTES = "size.in.bytes";
     private static final String SIZE_IN_BYTES_DOC = "The native size of this type in bytes";
@@ -50,11 +50,11 @@ public class IntegerTypeConfig extends Config implements DataTypeConfig {
 
     public static IntegerTypeConfig specToConfig(IntegerSpec integerSpec) {
         Map<String, Object> originals = new HashMap<>();
-        originals.put("default.value", integerSpec.getDefaultValue());
-        originals.put("lower.bound.domain", integerSpec.getMinValue());
-        originals.put("upper.bound.domain", integerSpec.getMaxValue());
-        originals.put("distribution", DistributionConfig.specToDistribution(integerSpec.getDistribution()));
-        originals.put("random.seed", integerSpec.getRandomSeed());
+        originals.put(IntegerTypeConfig.DEFAULT_VALUE, integerSpec.getDefaultValue());
+        originals.put(IntegerTypeConfig.LOWER_BOUND_DOMAIN, integerSpec.getMinValue());
+        originals.put(IntegerTypeConfig.UPPER_BOUND_DOMAIN, integerSpec.getMaxValue());
+        originals.put(IntegerTypeConfig.DISTRIBUTION, DistributionConfig.specToDistribution(integerSpec.getDistribution()));
+        originals.put(IntegerTypeConfig.RANDOM_SEED, integerSpec.getRandomSeed());
 
         return new IntegerTypeConfig(originals);
     }

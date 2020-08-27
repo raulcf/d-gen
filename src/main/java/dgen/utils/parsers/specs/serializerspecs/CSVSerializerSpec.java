@@ -8,6 +8,7 @@ public class CSVSerializerSpec implements SerializerSpec {
     String delimiter = ",";
     String parentDirectory;
     String metadataOutputPath;
+    String lowLevelOutputPath = null;
 
     @Override
     public Serializers serializerType() {
@@ -40,5 +41,14 @@ public class CSVSerializerSpec implements SerializerSpec {
     @Override
     public void setMetadataOutputPath(String metadataOutputPath) {
         this.metadataOutputPath = metadataOutputPath;
+    }
+
+    @Override
+    public String getLowLevelOutputPath() {
+        return lowLevelOutputPath;
+    }
+
+    public void setLowLevelOutputPath(String lowLevelOutputPath) {
+        this.lowLevelOutputPath = lowLevelOutputPath;
     }
 }

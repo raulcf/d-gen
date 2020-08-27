@@ -7,6 +7,7 @@ public class PostgresSerializerSpec implements SerializerSpec {
 
     String parentDirectory;
     String metadataOutputPath;
+    String lowLevelOutputPath = null;
 
     @Override
     public Serializers serializerType() {
@@ -31,5 +32,15 @@ public class PostgresSerializerSpec implements SerializerSpec {
     @Override
     public void setMetadataOutputPath(String metadataOutputPath) {
         this.metadataOutputPath = metadataOutputPath;
+    }
+
+    @Override
+    public String getLowLevelOutputPath() {
+        return lowLevelOutputPath;
+    }
+
+    @Override
+    public void setLowLevelOutputPath(String lowLevelOutputPath) {
+        this.lowLevelOutputPath = lowLevelOutputPath;
     }
 }

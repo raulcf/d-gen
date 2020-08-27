@@ -3,6 +3,11 @@
 database:
   databaseName: "2_input"
   randomSeed: 1
+  parquet:
+    # Tables in database will be written to .parquet files in ~/Downloads/2_input
+    parentDirectory: "~/Downloads"
+    # Creates file and writes metadata to ~/Downloads/2_input_metadata.json
+    metadataOutputPath: "~/Downloads/2_input_metadata.json"
   tables:
       # A defined functional dependency with column 1 as the determinant and columns 2 and 3 as the dependents
     - defTable:
