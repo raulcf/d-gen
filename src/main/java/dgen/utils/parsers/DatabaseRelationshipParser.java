@@ -1,14 +1,13 @@
 package dgen.utils.parsers;
 
-import dgen.datatypes.DataType;
 import dgen.utils.parsers.specs.ColumnSpec;
 import dgen.utils.parsers.specs.DefForeignKeySpec;
 import dgen.utils.parsers.specs.PrimaryKeySpec;
 import dgen.utils.parsers.specs.datatypespecs.DataTypeSpec;
-import dgen.utils.parsers.specs.relationships.DatabaseRelationshipSpec;
-import dgen.utils.parsers.specs.relationships.DefPKFKSpec;
-import dgen.utils.parsers.specs.relationships.GenPKFKSpec;
-import dgen.utils.parsers.specs.relationships.GraphSpec;
+import dgen.utils.parsers.specs.relationshipspecs.DatabaseRelationshipSpec;
+import dgen.utils.parsers.specs.relationshipspecs.DefPKFKSpec;
+import dgen.utils.parsers.specs.relationshipspecs.GenPKFKSpec;
+import dgen.utils.parsers.specs.relationshipspecs.GraphSpec;
 import org.javatuples.Pair;
 
 import java.util.*;

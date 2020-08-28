@@ -3,6 +3,14 @@
 database:
   databaseName: "1_input"
   randomSeed: 1
+  serializer:
+    # Serializes to CSV
+    csv:
+      delimiter: "\t"
+      # Tables in database will be written to .csv files in ~/Downloads/1_input
+      parentDirectory: "~/Downloads"
+      # Creates file and writes metadata to ~/Downloads/1_input_metadata.json
+      metadataOutputPath: "~/Downloads/1_input_metadata.json"
   tables:
     # Creates one table with one column with integers and one column with strings
     - defTable:

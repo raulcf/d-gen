@@ -37,29 +37,28 @@ public class ColumnGenerator {
 
     public ColumnGenerator(ColumnConfig columnConfig) {
         this.columnConfig = columnConfig;
-        columnID = columnConfig.getInt("column.id");
-        rnd = new RandomGenerator(columnConfig.getLong("random.seed"));
+        columnID = columnConfig.getInt(ColumnConfig.COLUMN_ID);
+        rnd = new RandomGenerator(columnConfig.getLong(ColumnConfig.RANDOM_SEED));
 
-        if (columnConfig.getString("column.name") != null) {
-            this.ang = new DefaultAttributeNameGenerator(columnConfig.getString("column.name"));
-        } else if (columnConfig.getString("regex.name") != null) {
-            this.ang = new RegexAttributeNameGenerator(rnd, columnConfig.getString("regex.name"));
-        } else if (columnConfig.getBoolean("random.name")) {
+        if (columnConfig.getString(ColumnConfig.COLUMN_NAME) != null) {
+            this.ang = new DefaultAttributeNameGenerator(columnConfig.getString(ColumnConfig.COLUMN_NAME));
+        } else if (columnConfig.getString(ColumnConfig.REGEX_NAME) != null) {
+            this.ang = new RegexAttributeNameGenerator(rnd, columnConfig.getString(ColumnConfig.REGEX_NAME));
+        } else if (columnConfig.getBoolean(ColumnConfig.RANDOM_NAME)) {
             this.ang = new RandomAttributeNameGenerator(rnd);
         }
 
-        if (columnConfig.getObject("column.type") == SpecType.DEFFOREIGNKEY) {
+        if (columnConfig.getObject(ColumnConfig.COLUMN_TYPE) == SpecType.DEFFOREIGNKEY) {
             this.dtg = null;
         } else {
-            this.dtg = DataTypeConfig.specToGenerator((DataTypeSpec) columnConfig.getObject("datatype"));
+            this.dtg = DataTypeConfig.specToGenerator((DataTypeSpec) columnConfig.getObject(ColumnConfig.DATATYPE));
         }
 
         //TODO: Add logic for nulls
-        this.unique = columnConfig.getBoolean("unique");
+        this.unique = columnConfig.getBoolean(ColumnConfig.UNIQUE);
     }
 
     public Column generateColumn(int numRecords) {
-
         if (dtg == null) {
             throw new DGException("Missing data generator");
         }
@@ -80,6 +79,40 @@ public class ColumnGenerator {
         Column c = new Column(columnID, attributeName, values);
 
         return c;
+    }
+
+    public String generateName() {
+        return ang.generateAttributeName();
+    }
+
+    public DataType generateData() {
+        if (dtg == null) {
+            throw new DGException("Missing data generator");
+        }
+
+        if (unique) {
+            return this.dtg.drawWithoutReplacement();
+        } else {
+            return this.dtg.drawWithReplacement();
+        }
+    }
+
+    public ArrayList<DataType> generateData(int numRecords) {
+        if (dtg == null) {
+            throw new DGException("Missing data generator");
+        }
+
+        ArrayList<DataType> data = new ArrayList<>();
+
+        for (int i = 0; i < numRecords; i++) {
+            if (unique) {
+                data.add(this.dtg.drawWithoutReplacement());
+            } else {
+                data.add(this.dtg.drawWithReplacement());
+            }
+        }
+
+        return data;
     }
 
     public ColumnGenerator copy() {
@@ -104,6 +137,10 @@ public class ColumnGenerator {
 
     public void setDtg(DataTypeGenerator dtg) {
         this.dtg = dtg;
+    }
+
+    public ColumnConfig getColumnConfig() {
+        return columnConfig;
     }
 
     @Override

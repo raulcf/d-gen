@@ -6,9 +6,7 @@ import dgen.coreconfig.DGException;
 import dgen.datatypes.DataType;
 import dgen.datatypes.NativeType;
 import dgen.datatypes.generators.DataTypeGenerator;
-import dgen.datatypes.generators.IntegerTypeGenerator;
 import dgen.utils.parsers.RandomGenerator;
-import dgen.utils.parsers.specs.relationships.dependencyFunctions.JaccardSimilarity;
 
 import java.util.*;
 
@@ -27,7 +25,7 @@ public class JaccardSimilarityGenerator implements DataTypeGenerator {
     public static boolean validate(List<DataType> determinantData, ColumnGenerator dependent,
                                    JaccardSimilarityConfig jaccardSimilarityConfig, int numRecords) {
         Column dependentColumn = dependent.generateColumn(numRecords);
-        Float similarity = jaccardSimilarityConfig.getFloat("similarity");
+        Float similarity = jaccardSimilarityConfig.getFloat(JaccardSimilarityConfig.SIMILARITY);
         Set<Object> determinantValues = new HashSet<>();
         for (DataType d: determinantData) {
             determinantValues.add(d.value());

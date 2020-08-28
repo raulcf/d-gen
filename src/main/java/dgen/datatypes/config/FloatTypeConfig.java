@@ -28,10 +28,10 @@ public class FloatTypeConfig extends Config implements DataTypeConfig {
     private static final String UPPER_BOUND_DOMAIN_DOC = "Indicates the upper bound of a type's domain";
 
     public static final String DISTRIBUTION = "distribution";
-    public static final String DISTRIBUTION_DOC = "Indicates distribution of type";
+    private static final String DISTRIBUTION_DOC = "Indicates distribution of type";
 
     public static final String RANDOM_SEED = "random.seed";
-    public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
+    private static final String RANDOM_SEED_DOC = "Random seed used to generate values";
 
     public static final String SIZE_IN_BYTES = "size.in.bytes";
     private static final String SIZE_IN_BYTES_DOC = "The native size of this type in bytes";
@@ -48,11 +48,11 @@ public class FloatTypeConfig extends Config implements DataTypeConfig {
 
     public static FloatTypeConfig specToConfig(FloatSpec floatSpec) {
         Map<String, Object> originals = new HashMap<>();
-        originals.put("default.value", floatSpec.getDefaultValue());
-        originals.put("lower.bound.domain", floatSpec.getMinValue());
-        originals.put("upper.bound.domain", floatSpec.getMaxValue());
-        originals.put("distribution", DistributionConfig.specToDistribution(floatSpec.getDistribution()));
-        originals.put("random.seed", floatSpec.getRandomSeed());
+        originals.put(FloatTypeConfig.DEFAULT_VALUE, floatSpec.getDefaultValue());
+        originals.put(FloatTypeConfig.LOWER_BOUND_DOMAIN, floatSpec.getMinValue());
+        originals.put(FloatTypeConfig.UPPER_BOUND_DOMAIN, floatSpec.getMaxValue());
+        originals.put(FloatTypeConfig.DISTRIBUTION, DistributionConfig.specToDistribution(floatSpec.getDistribution()));
+        originals.put(FloatTypeConfig.RANDOM_SEED, floatSpec.getRandomSeed());
 
         return new FloatTypeConfig(originals);
     }

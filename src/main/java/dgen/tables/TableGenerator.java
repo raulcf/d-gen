@@ -4,7 +4,6 @@ import dgen.attributegenerators.AttributeNameGenerator;
 import dgen.attributegenerators.DefaultAttributeNameGenerator;
 import dgen.attributegenerators.RandomAttributeNameGenerator;
 import dgen.attributegenerators.RegexAttributeNameGenerator;
-import dgen.column.Column;
 import dgen.column.ColumnConfig;
 import dgen.column.ColumnGenerator;
 import dgen.coreconfig.DGException;
@@ -16,9 +15,9 @@ import dgen.tablerelationships.dependencyfunctions.funcdeps.FuncDepGenerator;
 import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityConfig;
 import dgen.tablerelationships.dependencyfunctions.jaccardsimilarity.JaccardSimilarityGenerator;
 import dgen.utils.parsers.RandomGenerator;
+import dgen.utils.serialization.Serializer;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * A table generator is a collection of column generators
@@ -32,36 +31,30 @@ public class TableGenerator {
     private int numRecords;
     private RandomGenerator rnd;
 
-    public TableGenerator(AttributeNameGenerator ang, Map<Integer, ColumnGenerator> columnGeneratorMap, int numRecords){
-        this.ang = ang;
-        this.numRecords = numRecords;
-        this.columnGeneratorMap = columnGeneratorMap;
-    }
-
     public TableGenerator(TableConfig tableConfig) {
-        tableID = tableConfig.getInt("table.id");
-        numRecords = tableConfig.getInt("num.rows");
-        rnd = new RandomGenerator(tableConfig.getLong("random.seed"));
+        tableID = tableConfig.getInt(TableConfig.TABLE_ID);
+        numRecords = tableConfig.getInt(TableConfig.NUM_ROWS);
+        rnd = new RandomGenerator(tableConfig.getLong(TableConfig.RANDOM_SEED));
 
-        if (tableConfig.getString("table.name") != null) {
-            this.ang = new DefaultAttributeNameGenerator(tableConfig.getString("table.name"));
-        } else if (tableConfig.getString("regex.name") != null) {
-            this.ang = new RegexAttributeNameGenerator(rnd, tableConfig.getString("regex.name"));
-        } else if (tableConfig.getBoolean("random.name")) {
+        if (tableConfig.getString(TableConfig.TABLE_NAME) != null) {
+            this.ang = new DefaultAttributeNameGenerator(tableConfig.getString(TableConfig.TABLE_NAME));
+        } else if (tableConfig.getString(TableConfig.REGEX_NAME) != null) {
+            this.ang = new RegexAttributeNameGenerator(rnd, tableConfig.getString(TableConfig.REGEX_NAME));
+        } else if (tableConfig.getBoolean(TableConfig.RANDOM_NAME)) {
             this.ang = new RandomAttributeNameGenerator(rnd);
         }
 
         Map<Integer, ColumnGenerator> columnGenerators = new HashMap<>();
-        for (ColumnConfig columnConfig: (List<ColumnConfig>) tableConfig.getObject("column.configs")) {
+        for (ColumnConfig columnConfig: (List<ColumnConfig>) tableConfig.getObject(TableConfig.COLUMN_CONFIGS)) {
             ColumnGenerator columnGenerator = new ColumnGenerator(columnConfig);
             columnGenerators.put(columnGenerator.getColumnID(), columnGenerator);
         }
         this.columnGeneratorMap = columnGenerators;
 
-        List<TableRelationshipConfig> tableRelationshipConfigs = (List<TableRelationshipConfig>) tableConfig.getObject("table.relationships");
+        List<TableRelationshipConfig> tableRelationshipConfigs = (List<TableRelationshipConfig>) tableConfig.getObject(TableConfig.TABLE_RELATIONSHIPS);
         Set<Integer> visitedColumns = new HashSet<>();
         for (TableRelationshipConfig tableRelationshipConfig : tableRelationshipConfigs) {
-            Map<Integer, Set<Integer>> mappings = (Map<Integer, Set<Integer>>) tableRelationshipConfig.getObject("mappings");
+            Map<Integer, Set<Integer>> mappings = (Map<Integer, Set<Integer>>) tableRelationshipConfig.getObject(TableRelationshipConfig.MAPPINGS);
 
             for (Integer determinant: mappings.keySet()) {
                 ColumnGenerator determinantColumnGenerator = columnGeneratorMap.get(determinant);
@@ -74,7 +67,7 @@ public class TableGenerator {
                     if (dependantColumnGenerator.getDtg() == null) {
                         throw new DGException("Unsupported relationship with foreign keys");
                     } else {
-                        DependencyFunctionConfig dependencyFunctionConfig = (DependencyFunctionConfig) tableRelationshipConfig.getObject("dependency.function.config");
+                        DependencyFunctionConfig dependencyFunctionConfig = (DependencyFunctionConfig) tableRelationshipConfig.getObject(TableRelationshipConfig.DEPENDENCY_FUNCTION_CONFIG);
                         switch (dependencyFunctionConfig.dependencyName()) {
                             case JACCARD_SIMILARITY:
                                 JaccardSimilarityConfig jaccardSimilarityConfig = (JaccardSimilarityConfig) dependencyFunctionConfig;
@@ -85,7 +78,7 @@ public class TableGenerator {
                                     if (visitedColumns.contains(dependant)) {
                                         throw new DGException("Cannot fulfill table relationship");
                                     } else {
-                                        dependantColumnGenerator.setDtg(new JaccardSimilarityGenerator(tableRelationshipConfig.getLong("random.seed"),
+                                        dependantColumnGenerator.setDtg(new JaccardSimilarityGenerator(tableRelationshipConfig.getLong(TableRelationshipConfig.RANDOM_SEED),
                                                 jaccardSimilarityConfig, dependantColumnGenerator.getDtg().copy(),
                                                 determinantData, numRecords));
                                     }
@@ -99,7 +92,7 @@ public class TableGenerator {
                                     if (visitedColumns.contains(dependant)) {
                                         throw new DGException("Cannot fulfill table relationship");
                                     } else {
-                                        dependantColumnGenerator.setDtg(new FuncDepGenerator(tableRelationshipConfig.getLong("random.seed"),
+                                        dependantColumnGenerator.setDtg(new FuncDepGenerator(tableRelationshipConfig.getLong(TableRelationshipConfig.RANDOM_SEED),
                                                 funcDepConfig, dependantColumnGenerator.getDtg().copy(),
                                                 determinantData, numRecords));
                                     }
@@ -115,17 +108,59 @@ public class TableGenerator {
 
     // TODO: this should be an iterator that provides either columns or rows, depending on the storage orientation
 
-    public Table generateTable() {
+    public Table generateTable(Serializer serializer) throws Exception {
+        String attributeName = ang.generateAttributeName();
+        List<ColumnGenerator> columnGenerators = new ArrayList<>(columnGeneratorMap.values());
+        LinkedHashMap<Integer, String> columnNameMap = new LinkedHashMap<>();
+        List<ColumnConfig> columnConfigs = new ArrayList<>();
 
-        Map<Integer, Column> columns = new HashMap<>();
-        for (ColumnGenerator cg : columnGeneratorMap.values()) {
-            Column c = cg.generateColumn(this.numRecords);
-            columns.put(c.getColumnID(), c);
+        serializer.fileSetup(attributeName);
+
+        for (ColumnGenerator columnGenerator: columnGenerators) {
+            String columnName = columnGenerator.generateName();
+            columnNameMap.put(columnGenerator.getColumnID(), columnName);
+            columnConfigs.add(columnGenerator.getColumnConfig());
         }
 
-        String attributeName = ang.generateAttributeName();
-        Table t = new Table(tableID, attributeName, columns);
-        return t;
+        serializer.serializationSetup(attributeName, columnNameMap, columnConfigs);
+
+        // Might want to create an enum of row-oriented and column-oriented serialization types
+        switch (serializer.serializerType()) {
+            case POSTGRES:
+            case PARQUET:
+            case CSV:
+                generateTableInRows(serializer, attributeName);
+                break;
+        }
+
+        serializer.postSerialization();
+
+        return new Table(tableID, attributeName, columnNameMap);
+    }
+
+    public void generateTableInRows(Serializer serializer, String attributeName) throws Exception {
+        List<ColumnGenerator> columnGenerators = new ArrayList<>(columnGeneratorMap.values());
+
+        for (int i = 0; i < numRecords; i++) {
+            ArrayList<DataType> row = new ArrayList<>(columnGenerators.size());
+
+            for (ColumnGenerator columnGenerator: columnGenerators) {
+                row.add(columnGenerator.generateData());
+            }
+
+            serializer.serialize(row, attributeName);
+        }
+    }
+
+    public void generateTableInColumns(Serializer serializer, String attributeName) throws Exception {
+        List<ColumnGenerator> columnGenerators = new ArrayList<>(columnGeneratorMap.values());
+
+        for (ColumnGenerator columnGenerator: columnGenerators) {
+            ArrayList<DataType> column = columnGenerator.generateData(numRecords);
+
+            serializer.serialize(column, attributeName);
+        }
+
     }
 
     public ColumnGenerator getColumnGenerator(int columnID) {

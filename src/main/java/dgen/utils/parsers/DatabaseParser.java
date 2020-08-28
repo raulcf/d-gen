@@ -3,8 +3,8 @@ package dgen.utils.parsers;
 import dgen.utils.parsers.specs.ColumnSpec;
 import dgen.utils.parsers.specs.DatabaseSpec;
 import dgen.utils.parsers.specs.TableSpec;
-import dgen.utils.parsers.specs.relationships.DatabaseRelationshipSpec;
-import dgen.utils.parsers.specs.relationships.RelationshipType;
+import dgen.utils.parsers.specs.relationshipspecs.DatabaseRelationshipSpec;
+import dgen.utils.parsers.specs.relationshipspecs.RelationshipType;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -25,6 +25,9 @@ public class DatabaseParser {
     public void parse(DatabaseSpec d) {
         database = d;
         rnd = new RandomGenerator(database.getRandomSeed());
+
+        SerializerParser serializerParser = new SerializerParser(database.getSerializer());
+        database.setSerializer(serializerParser.parse());
 
         TableParser tableParser = new TableParser(rnd);
         for (TableSpec tableSchema: database.getTableSpecs()) {

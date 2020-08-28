@@ -3,6 +3,11 @@
 database:
   databaseName: "3_input"
   randomSeed: 1
+  postgres:
+    # Postgres script will be written to ~/Downloads/3_input
+    parentDirectory: "~/Downloads"
+    # Creates file and writes metadata to ~/Downloads/3_input_metadata.json
+    metadataOutputPath: "~/Downloads/3_input_metadata.json"
   tables:
     - defTable:
         numRows: 10

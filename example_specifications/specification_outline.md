@@ -233,7 +233,8 @@ Databases are comprised of tables and relationships between those tables.
 
 Required Parameters:
 - `databaseName`: Name to give to the database.
-- `tables`: A list of table specifications.  
+- `tables`: A list of table specifications. 
+- `serializer`: An output format to serialize the database to (explained below). 
 
 Optional Parameters:  
 - `databaseRelationships`: A list of database relationships (explained below).
@@ -267,3 +268,33 @@ tables.
 Randomly distributes all relationships with equal probability.
 
 No parameters.
+
+### Serializers
+Serializers serialize the database into standard database formats. Currently supported formats are
+CSV, PostgreSQL, and Parquet.
+
+### `csv`
+Required parameters:
+- `parentDirectory`: Name of directory to serialize dataset to. A subdirectory named after the 
+dataset wil be created in the parent directory. Each table in the dataset will then be serialized 
+to individual `.csv` files.
+- `metadataOutputPath`: Path of file to write metadata to.
+
+Optional parameters:
+- `delimiter` (Default "`,`"): Delimiter to use when separating row values.
+
+### `postgres`
+Creates PostgreSQL script. Databases are serialized into PostgreSQL as schemas and tables are created 
+within the schema.
+
+Required parameters:
+- `parentDirectory`: Name of directory to create script in. PostgreSQL scripts are named after the
+database.
+- `metadataOutputPath`: Path of file to write metadata to.
+
+### `parquet`
+Required parameters:
+- `parentDirectory`: Name of directory to serialize dataset to. A subdirectory named after the 
+dataset wil be created in the parent directory. Each table in the dataset will then be serialized 
+to individual `.parquet` files.
+- `metadataOutputPath`: Path of file to write metadata to.

@@ -148,6 +148,7 @@ public class StringTypeGenerator implements DataTypeGenerator{
         String generatedString = generateString(stringLength);
 
         while (drawnStrings.contains(generatedString)) {
+            stringLength = rnd.nextInt(this.maxLength - this.minLength) + this.minLength;
             generatedString = generateString(stringLength);
         }
 

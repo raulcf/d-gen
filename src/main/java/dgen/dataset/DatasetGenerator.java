@@ -6,9 +6,14 @@ import dgen.pkfk.FKGenerator;
 import dgen.tables.Table;
 import dgen.tables.TableConfig;
 import dgen.tables.TableGenerator;
+import dgen.utils.serialization.Serializer;
+import dgen.utils.serialization.config.SerializerConfig;
 import org.javatuples.Pair;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * A DatasetGenerator is a collection of table generators
@@ -18,6 +23,7 @@ public class DatasetGenerator {
     private String attributeName;
     private Map<Integer, TableGenerator> tableGeneratorMap;
     private DatasetConfig datasetConfig;
+    private Serializer serializer;
 
     public DatasetGenerator(String attributeName, Map<Integer, TableGenerator> tableGeneratorMap) {
         this.attributeName = attributeName;
@@ -26,17 +32,18 @@ public class DatasetGenerator {
 
     public DatasetGenerator(DatasetConfig datasetConfig) {
         this.datasetConfig = datasetConfig;
-        this.attributeName = datasetConfig.getString("dataset.name");
+        this.attributeName = datasetConfig.getString(DatasetConfig.DATASET_NAME);
+        this.serializer = SerializerConfig.configToGenerator((SerializerConfig) datasetConfig.getObject(DatasetConfig.SERIALIZER_CONFIG));
 
         Map<Integer, TableGenerator> tableGenerators = new HashMap<>();
-        for (TableConfig tableConfig : (List<TableConfig>) datasetConfig.getObject("table.configs")) {
+        for (TableConfig tableConfig : (List<TableConfig>) datasetConfig.getObject(DatasetConfig.TABLE_CONFIGS)) {
             TableGenerator tableGenerator = new TableGenerator(tableConfig);
             tableGenerators.put(tableGenerator.getTableID(), tableGenerator);
         }
         this.tableGeneratorMap = tableGenerators;
 
         // Handling PK-FK
-        Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> pkfkMappings = (Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>>) datasetConfig.getObject("pk.fk.mappings");
+        Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>> pkfkMappings = (Map<Pair<Integer, Integer>, Set<Pair<Integer, Integer>>>) datasetConfig.getObject(DatasetConfig.PK_FK_MAPPINGS);
         for (Pair<Integer, Integer> pk : pkfkMappings.keySet()) {
             int numRecords = getTableGenerator(pk.getValue0()).getNumRecords();
             ColumnGenerator pkColumnGenerator = getColumnGenerator(pk.getValue0(), pk.getValue1());
@@ -61,15 +68,19 @@ public class DatasetGenerator {
 
     }
 
-    public Dataset generateDataset() {
+    public void generateDataset() throws Exception {
+        Map<Integer, Map<Integer, String>> columnNames = new HashMap<>();
+        Map<Integer, String> tableNames = new HashMap<>();
 
-        Map<Integer, Table> tables = new HashMap<>();
+        serializer.directorySetup(attributeName);
+
         for (TableGenerator tg: tableGeneratorMap.values()) {
-            Table table = tg.generateTable();
-            tables.put(table.getTableID(), table);
+            Table table = tg.generateTable(serializer);
+            columnNames.put(table.getTableID(), table.getColumnNames());
+            tableNames.put(table.getTableID(), table.getAttributeName());
         }
 
-        return new Dataset(datasetConfig, attributeName, tables);
+        serializer.cleanup(datasetConfig, tableNames, columnNames);
     }
 
     public TableGenerator getTableGenerator(int tableID) {

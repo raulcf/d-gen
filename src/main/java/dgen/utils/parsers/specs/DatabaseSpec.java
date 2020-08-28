@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import dgen.utils.parsers.SpecificationException;
-import dgen.utils.parsers.specs.relationships.DatabaseRelationshipSpec;
+import dgen.utils.parsers.specs.relationshipspecs.DatabaseRelationshipSpec;
+import dgen.utils.parsers.specs.serializerspecs.CSVSerializerSpec;
+import dgen.utils.parsers.specs.serializerspecs.SerializerSpec;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.Random;
 public class DatabaseSpec implements Spec {
     private String databaseName;
     private Long randomSeed = new Random().nextLong();
+    private SerializerSpec serializer = new CSVSerializerSpec();
     @JsonProperty("tables")
     private List<TableSpec> tableSpecs;
     private List<DatabaseRelationshipSpec> databaseRelationships = new ArrayList<>();
@@ -49,6 +52,14 @@ public class DatabaseSpec implements Spec {
 
     public void setDatabaseRelationships(List<DatabaseRelationshipSpec> databaseRelationships) {
         this.databaseRelationships = databaseRelationships;
+    }
+
+    public SerializerSpec getSerializer() {
+        return serializer;
+    }
+
+    public void setSerializer(SerializerSpec serializer) {
+        this.serializer = serializer;
     }
 
     @Override

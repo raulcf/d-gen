@@ -18,8 +18,8 @@ public class GaussianDistribution implements Distribution{
     }
 
     public GaussianDistribution(GaussianDistributionConfig dtc) {
-        this.standardDeviation = dtc.getFloat("standard.deviation");
-        this.mean = dtc.getFloat("mean");
+        this.standardDeviation = dtc.getFloat(GaussianDistributionConfig.STANDARD_DEVIATION);
+        this.mean = dtc.getFloat(GaussianDistributionConfig.MEAN);
     }
 
     public float getStandardDeviation() {

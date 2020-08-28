@@ -1,4 +1,4 @@
-package dgen.utils.parsers.specs.relationships;
+package dgen.utils.parsers.specs.relationshipspecs;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

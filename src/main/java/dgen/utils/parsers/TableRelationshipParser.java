@@ -2,11 +2,11 @@ package dgen.utils.parsers;
 
 
 import dgen.utils.parsers.specs.ColumnSpec;
-import dgen.utils.parsers.specs.relationships.DefTableRelationshipSpec;
-import dgen.utils.parsers.specs.relationships.GenTableRelationshipSpec;
-import dgen.utils.parsers.specs.relationships.GraphSpec;
-import dgen.utils.parsers.specs.relationships.TableRelationshipSpec;
-import dgen.utils.parsers.specs.relationships.dependencyFunctions.DependencyFunction;
+import dgen.utils.parsers.specs.relationshipspecs.DefTableRelationshipSpec;
+import dgen.utils.parsers.specs.relationshipspecs.GenTableRelationshipSpec;
+import dgen.utils.parsers.specs.relationshipspecs.GraphSpec;
+import dgen.utils.parsers.specs.relationshipspecs.TableRelationshipSpec;
+import dgen.utils.parsers.specs.relationshipspecs.dependencyFunctions.DependencyFunction;
 
 import java.util.*;
 

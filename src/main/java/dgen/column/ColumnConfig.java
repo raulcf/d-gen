@@ -45,7 +45,7 @@ public class ColumnConfig extends Config {
     private static final String NULL_FREQUENCY_DOC = "Indicates frequency of null values";
 
     public static final String RANDOM_SEED = "random.seed";
-    public static final String RANDOM_SEED_DOC = "Random seed used to generate values";
+    private static final String RANDOM_SEED_DOC = "Random seed used to generate values";
 
     static {
         config = new ConfigDef()
@@ -63,16 +63,16 @@ public class ColumnConfig extends Config {
 
     public static ColumnConfig specToConfig(ColumnSpec columnSpec) {
         Map<String, Object> originals = new HashMap<>();
-        originals.put("column.id", columnSpec.getColumnID());
-        originals.put("column.type", columnSpec.specType());
-        originals.put("column.name", columnSpec.getColumnName());
-        originals.put("regex.name", columnSpec.getRegexName());
-        originals.put("random.name", columnSpec.isRandomName());
-        originals.put("datatype", columnSpec.getDataTypeSpec());
-        originals.put("unique", columnSpec.isUnique());
-        originals.put("has.null", columnSpec.isHasNull());
-        originals.put("null.frequency", columnSpec.getNullFrequency());
-        originals.put("random.seed", columnSpec.getRandomSeed());
+        originals.put(ColumnConfig.COLUMN_ID, columnSpec.getColumnID());
+        originals.put(ColumnConfig.COLUMN_TYPE, columnSpec.specType());
+        originals.put(ColumnConfig.COLUMN_NAME, columnSpec.getColumnName());
+        originals.put(ColumnConfig.REGEX_NAME, columnSpec.getRegexName());
+        originals.put(ColumnConfig.RANDOM_NAME, columnSpec.isRandomName());
+        originals.put(ColumnConfig.DATATYPE, columnSpec.getDataTypeSpec());
+        originals.put(ColumnConfig.UNIQUE, columnSpec.isUnique());
+        originals.put(ColumnConfig.HAS_NULL, columnSpec.isHasNull());
+        originals.put(ColumnConfig.NULL_FREQUENCY, columnSpec.getNullFrequency());
+        originals.put(ColumnConfig.RANDOM_SEED, columnSpec.getRandomSeed());
 
         return new ColumnConfig(originals);
     }
