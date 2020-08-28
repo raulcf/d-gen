@@ -1,13 +1,8 @@
 package dgen;
 
-import dgen.dataset.Dataset;
 import dgen.dataset.DatasetConfig;
 import dgen.dataset.DatasetGenerator;
 import dgen.utils.parsers.SpecificationParser;
-import dgen.utils.serialization.CSVSerializer;
-import dgen.utils.serialization.ParquetSerializer;
-import dgen.utils.serialization.PostgresSerializer;
-import dgen.utils.serialization.Serializer;
 import org.apache.commons.cli.*;
 
 /**

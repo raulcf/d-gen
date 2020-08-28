@@ -2,12 +2,8 @@ package dgen.utils.serialization;
 
 import dgen.column.ColumnConfig;
 import dgen.coreconfig.DGException;
-import dgen.dataset.Dataset;
 import dgen.dataset.DatasetConfig;
-import dgen.dataset.DatasetGenerator;
 import dgen.datatypes.DataType;
-import dgen.tables.Table;
-import dgen.utils.parsers.SpecificationParser;
 import dgen.utils.parsers.specs.serializerspecs.Serializers;
 import dgen.utils.serialization.config.CSVConfig;
 import dgen.utils.serialization.config.SerializerConfig;

@@ -2,16 +2,12 @@ package dgen.utils.serialization;
 
 import dgen.column.ColumnConfig;
 import dgen.coreconfig.DGException;
-import dgen.dataset.Dataset;
 import dgen.dataset.DatasetConfig;
 import dgen.dataset.DatasetGenerator;
 import dgen.datatypes.DataType;
-import dgen.tables.Table;
-import dgen.tables.TableConfig;
 import dgen.utils.parsers.SpecificationParser;
 import dgen.utils.parsers.specs.datatypespecs.DataTypeSpec;
 import dgen.utils.parsers.specs.serializerspecs.Serializers;
-import dgen.utils.serialization.config.CSVConfig;
 import dgen.utils.serialization.config.ParquetConfig;
 import dgen.utils.serialization.config.SerializerConfig;
 import org.apache.avro.Schema;
@@ -25,9 +21,6 @@ import org.apache.parquet.hadoop.ParquetWriter;
 import org.apache.parquet.hadoop.metadata.CompressionCodecName;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

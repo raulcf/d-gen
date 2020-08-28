@@ -2,7 +2,6 @@ package dgen.utils.serialization;
 
 import dgen.column.ColumnConfig;
 import dgen.coreconfig.DGException;
-import dgen.dataset.Dataset;
 import dgen.dataset.DatasetConfig;
 import dgen.dataset.DatasetGenerator;
 import dgen.datatypes.DataType;
@@ -12,20 +11,16 @@ import dgen.tables.TableConfig;
 import dgen.utils.parsers.SpecificationParser;
 import dgen.utils.parsers.specs.datatypespecs.DataTypeSpec;
 import dgen.utils.parsers.specs.serializerspecs.Serializers;
-import dgen.utils.serialization.config.CSVConfig;
 import dgen.utils.serialization.config.PostgresConfig;
 import dgen.utils.serialization.config.SerializerConfig;
 import org.javatuples.Pair;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class PostgresSerializer implements Serializer {
 
